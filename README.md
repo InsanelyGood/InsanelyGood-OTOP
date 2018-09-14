@@ -9,7 +9,7 @@ Run 2 server
 - `cd backend` command `yarn start` or `npm start` for run express.
 
 ### Task
-Don't use `master` to do your task. Create your branch with your name and your task like `git checkout -b <name>-<your task>` ex. `git checkout -b jack-create-app` then command `git checkout jack-create-app` to switch to your branch and do your task!
+Don't use `master` to do your task. Create your branch with your name and your task like `git checkout -b <name>-<your task>` ex. `git checkout -b jack-create-app` then, it will chang to your branch.
 
 ### Web Structure
 - frontend
