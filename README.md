@@ -13,9 +13,9 @@ Don't use `master` to do your task. Create your branch with your name and your t
 
 ### Web Structure
 - frontend
-    - /src -> Component file
+    - /src/component -> Component file
+    - /src/css -> css
     - /spec -> Test
-    - /public -> css
 - backend
     - /public -> css
     - /routes -> routes
