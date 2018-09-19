@@ -5,6 +5,7 @@
 }
 .product-card-image {
     width: 100%;
+    height: 70%;
     display: block;
 }
 .product-card-description {
