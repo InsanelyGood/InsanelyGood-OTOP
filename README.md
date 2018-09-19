@@ -24,3 +24,6 @@ Don't use `master` to do your task. Create your branch with your name and your t
     - /views -> html file (Maybe use)
     - /spec -> Test
     - /models -> Schema
+
+### Dump database
+Dump database for see products by command `mongorestore --collection products --db otopaholicDBTest <Project directory>/dump/otopaholicDBTest/products.bson`

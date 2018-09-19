@@ -13,7 +13,7 @@ var productRouter = require('./routes/products');
 var app = express();
 
 // Connect to database
-mongoose.connect('mongodb://localhost:27017/nodekb', {
+mongoose.connect('mongodb://localhost:27017/otopaholicDBTest', {
   useNewUrlParser: true
 })
 var db = mongoose.connection
