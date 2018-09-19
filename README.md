@@ -13,8 +13,10 @@ Don't use `master` to do your task. Create your branch with your name and your t
 
 ### Web Structure
 - frontend
+    - /src/api -> api for get data from backend
     - /src/component -> Component file
     - /src/css -> css
+    - /src/views -> pages 
     - /spec -> Test
 - backend
     - /public -> css
