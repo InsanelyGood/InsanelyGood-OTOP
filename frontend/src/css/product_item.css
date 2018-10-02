@@ -9,6 +9,7 @@
     display: block;
 }
 .product-card-description {
+    color: inherit;
     font-size: 13px;
     line-height: 18px;
     display: block;
