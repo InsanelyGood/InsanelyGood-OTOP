@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    h1 #{title}
+    form(method='POST', action='/products/add')
+        #form-group
+            label ID:
+            input.form-control(name='id', type='text')
+        #form-group
+            label Product Name:
+            input.form-control(name='name', type='text')  
+        #form-group
+            label Image URL:
+            input.form-control(name='image', type='url')  
+        #form-group
+            label Price:
+            input.form-control(name='price', type='number')  
+        #form-group
+            label Description:
+            textarea.form-control(name='description')
+        #form-group
+            label Stock:
+            input.form-control(name='stock', type='number')
+        #form-group
+            label Category:
+            input.form-control(name='category', type='text')          
+        #form-group
+            label Region:
+            select(name='region')
+                option(value='north') North
+                option(value='east') East
+                option(value='west') West
+                option(value='south') South
+                option(value='central') Central
+        br
+        input.btn.btn-primary(type='submit',value='Submit')
