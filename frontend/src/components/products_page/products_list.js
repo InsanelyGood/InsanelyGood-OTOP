@@ -1,29 +1,24 @@
 import React from 'react';
 import ProductItem from './product_item';
-import { getProducts } from '../../api/products_list'
+import PropTypes from 'prop-types';
 
 class ProductsList extends React.Component {
-
-    constructor() {
-        super()
-        this.state = {
-            products: []
-        }
-    }
-
-    async componentDidMount() {
-        this.setState({
-            products: await getProducts()
-        })
-    }
 
     render = () => {
         return (
             <div className='modal-body row'>
-                {this.state.products.map((product) => (<ProductItem key={product._id} product_name={product.name} product_image={product.image} product_des={product.description} product_price={product.price} />))}
+                {this.props.productsShow.map((product) => (<ProductItem key={product._id} product_name={product.name} product_image={product.image} product_des={product.description} product_price={product.price} />))}
             </div>
         );
     }
+}
+
+ProductsList.propTypes = {
+    productsShow: PropTypes.array
+}
+
+ProductsList.defaultProps = {
+    productsShow: []
 }
 
 export default ProductsList;
