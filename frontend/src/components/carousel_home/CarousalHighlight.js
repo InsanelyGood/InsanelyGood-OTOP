@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
+import '../../css/home.css';
 
 import {
   Carousel,
@@ -10,24 +12,25 @@ import {
 
 const items = [
   {
-    src: '../images/center_dinpao.jpg',
-    altText: 'Slide 1',
-    caption: 'Slide 1'
+    src: 'https://user-images.githubusercontent.com/25145746/46333919-617a0180-c64c-11e8-93b7-99f704e55f61.jpg',
+    caption: 'Product from Central of Thailand',
+    altText: 'Slide 1'
   },
   {
-    src: '../images/Esan_saerng.jpg',
-    altText: 'Slide 2',
-    caption: 'Slide 2'
+    src: 'https://user-images.githubusercontent.com/25145746/46333887-41e2d900-c64c-11e8-95b4-7c791a01bb09.jpg',
+    altText: 'NortEastProduct',
+    caption: 'Product from NorthEast of Thailand'
   },
   {
-    src: '../images/north_fon.jpg',
-    altText: 'Slide 3',
-    caption: 'Slide 3'
+    src: 'https://user-images.githubusercontent.com/25145746/46333914-5de67a80-c64c-11e8-8461-a139b63f6bf0.jpg',
+    altText: 'NorthProduct',
+    caption: 'Product from North of Thailand',
+    button: 'Shop Now'
   },
   {
-    src: '../images/south_TaLuang2.jpg',
-    altText: 'Slide 4',
-    caption: 'Slide 4'
+    src: 'https://user-images.githubusercontent.com/25145746/46333925-63dc5b80-c64c-11e8-86d1-a594a14435d3.jpg',
+    altText: 'SouthProduct',
+    caption: 'Product from South of Thailand'
   }
 ];
 
@@ -77,8 +80,13 @@ class CarousalHighlight extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <img src={item.src} alt={item.altText}  height= "342" weight= "1024"/>
-          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+          {/* <a href="#" class="button">Link Button</a> */}
+          <p>
+            <img src={item.src} alt={item.altText}  width="100%" />
+            {/* <a href="#" class="button">Link Button</a> */}
+          </p>
+          
+          <CarouselCaption captionText={"Shop Now"} captionHeader={item.caption} cssModule={item.button}/>
         </CarouselItem>
       );
     });
