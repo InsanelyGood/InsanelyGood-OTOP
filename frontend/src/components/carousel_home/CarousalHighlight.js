@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import Center from '../../images/center_dinpao.jpg'
+import Esan from '../../images/Esan_saerng.jpg'
+import North from '../../images/north_fon.jpg'
+import South from '../../images/south_TaLuang.jpg'
+import styled from 'styled-components'
 
 import {
   Carousel,
@@ -10,26 +15,30 @@ import {
 
 const items = [
   {
-    src: '../images/center_dinpao.jpg',
+    src: Center,
     altText: 'Slide 1',
     caption: 'Slide 1'
   },
   {
-    src: '../images/Esan_saerng.jpg',
+    src: Esan,
     altText: 'Slide 2',
     caption: 'Slide 2'
   },
   {
-    src: '../images/north_fon.jpg',
+    src: North,
     altText: 'Slide 3',
     caption: 'Slide 3'
   },
   {
-    src: '../images/south_TaLuang2.jpg',
+    src: South,
     altText: 'Slide 4',
     caption: 'Slide 4'
   }
 ];
+
+const Img = styled.img`
+  width: 100%
+`
 
 class CarousalHighlight extends Component {
   constructor(props) {
@@ -77,7 +86,7 @@ class CarousalHighlight extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          <img src={item.src} alt={item.altText}  height= "342" weight= "1024"/>
+          <Img src={item.src} alt={item.altText}  />
           <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
         </CarouselItem>
       );
