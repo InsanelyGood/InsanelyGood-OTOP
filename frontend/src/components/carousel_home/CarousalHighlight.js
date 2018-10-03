@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
-import '../../css/home.css';
+import Center from '../../images/center_dinpao.jpg'
+import Esan from '../../images/Esan_saerng.jpg'
+import North from '../../images/north_fon.jpg'
+import South from '../../images/south_TaLuang.jpg'
+import styled from 'styled-components'
+
 
 import {
   Carousel,
@@ -12,27 +16,30 @@ import {
 
 const items = [
   {
-    src: 'https://user-images.githubusercontent.com/25145746/46333919-617a0180-c64c-11e8-93b7-99f704e55f61.jpg',
-    caption: 'Product from Central of Thailand',
-    altText: 'Slide 1'
+    src: Center,
+    altText: 'CentralProduct',
+    caption: 'Product from Central of Thailand'
   },
   {
-    src: 'https://user-images.githubusercontent.com/25145746/46333887-41e2d900-c64c-11e8-95b4-7c791a01bb09.jpg',
+    src: Esan,
     altText: 'NortEastProduct',
     caption: 'Product from NorthEast of Thailand'
   },
   {
-    src: 'https://user-images.githubusercontent.com/25145746/46333914-5de67a80-c64c-11e8-8461-a139b63f6bf0.jpg',
+    src: North,
     altText: 'NorthProduct',
-    caption: 'Product from North of Thailand',
-    button: 'Shop Now'
+    caption: 'Product from North of Thailand'
   },
   {
-    src: 'https://user-images.githubusercontent.com/25145746/46333925-63dc5b80-c64c-11e8-86d1-a594a14435d3.jpg',
+    src: South,
     altText: 'SouthProduct',
     caption: 'Product from South of Thailand'
   }
 ];
+
+const Img = styled.img`
+  width: 100%
+`
 
 class CarousalHighlight extends Component {
   constructor(props) {
@@ -80,13 +87,8 @@ class CarousalHighlight extends Component {
           onExited={this.onExited}
           key={item.src}
         >
-          {/* <a href="#" class="button">Link Button</a> */}
-          <p>
-            <img src={item.src} alt={item.altText}  width="100%" />
-            {/* <a href="#" class="button">Link Button</a> */}
-          </p>
-          
-          <CarouselCaption captionText={"Shop Now"} captionHeader={item.caption} cssModule={item.button}/>
+          <Img src={item.src} alt={item.altText} width="100%"  />
+          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
         </CarouselItem>
       );
     });
