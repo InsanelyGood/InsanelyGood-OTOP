@@ -27,9 +27,41 @@ h2{
  /* }  */
 
  .captionSouth{
-    top: 65%;
-    bottom: auto;
-    text-size-adjust: 40px;
-    color: gold;
-    font-size: 50px;
+    position: absolute;
+    top: 25%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color:#FFDF00 !important; 
+    text-shadow: 1px 1px  black;
+    text-align: right !important;
+    font-size: 200% !important;
+ }
+ .captionEsan{
+    position: absolute;
+    top: 45%;
+    width: 300px;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color:rgb(255, 255, 255) !important; 
+    text-shadow: 1px 1px  black;
+    text-align: left !important;
+    font-size: 200% !important;
+ }
+ .captionCentral{
+    top: 55%;
+    text-shadow: 1px 1px  black;
+    font-size: 200% !important;
+ }
+ .captionNorth{
+    position: absolute;
+    top: 63%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color:rgb(255, 255, 255) !important; 
+    text-shadow: 1px 1px  black;
+    text-align: right !important;
+    font-size: 200% !important;
  }

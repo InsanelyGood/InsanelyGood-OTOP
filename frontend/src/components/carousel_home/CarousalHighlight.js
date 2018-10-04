@@ -18,30 +18,30 @@ const items = [
   {
     src: Central,
     altText: 'CentralProduct',
-    caption: 'Product from Central of Thailand',
+    caption: 'Product from Central',
     button: <a className ="btn btn-outline-white" href="/">Shop Collection</a>,
-    positions: 'carousel-captionSouth'
+    positions: 'captionCentral'
   },
   {
     src: Esan,
     altText: 'NortEastProduct',
-    caption: 'Product from NorthEast of Thailand',
+    caption:'Product from NorthEast',
     button: <a className ="btn btn-outline-white" href="/">Shop Collection</a>,
-    positions: 'carousel-captionSouth'
+    positions: 'captionEsan'
   },
   {
     src: North,
     altText: 'NorthProduct',
-    caption: 'Product from North of Thailand',
-    button: <a className ="btn-outline-gray btn" href="/">Shop Collection</a>,
-    positions: 'carousel-captionSouth'
+    caption: 'Product from North',
+    button: <a className ="btn-outline-white btn" href="/">Shop Collection</a>,
+    positions: 'captionNorth'
   },
   {
     src: South,
     altText: 'SouthProduct',
-    caption: 'Product from South of Thailand',
+    caption: 'Product from South',
     button: <a className ="btn btn-outline-white" href="/">Shop Collection</a>,
-    positions: '.captionSouth'
+    positions: 'captionSouth'
   }
 ];
 
@@ -106,7 +106,7 @@ class CarousalHighlight extends  Component {
         <div > 
             <Carousel activeIndex={activeIndex} next={this.next} previous={this.previous}>
 
-                <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+                {/* <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} /> */}
                 {slides}
                 <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
                 <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
@@ -117,5 +117,5 @@ class CarousalHighlight extends  Component {
       }
 
 }
-
+ 
 export default CarousalHighlight;
