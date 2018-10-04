@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import ProductsList from '../components/products_page/products_list';
+import ProductPanel from '../components/products_page/product_panel'
+import ProductsCat from '../components/products_page/product_cat'
 import { getProducts } from '../api/products_list'
+import Navbar from '../components/common/navbar'
+import { Row, Col } from 'reactstrap'
 
 class ProductsPage extends Component {
 
@@ -20,8 +23,11 @@ class ProductsPage extends Component {
     render() {
         return(
             <div>
-                <h1>Products List</h1>
-                <ProductsList productsShow={this.state.products}/>
+                <Navbar/>
+                <Row>
+                    <Col md='3'><ProductsCat/></Col>
+                    <Col md='9'><ProductPanel productsShow={this.state.products}/></Col>
+                </Row>
             </div>
         )
     }
