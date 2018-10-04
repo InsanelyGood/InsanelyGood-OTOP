@@ -3,6 +3,7 @@ import Central from '../../images/center_dinpao.jpg'
 import Esan from '../../images/Esan_saerng.jpg'
 import North from '../../images/north_fon.jpg'
 import South from '../../images/south_TaLuang.jpg'
+import Highlight from '../../images/main_highlight.jpg'
 import styled from 'styled-components'
 import '../../css/home.css'
 
@@ -15,6 +16,13 @@ import {
 } from 'reactstrap';
 
 const items = [
+  {
+    src: Highlight,
+    altText: 'Index',
+    caption: 'OTOP Product from Thailand',
+    button: <a className ="btn btn-outline-white" href="/">Shop Now</a>,
+    positions: 'captionHighlight'
+  },
   {
     src: Central,
     altText: 'CentralProduct',

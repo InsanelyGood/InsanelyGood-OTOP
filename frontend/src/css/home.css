@@ -8,24 +8,7 @@ h2{
     color: rgba(255,255,255,0.9);
     background-color: rgba(0,0,0,0.1);
     border: 2px solid #f8f9fa !important;
-    /* border-radius: 0;
-    border-style: solid;
-    border-width: 2px; */
 }
-.btn-outline-gray {
-    color: #37474D;
-    background-color: rgba(255,255,255,0.2);
-    border: 2px solid #5d666ebd !important;
-}
-/* .carousel-caption {
-    /* top: 65%;
-    bottom: auto;
-    text-size-adjust: 40px; */
-    /* color: gold;
-    font-size: 50px; */
-    
- /* }  */
-
  .captionSouth{
     position: absolute;
     top: 25%;
@@ -63,5 +46,10 @@ h2{
     color:rgb(255, 255, 255) !important; 
     text-shadow: 1px 1px  black;
     text-align: right !important;
+    font-size: 200% !important;
+ }
+.captionHighlight{
+    top: 50%;
+    text-shadow: 1px 1px  black;
     font-size: 200% !important;
  }
