@@ -1,0 +1,12 @@
+.navbar {
+
+} 
+.navbar-expand-md {
+    background-color: antiquewhite; 
+    position: fixed !important;
+    width: 100%;
+    z-index: 99;
+} 
+.navbar-light {
+
+}

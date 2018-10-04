@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Form = styled.div`
     text-align: center;
-    padding: 3em 2em 3em 2em;
+    padding: 7em 2em 3em 2em;
     // padding-top: 3em;
     // padding-left: 2em;
     // padding-right: 2em;

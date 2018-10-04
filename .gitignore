@@ -11,3 +11,7 @@ Desktop.ini
 # Linux
 .directory
 *~
+
+# intelliJ IDEA
+.idea/
+InsanelyGood-OTOP.iml
