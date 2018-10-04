@@ -3,6 +3,7 @@ import Navbar from '../components/common/navbar'
 import CarousalHighlight from '../components/carousel_home/CarousalHighlight'
 import ProductsList from '../components/products_page/products_list'
 import { getProducts } from '../api/products_list';
+import '../css/home.css' 
 
 class Home extends React.Component {
 
@@ -26,7 +27,9 @@ class Home extends React.Component {
             <Navbar />
             <CarousalHighlight />
             <div className='container'>
-            <h1>Highlight Products</h1>
+            <br/>
+            <br/>
+            <h2>Highlight Products</h2>
             <ProductsList productsShow={random} />
             </div>
         </div>)

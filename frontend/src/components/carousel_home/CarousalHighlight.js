@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Center from '../../images/center_dinpao.jpg'
+import Central from '../../images/center_dinpao.jpg'
 import Esan from '../../images/Esan_saerng.jpg'
 import North from '../../images/north_fon.jpg'
 import South from '../../images/south_TaLuang.jpg'
 import styled from 'styled-components'
-
+import '../../css/home.css'
 
 import {
   Carousel,
@@ -16,96 +16,106 @@ import {
 
 const items = [
   {
-    src: Center,
+    src: Central,
     altText: 'CentralProduct',
-    caption: 'Product from Central of Thailand'
+    caption: 'Product from Central of Thailand',
+    button: <a className ="btn btn-outline-white" href="/">Shop Collection</a>,
+    positions: 'carousel-captionSouth'
   },
   {
     src: Esan,
     altText: 'NortEastProduct',
-    caption: 'Product from NorthEast of Thailand'
+    caption: 'Product from NorthEast of Thailand',
+    button: <a className ="btn btn-outline-white" href="/">Shop Collection</a>,
+    positions: 'carousel-captionSouth'
   },
   {
     src: North,
     altText: 'NorthProduct',
-    caption: 'Product from North of Thailand'
+    caption: 'Product from North of Thailand',
+    button: <a className ="btn-outline-gray btn" href="/">Shop Collection</a>,
+    positions: 'carousel-captionSouth'
   },
   {
     src: South,
     altText: 'SouthProduct',
-    caption: 'Product from South of Thailand'
+    caption: 'Product from South of Thailand',
+    button: <a className ="btn btn-outline-white" href="/">Shop Collection</a>,
+    positions: '.captionSouth'
   }
 ];
 
 const Img = styled.img`
   width: 100%
-`
+` 
 
-class CarousalHighlight extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { activeIndex: 0 };
-    this.next = this.next.bind(this);
-    this.previous = this.previous.bind(this);
-    this.goToIndex = this.goToIndex.bind(this);
-    this.onExiting = this.onExiting.bind(this);
-    this.onExited = this.onExited.bind(this);
-  }
+class CarousalHighlight extends  Component {
 
-  onExiting() {
-    this.animating = true;
-  }
+      constructor(props) {
+        super(props);
+        this.state = { activeIndex: 0 };
+        this.next = this.next.bind(this);
+        this.previous = this.previous.bind(this);
+        this.goToIndex = this.goToIndex.bind(this);
+        this.onExiting = this.onExiting.bind(this);
+        this.onExited = this.onExited.bind(this);
+      }
 
-  onExited() {
-    this.animating = false;
-  }
+      onExiting() {
+        this.animating = true;
+      }
 
-  next() {
-    if (this.animating) return;
-    const nextIndex = this.state.activeIndex === items.length - 1 ? 0 : this.state.activeIndex + 1;
-    this.setState({ activeIndex: nextIndex });
-  }
+      onExited() {
+        this.animating = false;
+      }
 
-  previous() {
-    if (this.animating) return;
-    const nextIndex = this.state.activeIndex === 0 ? items.length - 1 : this.state.activeIndex - 1;
-    this.setState({ activeIndex: nextIndex });
-  }
+      next() {
+        if (this.animating) return;
+        const nextIndex = this.state.activeIndex === items.length - 1 ? 0 : this.state.activeIndex + 1;
+        this.setState({ activeIndex: nextIndex });
+      }
 
-  goToIndex(newIndex) {
-    if (this.animating) return;
-    this.setState({ activeIndex: newIndex });
-  }
+      previous() {
+        if (this.animating) return;
+        const nextIndex = this.state.activeIndex === 0 ? items.length - 1 : this.state.activeIndex - 1;
+        this.setState({ activeIndex: nextIndex });
+      }
 
-  render() {
-    const { activeIndex } = this.state;
+      goToIndex(newIndex) {
+        if (this.animating) return;
+        this.setState({ activeIndex: newIndex });
+      }
 
-    const slides = items.map((item) => {
-      return (
-        <CarouselItem
-          onExiting={this.onExiting}
-          onExited={this.onExited}
-          key={item.src}
-        >
-          <Img src={item.src} alt={item.altText} width="100%"  />
-          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
-        </CarouselItem>
-      );
-    });
+      render() {
+        const { activeIndex } = this.state;
 
-    return (
-    <div>
-        <Carousel activeIndex={activeIndex} next={this.next} previous={this.previous}>
-            <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-            {slides}
-            <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-            <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-        </Carousel>
-    </div>
-       
-    );
-  }
+        const slides = items.map((item) => {
+          return (
+            <CarouselItem
+            onExiting={this.onExiting}
+            onExited={this.onExited}
+            key={item.src}
+            >
+              <Img src={item.src} alt={item.altText} />
+              <CarouselCaption className = {item.positions} captionHeader={item.caption} captionText={item.button}  />
+            </CarouselItem>
+          );
+        });
+
+        return (
+        <div > 
+            <Carousel activeIndex={activeIndex} next={this.next} previous={this.previous}>
+
+                <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+                {slides}
+                <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+                <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+            </Carousel>
+        </div>
+          
+        );
+      }
+
 }
-
 
 export default CarousalHighlight;
