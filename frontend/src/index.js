@@ -17,7 +17,7 @@ ReactDOM.render(
             <Route exact path="/" component={Home} />
             <Route exact path="/products" component={ProductsPage} />
             <Route path="/search" component={Search} />
-            <Route path="/products/:name" component={() => <ProductDetail product_name={'a'} />} />
+            <Route path="/products/:name" component={ProductDetail} />
         </div>
     </Router>,
     document.getElementById('root'));

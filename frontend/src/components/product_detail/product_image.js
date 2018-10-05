@@ -9,7 +9,7 @@ const Image = styled.img`
 
 class ProductImage extends React.Component {
     render = () => {
-        return (<Image src={this.props.image_url} alt='No image' />)
+        return (<Image src={this.props.imageUrl} alt='No image' />)
     }
 }
 

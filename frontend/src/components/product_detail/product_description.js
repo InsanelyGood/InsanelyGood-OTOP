@@ -17,9 +17,9 @@ const ToCart = styled.button`
 class ProductDescription extends React.Component {
     render = () => {
         return (<div>
-            <Name>Product: Name1</Name>
-            <Description>Description: this is product, name Name1</Description>
-            <Price>Price: 100$</Price>
+            <Name>Product: {this.props.productDetail.name}</Name>
+            <Description>Description: {this.props.productDetail.description}</Description>
+            <Price>Price: {this.props.productDetail.price}$</Price>
             <ToCart>Add to Cart</ToCart>
         </div>)
     }
