@@ -12,7 +12,7 @@ class ProductItem extends React.Component {
                     price={this.props.product_price}
                     productName={this.props.product_name}
                     description={this.props.product_des}
-                    url='/'
+                    url={'/products/' + this.props.product_name}
                 />
             </div>
         );
