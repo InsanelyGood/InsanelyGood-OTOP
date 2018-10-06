@@ -13,12 +13,17 @@ Don't use `master` to do your task. Create your branch with your name and your t
 
 ### Web Structure
 - frontend
-    - /src -> Component file
+    - /src/api -> api for get data from backend
+    - /src/component -> Component file
+    - /src/css -> css
+    - /src/views -> pages 
     - /spec -> Test
-    - /public -> css
 - backend
     - /public -> css
     - /routes -> routes
     - /views -> html file (Maybe use)
     - /spec -> Test
     - /models -> Schema
+
+### Dump database
+Dump database for see products by command `mongorestore --collection products --db otopaholicDBTest <Project directory>/dump/otopaholicDBTest/products.bson`
