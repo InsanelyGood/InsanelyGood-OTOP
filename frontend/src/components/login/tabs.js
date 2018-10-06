@@ -10,6 +10,7 @@ const Form = styled.div`
     // padding: 5% 37% 20% 30%;
 `
 const LoginContent = styled.div`
+    padding: 5em;
     margin: auto;
 `
 
