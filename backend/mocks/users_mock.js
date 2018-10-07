@@ -1,6 +1,5 @@
 db.users.insertMany([
-   { id: "000001",
-     role: "customer",
+   { role: "customer",
      username: "janny",
      password: "janny1234",
      firstname: "Janny",
@@ -10,8 +9,7 @@ db.users.insertMany([
      telephone_number: "0987654321",
      cart_list: []
    },
-   { id: "000002",
-     role: "customer",
+   { role: "customer",
      username: "tune",
      password: "tune1234",
      firstname: "Tune",
@@ -21,8 +19,7 @@ db.users.insertMany([
      telephone_number: "0123456789",
      cart_list: []
    },
-   { id: "000003",
-     role: "customer",
+   { role: "customer",
      username: "ploy",
      password: "ploy1234",
      firstname: "Ploy",
@@ -32,8 +29,7 @@ db.users.insertMany([
      telephone_number: "0555555555",
      cart_list: []
    },
-   { id: "100001",
-     role: "admin",
+   { role: "admin",
      username: "jack",
      password: "jack4321",
      firstname: "Jack",
@@ -43,8 +39,7 @@ db.users.insertMany([
      telephone_number: "0999999999",
      cart_list: []
    },
-   { id: "100002",
-     role: "admin",
+   { role: "admin",
      username: "admin",
      password: "1234567890",
      firstname: "Admin na ka",
