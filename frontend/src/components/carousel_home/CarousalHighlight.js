@@ -20,36 +20,36 @@ const items = [
     src: Highlight,
     altText: 'Index',
     caption: 'OTOP Product from Thailand',
-    button: <a className ="btn btn-outline-white" href="/">Shop Now</a>,
-    positions: 'captionHighlight'
+    button: <a className ="btn btn-outline-white" href="/products">Shop Now</a>,
+    positions: 'captionHighlight fontHigh'
   },
   {
     src: Central,
     altText: 'CentralProduct',
     caption: 'Product from Central',
-    button: <a className ="btn btn-outline-white" href="/">Shop Collection</a>,
-    positions: 'captionCentral'
+    button: <a className ="btn btn-outline-white" href="/products">Shop Collection</a>,
+    positions: 'captionCentral fontHigh'
   },
   {
     src: Esan,
     altText: 'NortEastProduct',
     caption:'Product from NorthEast',
-    button: <a className ="btn btn-outline-white" href="/">Shop Collection</a>,
-    positions: 'captionEsan'
+    button: <a className ="btn btn-outline-white" href="/products">Shop Collection</a>,
+    positions: 'captionEsan fontHigh'
   },
   {
     src: North,
     altText: 'NorthProduct',
     caption: 'Product from North',
-    button: <a className ="btn-outline-white btn" href="/">Shop Collection</a>,
-    positions: 'captionNorth'
+    button: <a className ="btn-outline-white btn" href="/products">Shop Collection</a>,
+    positions: 'captionNorth fontHigh'
   },
   {
     src: South,
     altText: 'SouthProduct',
     caption: 'Product from South',
-    button: <a className ="btn btn-outline-white" href="/">Shop Collection</a>,
-    positions: 'captionSouth'
+    button: <a className ="btn btn-outline-white" href="/products">Shop Collection</a>,
+    positions: 'captionSouth fontHigh'
   }
 ];
 

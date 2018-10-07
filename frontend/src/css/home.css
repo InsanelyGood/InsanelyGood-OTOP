@@ -2,14 +2,18 @@
     width: 100%;
 }
 h2{
-    text-shadow: 2px 1px #4d4d4d;
+    /* text-shadow: 2px 1px #4d4d4d; */
+    font-family: 'Lobster', cursive !important;
+    font-weight: bold !important;
 }
 .btn-outline-white {
     color: rgba(255,255,255,0.9);
     background-color: rgba(0,0,0,0.1);
     border: 2px solid #f8f9fa !important;
+    font-family: inherit !important;
 }
  .captionSouth{
+    /* font-family: 'Charmonman' !important; */
     position: absolute;
     top: 25%;
     z-index: 10;
@@ -21,6 +25,7 @@ h2{
     font-size: 200% !important;
  }
  .captionEsan{
+    /* font-family: 'Charmonman' !important; */
     position: absolute;
     top: 45%;
     width: 300px;
@@ -33,23 +38,35 @@ h2{
     font-size: 200% !important;
  }
  .captionCentral{
+    /* font-family: 'Lobster' !important; */
     top: 55%;
     text-shadow: 1px 1px  black;
     font-size: 200% !important;
  }
  .captionNorth{
+    /* font-family: 'Charmonman' !important; */
     position: absolute;
     top: 63%;
     z-index: 10;
     padding-top: 20px;
     padding-bottom: 20px;
-    color:rgb(255, 255, 255) !important; 
+    /* color:rgb(255, 255, 255) !important;  */
     text-shadow: 1px 1px  black;
     text-align: right !important;
     font-size: 200% !important;
  }
 .captionHighlight{
+    /* font-family: 'Charmonman' !important; */
     top: 50%;
     text-shadow: 1px 1px  black;
     font-size: 200% !important;
+ }
+ .fontHigh{
+    font-family: 'Lobster', cursive !important;
+    font-weight: bold !important;
+ }
+ @media (min-width: 820px){ 
+    .d-md-block {
+        display: block!important;
+    }
  }
