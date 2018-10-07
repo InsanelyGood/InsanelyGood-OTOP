@@ -2,11 +2,24 @@ import React from 'react'
 import Navbar from '../components/common/navbar'
 import SearchComponent from '../components/search/search_component'
 import ProductsList from '../components/products_page/products_list'
-import {getProducts} from '../api/products_list'
+import { getProducts } from '../api/products_list'
+import styled from 'styled-components'
+
+const Noti = styled.p`
+    text-align: center;
+    color: red;
+    font-size: 20px;
+`
+
+const SearchText = styled.span`
+    font-weight: bold;
+    color: black;
+    font-size: 23px;
+`
 
 class Search extends React.Component {
 
-    constructor(){
+    constructor() {
         super()
         this.state = {
             clicked: false,
@@ -36,9 +49,18 @@ class Search extends React.Component {
 
     renderProductsList = () => {
         let products = this.state.products.filter(product => product.name.toUpperCase().includes(this.state.search.toUpperCase()))
-        return (
-            <ProductsList productsShow={products} />
-        )
+        if (products.length <= 0) {
+            return (
+                <Noti>No Result For <SearchText>'{this.state.search}'</SearchText></Noti>
+            )
+        }
+        else {
+            return (
+                <div className='container'>
+                    <ProductsList productsShow={products} />
+                </div>
+            )
+        }
     }
 
     render = () => {
