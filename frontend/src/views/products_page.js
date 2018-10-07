@@ -4,6 +4,20 @@ import ProductsCat from '../components/products_page/product_cat'
 import { getProducts } from '../api/products_list'
 import Navbar from '../components/common/navbar'
 import { Row, Col } from 'reactstrap'
+import styled from 'styled-components'
+
+const Left = styled.div`
+    @media(max-width: 768px) {
+        width: 100%;
+    }
+    width: 20%;
+`
+const Right = styled.div`
+    @media(max-width: 768px) {
+        width: 100%;
+    }
+    width: 80%;
+`
 
 class ProductsPage extends Component {
 
@@ -24,10 +38,8 @@ class ProductsPage extends Component {
         return(
             <div>
                 <Navbar/>
-                <Row>
-                    <Col md='3'><ProductsCat/></Col>
-                    <Col md='9'><ProductPanel productsShow={this.state.products}/></Col>
-                </Row>
+                <Left><ProductsCat/></Left>
+                <Right><ProductPanel productsShow={this.state.products}/></Right>
             </div>
         )
     }
