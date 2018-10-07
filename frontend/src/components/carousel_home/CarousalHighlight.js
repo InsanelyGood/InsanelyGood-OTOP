@@ -19,35 +19,35 @@ const items = [
   {
     src: Highlight,
     altText: 'Index',
-    caption: 'OTOP Product from Thailand',
+    caption: 'OTOP Products from Thailand',
     button: <a className ="btn btn-outline-white" href="/products">Shop Now</a>,
     positions: 'captionHighlight fontHigh'
   },
   {
     src: Central,
     altText: 'CentralProduct',
-    caption: 'Product from Central',
+    caption: 'Products from Central',
     button: <a className ="btn btn-outline-white" href="/products">Shop Collection</a>,
     positions: 'captionCentral fontHigh'
   },
   {
     src: Esan,
     altText: 'NortEastProduct',
-    caption:'Product from NorthEast',
+    caption:'Products from NorthEast',
     button: <a className ="btn btn-outline-white" href="/products">Shop Collection</a>,
     positions: 'captionEsan fontHigh'
   },
   {
     src: North,
     altText: 'NorthProduct',
-    caption: 'Product from North',
+    caption: 'Products from North',
     button: <a className ="btn-outline-white btn" href="/products">Shop Collection</a>,
     positions: 'captionNorth fontHigh'
   },
   {
     src: South,
     altText: 'SouthProduct',
-    caption: 'Product from South',
+    caption: 'Products from South',
     button: <a className ="btn btn-outline-white" href="/products">Shop Collection</a>,
     positions: 'captionSouth fontHigh'
   }
