@@ -1,5 +1,6 @@
 import React from 'react'
 import {Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink} from 'reactstrap'
+import '../../css/navbar.css'
 
 class NavBar extends React.Component {
 
@@ -19,7 +20,7 @@ class NavBar extends React.Component {
 
     render = () => {
         return (<div>
-            <Navbar color="light" light expand="md">
+            <Navbar light expand="md">
                 <NavbarBrand href="/">OTOPaholic</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
@@ -31,7 +32,7 @@ class NavBar extends React.Component {
                             <NavLink href="/products">Product</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/">Login</NavLink>
+                            <NavLink href="/users/login">Login</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>

@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductItem from './product_item';
+import ProductItem from './product_itemV2';
 import PropTypes from 'prop-types';
 
 class ProductsList extends React.Component {
