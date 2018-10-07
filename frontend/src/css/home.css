@@ -1,3 +1,55 @@
 .carousel-image {
     width: 100%;
 }
+h2{
+    text-shadow: 2px 1px #4d4d4d;
+}
+.btn-outline-white {
+    color: rgba(255,255,255,0.9);
+    background-color: rgba(0,0,0,0.1);
+    border: 2px solid #f8f9fa !important;
+}
+ .captionSouth{
+    position: absolute;
+    top: 25%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color:#FFDF00 !important; 
+    text-shadow: 1px 1px  black;
+    text-align: right !important;
+    font-size: 200% !important;
+ }
+ .captionEsan{
+    position: absolute;
+    top: 45%;
+    width: 300px;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color:rgb(255, 255, 255) !important; 
+    text-shadow: 1px 1px  black;
+    text-align: left !important;
+    font-size: 200% !important;
+ }
+ .captionCentral{
+    top: 55%;
+    text-shadow: 1px 1px  black;
+    font-size: 200% !important;
+ }
+ .captionNorth{
+    position: absolute;
+    top: 63%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color:rgb(255, 255, 255) !important; 
+    text-shadow: 1px 1px  black;
+    text-align: right !important;
+    font-size: 200% !important;
+ }
+.captionHighlight{
+    top: 50%;
+    text-shadow: 1px 1px  black;
+    font-size: 200% !important;
+ }
