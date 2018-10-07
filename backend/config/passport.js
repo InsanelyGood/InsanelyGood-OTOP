@@ -22,7 +22,7 @@ module.exports = function(passport){
         console.log("password", password)
         console.log("user password", user.password)
         console.log(password === user.password)
-        if(password === user.password){
+        if(isMatch){
           console.log("match")
           return done(null, user);
         }else{

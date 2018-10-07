@@ -18,9 +18,14 @@ router.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
+// Register Form
+router.get('/register', function(req, res){
+  res.render('register');
+})
 
 // Register Process
 router.post('/register', function(req, res){
+  
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
@@ -39,6 +44,44 @@ router.post('/register', function(req, res){
   req.checkBody('telephone_number','telephone_number is Required').notEmpty();
   // req.checkBody('telephone_number','telephone_number size must be 10').size() == 10;
 
+  let errors = req.validationErrors();
+  if(errors){
+    console.log(errors)
+    res.render('register',{
+      errors: errors
+    });
+  }else{
+    let newUser = new User({
+      role: "customer",
+      username: username,
+      password: password,
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      address:"",
+      telephone_number: telephone_number,
+      cart_list:[]
+    });
+
+    bcrypt.genSalt(10, function(err, salt){
+      if (err) console.log(err)
+      bcrypt.hash(newUser.password, salt, function(err, hash){
+        if(err){
+          console.log(err);
+        }
+        newUser.password = hash;
+        newUser.save(function(err){
+          if(err){
+            console.log(err);
+            return;
+          }else{
+            res.redirect('/users/login');
+          }
+        });
+      });
+    });
+
+  }
 
 })
 

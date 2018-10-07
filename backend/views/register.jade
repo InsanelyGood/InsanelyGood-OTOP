@@ -1,0 +1,37 @@
+//- REGISTER
+extends layout
+
+block content
+  h1 Register
+  form(method='POST', action='/users/register')
+    #form-group
+      label FirstName:
+      br
+      input.form-control(name='firstname', type='text')
+    #form-group
+      label LastName:
+      br
+      input.form-control(name='lastname', type='text')
+    #form-group
+      label Email:
+      br
+      input.form-control(name='email', type='text')
+    #form-group
+      label Telephone Number:
+      br
+      input.form-control(name='telephone_number', type='text')
+    #form-group
+      label Username:
+      br
+      input.form-control(name='username', type='text')
+    #form-group
+      label Password:
+      br
+      input.form-control(name='password', type='password')
+    #form-group
+      label Confirm:
+      br
+      input.form-control(name='confirm_password', type='password')
+    
+    br
+    input.btn.btn-primary(type='submit',value='Submit')

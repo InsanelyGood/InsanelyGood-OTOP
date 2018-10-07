@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const usersSchema = mongoose.Schema({
-    id: {
+    role: {
         type: String,
         required: true
     },
@@ -27,7 +27,6 @@ const usersSchema = mongoose.Schema({
     },
     address: {
         type: String,
-        required: true
     },
     telephone_number: {
         type: String,
@@ -35,8 +34,7 @@ const usersSchema = mongoose.Schema({
     },
     cart_list: {
         type: String,
-        required: true
     }
 })
 
-const User = module.exports = mongoose.model('User', usersSchema)
+const User = module.exports = mongoose.model('Users', usersSchema)
