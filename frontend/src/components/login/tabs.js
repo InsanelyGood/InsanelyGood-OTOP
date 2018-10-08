@@ -12,6 +12,12 @@ const Form = styled.div`
 const LoginContent = styled.div`
     padding: 5em;
     margin: auto;
+    a {
+        color: black;
+    },
+    a:hover {
+        color: black;
+    }
 `
 
 export default class Example extends React.Component {
@@ -22,6 +28,12 @@ export default class Example extends React.Component {
         this.state = {
             activeTab: '1'
         };
+    }
+
+    componentDidMount() {
+        if(this.props.defaultTab === '2') {
+            this.setState({activeTab: '2'})
+        }
     }
 
     toggle(tab) {
@@ -40,6 +52,7 @@ export default class Example extends React.Component {
                     <Nav tabs>
                         <NavItem>
                             <NavLink xs="6"
+                                href='/users/login'
                                 className={classnames({ active: this.state.activeTab === '1' })}
                                 onClick={() => { this.toggle('1'); }}
                             >
@@ -48,6 +61,7 @@ export default class Example extends React.Component {
                         </NavItem>
                         <NavItem>
                             <NavLink xs="6"
+                                href='/users/register'
                                 className={classnames({ active: this.state.activeTab === '2' })}
                                 onClick={() => { this.toggle('2'); }}
                             >
