@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Label, FormFeedback } from 'reactstrap';
+import { Input, Label, FormFeedback , Row , Col} from 'reactstrap';
 import styled from 'styled-components'
 
 const Form = styled.div`
@@ -153,7 +153,47 @@ class RegisComponent extends React.Component {
 
     render() {
         return (
-            <Form >
+            <Form inline>
+             <div>
+                    <Row form>
+                        <Col md={6}>
+                            <FormGroups>
+                                <Label>Firstname</Label>
+                                {
+                                    this.state.notHaveFirstName &&
+                                    <alert >
+                                        <Input invalid type="text" onChange={this.handleFirstNameChange} name="firstName" placeholder="Firstname" />
+                                        <FormFeedback>Please enter first name.</FormFeedback>
+                                    </alert>
+                                }
+                                {
+                                    !this.state.notHaveFirstName &&
+                                    <alert >
+                                        <Input type="text" onChange={this.handleFirstNameChange} name="firstName" placeholder="Firstname" />
+                                    </alert>
+                                }
+                            </FormGroups>
+                        </Col>
+                        <Col md={6}>
+                            <FormGroups>
+                                <Label>Lastname</Label>
+                                {
+                                    this.state.notHaveLastName &&
+                                    <alert >
+                                        <Input invalid type="text" onChange={this.handleLastNameChange} name="lastName" placeholder="Lastname" />
+                                        <FormFeedback>Please enter last name.</FormFeedback>
+                                    </alert>
+                                }
+                                {
+                                    !this.state.notHaveLastName &&
+                                    <alert >
+                                        <Input type="text" onChange={this.handleLastNameChange} name="lastName" placeholder="Lastname" />
+                                    </alert>
+                                }
+                            </FormGroups>
+                        </Col>
+                    </Row>
+                </div>
                 <FormGroups>
                     <Label>Username</Label>
                     {
@@ -169,23 +209,6 @@ class RegisComponent extends React.Component {
                             <Input type="text" onChange={this.handleUserChange} name="username" placeholder="Username" />
                         </alert>
                     }                        </FormGroups>
-                <FormGroups>
-                    <Label>Email</Label>
-                    {
-                        this.state.notHaveEmail &&
-                        <alert >
-                            <Input invalid type="email" onChange={this.handleEmailChange} name="email" placeholder="Email" />
-                            <FormFeedback>Please enter email.</FormFeedback>
-                        </alert>
-                    }
-                    {
-                        !this.state.notHaveEmail &&
-                        <alert >
-                            <Input type="email" onChange={this.handleEmailChange} name="email" placeholder="Email" />
-                        </alert>
-                    }
-
-                </FormGroups>
                 <FormGroups>
                     <Label>Password</Label>
                     {
@@ -219,36 +242,21 @@ class RegisComponent extends React.Component {
                     }
                 </FormGroups>
                 <FormGroups>
-                    <Label>Firstname</Label>
+                    <Label>Email</Label>
                     {
-                        this.state.notHaveFirstName &&
+                        this.state.notHaveEmail &&
                         <alert >
-                            <Input invalid type="text" onChange={this.handleFirstNameChange} name="firstName" placeholder="Firstname" />
-                            <FormFeedback>Please enter first name.</FormFeedback>
+                            <Input invalid type="email" onChange={this.handleEmailChange} name="email" placeholder="Email" />
+                            <FormFeedback>Please enter email.</FormFeedback>
                         </alert>
                     }
                     {
-                        !this.state.notHaveFirstName &&
+                        !this.state.notHaveEmail &&
                         <alert >
-                            <Input type="text" onChange={this.handleFirstNameChange} name="firstName" placeholder="Firstname" />
+                            <Input type="email" onChange={this.handleEmailChange} name="email" placeholder="Email" />
                         </alert>
                     }
-                </FormGroups>
-                <FormGroups>
-                    <Label>Lastname</Label>
-                    {
-                        this.state.notHaveLastName &&
-                        <alert >
-                            <Input invalid type="text" onChange={this.handleLastNameChange} name="lastName" placeholder="Lastname" />
-                            <FormFeedback>Please enter last name.</FormFeedback>
-                        </alert>
-                    }
-                    {
-                        !this.state.notHaveLastName &&
-                        <alert >
-                            <Input type="text" onChange={this.handleLastNameChange} name="lastName" placeholder="Lastname" />
-                        </alert>
-                    }
+
                 </FormGroups>
                 <FormGroups>
                     <Label>Contact Number</Label>
