@@ -7,6 +7,9 @@ import badge from '../images/product-page-badge.jpg'
 const Row = styled.div`
     @media(max-width: 768px) {
         display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 10px;
     }
     padding-top: 30px;
     display: flex;
@@ -20,6 +23,10 @@ const Left = styled.div`
     width: 520px;
 `
 const Img = styled.img`
+    @media(max-width: 768px) {
+        margin-left: 16px;
+        margin-right: auto;
+    }
     width: 96%;
     margin-top: 100px;
     margin-left: 35px;
@@ -28,6 +35,7 @@ const Img = styled.img`
 
 const Right = styled.div`
     @media(max-width: 768px) {
+        padding-top: 10px;
         width: 100%;
     }
     width: 80%;
