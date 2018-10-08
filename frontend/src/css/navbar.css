@@ -1,12 +1,33 @@
-.navbar {
-
-} 
+/* .navbar {
+  font-family: Andale Mono, monospace;
+} */
 .navbar-expand-md {
-    background-color: antiquewhite; 
-    position: fixed !important;
-    width: 100%;
-    z-index: 99;
-} 
-.navbar-light {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed !important;
+  width: 100%;
+  z-index: 99;
 
+}
+.navbar-brand {
+  font-weight: bolder;
+  color: white !important;
+  /* background: rgba(144, 12, 63, 1); */
+}
+
+.nav-item {
+  text-transform: uppercase;
+}
+
+.nav-link .top-navbar{
+  color: white !important;
+}
+
+.top-navbar .nav-link:hover{
+  font-weight: bolder;
+  background: rgba(144, 12, 63, 0.8);
+  color: white !important;
+}
+
+.navbar-toggler-icon {
+  color: white !important;
 }

@@ -92,7 +92,9 @@ class LoginComponent extends React.Component {
     render() {
         return (
             <Div >
-                <div >
+
+                <form action="http://localhost:8000/users/login" method="POST">
+
                     <FormGroups>
                         <Label>Username</Label>
                         {
@@ -129,7 +131,7 @@ class LoginComponent extends React.Component {
                         <Buttons onClick={this.handleSubmit} type="submit" value='Login' href='/'/>
                     </FormGroups>
 
-                </div>
+                </form>
             </Div>
         );
     }
