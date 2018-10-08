@@ -18,7 +18,7 @@ const Head = styled.div`
     -webkit-box-shadow:0px 5px 25px -5px black;
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
-    height: 120px;
+    height: 90px;
     background-color: black;
 `
 const Text = styled.h1`
@@ -27,12 +27,7 @@ const Text = styled.h1`
     color: white;
     padding-top: 22px;
 `
-const Text2 = styled.h1`
-    text-align: center;
-    font-weight: bold;
-    color: #c1c1c1;
-`
-const Text3 = styled.span`
+const Label = styled.span`
     font-weight: bold;
     color: black;
     margin: 15px;
@@ -99,28 +94,27 @@ class Categories extends React.Component {
                 <Content>
                     <Head>
                         <Text>Categories</Text>
-                        <Text2>...</Text2>
                     </Head>
                     <BGroup>
                             <Tab>
                                 <Check type='Bag' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
-                                <Text3>Bag</Text3>
+                                <Label>Bag</Label>
                             </Tab>
                             <Tab>
                                 <Check type='Bloom' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
-                                <Text3>Bloom</Text3>
+                                <Label>Bloom</Label>
                             </Tab>
                             <Tab>
                                 <Check type='Cloth' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
-                                <Text3>Cloth</Text3>
+                                <Label>Cloth</Label>
                             </Tab>
                             <Tab>
                                 <Check type='Food' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
-                                <Text3>Food</Text3>
+                                <Label>Food</Label>
                             </Tab>
                             <Tab>
                                 <Check type='Shoe' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
-                                <Text3>Shoe</Text3>
+                                <Label>Shoe</Label>
                             </Tab>
                         </BGroup>
                         <br/>
