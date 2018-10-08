@@ -22,7 +22,7 @@ router.post('/login', function (req, res, next) {
     if (!user) { return res.sendStatus(400); }
     req.logIn(user, function (err) {
       if (err) { return next(err); }
-      return res.sendStatus(200);
+      return res.cookie('username', user.username).sendStatus(200);
     });
   })(req, res, next);
 });
