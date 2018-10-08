@@ -29,7 +29,11 @@
   text-decoration: none;
 } */
 
-body {
+.mt-3 p {
+  color: #c6c7c7 !important;
+}
+
+.text-center {
   color: #c6c7c7 !important;
 }
 

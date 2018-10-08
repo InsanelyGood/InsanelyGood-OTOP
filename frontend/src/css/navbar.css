@@ -1,6 +1,6 @@
-.navbar {
+/* .navbar {
   font-family: Andale Mono, monospace;
-}
+} */
 .navbar-expand-md {
   background: rgba(0, 0, 0, 0.5);
   position: fixed !important;
@@ -8,26 +8,21 @@
   z-index: 99;
 
 }
-.navbar-light {
-
-}
-
 .navbar-brand {
   font-weight: bolder;
   color: white !important;
   /* background: rgba(144, 12, 63, 1); */
-
 }
 
 .nav-item {
   text-transform: uppercase;
 }
 
-.nav-link {
+.nav-link .top-navbar{
   color: white !important;
 }
 
-.nav-link:hover {
+.top-navbar .nav-link:hover{
   font-weight: bolder;
   background: rgba(144, 12, 63, 0.8);
   color: white !important;

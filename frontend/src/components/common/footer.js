@@ -41,7 +41,7 @@ class FooterPage extends React.Component {
                     <hr/>
                     <Row className="d-flex align-items-center">
                         <Col md="8" lg="8">
-                            <p className="text-center text-md-left grey-text">&copy; {(new Date().getFullYear())} Copyright <a href="https://www.otoaholic.com"> OTOPaholic.com </a></p>
+                            <p className="text-center text-md-left grey-text">&copy; {(new Date().getFullYear())} Copyright <a href="/"> OTOPaholic.com </a></p>
                         </Col>
                     </Row>
                 </Container>
