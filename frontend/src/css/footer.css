@@ -1,0 +1,66 @@
+/* .page-footer
+
+
+.deep-purple {
+  border-top: 1px solid rgba(144, 12, 63, 0.8);
+}
+
+.mb-4 a{
+  color: #212529 !important;
+}
+
+.mb-4 a:hover{
+  text-decoration: none;
+}
+
+.container-fluid {
+  color: grey !important;
+}
+
+.footer-copyright {
+  background: #313342;
+}
+
+.footer-copyright a {
+  color: white !important;
+}
+
+.footer-copyright a:hover {
+  text-decoration: none;
+} */
+
+.mt-3 p {
+  color: #c6c7c7 !important;
+}
+
+.text-center {
+  color: #c6c7c7 !important;
+}
+
+.page-footer {
+  background: #3c3d48;
+}
+
+.text-uppercase {
+  color: white !important;
+}
+
+.mx-auto a {
+  color: #c6c7c7 !important;
+  text-decoration: none;
+}
+
+.mx-auto a:hover {
+  color: rgb(191, 61, 99) !important;
+  text-decoration: none;
+}
+
+.col-md-8 a {
+  font-weight: bold;
+  color: white !important;
+}
+
+.col-md-8 a:hover {
+  color: #6C99BD !important;
+  text-decoration: none;
+}

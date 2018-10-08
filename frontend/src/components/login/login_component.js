@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Label } from 'reactstrap';
+import { Input, Label, FormFeedback } from 'reactstrap';
 import styled from 'styled-components'
 
 const Div = styled.div`
@@ -26,46 +26,111 @@ const Buttons = styled.input`
     font-weight: bold;
 `
 
+// const Block = styled.div`
+//     display: block;
+//     margin-top: 5px;
+//     margin-bootom: 10px; 
+// `
 
 class LoginComponent extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            email: '',
+            username: '',
             password: '',
+            error: '',
+            notHaveUsername: false,
+            notHavePassword: false
         };
+        this.handlePassChange = this.handlePassChange.bind(this);
+        this.handleUserChange = this.handleUserChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.dismissError = this.dismissError.bind(this);
     }
 
-    handleChange = event => {
+    dismissError() {
+        this.setState({ 
+            username: '',
+            password: '',
+            error: '',
+     });
+    }
+
+    handleUserChange = event => {
         this.setState({
-            [event.target.id]: event.target.value
+            username: event.target.value,
+        });
+    };
+
+    handlePassChange = event => {
+        this.setState({
+            password: event.target.value
         });
     }
 
-    onLoginClick = event => {
-        event.preventDefault();
+    handleSubmit = event => {
+        // event.preventDefault();
+        
+        console.log(this.state.username);
+        console.log(this.state.password);
+        
+        
+        if (this.state.username === '') {
+            this.setState({ notHaveUsername: true });
+        }
+        else {
+            this.setState({notHaveUsername: false})
+        }
+
+        if (this.state.password === '') {
+            this.setState({ notHavePassword: true });
+        }else {
+            this.setState({notHavePassword: false})
+        }
+
     }
-
-
 
     render() {
         return (
             <Div >
-                {/* <form onSubmit={this.handleSubmit}> */}
 
                 <form action="http://localhost:8000/users/login" method="POST">
 
                     <FormGroups>
-                        <Label>Email</Label>
-                        <Input type="email" name="email" placeholder="Email" />
+                        <Label>Username</Label>
+                        {
+                            this.state.notHaveUsername &&
+                            <alert >
+                                <Input invalid type="text" onChange={this.handleUserChange} name="email" placeholder="Username" />
+                                <FormFeedback>Please enter username.</FormFeedback>
+                            </alert>
+                        }
+                        {
+                            !this.state.notHaveUsername &&
+                            <alert >
+                                <Input type="text" name="email" onChange={this.handleUserChange} placeholder="Username" />
+                            </alert>
+                        }
                     </FormGroups>
                     <FormGroups>
                         <Label>Password</Label>
-                        <Input type="password" name="password" placeholder="Password" />
+                        {
+                            this.state.notHavePassword &&
+                            <alert >
+                                <Input invalid type="password" onChange={this.handlePassChange} name="password" placeholder="Password" />
+                                <FormFeedback>Please enter password.</FormFeedback>
+                            </alert>
+                        }
+                        {
+                            !this.state.notHavePassword &&
+                            <alert >
+                                <Input type="password" name="password" onChange={this.handlePassChange} placeholder="Password" />
+                            </alert>
+                        }
                     </FormGroups>
                     <FormGroups>
-                        <Buttons type="submit" value='Login' />
+                        <Buttons onClick={this.handleSubmit} type="submit" value='Login' />
                     </FormGroups>
 
                 </form>
