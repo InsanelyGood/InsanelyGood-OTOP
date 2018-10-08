@@ -71,19 +71,19 @@ class Categories extends React.Component {
     checkedType = (type)=> {
         this.setState({
             types: [...this.state.types,type]
+        }, ()=> {
+            console.log(this.state.types);
+            this.props.changeTypes(this.state.types)
         })
-
-        console.log(this.state.types);
-        
-        this.props.changeTypes(this.state.types)
     }
 
     unCheckedType = (type)=> {
         this.setState({
-            types: this.state.types.filter((ptype) => ptype != type)
+            types: this.state.types.filter((ptype) => ptype !== type)
+        },()=> {
+            console.log(this.state.types);
+            this.props.unCheckedType(this.state.types)
         })
-
-        console.log(this.state.types);
         
     }
 
@@ -134,26 +134,26 @@ class Check extends React.Component {
     }
 
     onClick = ()=> {
-        if(this.state.checked) {
-            this.setState({
-                color: '#eee',
-                content: ''
-            })
-        } else {
-            this.setState({
-                color: '#2196F3',
-                content: '✔'
-            })
-        }
-
-        if(!this.state.checked) {
-            this.props.checkedType(this.props.type)
-        } else {
-            this.props.unCheckedType(this.props.type)
-        }
-        
         this.setState({
             checked: !this.state.checked
+        },()=> {
+
+            console.log(this.state.checked);
+        
+
+            if(this.state.checked) {
+                this.setState({
+                    color: '#2196F3',
+                    content: '✔'
+                })
+                this.props.checkedType(this.props.type)
+            } else {
+                this.setState({
+                    color: '#eee',
+                    content: ''
+                })
+                this.props.unCheckedType(this.props.type)
+            }
         })
         
     }
