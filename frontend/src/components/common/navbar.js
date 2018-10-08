@@ -8,6 +8,7 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap'
+import Cookie from 'js-cookie'
 import '../../css/navbar.css'
 
 class NavBar extends React.Component {
@@ -16,7 +17,8 @@ class NavBar extends React.Component {
     super(props);
 
     this.state = {
-      isOpen: false
+      isOpen: false,
+      isLogin: false
     };
   }
 
@@ -24,6 +26,10 @@ class NavBar extends React.Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+
+  onLogoutClicked = () => {
+    Cookie.remove('username')
   }
 
   render = () => {
@@ -57,9 +63,14 @@ class NavBar extends React.Component {
               <NavItem>
                 <NavLink href="#">cart</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="/users/login">Login</NavLink>
-              </NavItem>
+              {Cookie.get('username') 
+                ? <NavItem>
+                  <NavLink onClick={this.onLogoutClicked} href="/">Logout</NavLink>
+                  </NavItem> 
+                : <NavItem>
+                    <NavLink href="/users/login">Login</NavLink>
+                  </NavItem>
+              }
             </Nav>
           </Collapse>
         </Navbar>
