@@ -82,7 +82,7 @@ class Categories extends React.Component {
             types: this.state.types.filter((ptype) => ptype !== type)
         },()=> {
             console.log(this.state.types);
-            this.props.unCheckedType(this.state.types)
+            this.props.changeTypes(this.state.types)
         })
         
     }
@@ -97,20 +97,20 @@ class Categories extends React.Component {
                     </Head>
                     <BGroup>
                             <Tab>
-                                <Check type='bag' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
+                                <Check type='Bag' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
                                 <Text3>Bag</Text3>
                             </Tab>
                             <Tab>
-                                <Check type='bloom' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
+                                <Check type='Bloom' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
                                 <Text3>Bloom</Text3>
                             </Tab>
                             <Tab>
-                                <Check type='cloth' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
+                                <Check type='Cloth' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
                                 <Text3>Cloth</Text3>
                             </Tab>
                             <Tab>
-                                <Check type='food' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
-                                <Text3>food</Text3>
+                                <Check type='Food' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
+                                <Text3>Food</Text3>
                             </Tab>
                         </BGroup>
                         <br/>

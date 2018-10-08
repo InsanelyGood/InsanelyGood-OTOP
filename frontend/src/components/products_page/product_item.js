@@ -8,7 +8,12 @@ class ProductItem extends React.Component {
         return (
             <div className='col-md-4 col-sm-6 product-item'>
                 <a href='/'>
-                    <CardImg src={this.props.product_image} alt="error" />
+                    {/* <CardImg src={this.props.product_image} alt="error" /> */}
+                    <img
+                        alt='error'
+                        src={this.props.product_image}
+                        className='product-card-image'
+                    />
                 </a>
                 <a href='/' className='product-card-description'>
                     <p className='product-card-band'>{this.props.product_name}</p>

@@ -43,18 +43,16 @@ class ProductsPage extends Component {
         })
     }
 
-    productFilter = (types) => {
-        if(types.length < 1) {
+    productFilter = () => {
+        if(this.state.types.length < 1) {
             return this.state.products
         }
-        return this.state.products.filter((product) => types.includes(product.category))
+        return this.state.products.filter((product) => this.state.types.includes(product.category))
     }
 
     changeTypes = (nTypes) => {
         console.log(nTypes);
-        this.setState({ types: nTypes })
-        console.log(this.state.types);
-        
+        this.setState({ types: nTypes }, this.productFilter)
     }
 
     render() {
@@ -63,7 +61,7 @@ class ProductsPage extends Component {
                 <Navbar/>
                 <Row>
                     <Left><ProductsCat changeTypes={this.changeTypes}/></Left>
-                    <Right><ProductPanel productsShow={this.productFilter(this.state.types)}/></Right>
+                    <Right><ProductPanel productsShow={this.productFilter()}/></Right>
                 </Row>
             </div>
         )

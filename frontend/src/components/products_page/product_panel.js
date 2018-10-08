@@ -24,10 +24,7 @@ const Content = styled.div`
 `
 
 class ProductPanel extends Component {
-    constructor(props) {
-        super(props)
-    }
-
+    
     render() {
         return(
             <Block>
