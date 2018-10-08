@@ -32,7 +32,7 @@ class NavBar extends React.Component {
                             <NavLink href="/products">Product</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/">Login</NavLink>
+                            <NavLink href="/users/login">Login</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>
