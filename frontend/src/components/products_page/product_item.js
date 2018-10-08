@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../css/product_item.css';
+import { CardImg } from 'reactstrap'
 
 class ProductItem extends React.Component {
 
@@ -7,6 +8,7 @@ class ProductItem extends React.Component {
         return (
             <div className='col-md-4 col-sm-6 product-item'>
                 <a href='/'>
+                    {/* <CardImg src={this.props.product_image} alt="error" /> */}
                     <img
                         alt='error'
                         src={this.props.product_image}
