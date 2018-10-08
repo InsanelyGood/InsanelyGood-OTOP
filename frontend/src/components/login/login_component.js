@@ -39,7 +39,6 @@ class LoginComponent extends React.Component {
         this.state = {
             username: '',
             password: '',
-            error: '',
             notHaveUsername: false,
             notHavePassword: false
         };
@@ -53,7 +52,6 @@ class LoginComponent extends React.Component {
         this.setState({ 
             username: '',
             password: '',
-            error: '',
      });
     }
 
@@ -128,7 +126,7 @@ class LoginComponent extends React.Component {
                         }
                     </FormGroups>
                     <FormGroups>
-                        <Buttons onClick={this.handleSubmit} type="submit" value='Login' />
+                        <Buttons onClick={this.handleSubmit} type="submit" value='Login' href='/'/>
                     </FormGroups>
 
                 </div>
