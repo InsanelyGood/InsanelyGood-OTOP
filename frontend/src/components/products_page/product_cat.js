@@ -58,6 +58,14 @@ const CheckBox = styled.span`
     height: 25px;
     width: 25px;
 `
+const CheckMark = styled.span`
+    width: 50%;
+    height: 50%;
+    margin: 6px;
+    position: inherit;
+    border-radius: 5px;
+    background-color: #2196F3;
+`
 
 class Categories extends React.Component {
 
@@ -131,7 +139,7 @@ class Check extends React.Component {
         this.state = { 
             checked: false,
             color: '#eee',
-            content: ''
+            opacity: 0
         }
     }
 
@@ -141,14 +149,12 @@ class Check extends React.Component {
         },()=> {
             if(this.state.checked) {
                 this.setState({
-                    color: '#2196F3',
-                    content: '✔'
+                    opacity: 100
                 })
                 this.props.checkedType(this.props.type)
             } else {
                 this.setState({
-                    color: '#eee',
-                    content: ''
+                    opacity: 0
                 })
                 this.props.unCheckedType(this.props.type)
             }
@@ -174,7 +180,13 @@ class Check extends React.Component {
 
     render = ()=> {
         return(
-            <CheckBox style={{backgroundColor: this.state.color, content: this.state.content}} onMouseOver={this.mouseOver} onMouseOut={this.mouseOut} onClick={this.onClick}></CheckBox>
+            <CheckBox 
+                style={{backgroundColor: this.state.color}}
+                onMouseOver={this.mouseOver} 
+                onMouseOut={this.mouseOut} 
+                onClick={this.onClick}>
+                <CheckMark style={{opacity: this.state.opacity}}></CheckMark>
+            </CheckBox>
         )
     }
 }
