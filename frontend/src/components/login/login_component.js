@@ -102,14 +102,14 @@ class LoginComponent extends React.Component {
                         {
                             this.state.notHaveUsername &&
                             <alert >
-                                <Input invalid type="text" onChange={this.handleUserChange} name="email" placeholder="Username" />
+                                <Input invalid type="text" onChange={this.handleUserChange} name="username" placeholder="Username" />
                                 <FormFeedback>Please enter username.</FormFeedback>
                             </alert>
                         }
                         {
                             !this.state.notHaveUsername &&
                             <alert >
-                                <Input type="text" name="email" onChange={this.handleUserChange} placeholder="Username" />
+                                <Input type="text" name="username" onChange={this.handleUserChange} placeholder="Username" />
                             </alert>
                         }
                     </FormGroups>

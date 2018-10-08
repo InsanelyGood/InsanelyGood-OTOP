@@ -33,7 +33,7 @@ export default class Example extends React.Component {
     }
     render() {
         return (
-            <LoginContent className='col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-3'>
+            <LoginContent className='col-sm-8 col-sm-offset-2 col-md-5 col-md-offset-3'>
                 <Form className='container'>
                 
 

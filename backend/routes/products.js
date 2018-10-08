@@ -6,15 +6,15 @@ let Product = require("../models/products");
 // All products
 router.get("/", (req, res, next) => {
   console.log(req.cookies)
-  if (req.cookies.username) {
-    Product.find({}, (err, products) => {
-      res.send({ products });
-    });
-  } else {
-    res.status(401).send({
-      error: 'mai dai login'
-    })
-  }
+  Product.find({}, (err, products) => {
+    res.send({ products });
+  });
+  // if (req.cookies.username) {
+  // } else {
+  //   res.status(401).send({
+  //     error: 'mai dai login'
+  //   })
+  // }
 });
 
 // North products
