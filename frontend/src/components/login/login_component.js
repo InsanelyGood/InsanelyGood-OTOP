@@ -39,22 +39,12 @@ class LoginComponent extends React.Component {
         this.state = {
             username: '',
             password: '',
-            error: '',
             notHaveUsername: false,
             notHavePassword: false
         };
         this.handlePassChange = this.handlePassChange.bind(this);
         this.handleUserChange = this.handleUserChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.dismissError = this.dismissError.bind(this);
-    }
-
-    dismissError() {
-        this.setState({ 
-            username: '',
-            password: '',
-            error: '',
-     });
     }
 
     handleUserChange = event => {
@@ -94,9 +84,7 @@ class LoginComponent extends React.Component {
     render() {
         return (
             <Div >
-
                 <form action="http://localhost:8000/users/login" method="POST">
-
                     <FormGroups>
                         <Label>Username</Label>
                         {
@@ -130,9 +118,8 @@ class LoginComponent extends React.Component {
                         }
                     </FormGroups>
                     <FormGroups>
-                        <Buttons onClick={this.handleSubmit} type="submit" value='Login' />
+                        <Buttons onClick={this.handleSubmit} type="submit" value='Login' href='/'/>
                     </FormGroups>
-
                 </form>
             </Div>
         );

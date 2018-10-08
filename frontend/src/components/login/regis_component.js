@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Label , FormFeedback} from 'reactstrap';
+import { Input, Label, FormFeedback } from 'reactstrap';
 import styled from 'styled-components'
 
 const Form = styled.div`
@@ -25,28 +25,41 @@ const Buttons = styled.input`
     font-weight: bold;
 `
 
-class LoginComponent extends React.Component {
+class RegisComponent extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             email: '',
+            username: '',
             password: '',
-            comfirmPassword: '',
+            confirmPassword: '',
             firstName: '',
             lastName: '',
             contactNumber: '',
-            error: '',
+            notHaveEmail: false,
+            notHaveUsername: false,
+            notHavePassword: false,
+            notHaveConfirmPass: false,
+            notHaveFirstName: false,
+            notHaveLastName: false,
+            notHaveContectNum: false,
         };
-        this.handlePassChange = this.handlePassChange.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handleUserChange = this.handleUserChange.bind(this);
+        this.handlePassChange = this.handlePassChange.bind(this);
+        this.handleConPassChange = this.handleConPassChange.bind(this);
+        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+        this.handleLastNameChange = this.handleLastNameChange.bind(this);
+        this.handleContactNumbChange = this.handleContactNumbChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.dismissError = this.dismissError.bind(this);
     }
 
-    dismissError() {
-        this.setState({ error: '' });
-    }
+    handleEmailChange = event => {
+        this.setState({
+            email: event.target.value,
+        });
+    };
 
     handleUserChange = event => {
         this.setState({
@@ -60,146 +73,207 @@ class LoginComponent extends React.Component {
         });
     }
 
+    handleConPassChange = event => {
+        this.setState({
+            confirmPassword: event.target.value,
+        });
+    };
+
+    handleFirstNameChange = event => {
+        this.setState({
+            firstName: event.target.value,
+        });
+    };
+
+    handleLastNameChange = event => {
+        this.setState({
+            lastName: event.target.value,
+        });
+    };
+
+    handleContactNumbChange = event => {
+        this.setState({
+            contactNumber: event.target.value,
+        });
+    };
+
     handleSubmit = event => {
-        event.preventDefault();
+        console.log(this.state.username);
+        console.log(this.state.email);
+        console.log(this.state.password);
+        console.log(this.state.confirmPassword);
+        console.log(this.state.firstName);
+        console.log(this.state.lastName);
+        console.log(this.state.contactNumber);
 
-        if (!this.state.username) {
-            return this.setState({ error: 'Username is required' });
+        if (this.state.username === '') {
+            this.setState({ notHaveUsername: true });
+        }
+        else {
+            this.setState({ notHaveUsername: false })
         }
 
-        if (!this.state.password) {
-            return this.setState({ error: 'Password is required' });
+        if (this.state.email === '') {
+            this.setState({ notHaveEmail: true });
+        }
+        else {
+            this.setState({ notHaveEmail: false })
         }
 
-        return this.setState({ error: '' });
+        if (this.state.password === '') {
+            this.setState({ notHavePassword: true });
+        } else {
+            this.setState({ notHavePassword: false })
+        }
+
+        if (this.state.confirmPassword === '') {
+            this.setState({ notHaveConfirmPass: true });
+        } else {
+            this.setState({ notHaveConfirmPass: false })
+        }
+
+        if (this.state.firstName === '') {
+            this.setState({ notHaveFirstName: true });
+        } else {
+            this.setState({ notHaveFirstName: false })
+        }
+
+        if (this.state.lastName === '') {
+            this.setState({ notHaveLastName: true });
+        } else {
+            this.setState({ notHaveLastName: false })
+        }
+
+        if (this.state.contactNumber === '') {
+            this.setState({ notHaveContectNum: true });
+        } else {
+            this.setState({ notHaveContectNum: false })
+        }
     }
-
-
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <Form >
-                        <FormGroups>
-                            <Label>Username</Label>
-                            {
-                                this.state.username &&
-                                <alert onClick={this.dismissError}>
-                                    <Input invalid type="text" name="email" placeholder="Username" />
-                                    <FormFeedback>Please enter username.</FormFeedback>
-                                </alert>
-                            }
-                            {
-                                !this.state.error &&
-                                <alert onSubmit={this.dismissError}>
-                                    <Input type="text" name="email" placeholder="Username" />
-                                </alert>
-                            }                        </FormGroups>
-                        <FormGroups>
-                            <Label>Email</Label>
-                            {
-                            this.state.error &&
-                            <alert onClick={this.dismissError}>
-                                <Input invalid type="email" name="email" placeholder="Email" />
-                                <FormFeedback>Please enter email.</FormFeedback>
-                            </alert>
-                        }
-                        {
-                            !this.state.error &&
-                            <alert onSubmit={this.dismissError}>
-                                <Input type="email" name="email" placeholder="Email" />
-                            </alert>
-                        }
-                            
-                        </FormGroups>
-                        <FormGroups>
-                            <Label>Password</Label>
-                            {
-                                this.state.error &&
-                                <alert onClick={this.dismissError}>
-                                    <Input invalid type="password" name="password" placeholder="Password" />
-                                    <FormFeedback>Please enter password.</FormFeedback>
-                                </alert>
-                            }
-                            {
-                                !this.state.error &&
-                                <alert onSubmit={this.dismissError}>
-                                    <Input type="password" name="password" placeholder="Password" />
-                                </alert>
-                            }                        </FormGroups>
-                        <FormGroups>
-                            <Label>Confirm Password</Label>
-                            {
-                                this.state.error &&
-                                <alert onClick={this.dismissError}>
-                                    <Input invalid type="password" name="password" placeholder="Password" />
-                                    <FormFeedback>Please enter password.</FormFeedback>
-                                </alert>
-                            }
-                            {
-                                !this.state.error &&
-                                <alert onSubmit={this.dismissError}>
-                                    <Input type="password" name="cPassword" placeholder="Confirm Password" />
-                                </alert>
-                            }  
-                        </FormGroups>
-                        <FormGroups>
-                            <Label>Firstname</Label>
-                            {
-                                this.state.error &&
-                                <alert onClick={this.dismissError}>
-                                    <Input invalid type="text" name="firstName" id="id_fn" placeholder="Firstname" />
-                                    <FormFeedback>Please enter first name.</FormFeedback>
-                                </alert>
-                            }
-                            {
-                                !this.state.error &&
-                                <alert onSubmit={this.dismissError}>
-                                    <Input type="text" name="firstName" id="id_fn" placeholder="Firstname" />
-                                </alert>
-                            } 
-                        </FormGroups>
-                        <FormGroups>
-                            <Label>Lastname</Label>
-                            {
-                                this.state.error &&
-                                <alert onClick={this.dismissError}>
-                                    <Input invalid type="text" name="lastName" id="id_ln" placeholder="Lastname" />
-                                    <FormFeedback>Please enter last name.</FormFeedback>
-                                </alert>
-                            }
-                            {
-                                !this.state.error &&
-                                <alert onSubmit={this.dismissError}>
-                                    <Input type="text" name="lastName" id="id_ln" placeholder="Lastname" />
-                                </alert>
-                            }
-                        </FormGroups>
-                        <FormGroups>
-                            <Label>Contact Number</Label>
-                            {
-                                this.state.error &&
-                                <alert onClick={this.dismissError}>
-                                    <Input invalid type="text" name="contactNumber" id="id_cn" placeholder="Contact Number" />
-                                    <FormFeedback>Please enter contact number.</FormFeedback>
-                                </alert>
-                            }
-                            {
-                                !this.state.error &&
-                                <alert onSubmit={this.dismissError}>
-                                    <Input type="text" name="contactNumber" id="id_cn" placeholder="Contact Number" />
-                                </alert>
-                            }
-                        </FormGroups>
-                        <FormGroups>
-                            <Buttons type="submit" value='Sign up' />
-                        </FormGroups>
-                    </Form>
-                </form>
-            </div>
+            <Form >
+                <FormGroups>
+                    <Label>Username</Label>
+                    {
+                        this.state.notHaveUsername &&
+                        <alert >
+                            <Input invalid type="text" onChange={this.handleUserChange} name="username" placeholder="Username" />
+                            <FormFeedback>Please enter username.</FormFeedback>
+                        </alert>
+                    }
+                    {
+                        !this.state.notHaveUsername &&
+                        <alert >
+                            <Input type="text" onChange={this.handleUserChange} name="username" placeholder="Username" />
+                        </alert>
+                    }                        </FormGroups>
+                <FormGroups>
+                    <Label>Email</Label>
+                    {
+                        this.state.notHaveEmail &&
+                        <alert >
+                            <Input invalid type="email" onChange={this.handleEmailChange} name="email" placeholder="Email" />
+                            <FormFeedback>Please enter email.</FormFeedback>
+                        </alert>
+                    }
+                    {
+                        !this.state.notHaveEmail &&
+                        <alert >
+                            <Input type="email" onChange={this.handleEmailChange} name="email" placeholder="Email" />
+                        </alert>
+                    }
+
+                </FormGroups>
+                <FormGroups>
+                    <Label>Password</Label>
+                    {
+                        this.state.notHavePassword &&
+                        <alert >
+                            <Input invalid type="password" onChange={this.handlePassChange} name="password" placeholder="Password" />
+                            <FormFeedback>Please enter password.</FormFeedback>
+                        </alert>
+                    }
+                    {
+                        !this.state.notHavePassword &&
+                        <alert >
+                            <Input type="password" onChange={this.handlePassChange} name="password" placeholder="Password" />
+                        </alert>
+                    }
+                </FormGroups>
+                <FormGroups>
+                    <Label>Confirm Password</Label>
+                    {
+                        this.state.notHaveConfirmPass &&
+                        <alert >
+                            <Input invalid type="password" onChange={this.handleConPassChange} name="password" placeholder="Confirm Password" />
+                            <FormFeedback>Please enter password.</FormFeedback>
+                        </alert>
+                    }
+                    {
+                        !this.state.notHaveConfirmPass &&
+                        <alert >
+                            <Input type="password" onChange={this.handleConPassChange} name="cPassword" placeholder="Confirm Password" />
+                        </alert>
+                    }
+                </FormGroups>
+                <FormGroups>
+                    <Label>Firstname</Label>
+                    {
+                        this.state.notHaveFirstName &&
+                        <alert >
+                            <Input invalid type="text" onChange={this.handleFirstNameChange} name="firstName" placeholder="Firstname" />
+                            <FormFeedback>Please enter first name.</FormFeedback>
+                        </alert>
+                    }
+                    {
+                        !this.state.notHaveFirstName &&
+                        <alert >
+                            <Input type="text" onChange={this.handleFirstNameChange} name="firstName" placeholder="Firstname" />
+                        </alert>
+                    }
+                </FormGroups>
+                <FormGroups>
+                    <Label>Lastname</Label>
+                    {
+                        this.state.notHaveLastName &&
+                        <alert >
+                            <Input invalid type="text" onChange={this.handleLastNameChange} name="lastName" placeholder="Lastname" />
+                            <FormFeedback>Please enter last name.</FormFeedback>
+                        </alert>
+                    }
+                    {
+                        !this.state.notHaveLastName &&
+                        <alert >
+                            <Input type="text" onChange={this.handleLastNameChange} name="lastName" placeholder="Lastname" />
+                        </alert>
+                    }
+                </FormGroups>
+                <FormGroups>
+                    <Label>Contact Number</Label>
+                    {
+                        this.state.notHaveContectNum &&
+                        <alert >
+                            <Input invalid type="text" onChange={this.handleContactNumbChange} name="contactNumber" placeholder="Contact Number" />
+                            <FormFeedback>Please enter contact number.</FormFeedback>
+                        </alert>
+                    }
+                    {
+                        !this.state.notHaveContectNum &&
+                        <alert >
+                            <Input type="text" onChange={this.handleContactNumbChange} name="contactNumber" placeholder="Contact Number" />
+                        </alert>
+                    }
+                </FormGroups>
+                <FormGroups>
+                    <Buttons onClick={this.handleSubmit} type="submit" value='Sign up' />
+                </FormGroups>
+            </Form>
+
+
         );
     }
 }
 
-export default LoginComponent
+export default RegisComponent
