@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from '../components/common/navbar'
 import SearchComponent from '../components/search/search_component'
 import ProductsList from '../components/products_page/products_list'
 import { getProducts } from '../api/products_list'
@@ -65,7 +64,6 @@ class Search extends React.Component {
 
     render = () => {
         return (<div>
-            <Navbar />
             <SearchComponent callbackValue={this.callbackSearchValue} />
             {(this.state.clicked) && this.renderProductsList()}
         </div>)

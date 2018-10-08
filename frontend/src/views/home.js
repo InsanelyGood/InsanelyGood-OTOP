@@ -1,9 +1,7 @@
 import React from 'react'
-import Navbar from '../components/common/navbar'
 import CarousalHighlight from '../components/carousel_home/CarousalHighlight'
 import ProductsList from '../components/products_page/products_list'
 import { getProducts } from '../api/products_list';
-import Footer from '../components/common/footer'
 import '../css/home.css'
 
 class Home extends React.Component {
@@ -25,7 +23,6 @@ class Home extends React.Component {
 
         let random = this.state.products.slice(0, 3)
         return (<div>
-            <Navbar />
             <CarousalHighlight />
             <div className='container'>
             <br/>
@@ -33,7 +30,6 @@ class Home extends React.Component {
             <h2>Highlight Products</h2>
             <ProductsList productsShow={random} />
             </div>
-            <Footer />
         </div>)
     }
 }
