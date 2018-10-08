@@ -4,12 +4,10 @@ import TabComponent from '../components/login/tabs'
 
 class Login extends Component{
     render(){
-        return(
-            <div>
-                <Navbar />
-                <TabComponent />
-            </div>
-        )
+        return <div>
+            <Navbar />
+            <TabComponent defaultTab={'1'} />
+          </div>;
     }
 }
 export default Login

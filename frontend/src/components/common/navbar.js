@@ -8,6 +8,7 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap'
+import Cookie from 'js-cookie'
 import '../../css/navbar.css'
 
 class NavBar extends React.Component {
@@ -16,7 +17,8 @@ class NavBar extends React.Component {
     super(props);
 
     this.state = {
-      isOpen: false
+      isOpen: false,
+      isLogin: false
     };
   }
 
@@ -24,6 +26,10 @@ class NavBar extends React.Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+
+  onLogoutClicked = () => {
+    Cookie.remove('username')
   }
 
   render = () => {
@@ -34,16 +40,16 @@ class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar={true} >
             <Nav className="ml-auto" navbar={true}>
               <NavItem>
-                <NavLink href="/north">north</NavLink>
+                <NavLink href="#">north</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/central">central</NavLink>
+                <NavLink href="#">central</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/south">south</NavLink>
+                <NavLink href="#">south</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/northeast">northeast</NavLink>
+                <NavLink href="#">northeast</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/products">all</NavLink>
@@ -55,11 +61,16 @@ class NavBar extends React.Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/cart">cart</NavLink>
+                <NavLink href="#">cart</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="/users/login">Login</NavLink>
-              </NavItem>
+              {Cookie.get('username') 
+                ? <NavItem>
+                  <NavLink onClick={this.onLogoutClicked} href="/">Logout</NavLink>
+                  </NavItem> 
+                : <NavItem>
+                    <NavLink href="/users/login">Login</NavLink>
+                  </NavItem>
+              }
             </Nav>
           </Collapse>
         </Navbar>

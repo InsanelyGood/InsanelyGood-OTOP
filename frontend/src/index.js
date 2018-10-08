@@ -7,6 +7,7 @@ import ProductsPage from './views/products_page'
 import Search from './views/search'
 import ProductDetail from './views/product_detail'
 import Login from './views/login'
+import Register from './views/register'
 
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,6 +21,7 @@ ReactDOM.render(
             <Route path="/search" component={Search} />
             <Route path="/products/:name" component={ProductDetail} />
             <Route path="/users/login" component={Login} />
+            <Route path="/users/register" component={Register} />
         </div>
     </Router>,
     document.getElementById('root'));
