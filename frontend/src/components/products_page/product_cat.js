@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Block = styled.div`
-    margin: 40px;
+    margin-left: 40px;
     position: sticky;
     position: -webkit-sticky;
     top: 69px; /* required */

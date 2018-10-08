@@ -3,7 +3,7 @@ import ProductPanel from '../components/products_page/product_panel'
 import ProductsCat from '../components/products_page/product_cat'
 import { getProducts } from '../api/products_list'
 import styled from 'styled-components'
-
+import badge from '../images/product-page-badge.jpg'
 const Row = styled.div`
     @media(max-width: 768px) {
         display: block;
@@ -19,6 +19,13 @@ const Left = styled.div`
     }
     width: 520px;
 `
+const Img = styled.img`
+    width: 96%;
+    margin-top: 100px;
+    margin-left: 35px;
+    margin-right: 35px;
+`
+
 const Right = styled.div`
     @media(max-width: 768px) {
         width: 100%;
@@ -56,9 +63,12 @@ class ProductsPage extends Component {
     render() {
         return(
             <div>
+                <Img src={badge}></Img>
                 <Row>
                     <Left><ProductsCat changeTypes={this.changeTypes}/></Left>
-                    <Right><ProductPanel productsShow={this.productFilter()}/></Right>
+                    <Right>
+                        <ProductPanel productsShow={this.productFilter()}/>
+                    </Right>
                 </Row>
             </div>
         )
