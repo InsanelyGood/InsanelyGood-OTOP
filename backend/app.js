@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport')
 const expressValidator = require('express-validator');
-const config = require('./config/database')
+const config = require('./config/database');
 
 var app = express();
 
@@ -23,7 +23,7 @@ db.on('error', console.error.bind(console, 'connection error:'))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(cors());
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,18 +32,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Express Validator Middleware
 app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
+  errorFormatter: function (param, msg, value) {
     var namespace = param.split('.')
-    , root = namespace.shift()
-    , formParam = root;
+      , root = namespace.shift()
+      , formParam = root;
 
-    while(namespace.length) {
+    while (namespace.length) {
       formParam += '[' + namespace.shift() + ']';
     }
     return {
-      param : formParam,
-      msg : msg,
-      value : value
+      param: formParam,
+      msg: msg,
+      value: value
     };
   }
 }));
@@ -63,12 +63,12 @@ app.use('/users', usersRouter);
 app.use('/products', productRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

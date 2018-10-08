@@ -52,7 +52,9 @@ class LoginComponent extends React.Component {
     render() {
         return (
             <Div >
-                <form onSubmit={this.handleSubmit}>
+                {/* <form onSubmit={this.handleSubmit}> */}
+
+                <form action="http://localhost:8000/users/login" method="POST">
 
                     <FormGroups>
                         <Label>Email</Label>
