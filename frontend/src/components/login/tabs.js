@@ -34,7 +34,6 @@ export default class Tabs extends React.Component {
     render() {
         return (
             <LoginContent className='col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-3'>
-                {/* <div className='container'> */}
                     <Nav tabs>
                         <NavItem>
                             <NavLink xs="6"
@@ -68,9 +67,7 @@ export default class Tabs extends React.Component {
                                 </Col>
                             </Row>
                         </TabPane>
-                    </TabContent>
-                
-                {/* </div> */}
+                    </TabContent>               
             </LoginContent>
         );
     }
