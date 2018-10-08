@@ -1,8 +1,10 @@
 import React from 'react';
-import ProductItem from './product_itemV2';
+import ProductItem from './product_item';
 import PropTypes from 'prop-types';
 
 class ProductsList extends React.Component {
+
+   
 
     render = () => {
         return (
