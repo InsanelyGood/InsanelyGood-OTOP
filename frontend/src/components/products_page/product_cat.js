@@ -72,7 +72,6 @@ class Categories extends React.Component {
         this.setState({
             types: [...this.state.types,type]
         }, ()=> {
-            console.log(this.state.types);
             this.props.changeTypes(this.state.types)
         })
     }
@@ -81,7 +80,6 @@ class Categories extends React.Component {
         this.setState({
             types: this.state.types.filter((ptype) => ptype !== type)
         },()=> {
-            console.log(this.state.types);
             this.props.changeTypes(this.state.types)
         })
         
@@ -112,6 +110,10 @@ class Categories extends React.Component {
                                 <Check type='Food' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
                                 <Text3>Food</Text3>
                             </Tab>
+                            <Tab>
+                                <Check type='Shoe' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
+                                <Text3>Shoe</Text3>
+                            </Tab>
                         </BGroup>
                         <br/>
                 </Content>
@@ -137,10 +139,6 @@ class Check extends React.Component {
         this.setState({
             checked: !this.state.checked
         },()=> {
-
-            console.log(this.state.checked);
-        
-
             if(this.state.checked) {
                 this.setState({
                     color: '#2196F3',

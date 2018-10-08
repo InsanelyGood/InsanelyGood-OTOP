@@ -51,7 +51,6 @@ class ProductsPage extends Component {
     }
 
     changeTypes = (nTypes) => {
-        console.log(nTypes);
         this.setState({ types: nTypes }, this.productFilter)
     }
 
