@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ProductPanel from '../components/products_page/product_panel'
 import ProductsCat from '../components/products_page/product_cat'
 import { getProducts } from '../api/products_list'
-import Navbar from '../components/common/navbar'
 import styled from 'styled-components'
 
 const Row = styled.div`
@@ -57,7 +56,6 @@ class ProductsPage extends Component {
     render() {
         return(
             <div>
-                <Navbar/>
                 <Row>
                     <Left><ProductsCat changeTypes={this.changeTypes}/></Left>
                     <Right><ProductPanel productsShow={this.productFilter()}/></Right>

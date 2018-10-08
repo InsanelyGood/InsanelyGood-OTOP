@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../components/common/navbar";
 import styled from "styled-components";
 import ProductImage from "../components/product_detail/product_image";
 import ProductDescription from "../components/product_detail/product_description";
@@ -29,7 +28,6 @@ class ProductDetail extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
         <Detail className="container">
           <div className="col-md-6">
             <ProductImage imageUrl={this.state.product.image} />
