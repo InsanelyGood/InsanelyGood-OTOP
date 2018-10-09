@@ -55,12 +55,6 @@ class NavBar extends React.Component {
                 <NavLink href="/products">all</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/search">
-                  Search
-                  <i className="fas fa-search" />
-                </NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink href="#">cart</NavLink>
               </NavItem>
               {Cookie.get('username') 
