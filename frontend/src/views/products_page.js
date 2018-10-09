@@ -4,6 +4,12 @@ import ProductsCat from '../components/products_page/product_cat'
 import { getProducts } from '../api/products_list'
 import styled from 'styled-components'
 import badge from '../images/product-page-badge.jpg'
+
+const Block = styled.div`
+    margin-left: 120px;
+    margin-right: 120px;
+`
+
 const Row = styled.div`
     @media(max-width: 768px) {
         display: block;
@@ -20,7 +26,7 @@ const Left = styled.div`
         width: 100%;
         height: 20%;
     }
-    width: 520px;
+    width: 330px;
 `
 const Img = styled.img`
     @media(max-width: 768px) {
@@ -128,13 +134,15 @@ class ProductsPage extends Component {
     render() {
         return(
             <div>
-                <Img src={badge}></Img>
-                <Row>
-                    <Left><ProductsCat changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
-                    <Right>
-                        {this.renderProductPanel(this.state.renderState)}
-                    </Right>
-                </Row>
+                <Block>
+                    <Img src={badge}></Img>
+                    <Row>
+                        <Left><ProductsCat changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
+                        <Right>
+                            {this.renderProductPanel(this.state.renderState)}
+                        </Right>
+                    </Row>
+                </Block>
             </div>
         )
     }

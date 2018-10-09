@@ -16,7 +16,7 @@ const Content = styled.div`
     @media(max-width: 768px) {
         border-radius: 10px;
     }
-    border-radius: 25px;
+    border-radius: 20px;
     width: inherit;
     min-height: 100px;
     background-color: #00c6a9;
@@ -29,8 +29,8 @@ const Head = styled.div`
         border-top-left-radius: 10px;
     }
     -webkit-box-shadow:0px 5px 25px -5px black;
-    border-top-right-radius: 25px;
-    border-top-left-radius: 25px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
     height: 90px;
     background-color: black;
 `
@@ -63,8 +63,8 @@ const BGroup = styled.div`
         margin: auto;
         justify-content: center;
     }
-    margin: 30px;
-    margin-left: 36px;
+    margin: 10px;
+    margin-left: 16px;
     display: Block;
 `
 const Tab = styled.div`
