@@ -154,6 +154,7 @@ class RegisComponent extends React.Component {
     render() {
         return (
             <Form inline>
+            <form action="http://localhost:8000/users/register" method="POST">
              <div>
                     <Row form>
                         <Col md={6}>
@@ -277,6 +278,7 @@ class RegisComponent extends React.Component {
                 <FormGroups>
                     <Buttons onClick={this.handleSubmit} type="submit" value='Sign up' />
                 </FormGroups>
+                </form>
             </Form>
 
 
