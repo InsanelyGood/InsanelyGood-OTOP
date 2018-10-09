@@ -3,7 +3,6 @@ import { Route } from "react-router-dom";
 
 import Home from '../views/home';
 import ProductsPage from "../views/products_page";
-import Search from "../views/search";
 import ProductDetail from "../views/product_detail";
 import Login from "../views/login";
 import Register from "../views/register";
@@ -34,11 +33,6 @@ const routes = [
     path: "/products",
     exact: true,
     component: ProductsPage
-  },
-  {
-    path: "/search",
-    exact: true,
-    component: Search
   }
 ];
 
