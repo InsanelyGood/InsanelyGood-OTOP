@@ -9,20 +9,21 @@ const Detail = styled.div`
     display: flex;
   }
   padding-top: 5em;
-`;
+`
+
 const DesDetail = styled.div`
   margin: auto;
-`;
+`
 
 class ProductDetail extends React.Component {
   state = {
     product: {}
-  };
+  }
 
   async componentDidMount() {
     this.setState({
       product: (await getProduct(window.location.pathname))[0]
-    });
+    })
   }
 
   render() {
@@ -37,7 +38,7 @@ class ProductDetail extends React.Component {
           </DesDetail>
         </Detail>
       </div>
-    );
+    )
   }
 }
 
