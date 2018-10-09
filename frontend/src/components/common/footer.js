@@ -11,7 +11,11 @@ class FooterPage extends React.Component {
                     <Row className="text-center text-md-left mt-3 pb-3">
                         <Col md="3" lg="3" xl="3" className="mx-auto mt-3">
                             <h6 className="text-uppercase mb-4 font-weight-bold">About Us</h6>
-                            <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            <p>
+                            OTOPaholic was founded because we love to Thai’s handmade Product and 
+                            would love  to help so they can have opportunity in not just Thailand 
+                            but around the world so we decided to create this  website to archive that goal.
+                            </p>
                         </Col>
                         <hr className="w-100 clearfix d-md-none"/>
                         <Col md="2" lg="2" xl="2" className="mx-auto mt-3">
