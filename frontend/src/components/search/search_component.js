@@ -7,15 +7,11 @@ const Form = styled.div`
 `
 
 const Input = styled.input`
-    @media(max-width: 768px) {
-        display: block;
-        width: 100%;
-        margin-bottom: 0.25em;
-    }
-    width: 80%;
-    height: 40px;
-    padding: 0.75em;
-`
+  border-radius: 5px;
+  width: 80%;
+  height: 40px;
+  padding: 0.75em;
+`;
 
 const Button = styled.button`
     color: white;
