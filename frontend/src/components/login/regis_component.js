@@ -231,14 +231,14 @@ class RegisComponent extends React.Component {
                     {
                         this.state.notHaveConfirmPass &&
                         <alert >
-                            <Input invalid type="password" onChange={this.handleConPassChange} name="password" placeholder="confirm_password" />
+                            <Input invalid type="password" onChange={this.handleConPassChange} name="confirm_password" placeholder="Confirm Password" />
                             <FormFeedback>Please enter password.</FormFeedback>
                         </alert>
                     }
                     {
                         !this.state.notHaveConfirmPass &&
                         <alert >
-                            <Input type="password" onChange={this.handleConPassChange} name="cPassword" placeholder="confirm_password" />
+                            <Input type="password" onChange={this.handleConPassChange} name="confirm_password" placeholder="Confirm Password" />
                         </alert>
                     }
                 </FormGroups>
