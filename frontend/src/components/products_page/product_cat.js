@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Search from '../search/search_component'
 
 const Block = styled.div`
     margin-left: 40px;
@@ -35,7 +36,7 @@ const Label = styled.span`
     font-size: 21px;
 `
 const BGroup = styled.div`
-    margin: 30px;
+    margin: 20px;
     margin-left: 36px;
     display: Block;
 `
@@ -95,6 +96,7 @@ class Categories extends React.Component {
                     <Head>
                         <Text>Categories</Text>
                     </Head>
+                    <Search />
                     <BGroup>
                             <Tab>
                                 <Check type='Bag' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>

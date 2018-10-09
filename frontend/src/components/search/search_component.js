@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Form = styled.div`
     text-align: center;
-    padding: 7em 2em 3em 2em;
+    padding: 1em 1em 1em 1em;
 `
 
 const Input = styled.input`
@@ -12,14 +12,14 @@ const Input = styled.input`
         width: 100%;
         margin-bottom: 0.25em;
     }
-    width: 50%;
+    width: 80%;
     height: 40px;
     padding: 0.75em;
 `
 
-const Button = styled.input`
+const Button = styled.button`
     color: white;
-    width: 130px;
+    width: 40px;
     height: 40px;
     border-radius: 5px;
     border-color: #57a9bb;
@@ -56,7 +56,7 @@ class SearchComponent extends React.Component {
         return (<div className='container'>
             <Form>
                 <Input type='text' name='search_value' onChange={this.setSearchValue} placeholder='Search product name ..' onKeyPress={this._handleKeyPress}  />
-                <Button type='button' value='Search' onClick={this.onSearchClick} />
+                <Button onClick={this.onSearchClick} ><ion-icon name="search"></ion-icon></Button>
             </Form>
         </div>)
     }
