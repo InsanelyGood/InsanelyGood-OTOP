@@ -39,22 +39,12 @@ class LoginComponent extends React.Component {
         this.state = {
             username: '',
             password: '',
-            error: '',
             notHaveUsername: false,
             notHavePassword: false
         };
         this.handlePassChange = this.handlePassChange.bind(this);
         this.handleUserChange = this.handleUserChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.dismissError = this.dismissError.bind(this);
-    }
-
-    dismissError() {
-        this.setState({ 
-            username: '',
-            password: '',
-            error: '',
-     });
     }
 
     handleUserChange = event => {
@@ -94,20 +84,20 @@ class LoginComponent extends React.Component {
     render() {
         return (
             <Div >
-                <div >
+                <form action="http://localhost:8000/users/login" method="POST">
                     <FormGroups>
                         <Label>Username</Label>
                         {
                             this.state.notHaveUsername &&
                             <alert >
-                                <Input invalid type="text" onChange={this.handleUserChange} name="email" placeholder="Username" />
+                                <Input invalid type="text" onChange={this.handleUserChange} name="username" placeholder="Username" />
                                 <FormFeedback>Please enter username.</FormFeedback>
                             </alert>
                         }
                         {
                             !this.state.notHaveUsername &&
                             <alert >
-                                <Input type="text" name="email" onChange={this.handleUserChange} placeholder="Username" />
+                                <Input type="text" name="username" onChange={this.handleUserChange} placeholder="Username" />
                             </alert>
                         }
                     </FormGroups>
@@ -128,10 +118,9 @@ class LoginComponent extends React.Component {
                         }
                     </FormGroups>
                     <FormGroups>
-                        <Buttons onClick={this.handleSubmit} type="submit" value='Login' />
+                        <Buttons onClick={this.handleSubmit} type="submit" value='Login' href='/'/>
                     </FormGroups>
-
-                </div>
+                </form>
             </Div>
         );
     }

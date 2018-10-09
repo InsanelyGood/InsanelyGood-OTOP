@@ -10,19 +10,31 @@ router.get('/login', function (req, res) {
   res.render('login');
 });
 
+router.get('/test', (req, res) => {
+  console.log(req.cookies)
+  res.sendStatus(200)
+})
+
 // Login Process
 router.post('/login', function (req, res, next) {
   console.log("login");
-  
+
   passport.authenticate('local', function (err, user, info) {
-    if (err) { 
+    console.log('in local authen')
+    if (err) {
+      console.log('in error')
       console.log(err)
-      return next(err); 
+      return next(err);
     }
-    if (!user) { return res.sendStatus(400); }
+
+    console.log('user', user)
+    if (!user) {
+      return res.redirect('http://localhost:3000/users/login')
+    }
+
     req.logIn(user, function (err) {
       if (err) { return next(err); }
-      return res.cookie('username', user.username).sendStatus(200);
+      return res.cookie('username', user.username).redirect('http://localhost:3000/');
     });
   })(req, res, next);
 });
