@@ -26,4 +26,45 @@ router.post('/new_order', (req, res) => {
   res.redirect('/orders')
 })
 
+router.get('/:id', (req, res) => {
+  Order.findById(req.params.id, (err, order) => {
+    if(err) {
+      console.log(err);
+    } else {
+      res.send({order})
+    }
+  })
+})
+
+// Update order status
+router.post('/:id', (req, res) => {
+  let order = {}
+  order.status = req.body.status
+  let query = {
+    _id: req.params.id
+  }
+  Order.findOneAndUpdate(query, order, {new: true}, (err, order) => {
+    if(err) {
+      console.log(err);
+    } else {
+      res.send('Success')
+    }
+  })
+})
+
+router.delete('/:id', (req, res) => {
+  let query = {
+    _id: req.params.id
+  }
+  Order.findById(req.params.id, (err, order) => {
+    Order.remove(query, (err) => {
+      if(err) {
+        console.log(err)
+      } else {
+        res.send('Success')
+      }
+    })
+  })
+})
+
 module.exports = router;

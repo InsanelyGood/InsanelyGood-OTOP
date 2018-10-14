@@ -32,9 +32,7 @@ const usersSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    cart_list: {
-        type: String,
-    }
+    cart_list: []
 })
 
 const User = module.exports = mongoose.model('Users', usersSchema)
