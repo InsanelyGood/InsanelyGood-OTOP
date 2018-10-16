@@ -5,6 +5,12 @@ const passport = require('passport');
 
 let User = require('../models/users');
 
+router.get('/', (req, res) => {
+  User.find({}, (err, users) => {
+    res.send({users})
+  })
+})
+
 // Login Form
 router.get('/login', function (req, res) {
   res.render('login');
@@ -104,6 +110,23 @@ router.post('/register', function (req, res) {
 
   }
 
+})
+
+// =============== Cart part =====================
+router.get('/:id', (req, res) => {
+  User.findById(req.params.id, (err, user) => {    
+    res.send({user})
+  })
+})
+
+router.get('/:id/cart', (req, res) => {
+  User.findById(req.params.id, (err, user) => {
+    res.send( user.cart_list )
+  })
+})
+
+router.post('/:id/cart/add', (req, res) => {
+  
 })
 
 module.exports = router;
