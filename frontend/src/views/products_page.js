@@ -101,11 +101,26 @@ class ProductsPage extends Component {
         }
     }
 
+    checkProductName = (search, product) => {
+        let wow = []
+        let search_length = search.length
+        if(product.includes(' ')) {
+            product = product.split(' ')
+            wow = product.filter(p => p.substring(0, search_length) === search)
+            
+            return wow.length > 0
+        } else {
+            return product.substring(0, search_length) === search
+        }
+    }
+
     productSearch = () => {
+
         let products = this.state.products.filter(product =>
-          product.name
-            .toUpperCase()
-            .includes(this.state.search.toUpperCase())
+          this.checkProductName(
+            this.state.search.toUpperCase(),
+            product.name.toUpperCase()
+          )
         );
         
         if (products.length <= 0) {
