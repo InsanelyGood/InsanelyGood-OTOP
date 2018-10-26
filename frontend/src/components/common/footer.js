@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col, Container, Row, Footer } from 'mdbreact';
+import { Link } from 'react-router-dom'
 
 import '../../css/footer.css'
 
