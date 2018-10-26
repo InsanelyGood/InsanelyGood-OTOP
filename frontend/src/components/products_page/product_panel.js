@@ -21,7 +21,8 @@ const Text = styled.h1`
 `
 
 const Content = styled.div`
-    margin: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
 `
 
 class ProductPanel extends Component {

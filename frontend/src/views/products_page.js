@@ -6,8 +6,8 @@ import styled from 'styled-components'
 import badge from '../images/product-page-badge.jpg'
 
 const Block = styled.div`
-    margin-left: 120px;
-    margin-right: 120px;
+    margin-left: 7%;
+    margin-right: 7%;
 `
 
 const Row = styled.div`

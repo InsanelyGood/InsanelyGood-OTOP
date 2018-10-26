@@ -64,7 +64,7 @@ const BGroup = styled.div`
         justify-content: center;
     }
     margin: 10px;
-    margin-left: 16px;
+    margin-left: 6px;
     display: Block;
 `
 const Tab = styled.div`
@@ -145,7 +145,7 @@ class Categories extends React.Component {
     this.onSearchButtonClicked();
   };
 
-  render = () => {
+  render() {      
     return (
       <Block>
         <Content>
