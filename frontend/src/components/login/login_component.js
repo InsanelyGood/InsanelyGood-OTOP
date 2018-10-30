@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Label, FormFeedback } from 'reactstrap';
+import { Input, Label, FormFeedback, Alert } from 'reactstrap';
 import styled from 'styled-components'
 
 const Div = styled.div`
@@ -66,34 +66,55 @@ class LoginComponent extends React.Component {
         console.log(this.state.password);
         
         
-        if (this.state.username === '') {
-            this.setState({ notHaveUsername: true });
-        }
-        else {
-            this.setState({notHaveUsername: false})
-        }
+        // if (this.state.username === '') {
+        //     this.setState({ notHaveUsername: true });
+        // }
+        // else {
+        //     this.setState({notHaveUsername: false})
+        // }
 
-        if (this.state.password === '') {
-            this.setState({ notHavePassword: true });
-        }else {
-            this.setState({notHavePassword: false})
-        }
+        // if (this.state.password === '') {
+        //     this.setState({ notHavePassword: true });
+        // }else {
+        //     this.setState({notHavePassword: false})
+        // }
 
+        if (this.state.username === "123") {
+             if (this.state.password === "123"){
+                //  this.props.location= "/"
+                <Alert>
+                <Input invalid type="password"/>
+                <FormFeedback>Please enter password.</FormFeedback>
+                </Alert>                                
+             } else {
+                 
+                <Alert>
+                <Input invalid type="password" onChange={this.handlePassChange} name="password" placeholder="Password" />
+                <FormFeedback>Please enter password.</FormFeedback>
+                </Alert>
+             }
+        } else {
+            <Alert>
+            <Input invalid type="text" onChange={this.handleUserChange} name="username" placeholder="Username" />
+            <FormFeedback>Please enter username.</FormFeedback>
+            </Alert>
+        }
+        
     }
 
-    render() {
+    render() { 
         return (
             <Div >
                 <form action="http://localhost:8000/users/login" method="POST">
                     <FormGroups>
                         <Label>Username</Label>
-                        {
+                        {/* {
                             this.state.notHaveUsername &&
                             <alert >
                                 <Input invalid type="text" onChange={this.handleUserChange} name="username" placeholder="Username" />
                                 <FormFeedback>Please enter username.</FormFeedback>
                             </alert>
-                        }
+                        } */}
                         {
                             !this.state.notHaveUsername &&
                             <alert >
@@ -103,13 +124,13 @@ class LoginComponent extends React.Component {
                     </FormGroups>
                     <FormGroups>
                         <Label>Password</Label>
-                        {
+                        {/* {
                             this.state.notHavePassword &&
                             <alert >
                                 <Input invalid type="password" onChange={this.handlePassChange} name="password" placeholder="Password" />
                                 <FormFeedback>Please enter password.</FormFeedback>
                             </alert>
-                        }
+                        } */}
                         {
                             !this.state.notHavePassword &&
                             <alert >
