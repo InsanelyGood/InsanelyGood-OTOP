@@ -11,8 +11,10 @@ router.get('/login', function (req, res) {
 });
 
 router.get('/test', (req, res) => {
-  console.log(req.cookies)
-  res.sendStatus(200)
+  console.log('lsdbackdj-------------------------------------')
+  // console.log(req.cookies)
+  // res.sendStatus(200)
+  res.status(200).send("Hello world")
 })
 
 // Login Process
@@ -105,5 +107,16 @@ router.post('/register', function (req, res) {
   }
 
 })
+
+// User Information
+router.get("/information", (req, res, next) => {
+  console.log('COOKIEEEEEEEEE', req.cookies)
+  User.find({ username: req.cookies.username }, (err, userinfo) => {
+    if (userinfo.length > 0)
+      res.status(200).send(userinfo[0]);
+    else 
+      res.status(404).send('Not found')
+  });
+});
 
 module.exports = router;
