@@ -4,6 +4,12 @@ import ProductsCat from '../components/products_page/product_cat'
 import { getProducts } from '../api/products_list'
 import styled from 'styled-components'
 import badge from '../images/product-page-badge.jpg'
+
+const Block = styled.div`
+    margin-left: 7%;
+    margin-right: 7%;
+`
+
 const Row = styled.div`
     @media(max-width: 768px) {
         display: block;
@@ -20,7 +26,7 @@ const Left = styled.div`
         width: 100%;
         height: 20%;
     }
-    width: 520px;
+    width: 330px;
 `
 const Img = styled.img`
     @media(max-width: 768px) {
@@ -40,6 +46,20 @@ const Right = styled.div`
     }
     width: 80%;
 `
+const Noti = styled.p`
+  text-align: center;
+  color: red;
+  font-size: 20px;
+`;
+
+const SearchText = styled.span`
+  font-weight: bold;
+  color: black;
+  font-size: 23px;
+`;
+
+const FILTER_CASE = 'filter'
+const SEARCH_CASE = 'search'
 
 class ProductsPage extends Component {
 
@@ -47,7 +67,9 @@ class ProductsPage extends Component {
         super(props)
         this.state = {
             products: [],
-            types: []
+            types: [],
+            search: '',
+            renderState: ''
         }
     }
 
@@ -59,25 +81,83 @@ class ProductsPage extends Component {
 
     productFilter = () => {
         if(this.state.types.length < 1) {
-            return this.state.products
+            return (<ProductPanel productsShow={this.state.products} />)
         }
-        return this.state.products.filter((product) => this.state.types.includes(product.category))
+        let filter = this.state.products.filter(product =>
+          this.state.types.includes(product.category)
+        );
+        return (<ProductPanel productsShow={filter} />)
+    }
+    
+    renderProductPanel = input_case => {
+        switch (input_case) {
+            case FILTER_CASE:
+                return this.productFilter()
+                
+            case SEARCH_CASE:
+                return this.productSearch()
+            default:
+                return (<ProductPanel productsShow={this.state.products} />)
+        }
+    }
+
+    checkProductName = (search, product) => {
+        let wow = []
+        let search_length = search.length
+        if(product.includes(' ')) {
+            product = product.split(' ')
+            wow = product.filter(p => p.substring(0, search_length) === search)
+            
+            return wow.length > 0
+        } else {
+            return product.substring(0, search_length) === search
+        }
+    }
+
+    productSearch = () => {
+
+        let products = this.state.products.filter(product =>
+          this.checkProductName(
+            this.state.search.toUpperCase(),
+            product.name.toUpperCase()
+          )
+        );
+        
+        if (products.length <= 0) {
+            return <Noti>
+              No Result For <SearchText>
+                '{this.state.search}'
+              </SearchText>
+            </Noti>;
+        } else {
+          return <div className="container">
+              <ProductPanel productsShow={products} />
+            </div>;
+        }
     }
 
     changeTypes = (nTypes) => {
-        this.setState({ types: nTypes }, this.productFilter)
+        this.setState({ types: nTypes, renderState: FILTER_CASE })
+    }
+
+    changeSearchValue = (value) => {
+        this.setState({
+            search: value, renderState: SEARCH_CASE
+        })
     }
 
     render() {
         return(
             <div>
-                <Img src={badge}></Img>
-                <Row>
-                    <Left><ProductsCat changeTypes={this.changeTypes}/></Left>
-                    <Right>
-                        <ProductPanel productsShow={this.productFilter()}/>
-                    </Right>
-                </Row>
+                <Block>
+                    <Img src={badge}></Img>
+                    <Row>
+                        <Left><ProductsCat changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
+                        <Right>
+                            {this.renderProductPanel(this.state.renderState)}
+                        </Right>
+                    </Row>
+                </Block>
             </div>
         )
     }

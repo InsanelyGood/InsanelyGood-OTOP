@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Search from '../search/search_component'
 
 const Block = styled.div`
     @media(max-width: 768px) {
@@ -15,7 +16,7 @@ const Content = styled.div`
     @media(max-width: 768px) {
         border-radius: 10px;
     }
-    border-radius: 25px;
+    border-radius: 20px;
     width: inherit;
     min-height: 100px;
     background-color: #00c6a9;
@@ -28,8 +29,8 @@ const Head = styled.div`
         border-top-left-radius: 10px;
     }
     -webkit-box-shadow:0px 5px 25px -5px black;
-    border-top-right-radius: 25px;
-    border-top-left-radius: 25px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
     height: 90px;
     background-color: black;
 `
@@ -62,8 +63,8 @@ const BGroup = styled.div`
         margin: auto;
         justify-content: center;
     }
-    margin: 30px;
-    margin-left: 36px;
+    margin: 10px;
+    margin-left: 6px;
     display: Block;
 `
 const Tab = styled.div`
@@ -103,65 +104,102 @@ const CheckMark = styled.span`
 `
 
 class Categories extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      types: []
+    };
+  }
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            types: []
-        }
-    }
+  checkedType = type => {
+    this.setState(
+      {
+        types: [...this.state.types, type]
+      },
+      () => {
+        this.props.changeTypes(this.state.types);
+      }
+    );
+  };
 
-    checkedType = (type)=> {
+  unCheckedType = type => {
+    this.setState(
+      {
+        types: this.state.types.filter(ptype => ptype !== type)
+      },
+      () => {
+        this.props.changeTypes(this.state.types);
+      }
+    );
+  };
+
+    onSearchButtonClicked = () => {
         this.setState({
-            types: [...this.state.types,type]
-        }, ()=> {
-            this.props.changeTypes(this.state.types)
+            clicked: true
         })
     }
 
-    unCheckedType = (type)=> {
-        this.setState({
-            types: this.state.types.filter((ptype) => ptype !== type)
-        },()=> {
-            this.props.changeTypes(this.state.types)
-        })
-        
-    }
+  callbackSearchValue = value => {
+      this.props.searchValue(value);
+    
+    this.onSearchButtonClicked();
+  };
 
-    render = () => {
-        return (
-            <Block>
-                <Content>
-                    <Head>
-                        <Text>Categories</Text>
-                    </Head>
-                    <BGroup>
-                            <Tab>
-                                <Check type='Bag' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
-                                <Label>Bag</Label>
-                            </Tab>
-                            <Tab>
-                                <Check type='Bloom' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
-                                <Label>Bloom</Label>
-                            </Tab>
-                            <Tab>
-                                <Check type='Cloth' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
-                                <Label>Cloth</Label>
-                            </Tab>
-                            <Tab>
-                                <Check type='Food' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
-                                <Label>Food</Label>
-                            </Tab>
-                            <Tab>
-                                <Check type='Shoe' checkedType={this.checkedType} unCheckedType={this.unCheckedType}/>
-                                <Label>Shoe</Label>
-                            </Tab>
-                        </BGroup>
-                        <br/>
-                </Content>
-            </Block>
-        )
-    }
+  render() {      
+    return (
+      <Block>
+        <Content>
+          <Head>
+            <Text>Categories</Text>
+          </Head>
+          <Search callbackValue={this.callbackSearchValue} />
+          <BGroup>
+            <Tab>
+              <Check
+                type="Bag"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+              />
+              <Label>Bag</Label>
+            </Tab>
+            <Tab>
+              <Check
+                type="Bloom"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+              />
+              <Label>Bloom</Label>
+            </Tab>
+            <Tab>
+              <Check
+                type="Cloth"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+              />
+              <Label>Cloth</Label>
+            </Tab>
+            <Tab>
+              <Check
+                type="Food"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+              />
+              <Label>Food</Label>
+            </Tab>
+            <Tab>
+              <Check
+                type="Shoe"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+              />
+              <Label>Shoe</Label>
+            </Tab>
+          </BGroup>
+          <br />
+        </Content>
+      </Block>
+    );
+  };
 }
 
 export default Categories

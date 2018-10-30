@@ -68,9 +68,9 @@ router.post('/register', function (req, res) {
   let errors = req.validationErrors();
   if (errors) {
     console.log(errors)
-    res.render('register', {
-      errors: errors
-    });
+    // res.render('register', {
+    //   errors: errors
+    // });
   } else {
     let newUser = new User({
       role: "customer",
@@ -96,7 +96,7 @@ router.post('/register', function (req, res) {
             console.log(err);
             return;
           } else {
-            res.redirect('/users/login');
+            res.redirect('http://localhost:3000/users/login');
           }
         });
       });
