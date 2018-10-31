@@ -1,0 +1,74 @@
+.locate{
+    padding: 10% 37% 20% 30%;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+info{
+    font-size: 20px;
+}
+p label{
+    margin-right: 1%;
+    margin-left: 1%;
+    font-weight: bold;
+}
+p input{
+    padding: 2px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+p textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+.buttonEdit {
+    display: inline-block!important;
+    border-radius: 4px!important;
+    border-color: #57a9bb !important;
+    background-color: #57a9bb!important;
+    border: none!important;
+    color: #FFFFFF!important;
+    text-align: center!important;
+    font-size: 20px !important;
+    /* font-family:  */
+    padding: 8px !important;
+    width: 150px !important;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px!important;
+  }
+  
+  .buttonEdit span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .buttonEdit span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .buttonEdit:hover span {
+    padding-right: 25px;
+  }
+  
+  .buttonEdit:hover span:after {
+    opacity: 1;
+    right: 0;
+  }

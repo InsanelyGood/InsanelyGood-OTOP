@@ -6,6 +6,8 @@ import ProductsPage from "../views/products_page";
 import ProductDetail from "../views/product_detail";
 import Login from "../views/login";
 import Register from "../views/register";
+import Purchased from "../views/purchased";
+import UserInfo from "../views/userInfo";
 
 const routes = [
   {
@@ -33,6 +35,16 @@ const routes = [
     path: "/products",
     exact: true,
     component: ProductsPage
+  },
+  {
+    path: "/purchased",
+    exact: true,
+    component: Purchased
+  },
+  {
+    path: "/user/information",
+    exact: true,
+    component: UserInfo
   }
 ];
 

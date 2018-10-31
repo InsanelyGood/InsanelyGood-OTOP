@@ -16,41 +16,41 @@ import {
 } from 'reactstrap';
 
 const items = [
-  // {
-  //   src: Highlight,
-  //   altText: 'Index',
-  //   caption: 'OTOP Products from Thailand',
-  //   button: <a className ="btn btn-outline-white" href="/products">Shop Now</a>,
-  //   positions: 'captionHighlight fontHigh'
-  // },
+  {
+    src: Highlight,
+    altText: 'Index',
+    caption: 'OTOP Products from Thailand',
+    button: <a className ="btn btn-outline-white" href="/products">Shop Now</a>,
+    positions: 'captionHighlight fontHigh'
+  },
   {
     src: Central,
     altText: 'CentralProduct',
     caption: 'Products from Central',
     button: <a className ="btn btn-outline-white" href="/products">Shop Collection</a>,
     positions: 'captionCentral fontHigh'
+  },
+  {
+    src: Esan,
+    altText: 'NortEastProduct',
+    caption:'Products from NorthEastern',
+    button: <a className ="btn btn-outline-white" href="/products">Shop Collection</a>,
+    positions: 'captionEsan fontHigh'
+  },
+  {
+    src: North,
+    altText: 'NorthProduct',
+    caption: 'Products from Northern',
+    button: <a className ="btn-outline-white btn" href="/products">Shop Collection</a>,
+    positions: 'captionNorth fontHigh'
+  },
+  {
+    src: South,
+    altText: 'SouthProduct',
+    caption: 'Products from Southern',
+    button: <a className ="btn btn-outline-white" href="/products">Shop Collection</a>,
+    positions: 'captionSouth fontHigh'
   }
-  // {
-  //   src: Esan,
-  //   altText: 'NortEastProduct',
-  //   caption:'Products from NorthEastern',
-  //   button: <a className ="btn btn-outline-white" href="/products">Shop Collection</a>,
-  //   positions: 'captionEsan fontHigh'
-  // },
-  // {
-  //   src: North,
-  //   altText: 'NorthProduct',
-  //   caption: 'Products from Northern',
-  //   button: <a className ="btn-outline-white btn" href="/products">Shop Collection</a>,
-  //   positions: 'captionNorth fontHigh'
-  // },
-  // {
-  //   src: South,
-  //   altText: 'SouthProduct',
-  //   caption: 'Products from Southern',
-  //   button: <a className ="btn btn-outline-white" href="/products">Shop Collection</a>,
-  //   positions: 'captionSouth fontHigh'
-  // }
 ];
 
 const Img = styled.img`
