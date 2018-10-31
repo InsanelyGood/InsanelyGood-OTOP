@@ -1,0 +1,29 @@
+//- NEW_ORDER
+extends layout
+
+block content
+  h1 New Order
+  form(method='POST', action='/orders/new_order')
+    #form-group
+      label Product List:
+      br
+      input.form-control(name='purchased_list', type='text')
+    #form-group
+      label Total Price:
+      br
+      input.form-control(name='total_price', type='number')
+    #form-group
+      label Status:
+      br
+      input.form-control(name='status', type='text')
+    #form-group
+      label Shipping Address:
+      br
+      input.form-control(name='shipping_address', type='text')
+    #form-group
+      label UserID:
+      br
+      input.form-control(name='userID', type='text')
+    
+    br
+    input.btn.btn-primary(type='submit',value='Submit')

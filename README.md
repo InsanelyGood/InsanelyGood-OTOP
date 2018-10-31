@@ -27,3 +27,8 @@ Don't use `master` to do your task. Create your branch with your name and your t
 
 ### Dump database
 Dump database for see products by command `mongorestore --collection products --db otopaholicDBTest <Project directory>/dump/otopaholicDBTest/products.bson`
+
+### Test for Backend
+- `cd backend` command `yarn test` for run test
+- name the test files as `____.test.js` in folder **tests**
+
