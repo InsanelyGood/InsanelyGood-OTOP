@@ -114,7 +114,21 @@ router.get("/information", (req, res, next) => {
   User.find({ username: req.cookies.username }, (err, userinfo) => {
     if (userinfo.length > 0)
       res.status(200).send(userinfo[0]);
-    else 
+    else
+      res.status(404).send('Not found')
+  });
+});
+
+// Checkout Information
+router.get("/checkout", (req, res, next) => {
+  User.find({ username: req.cookies.username }, (err, userInfos) => {
+    if (userInfos.length > 0) {
+      const userInfo = userInfos[0]
+      const jsonData = { cart_list : userInfo.cart_list }
+      //todo add more data to send
+      res.status(200).send(jsonData)
+    }
+    else
       res.status(404).send('Not found')
   });
 });
