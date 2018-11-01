@@ -8,11 +8,14 @@ const Table = styled.table`
 
 class CartTable extends React.Component {
   renderItemInCart = () => {
-    return this.props.cartItem.map(item => <tr key={item._id}>
-      <td>Name</td>
-      <td>{item.quantity}</td>
-      <td>1000</td>
-    </tr>)
+    return this.props.cartItem.map(item => (
+      <tr key={item.product._id}>
+        <td>{item.product.name}</td>
+        <td>{item.product.name}</td>
+        <td>{item.quantity}</td>
+        <td>{item.product.price}</td>
+      </tr>
+    ));
   };
 
   render() {
@@ -26,9 +29,7 @@ class CartTable extends React.Component {
               <th>Total Price</th>
             </tr>
           </thead>
-          <tbody>
-            {this.renderItemInCart()}
-          </tbody>
+          <tbody>{this.renderItemInCart()}</tbody>
         </Table>
       </div>
     );
@@ -37,10 +38,10 @@ class CartTable extends React.Component {
 
 CartTable.propTypes = {
   cartItem: PropTypes.array
-}
+};
 
 CartTable.defaultProps = {
   cartItem: []
-}
+};
 
 export default CartTable;

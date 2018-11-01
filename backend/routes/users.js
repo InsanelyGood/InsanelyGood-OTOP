@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 let User = require("../models/users");
+let Product = require("../models/products");
 
 router.get("/", (req, res) => {
   User.find({}, (err, users) => {
@@ -126,14 +127,25 @@ router.get("/information", (req, res, next) => {
   });
 });
 
-router.get('/:username/cart', (req, res) => {
-  User.find({username: req.params.username}, (err, user) => {
-    if(err) {
+router.get("/:username/cart", (req, res) => {
+  User.find({ username: req.params.username }, async (err, user) => {
+    if (err) {
       console.log(err);
     } else {
-      res.send(user[0].cart_list);
+      // res.send(user[0].cart_list);
+      let products = await Promise.all(
+        user[0].cart_list.map(async item => {
+          try {
+            const product = await Product.findOne({
+              id: item.productID
+            }).exec();
+            return { product, quantity: item.quantity };
+          } catch (error) {}
+        })
+      );
+      res.send(products);
     }
-  })
-})
+  });
+});
 
 module.exports = router;

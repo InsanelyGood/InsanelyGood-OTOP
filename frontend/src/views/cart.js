@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import CartTable from '../components/cart/cart_table'
-import { getProductCart } from '../api/user_cart'
-import Cookies from 'js-cookie'
+import React from "react";
+import styled from "styled-components";
+import CartTable from "../components/cart/cart_table";
+import { getProductCart } from "../api/user_cart";
+import Cookies from "js-cookie";
 
 const CartComponent = styled.div`
   padding-top: 5em;
-`
+`;
 
 class Cart extends React.Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class Cart extends React.Component {
 
   async componentDidMount() {
     this.setState({
-      carts: (await getProductCart(Cookies.get('username')))
+      carts: await getProductCart(Cookies.get("username"))
     });
   }
 
@@ -26,10 +26,10 @@ class Cart extends React.Component {
     return (
       <CartComponent>
         <h1>Your Cart</h1>
-        <CartTable cartItem={this.state.carts}/>
+        <CartTable cartItem={this.state.carts} />
       </CartComponent>
     );
   }
 }
 
-export default Cart
+export default Cart;
