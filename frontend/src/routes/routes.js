@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import { Route } from "react-router-dom";
 
-import Home from '../views/home';
+import Home from "../views/home";
 import ProductsPage from "../views/products_page";
 import ProductDetail from "../views/product_detail";
 import Login from "../views/login";
 import Register from "../views/register";
+import Cart from "../views/cart";
 
 const routes = [
   {
@@ -14,11 +15,10 @@ const routes = [
     component: Home
   },
   {
-    path: "/products/:name",
+    path: "/products/:id",
     exact: true,
     component: ProductDetail
   },
-
   {
     path: "/users/login",
     exact: true,
@@ -33,6 +33,11 @@ const routes = [
     path: "/products",
     exact: true,
     component: ProductsPage
+  },
+  {
+    path: "/cart",
+    exact: true,
+    component: Cart
   }
 ];
 

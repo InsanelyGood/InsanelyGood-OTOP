@@ -55,7 +55,7 @@ class NavBar extends React.Component {
                 <NavLink href="/products">all</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#">cart</NavLink>
+                <NavLink href="/cart">cart</NavLink>
               </NavItem>
               {Cookie.get('username') 
                 ? <NavItem>
