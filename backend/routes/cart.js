@@ -3,14 +3,14 @@ const router = express.Router();
 
 const findUser = require("../middlewares/findUser");
 
-router.get('/', findUser, (req, res) => {
-  res.send(req.user.cart_list)
-})
+router.get("/", findUser, (req, res) => {
+  res.send(req.user.cart_list);
+});
 
 router.post("/add", findUser, (req, res) => {
   const isInCart = req.user.cart_list.find(
     cart => cart.productID === req.body.productID
-  );  
+  );
   if (isInCart) {
     req.user.updateOne({
       cart_list: req.user.cart_list.map(cartItem => {
@@ -43,7 +43,7 @@ router.post("/remove", findUser, (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.send(req.user.cart_list);
+      res.redirect("http://localhost:3000/cart");
     }
   });
 });
