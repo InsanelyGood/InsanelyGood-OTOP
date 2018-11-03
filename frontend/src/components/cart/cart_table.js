@@ -10,11 +10,28 @@ const TD = styled.td`
   border: 1px solid #ddd;
   padding: 8px;
 `;
+const TDCenter = styled.td`
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+`;
 const TH = styled.th`
   border: 1px solid #ddd;
   padding: 8px;
+  font-size: 18px;
+`;
+const THCenter = styled.th`
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 18px;
+  text-align: center;
 `;
 const RemoveItem = styled.button`
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  font-weight: bold;
+  color: #999999;
   &:hover {
     cursor: pointer;
     background-color: #f2f2f2;
@@ -25,6 +42,10 @@ const Image = styled.img`
   width: 30%;
   padding-right: 5px;
 `;
+const InputQuantity = styled.input`
+  width: 50px;
+  text-align: center;
+`;
 
 class CartTable extends React.Component {
   renderItemInCart = () => {
@@ -34,10 +55,14 @@ class CartTable extends React.Component {
           <Image src={item.product.image} alt="No Image" />
           {item.product.name}
         </TD>
-        <TD>{item.product.price}</TD>
-        <TD>
+        <TDCenter>{item.product.price}</TDCenter>
+        <TDCenter>
           <form action="http://localhost:8000/users/cart/add" method="POST">
-            <input type="number" defaultValue={item.quantity} name="quantity" />
+            <InputQuantity
+              type="number"
+              defaultValue={item.quantity}
+              name="quantity"
+            />
             <input type="hidden" value={item.product.id} name="productID" />
             <input
               type="hidden"
@@ -45,9 +70,9 @@ class CartTable extends React.Component {
               name="username"
             />
           </form>
-        </TD>
-        <TD>{item.product.price * item.quantity}</TD>
-        <TD width="1px">
+        </TDCenter>
+        <TDCenter>{item.product.price * item.quantity}</TDCenter>
+        <TDCenter width="1px">
           <form action="http://localhost:8000/users/cart/remove" method="POST">
             <RemoveItem type="submit">&times;</RemoveItem>
             <input type="hidden" value={item.product.id} name="productID" />
@@ -57,7 +82,7 @@ class CartTable extends React.Component {
               name="username"
             />
           </form>
-        </TD>
+        </TDCenter>
       </tr>
     ));
   };
@@ -72,7 +97,7 @@ class CartTable extends React.Component {
         <td />
         <td />
         <td>Total</td>
-        <TD>{total}</TD>
+        <TDCenter>{total}</TDCenter>
       </tr>
     );
   };
@@ -84,9 +109,9 @@ class CartTable extends React.Component {
           <thead>
             <tr>
               <TH>Name</TH>
-              <TH width="30px">Price</TH>
-              <TH width="20px">Quantity</TH>
-              <TH width="100px">Total</TH>
+              <THCenter width="30px">Price</THCenter>
+              <THCenter width="20px">Quantity</THCenter>
+              <THCenter width="70px">Total</THCenter>
             </tr>
           </thead>
           <tbody>
