@@ -13,7 +13,7 @@ class ProductItem extends React.Component {
   }
 
     render = () => {
-        return <div className="col-md-4 col-sm-6 product-item">
+        return <div className="product-item">
             <div className="product-card-box">
               <Link to={"/products/" + this.props.product_name}>
                 {/* <CardImg src={this.props.product_image} alt="error" /> */}

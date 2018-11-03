@@ -6,17 +6,27 @@ import styled from 'styled-components'
 import badge from '../images/product-page-badge.jpg'
 
 const Block = styled.div`
-    margin-left: 7%;
-    margin-right: 7%;
+    margin-left: auto;
+    margin-right: auto;
 `
 
 const Row = styled.div`
     @media(max-width: 768px) {
         display: block;
-        margin-left: auto;
-        margin-right: auto;
         padding-top: 10px;
+        width: 100%;
     }
+    @media (min-width: 992px) {
+        width: 970px;
+    }
+    @media (min-width: 1200px) {
+        width: 1170px;
+    }
+    @media (min-width: 1400px) {
+        width: 1400px;
+    }
+    margin-right: auto;
+    margin-left: auto;
     padding-top: 30px;
     display: flex;
 `
@@ -26,17 +36,11 @@ const Left = styled.div`
         width: 100%;
         height: 20%;
     }
-    width: 330px;
+    width: 350px;
 `
 const Img = styled.img`
-    @media(max-width: 768px) {
-        margin-left: 16px;
-        margin-right: auto;
-    }
-    width: 96%;
-    margin-top: 100px;
-    margin-left: 35px;
-    margin-right: 35px;
+    width: 100%;
+    margin-top: 60px;
 `
 
 const Right = styled.div`
@@ -88,6 +92,27 @@ class ProductsPage extends Component {
         );
         return (<ProductPanel productsShow={filter} />)
     }
+
+    productSearch = () => {
+        let products = this.state.products.filter(product =>
+          this.checkProductName(
+            this.state.search.toUpperCase(),
+            product.name.toUpperCase()
+          )
+        );
+        
+        if (products.length <= 0) {
+            return <Noti>
+              No Result For <SearchText>
+                '{this.state.search}'
+              </SearchText>
+            </Noti>;
+        } else {
+          return <div className="container">
+              <ProductPanel productsShow={products} />
+            </div>;
+        }
+    }
     
     renderProductPanel = input_case => {
         switch (input_case) {
@@ -111,28 +136,6 @@ class ProductsPage extends Component {
             return wow.length > 0
         } else {
             return product.substring(0, search_length) === search
-        }
-    }
-
-    productSearch = () => {
-
-        let products = this.state.products.filter(product =>
-          this.checkProductName(
-            this.state.search.toUpperCase(),
-            product.name.toUpperCase()
-          )
-        );
-        
-        if (products.length <= 0) {
-            return <Noti>
-              No Result For <SearchText>
-                '{this.state.search}'
-              </SearchText>
-            </Noti>;
-        } else {
-          return <div className="container">
-              <ProductPanel productsShow={products} />
-            </div>;
         }
     }
 
