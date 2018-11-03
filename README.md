@@ -17,7 +17,6 @@ Don't use `master` to do your task. Create your branch with your name and your t
     - /src/component -> Component file
     - /src/css -> css
     - /src/views -> pages 
-    - /spec -> Test
 - backend
     - /public -> css
     - /routes -> routes
@@ -32,3 +31,6 @@ Dump database for see products by command `mongorestore --collection products --
 - `cd backend` command `yarn test` for run test
 - name the test files as `____.test.js` in folder **tests**
 
+### Test for Frontend
+- `cd frontend` command `yarn test` for run test
+- name the test files as `____.test.js` in the same folder of component that want to test
