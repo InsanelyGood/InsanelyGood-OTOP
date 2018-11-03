@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { Route } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import Home from "../views/home";
 import ProductsPage from "../views/products_page";
@@ -12,39 +13,45 @@ const routes = [
   {
     path: "/",
     exact: true,
-    component: Home
+    component: Home,
+    canAccess: true
   },
   {
     path: "/products/:id",
     exact: true,
-    component: ProductDetail
+    component: ProductDetail,
+    canAccess: true
   },
   {
     path: "/users/login",
     exact: true,
-    component: Login
+    component: Login,
+    canAccess: true
   },
   {
     path: "/users/register",
     exact: true,
-    component: Register
+    component: Register,
+    canAccess: true
   },
   {
     path: "/products",
     exact: true,
-    component: ProductsPage
+    component: ProductsPage,
+    canAccess: true
   },
   {
     path: "/cart",
     exact: true,
-    component: Cart
+    component: Cart,
+    canAccess: Cookies.get("username")
   }
 ];
 
 export default () => (
   <Fragment>
-    {routes.map((route, i) => (
-      <Route key={i} {...route} />
-    ))}
+    {routes.map(
+      (route, i) => route.canAccess && <Route key={i} {...route} />
+    )}
   </Fragment>
 );
