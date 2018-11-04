@@ -10,6 +10,7 @@ import Register from "../views/register";
 import Purchased from "../views/purchased";
 import UserInfo from "../views/userInfo";
 import UserInfoEdit from "../views/userEdit";
+import UserPassword from "../views/userPassword";
 import Cart from "../views/cart";
 
 const routes = [
@@ -58,6 +59,12 @@ const routes = [
     path: "/users/information/edit",
     exact: true,
     component: UserInfoEdit,
+    canAccess: true
+  },
+  {
+    path: "/users/information/changePassword",
+    exact: true,
+    component: UserPassword,
     canAccess: true
   },
   {

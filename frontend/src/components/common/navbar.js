@@ -79,8 +79,9 @@ class NavBar extends React.Component {
                     </DropdownToggle>
                     <DropdownMenu>
                       <DropdownItem header>HI, {this.state.firstname}</DropdownItem>
-                      <DropdownItem href="http://localhost:3000/users/information/" >Profile</DropdownItem>
-                      <DropdownItem href="http://localhost:3000/users/information/edit">Edit Profile</DropdownItem>
+                      <DropdownItem className="cilckable" href="http://localhost:3000/users/information/" >Profile</DropdownItem>
+                      <DropdownItem className="cilckable" href="http://localhost:3000/users/information/edit">Edit Profile</DropdownItem>
+                      <DropdownItem className="cilckable" href="http://localhost:3000/users/information/edit">Change Password</DropdownItem>
                       <DropdownItem divider />
                       <DropdownItem onClick={this.onLogoutClicked} href="/">Log Out</DropdownItem>
                     </DropdownMenu>
