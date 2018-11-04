@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     if (err) {
       res.send(401);
     } else if (!user) {
-      res.send(404);
+      res.send(404).send("User Not Found");
     } else {      
       req.user = user[0];
       next();
