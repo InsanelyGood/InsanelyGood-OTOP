@@ -1,0 +1,16 @@
+.pur{
+    padding-top: 10%;
+    font-style: italic;
+    font-size: 60px;
+    font-family: 'Rochester', cursive;
+}
+.heart{
+    font-size: 45px;
+}
+.buttonBack{
+    font-family: 'Coming Soon', cursive !important;
+    font-weight: bold !important;
+    padding-bottom: 10%;
+    border-color: #57a9bb !important;
+    background-color: #57a9bb!important;
+}
