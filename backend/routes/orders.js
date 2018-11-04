@@ -3,35 +3,53 @@ const router = express.Router();
 
 const Order = require('../models/orders')
 
+const findUserByPath = require("../middlewares/findUserByPath");
+const orderCreated = "orderCreated"
+const adminAccepted = "adminAccepted"
+
 router.get("/", (req, res, next) => {
   Order.find({}, (err, orders) => {
-    res.send({orders})
+    res.send({ orders })
   })
 })
 
-router.get('/new_order', (req, res) => {
-  res.render('new_order')
-})
+router.post('/:username/create', findUserByPath, (req, res) => {
+  const purchasedList = req.body.purchasedList;
+  const dataTime = req.body.dataTime;
+  const totalPrice = req.body.totalPrice;
+  const shippingAddress = req.body.shippingAddress;
 
-router.post('/new_order', (req, res) => {
-  let order = new Order()
-  order.purchased_list = req.body.purchased_list
-  order.date_time = new Date
-  order.total_price = req.body.total_price
-  order.status = req.body.status
-  order.shipping_address = req.body.shipping_address
-  order.userID = req.body.userID;
+  let newOrder = new Order({
+    purchasedList: purchasedList,
+    dateTime: new Date,
+    totalPrice: totalPrice,
+    status: orderCreated,
+    shippingAddress: shippingAddress,
+    userId: req.user._id
+  });
 
-  order.save()
-  res.redirect('/orders')
+  let errors = req.validationErrors();
+  if (errors) {
+    console.log(errors);
+  } else {
+    newOrder.save(function (err) {
+      if (err) {
+        console.log(err);
+        return;
+      } else {
+        res.status(200).send("Created order success")
+        // res.redirect("http://localhost:3000/purchased");
+      }
+    })
+  }
 })
 
 router.get('/:id', (req, res) => {
   Order.findById(req.params.id, (err, order) => {
-    if(err) {
+    if (err) {
       console.log(err);
     } else {
-      res.send({order})
+      res.send({ order })
     }
   })
 })
@@ -43,11 +61,11 @@ router.post('/:id', (req, res) => {
   let query = {
     _id: req.params.id
   }
-  Order.findOneAndUpdate(query, order, {new: true}, (err, order) => {
-    if(err) {
+  Order.findOneAndUpdate(query, order, { new: true }, (err, order) => {
+    if (err) {
       console.log(err);
     } else {
-      res.send('Success')
+      res.send('Update Success')
     }
   })
 })
@@ -58,10 +76,10 @@ router.delete('/:id', (req, res) => {
   }
   Order.findById(req.params.id, (err, order) => {
     Order.remove(query, (err) => {
-      if(err) {
+      if (err) {
         console.log(err)
       } else {
-        res.send('Success')
+        res.send('Delete Success')
       }
     })
   })
