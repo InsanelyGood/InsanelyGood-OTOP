@@ -3,10 +3,10 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
-let User = require("../models/users");
-let Product = require("../models/products");
+const User = require("../models/users");
 
 const findUserByPath = require("../middlewares/findUserByPath");
+const findProductsFromCartList = require("../middlewares/findProductsFromCartList")
 
 router.get("/", (req, res) => {
   User.find({}, (err, users) => {
@@ -139,24 +139,24 @@ router.get("/:username/information", findUserByPath, (req, res, next) => {
 });
 
 // User Information save
-router.post("/:username/information/save", findUserByPath,(req, res, next) => {
+router.post("/:username/information/save", findUserByPath, (req, res, next) => {
   // console.log("Req.body>>>>>>>>",req.body)
   // console.log("Req.user>>>>>>>>",req.user)
   if (req.user) {
     // console.log("if")
     const { username, password, firstname, lastname, email, address, telephoneNumber } = req.body
     let newUserData = {
-      username, 
-      // password, 
-      firstname, 
-      lastname, 
-      email, 
-      address, 
+      username,
+      password,
+      firstname,
+      lastname,
+      email,
+      address,
       telephoneNumber
     }
     console.log("newUserData>>>>",newUserData)
 
-    const query = { _id: req.user._id}
+    const query = { _id: req.user._id }
 
     User.updateOne(query, newUserData, function (err) {
       // console.log("newUserData>>>>",newUserData)
@@ -170,32 +170,24 @@ router.post("/:username/information/save", findUserByPath,(req, res, next) => {
       }
     });
   }
-  else{
+  else {
 
   }
 });
 
+// Cart list
+router.get("/:username/cart", findUserByPath ,findProductsFromCartList, (req, res) => {
+    res.status(200).send(req.products)
+})
 
-// Cart
-router.get("/:username/cart", (req, res) => {
-  User.find({ username: req.params.username }, async (err, user) => {
-    if (err) {
-      console.log(err);
-    } else {
-      // res.send(user[0].cart_list);
-      let products = await Promise.all(
-        user[0].cart_list.map(async item => {
-          try {
-            const product = await Product.findOne({
-              id: item.productID
-            }).exec();
-            return { product, quantity: item.quantity };
-          } catch (error) {}
-        })
-      );
-      res.send(products);
-    }
-  });
-});
+// Checkout Information
+router.get("/:username/checkout", findUserByPath, findProductsFromCartList, (req, res) => {
+  // console.log("address",req.user.address)
+  // console.log("products",req.products)
+  res.status(200).send({
+    address: req.user.address,
+    products: req.products
+  })
+})
 
 module.exports = router;
