@@ -10,7 +10,7 @@
 .buttonBack{
     font-family: 'Coming Soon', cursive !important;
     font-weight: bold !important;
-    padding-bottom: 10%;
     border-color: #57a9bb !important;
     background-color: #57a9bb!important;
+    margin-bottom: 50px;
 }
