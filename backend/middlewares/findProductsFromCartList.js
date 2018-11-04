@@ -2,7 +2,7 @@ const User = require("../models/users");
 const Product = require("../models/products");
 
 module.exports = async (req, res, next) => {
-  console.log("req.user>>", req.user)
+  // console.log("req.user>>", req.user)
   let products = await Promise.all(
     req.user.cart_list.map(async item => {
       try {
@@ -14,6 +14,6 @@ module.exports = async (req, res, next) => {
     })
   )
   req.products = products
-  console.log("req.products>>", req.products)
+  // console.log("req.products>>", req.products)
   next();
 }

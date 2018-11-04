@@ -60,13 +60,11 @@ var usersRouter = require('./routes/users');
 var productRouter = require('./routes/products');
 var orderRouter = require('./routes/orders');
 var cartRouter = require('./routes/cart');
-var checkoutRouter = require('./routes/checkout');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productRouter);
 app.use('/orders', orderRouter);
 app.use('/users/cart', cartRouter);
-app.use('/users/', checkoutRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

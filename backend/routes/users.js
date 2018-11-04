@@ -180,4 +180,14 @@ router.get("/:username/cart", findUserByPath ,findProductsFromCartList, (req, re
     res.status(200).send(req.products)
 })
 
+// Checkout Information
+router.get("/:username/checkout", findUserByPath, findProductsFromCartList, (req, res) => {
+  // console.log("address",req.user.address)
+  // console.log("products",req.products)
+  res.status(200).send({
+    address: req.user.address,
+    products: req.products
+  })
+})
+
 module.exports = router;
