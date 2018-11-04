@@ -47,6 +47,11 @@ class OrderList extends Component {
                     <Row>
                         <Col md="6">
                             <Card body>
+                                <CardTitle>Order List</CardTitle>
+                            </Card>
+                        </Col>
+                        <Col md="6">
+                            <Card body>
                                 <CardTitle>Payment Detail</CardTitle>
                                 <br></br>
                                 <CardText>Address</CardText>
@@ -61,11 +66,7 @@ class OrderList extends Component {
                                 <Button onClick={this.handleSubmit}>Confirm</Button>
                             </Card>
                         </Col>
-                        <Col md="6">
-                            <Card body>
-                                <CardTitle>Order List</CardTitle>
-                            </Card>
-                        </Col>
+
                     </Row>
                 </Form>
             </LoginContent>

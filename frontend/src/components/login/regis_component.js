@@ -1,6 +1,7 @@
 import React from 'react'
 import { Input, Label, FormFeedback , Row , Col} from 'reactstrap';
 import styled from 'styled-components'
+import { setUserRegis } from '../../api/userid';
 
 const Form = styled.div`
     margin: auto;
@@ -31,10 +32,10 @@ class RegisComponent extends React.Component {
             email: '',
             username: '',
             password: '',
-            confirmPassword: '',
-            firstName: '',
-            lastName: '',
-            contactNumber: '',
+            confirm_password: '',
+            firstname: '',
+            lastname: '',
+            telephone_number: '',
             notHaveEmail: false,
             notHaveUsername: false,
             notHavePassword: false,
@@ -47,7 +48,7 @@ class RegisComponent extends React.Component {
 
     handleInputChange = event => {
         this.setState({
-            [event.name]: event.target.value
+            [event.target.name]: event.target.value
         })
     }
 
@@ -73,35 +74,44 @@ class RegisComponent extends React.Component {
             this.setState({ notHavePassword: false })
         }
 
-        if (this.state.confirmPassword === '') {
+        if (this.state.confirm_password === '') {
             this.setState({ notHaveConfirmPass: true });
         } else {
             this.setState({ notHaveConfirmPass: false })
         }
 
-        if (this.state.firstName === '') {
+        if (this.state.firstname === '') {
             this.setState({ notHaveFirstName: true });
         } else {
             this.setState({ notHaveFirstName: false })
         }
 
-        if (this.state.lastName === '') {
+        if (this.state.lastname === '') {
             this.setState({ notHaveLastName: true });
         } else {
             this.setState({ notHaveLastName: false })
         }
 
-        if (this.state.contactNumber === '') {
+        if (this.state.telephone_number === '') {
             this.setState({ notHaveContectNum: true });
         } else {
             this.setState({ notHaveContectNum: false })
         }
+        // setUserRegis({
+        //     email: this.state.email,
+        //     username: this.state.username,
+        //     password: this.state.password,
+        //     confirmPassword: this.state.confirmPassword,
+        //     firstname: this.state.firstName,
+        //     lastname: this.state.lastName,
+        //     telephoneNumber: this.state.telephoneNumber,
+        // })
     }
 
     render() {
         return (
             <Form inline>
-            <form action="http://localhost:8000/users/register" method="POST">
+            <form action="http://localhost:8000/users/register" method='POST'>
              <div>
                     <Row>
                         <Col md={6}>
