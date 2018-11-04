@@ -1,7 +1,6 @@
 import React from "react";
 import { mount } from "enzyme";
 import ProductItem from "./product_item";
-import ProductDetail from "../../views/product_detail";
 import { BrowserRouter as Router } from "react-router-dom";
 
 describe("Product item component", () => {
