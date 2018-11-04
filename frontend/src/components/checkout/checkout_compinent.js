@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import ProductsList from './products_list'
 import styled from 'styled-components'
 import { Card, CardText, CardTitle, Input, ListGroupItem, FormGroup, Label, Row, Col, Button } from 'reactstrap';
 import Cookies from 'js-cookie'

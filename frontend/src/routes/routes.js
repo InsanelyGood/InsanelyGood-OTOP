@@ -1,51 +1,64 @@
 import React, { Fragment } from "react";
 import { Route } from "react-router-dom";
+import Cookies from "js-cookie";
 
-import Home from '../views/home';
+import Home from "../views/home";
 import ProductsPage from "../views/products_page";
 import ProductDetail from "../views/product_detail";
 import Login from "../views/login";
 import Register from "../views/register";
+import Cart from "../views/cart";
 import Checkout from "../views/checkout";
 
 const routes = [
   {
     path: "/",
     exact: true,
-    component: Home
+    component: Home,
+    canAccess: true
   },
   {
-    path: "/products/:name",
+    path: "/products/:id",
     exact: true,
-    component: ProductDetail
+    component: ProductDetail,
+    canAccess: true
   },
-
   {
     path: "/users/login",
     exact: true,
-    component: Login
+    component: Login,
+    canAccess: true
   },
   {
     path: "/users/register",
     exact: true,
-    component: Register
+    component: Register,
+    canAccess: true
   },
   {
     path: "/products",
     exact: true,
-    component: ProductsPage
+    component: ProductsPage,
+    canAccess: true
+  },
+  {
+    path: "/cart",
+    exact: true,
+    component: Cart,
+    canAccess: Cookies.get("username")
   },
   {
     path: "/checkout",
     exact: true,
-    component: Checkout
+    component: Checkout,
+    canAccess: true
   }
 ];
 
 export default () => (
   <Fragment>
-    {routes.map((route, i) => (
-      <Route key={i} {...route} />
-    ))}
+    {routes.map(
+      (route, i) => route.canAccess && <Route key={i} {...route} />
+    )}
   </Fragment>
 );

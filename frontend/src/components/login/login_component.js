@@ -3,20 +3,17 @@ import { Input, Label, FormFeedback } from 'reactstrap';
 import styled from 'styled-components'
 
 const Div = styled.div`
-    // padding: 5% 0; 
     margin: auto;
     width:100%;
 `
 
 const FormGroups = styled.div`
     padding: 10px 0;
-    // margin: auto;
     width: 100%;
 `
 
 const Buttons = styled.input`
     text-align: center;
-    // margin: auto;
     width: 100%;
     color: white;
     height: 40px;
@@ -25,12 +22,6 @@ const Buttons = styled.input`
     background-color: #57a9bb;
     font-weight: bold;
 `
-
-// const Block = styled.div`
-//     display: block;
-//     margin-top: 5px;
-//     margin-bootom: 10px; 
-// `
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -42,28 +33,17 @@ class LoginComponent extends React.Component {
             notHaveUsername: false,
             notHavePassword: false
         };
-        this.handlePassChange = this.handlePassChange.bind(this);
-        this.handleUserChange = this.handleUserChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleUserChange = event => {
+    handleInputChange = event => {
         this.setState({
-            username: event.target.value,
-        });
-    };
-
-    handlePassChange = event => {
-        this.setState({
-            password: event.target.value
-        });
+            [event.target.name]: event.target.value
+        })
     }
 
     handleSubmit = event => {
-        // event.preventDefault();
         
-        console.log(this.state.username);
-        console.log(this.state.password);
+        // console.log(this.state.event.name);
         
         
         if (this.state.username === '') {
@@ -83,21 +63,21 @@ class LoginComponent extends React.Component {
 
     render() { 
         return (
-            <Div >
+            <Div inline>
                 <form action="http://localhost:8000/users/login" method="POST">
                     <FormGroups>
                         <Label>Username</Label>
                         {
                             this.state.notHaveUsername &&
                             <alert >
-                                <Input invalid type="text" onChange={this.handleUserChange} name="username" placeholder="Username" />
+                                <Input invalid type="text" name="username" onChange={this.handleInputChange} placeholder="Username" />
                                 <FormFeedback>Please enter username.</FormFeedback>
                             </alert>
                         }
                         {
                             !this.state.notHaveUsername &&
                             <alert >
-                                <Input type="text" name="username" onChange={this.handleUserChange} placeholder="Username" />
+                                <Input type="text" name="username" onChange={this.handleInputChange} placeholder="Username" />
                             </alert>
                         }
                     </FormGroups>
@@ -106,14 +86,14 @@ class LoginComponent extends React.Component {
                         {
                             this.state.notHavePassword &&
                             <alert >
-                                <Input invalid type="password" onChange={this.handlePassChange} name="password" placeholder="Password" />
+                                <Input invalid type="password" name="password" onChange={this.handleInputChange} placeholder="Password" />
                                 <FormFeedback>Please enter password.</FormFeedback>
                             </alert>
                         }
                         {
                             !this.state.notHavePassword &&
                             <alert >
-                                <Input type="password" name="password" onChange={this.handlePassChange} placeholder="Password" />
+                                <Input type="password" name="password" onChange={this.handleInputChange} placeholder="Password" />
                             </alert>
                         }
                     </FormGroups>

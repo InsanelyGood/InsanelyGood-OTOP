@@ -15,3 +15,6 @@ Desktop.ini
 # intelliJ IDEA
 .idea/
 InsanelyGood-OTOP.iml
+
+# Vscode
+InsanelyGood.code-workspace

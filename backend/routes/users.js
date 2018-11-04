@@ -1,52 +1,65 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const passport = require('passport');
+const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
-let User = require('../models/users');
+let User = require("../models/users");
+let Product = require("../models/products");
 
-// Login Form
-router.get('/login', function (req, res) {
-  res.render('login');
+const findUserByPath = require("../middlewares/findUserByPath");
+
+router.get("/", (req, res) => {
+  User.find({}, (err, users) => {
+    res.send({ users });
+  });
 });
 
-router.get('/test', (req, res) => {
-  console.log(req.cookies)
-  res.sendStatus(200)
-})
+// Login Form
+router.get("/login", function (req, res) {
+  res.render("login");
+});
+
+router.get("/test", (req, res) => {
+  // console.log(req.cookies)
+  // res.sendStatus(200)
+  res.status(200).send("Hello world");
+});
 
 // Login Process
-router.post('/login', function (req, res, next) {
+router.post("/login", function (req, res, next) {
   console.log("login");
 
-  passport.authenticate('local', function (err, user, info) {
-    console.log('in local authen')
+  passport.authenticate("local", function (err, user, info) {
+    console.log("in local authen");
     if (err) {
-      console.log('in error')
-      console.log(err)
+      console.log("in error");
+      console.log(err);
       return next(err);
     }
 
-    console.log('user', user)
+    console.log("user", user);
     if (!user) {
-      return res.redirect('http://localhost:3000/users/login')
+      return res.redirect("http://localhost:3000/users/login");
     }
 
     req.logIn(user, function (err) {
-      if (err) { return next(err); }
-      return res.cookie('username', user.username).redirect('http://localhost:3000/');
+      if (err) {
+        return next(err);
+      }
+      return res
+        .cookie("username", user.username)
+        .redirect("http://localhost:3000/");
     });
   })(req, res, next);
 });
 
 // Register Form
-router.get('/register', function (req, res) {
-  res.render('register');
-})
+router.get("/register", function (req, res) {
+  res.render("register");
+});
 
 // Register Process
-router.post('/register', function (req, res) {
-
+router.post("/register", function (req, res) {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
@@ -55,19 +68,21 @@ router.post('/register', function (req, res) {
   const confirm_password = req.body.confirm_password;
   const telephone_number = req.body.telephone_number;
 
-  req.checkBody('firstname', 'Firstname is Required').notEmpty();
-  req.checkBody('lastname', 'Lastname is Required').notEmpty();
-  req.checkBody('email', 'Email is Required').notEmpty();
-  req.checkBody('email', 'Email is not valid').isEmail();
-  req.checkBody('username', 'Username is Required').notEmpty();
-  req.checkBody('password', 'Password is Required').notEmpty();
-  req.checkBody('confirm_password', 'Confirm Password do not match').equals(req.body.password);
-  req.checkBody('telephone_number', 'telephone_number is Required').notEmpty();
+  req.checkBody("firstname", "Firstname is Required").notEmpty();
+  req.checkBody("lastname", "Lastname is Required").notEmpty();
+  req.checkBody("email", "Email is Required").notEmpty();
+  req.checkBody("email", "Email is not valid").isEmail();
+  req.checkBody("username", "Username is Required").notEmpty();
+  req.checkBody("password", "Password is Required").notEmpty();
+  req
+    .checkBody("confirm_password", "Confirm Password do not match")
+    .equals(req.body.password);
+  req.checkBody("telephone_number", "telephone_number is Required").notEmpty();
   // req.checkBody('telephone_number','telephone_number size must be 10').size() == 10;
 
   let errors = req.validationErrors();
   if (errors) {
-    console.log(errors)
+    console.log(errors);
     // res.render('register', {
     //   errors: errors
     // });
@@ -85,7 +100,7 @@ router.post('/register', function (req, res) {
     });
 
     bcrypt.genSalt(10, function (err, salt) {
-      if (err) console.log(err)
+      if (err) console.log(err);
       bcrypt.hash(newUser.password, salt, function (err, hash) {
         if (err) {
           console.log(err);
@@ -96,14 +111,91 @@ router.post('/register', function (req, res) {
             console.log(err);
             return;
           } else {
-            res.redirect('http://localhost:3000/users/login');
+            res.redirect("http://localhost:3000/users/login");
           }
         });
       });
     });
+  }
+});
+
+
+// User Information
+router.get("/:username/information", findUserByPath, (req, res, next) => {
+  // console.log(">>>>>>>>",req.user)
+  if (req.user) {
+    const { role, username, firstname, lastname, email, address, telephone_number } = req.user
+    res.status(200).send({
+      role,
+      username,
+      firstname,
+      lastname,
+      email,
+      address,
+      telephoneNumber: telephone_number,
+    })
+  }
+  else res.status(404).send("Not found");
+});
+
+// User Information save
+router.post("/:username/information/save", findUserByPath,(req, res, next) => {
+  // console.log("Req.body>>>>>>>>",req.body)
+  // console.log("Req.user>>>>>>>>",req.user)
+  if (req.user) {
+    // console.log("if")
+    const { username, password, firstname, lastname, email, address, telephoneNumber } = req.body
+    let newUserData = {
+      username, 
+      password, 
+      firstname, 
+      lastname, 
+      email, 
+      address, 
+      telephoneNumber
+    }
+    // console.log("newUserData>>>>",newUserData)
+
+    const query = { _id: req.user._id}
+
+    User.updateOne(query, newUserData, function (err) {
+      // console.log("newUserData>>>>",newUserData)
+      if (err) {
+        console.log(err)
+        res.status(404).send("Update fail. There is something wrong in update process")
+        return
+      } else {
+        res.status(200).send("Update user data success")
+        // res.redirect('http://localhost:3000/users/information')
+      }
+    });
+  }
+  else{
 
   }
+});
 
-})
+
+// Cart
+router.get("/:username/cart", (req, res) => {
+  User.find({ username: req.params.username }, async (err, user) => {
+    if (err) {
+      console.log(err);
+    } else {
+      // res.send(user[0].cart_list);
+      let products = await Promise.all(
+        user[0].cart_list.map(async item => {
+          try {
+            const product = await Product.findOne({
+              id: item.productID
+            }).exec();
+            return { product, quantity: item.quantity };
+          } catch (error) {}
+        })
+      );
+      res.send(products);
+    }
+  });
+});
 
 module.exports = router;
