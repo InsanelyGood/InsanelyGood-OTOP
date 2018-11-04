@@ -14,11 +14,11 @@ class ProductImage extends React.Component {
 }
 
 ProductImage.propTypes = {
-  image_url: PropTypes.string
+  imageUrl: PropTypes.string
 };
 
 ProductImage.defaultProps = {
-  image_url:
+  imageUrl:
     "http://www.khaosodenglish.com/wp-content/uploads/2017/08/pasted-image-0.png"
 };
 
