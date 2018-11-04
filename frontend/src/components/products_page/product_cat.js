@@ -34,7 +34,7 @@ const Head = styled.div`
     height: 90px;
     background-color: black;
 `
-const Text = styled.h2`
+const Text = styled.h1`
     @media(max-width: 768px) {
         font-size: 20px;
         padding-top: 10px;
@@ -46,7 +46,7 @@ const Text = styled.h2`
 `
 const Label = styled.span`
     @media(max-width: 768px) {
-        font-size: 10px;
+        fon-size: 10px;
         margin-left: 30px;
     }   
     font-weight: bold;
@@ -59,6 +59,8 @@ const BGroup = styled.div`
     @media(max-width: 768px) {
         display: flex;
         flex-wrap: wrap;
+        padding-top: 8px;
+        margin: auto;
         justify-content: center;
     }
     margin: 10px;
@@ -79,7 +81,7 @@ const CheckBox = styled.span`
     @media(max-width: 768px) {
         height: 15px
         width: 15px;
-        margin-top: 4.5px;
+        margin-top: 8px;
     }   
     margin: 3px;
     margin-left: 10px;
@@ -91,7 +93,7 @@ const CheckBox = styled.span`
 `
 const CheckMark = styled.span`
     @media(max-width: 768px) {
-        margin: 3.5px;
+        margin: 4px;
     }   
     width: 50%;
     height: 50%;
