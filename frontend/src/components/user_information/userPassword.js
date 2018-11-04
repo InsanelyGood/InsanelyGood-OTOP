@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabContent, TabPane,  Nav, NavItem, NavLink,Button,Row, Col } from 'reactstrap';
+import { TabContent, TabPane,  Nav, NavItem, NavLink,Button,Row, Col,Input,FormFeedback } from 'reactstrap';
 import '../../css/userInfo.css'
 import classnames from 'classnames';
 import Cookies from 'js-cookie';
@@ -15,7 +15,7 @@ class UserPassword extends React.Component {
       oldPassword: '',
       newPassword1: '',
       newPassword2:'',
-
+      invalidConfirmPassword: '',
     };
   }
 
@@ -34,12 +34,15 @@ class UserPassword extends React.Component {
 
 handleSubmit = event => {
     if(this.state.newPassword1 === this.state.newPassword2){
-        setNewPassword(this.state.username, {
-            email: this.state.email,
+        setNewPassword({
             username: this.state.username,
             oldPassword: this.state.oldPassword,
-            newPassword: this.state.newPassword1
+            newPassword: this.state.newPassword1,
         })
+        this.setState({invalidConfirmPassword: false})
+    }
+    else{
+        this.setState({invalidConfirmPassword: true})
     }
 }
 
@@ -86,13 +89,12 @@ handleSubmit = event => {
                 </p>
                 <p>
                 <label>Confirm New Password</label>
-                <input type="password" name="newPassword2" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
                 </p>
-                
+                <input invalid type="password" name="newPassword2" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
                 </editable>
                 </div>
                 <p>
-                <Button className="buttonEdit" href="http://localhost:3000/users/information/" onClick={this.handleSubmit}><span>Save</span></Button>
+                <Button className="buttonEdit" onClick={this.handleSubmit} href="http://localhost:3000/users/information/" ><span>Save</span></Button>
                 </p>
               </Col>
             </Row>

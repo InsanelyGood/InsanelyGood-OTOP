@@ -74,8 +74,7 @@ editable textarea{
     width: 130px !important;
     transition: all 0.5s;
     cursor: pointer;
-    margin: 5px!important;
-    /* float: right; */
+    margin-top: 27px !important;
   }
   
   .buttonEdit span {
