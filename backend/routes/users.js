@@ -6,6 +6,8 @@ const passport = require("passport");
 let User = require("../models/users");
 let Product = require("../models/products");
 
+const findUserByPath = require("../middlewares/findUserByPath");
+
 router.get("/", (req, res) => {
   User.find({}, (err, users) => {
     res.send({ users });
@@ -13,22 +15,21 @@ router.get("/", (req, res) => {
 });
 
 // Login Form
-router.get("/login", function(req, res) {
+router.get("/login", function (req, res) {
   res.render("login");
 });
 
 router.get("/test", (req, res) => {
-  console.log("lsdbackdj-------------------------------------");
   // console.log(req.cookies)
   // res.sendStatus(200)
   res.status(200).send("Hello world");
 });
 
 // Login Process
-router.post("/login", function(req, res, next) {
+router.post("/login", function (req, res, next) {
   console.log("login");
 
-  passport.authenticate("local", function(err, user, info) {
+  passport.authenticate("local", function (err, user, info) {
     console.log("in local authen");
     if (err) {
       console.log("in error");
@@ -41,7 +42,7 @@ router.post("/login", function(req, res, next) {
       return res.redirect("http://localhost:3000/users/login");
     }
 
-    req.logIn(user, function(err) {
+    req.logIn(user, function (err) {
       if (err) {
         return next(err);
       }
@@ -53,12 +54,12 @@ router.post("/login", function(req, res, next) {
 });
 
 // Register Form
-router.get("/register", function(req, res) {
+router.get("/register", function (req, res) {
   res.render("register");
 });
 
 // Register Process
-router.post("/register", function(req, res) {
+router.post("/register", function (req, res) {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
@@ -98,14 +99,14 @@ router.post("/register", function(req, res) {
       cart_list: []
     });
 
-    bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.genSalt(10, function (err, salt) {
       if (err) console.log(err);
-      bcrypt.hash(newUser.password, salt, function(err, hash) {
+      bcrypt.hash(newUser.password, salt, function (err, hash) {
         if (err) {
           console.log(err);
         }
         newUser.password = hash;
-        newUser.save(function(err) {
+        newUser.save(function (err) {
           if (err) {
             console.log(err);
             return;
@@ -118,15 +119,64 @@ router.post("/register", function(req, res) {
   }
 });
 
+
 // User Information
-router.get("/information", (req, res, next) => {
-  console.log("COOKIEEEEEEEEE", req.cookies);
-  User.find({ username: req.cookies.username }, (err, userinfo) => {
-    if (userinfo.length > 0) res.status(200).send(userinfo[0]);
-    else res.status(404).send("Not found");
-  });
+router.get("/:username/information", findUserByPath, (req, res, next) => {
+  // console.log(">>>>>>>>",req.user)
+  if (req.user) {
+    const { role, username, firstname, lastname, email, address, telephone_number } = req.user
+    res.status(200).send({
+      role,
+      username,
+      firstname,
+      lastname,
+      email,
+      address,
+      telephoneNumber: telephone_number,
+    })
+  }
+  else res.status(404).send("Not found");
 });
 
+// User Information save
+router.post("/:username/information/save", findUserByPath,(req, res, next) => {
+  // console.log("Req.body>>>>>>>>",req.body)
+  // console.log("Req.user>>>>>>>>",req.user)
+  if (req.user) {
+    // console.log("if")
+    const { username, password, firstname, lastname, email, address, telephoneNumber } = req.body
+    let newUserData = {
+      username, 
+      password, 
+      firstname, 
+      lastname, 
+      email, 
+      address, 
+      telephoneNumber
+    }
+    // console.log("newUserData>>>>",newUserData)
+
+    const query = { _id: req.user._id}
+
+    User.updateOne(query, newUserData, function (err) {
+      // console.log("newUserData>>>>",newUserData)
+      if (err) {
+        console.log(err)
+        res.status(404).send("Update fail. There is something wrong in update process")
+        return
+      } else {
+        res.status(200).send("Update user data success")
+        // res.redirect('http://localhost:3000/users/information')
+      }
+    });
+  }
+  else{
+
+  }
+});
+
+
+// Cart
 router.get("/:username/cart", (req, res) => {
   User.find({ username: req.params.username }, async (err, user) => {
     if (err) {
