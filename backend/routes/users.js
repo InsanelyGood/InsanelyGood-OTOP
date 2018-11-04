@@ -5,7 +5,8 @@ const passport = require("passport");
 
 const User = require("../models/users");
 
-const findUserByPath = require("../middlewares/findUserByPath");
+const findUser = require("../middlewares/findUser")
+const findUserByPath = require("../middlewares/findUserByPath")
 const findProductsFromCartList = require("../middlewares/findProductsFromCartList")
 
 router.get("/", (req, res) => {
@@ -51,7 +52,7 @@ router.post("/login", function (req, res, next) {
         .redirect("http://localhost:3000/");
     });
   })(req, res, next);
-});
+})
 
 // Register Form
 router.get("/register", function (req, res) {
@@ -119,6 +120,31 @@ router.post("/register", function (req, res) {
   }
 });
 
+// User change password
+router.post("/password/change", findUser, (req, res, next) => {
+  // console.log(">>>>>>>>User", req.user)
+  // console.log(">>>>>>>>Body", req.body)
+  const { username, oldPassword, newPassword } = req.body
+  // Match Password
+  bcrypt.compare(oldPassword, req.user.password, function (err, isMatch) {
+    if (err) throw err;
+    if (isMatch || oldPassword==req.user.password) {
+      const query = { username: username }
+      User.findOneAndUpdate(query, { password: newPassword }, function (err) {
+        // console.log("newUserData>>>>",newUserData)
+        if (err) {
+          console.log(err)
+          res.status(404).send("Update fail. There is something wrong in update process")
+          return
+        } else {
+          res.status(200).send("Update password success")
+        }
+      })
+    } else {
+      res.status(404).send("Wrong old password")
+    }
+  });
+});
 
 // User Information
 router.get("/:username/information", findUserByPath, (req, res, next) => {
@@ -154,7 +180,7 @@ router.post("/:username/information/save", findUserByPath, (req, res, next) => {
       address,
       telephoneNumber
     }
-    console.log("newUserData>>>>",newUserData)
+    console.log("newUserData>>>>", newUserData)
 
     const query = { _id: req.user._id }
 
@@ -176,8 +202,8 @@ router.post("/:username/information/save", findUserByPath, (req, res, next) => {
 });
 
 // Cart list
-router.get("/:username/cart", findUserByPath ,findProductsFromCartList, (req, res) => {
-    res.status(200).send(req.products)
+router.get("/:username/cart", findUserByPath, findProductsFromCartList, (req, res) => {
+  res.status(200).send(req.products)
 })
 
 // Checkout Information

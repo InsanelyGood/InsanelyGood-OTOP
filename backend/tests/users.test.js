@@ -71,3 +71,6 @@ describe('GET users/:username/checkout', function () {
             })
     })
 })
+
+// POST Change Password
+//....
