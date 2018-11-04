@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import UserInfomation from '../components/user_information/userInfo'
+import UserEdit from '../components/user_information/userEdit'
 
-class UserInfo extends Component{
+class UserInfoEdit extends Component{
     render(){
         return <div>
             <div className='container' align="center">
-            <UserInfomation />
+            <UserEdit />
             </div>
           </div>
     }
 }
-export default UserInfo
+export default UserInfoEdit

@@ -8,6 +8,7 @@ import Login from "../views/login";
 import Register from "../views/register";
 import Purchased from "../views/purchased";
 import UserInfo from "../views/userInfo";
+import UserInfoEdit from "../views/userEdit";
 
 const routes = [
   {
@@ -42,9 +43,14 @@ const routes = [
     component: Purchased
   },
   {
-    path: "/user/information",
+    path: "/users/information",
     exact: true,
     component: UserInfo
+  },
+  {
+    path: "/users/information/edit",
+    exact: true,
+    component: UserInfoEdit
   }
 ];
 
