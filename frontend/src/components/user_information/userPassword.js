@@ -94,7 +94,7 @@ handleSubmit = event => {
                 </editable>
                 </div>
                 <p>
-                <Button className="buttonEdit" onClick={this.handleSubmit} href="http://localhost:3000/users/information/" ><span>Save</span></Button>
+                <Button className="buttonSave" onClick={this.handleSubmit} href="http://localhost:3000/users/information/" ><span>Save</span></Button>
                 </p>
               </Col>
             </Row>
