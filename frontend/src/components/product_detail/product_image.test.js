@@ -12,5 +12,7 @@ describe("Product image component", () => {
     const wrapperNoProps = mount(<ProductImage />);
     expect(wrapperNoProps.exists()).toEqual(true);
   });
-  it("renders without crashing");
+  it("renders without crashing", () => {
+    expect(wrapper.exists()).toEqual(true);
+  });
 });
