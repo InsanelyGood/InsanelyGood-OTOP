@@ -157,7 +157,7 @@ router.post("/:username/information/save", findUserByPath, (req, res, next) => {
       address,
       telephoneNumber
     }
-    // console.log("newUserData>>>>",newUserData)
+    console.log("newUserData>>>>",newUserData)
 
     const query = { _id: req.user._id }
 

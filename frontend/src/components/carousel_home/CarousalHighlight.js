@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Central from '../../images/center_dinpao.jpg'
+import Central from '../../images/central_banjarong.jpg'
 import Esan from '../../images/Esan_saerng.jpg'
 import North from '../../images/north_fon.jpg'
 import South from '../../images/south_TaLuang.jpg'

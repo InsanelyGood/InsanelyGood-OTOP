@@ -7,6 +7,10 @@ import ProductsPage from "../views/products_page";
 import ProductDetail from "../views/product_detail";
 import Login from "../views/login";
 import Register from "../views/register";
+import Purchased from "../views/purchased";
+import UserInfo from "../views/userInfo";
+import UserInfoEdit from "../views/userEdit";
+import UserPassword from "../views/userPassword";
 import Cart from "../views/cart";
 import Checkout from "../views/checkout";
 
@@ -38,7 +42,30 @@ const routes = [
   {
     path: "/products",
     exact: true,
-    component: ProductsPage,
+    component: ProductsPage
+  },
+  {
+    path: "/purchased",
+    exact: true,
+    component: Purchased,
+    canAccess: true
+  },
+  {
+    path: "/users/information",
+    exact: true,
+    component: UserInfo,
+    canAccess: true
+  },
+  {
+    path: "/users/information/edit",
+    exact: true,
+    component: UserInfoEdit,
+    canAccess: true
+  },
+  {
+    path: "/users/information/changePassword",
+    exact: true,
+    component: UserPassword,
     canAccess: true
   },
   {
