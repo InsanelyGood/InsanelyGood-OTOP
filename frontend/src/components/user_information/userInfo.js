@@ -16,7 +16,7 @@ class UserInfomation extends React.Component {
       email: '',
       firstName: '',
       lastName: '',
-      contactNumber: '',
+      telephoneNumber: '',
       address: ''
     };
   }
@@ -28,7 +28,7 @@ class UserInfomation extends React.Component {
       firstName: info.firstname,
       lastName: info.lastname,
       email: info.email,
-      contactNumber: info.contactNumber,
+      telephoneNumber: info.telephoneNumber,
       address: info.address
     })
   }
@@ -70,11 +70,10 @@ class UserInfomation extends React.Component {
                   </p>
                   <p>
                     <label>Username</label>
-                    <input type="text" name="username" value={this.state.username}></input>
+                    <input type="text" name="username" value={this.state.username} readOnly="readonly"></input>
                   </p>
                   <p>
                     <label>Address(Default)</label>
-                    {/* <input type="text" name="address" value="My address" readOnly="readonly"></input> */}
                     <textarea type="text" name="address" value={this.state.address} readOnly="readonly"></textarea>
                   </p>
                   <p>
@@ -83,7 +82,7 @@ class UserInfomation extends React.Component {
                   </p>
                   <p>
                     <label>Contact Number</label>
-                    <input type="text" name="contactNumber" value={this.state.contactNumber} readOnly="readonly"></input>
+                    <input type="text" name="telephoneNumber" value={this.state.telephoneNumber} readOnly="readonly"></input>
                   </p>
                 </div>
                 <p>

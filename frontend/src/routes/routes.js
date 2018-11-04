@@ -7,13 +7,10 @@ import ProductsPage from "../views/products_page";
 import ProductDetail from "../views/product_detail";
 import Login from "../views/login";
 import Register from "../views/register";
-<<<<<<< HEAD
 import Purchased from "../views/purchased";
 import UserInfo from "../views/userInfo";
 import UserInfoEdit from "../views/userEdit";
-=======
 import Cart from "../views/cart";
->>>>>>> master
 
 const routes = [
   {
@@ -43,25 +40,24 @@ const routes = [
   {
     path: "/products",
     exact: true,
-<<<<<<< HEAD
     component: ProductsPage
   },
   {
     path: "/purchased",
     exact: true,
-    component: Purchased
+    component: Purchased,
+    canAccess: true
   },
   {
     path: "/users/information",
     exact: true,
-    component: UserInfo
+    component: UserInfo,
+    canAccess: true
   },
   {
     path: "/users/information/edit",
     exact: true,
-    component: UserInfoEdit
-=======
-    component: ProductsPage,
+    component: UserInfoEdit,
     canAccess: true
   },
   {
@@ -69,7 +65,6 @@ const routes = [
     exact: true,
     component: Cart,
     canAccess: Cookies.get("username")
->>>>>>> master
   }
 ];
 
