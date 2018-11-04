@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 let User = require("../models/users");
-const findUser = require("../middlewares/findUser");
+let Product = require("../models/products");
 
 router.get("/", (req, res) => {
   User.find({}, (err, users) => {
@@ -127,63 +127,25 @@ router.get("/information", (req, res, next) => {
   });
 });
 
-// =============== Cart part =====================
-router.get("/:id/cart", (req, res) => {
-  User.findById(req.params.id, (err, user) => {
-    res.send(user.cart_list);
-  });
-});
-
-router.post("/:id/cart/add", findUser, (req, res) => {
-  const isInCart = req.user.cart_list.find(
-    cart => cart.productID === req.cart.productID
-  );
-  if (isInCart) {
-    req.user.updateOne({
-      cart_list: req.user.cart_list.map(cartItem => {
-        if (cartItem.productID === req.cart.productID)
-          cartItem.quantity = req.cart.quantity;
-        return cartItem;
-      })
-    });
-  } else {
-    req.user.cart_list.push(req.cart);
-  }
-  req.user.save(err => {
-    if (err) {
-      console.log(err);
-      return;
-    } else {
-      res.send("Success");
-    }
-  });
-});
-
-router.post("/:id/cart/remove", findUser, (req, res) => {
-  req.user.cart_list = req.user.cart_list.filter(
-    cartItem => cartItem.productID !== req.cart.productID
-  );
-  req.user.save(err => {
+router.get("/:username/cart", (req, res) => {
+  User.find({ username: req.params.username }, async (err, user) => {
     if (err) {
       console.log(err);
     } else {
-      res.send(req.user.cart_list);
+      // res.send(user[0].cart_list);
+      let products = await Promise.all(
+        user[0].cart_list.map(async item => {
+          try {
+            const product = await Product.findOne({
+              id: item.productID
+            }).exec();
+            return { product, quantity: item.quantity };
+          } catch (error) {}
+        })
+      );
+      res.send(products);
     }
   });
-});
-
-router.post("/:id/cart/removeAll", findUser, (req, res) => {
-  req.user.updateOne({ cart_list: [] }, err => {
-    if (err) {
-      console.log(err);
-    }
-  });
-  req.user.save(err => {
-    if (err) {
-      console.log(err);
-    }
-  });
-  res.send("Success");
 });
 
 module.exports = router;
