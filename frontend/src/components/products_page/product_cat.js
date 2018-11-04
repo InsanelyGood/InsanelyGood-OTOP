@@ -15,7 +15,6 @@ const Block = styled.div`
 const Content = styled.div`
     @media(max-width: 768px) {
         border-radius: 10px;
-
     }
     border-radius: 20px;
     width: inherit;

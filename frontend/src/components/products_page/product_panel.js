@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 const Block = styled.div`
     -webkit-box-shadow:0px 5px 25px -5px black;
-    margin-left: 40px;
+    margin-left: 30px;
     margin-right: 40px;
 `
 const Head = styled.div`
