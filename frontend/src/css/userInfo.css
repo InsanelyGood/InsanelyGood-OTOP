@@ -5,6 +5,22 @@
 .info{
     font-size: 16px ;
 }
+
+.changePass{
+    width: 340px !important;
+    font-size: 14px !important;
+    font-weight: bold;
+    float: center;
+    
+}
+.changePass input{
+    width: 160px; 
+}
+.changePass label{
+    width: 160px; 
+    float: left;
+}
+
 p label{
     margin-right: 1%;
     margin-left: 1%;

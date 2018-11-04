@@ -124,21 +124,30 @@ router.post("/register", function (req, res) {
 router.post("/password/change", findUser, (req, res, next) => {
   // console.log(">>>>>>>>User", req.user)
   // console.log(">>>>>>>>Body", req.body)
-  const { username, oldPassword, newPassword } = req.body
+  let { username, oldPassword, newPassword } = req.body
+  console.log('user', req.body);
+  
   // Match Password
   bcrypt.compare(oldPassword, req.user.password, function (err, isMatch) {
     if (err) throw err;
     if (isMatch || oldPassword==req.user.password) {
-      const query = { username: username }
-      User.findOneAndUpdate(query, { password: newPassword }, function (err) {
-        // console.log("newUserData>>>>",newUserData)
-        if (err) {
-          console.log(err)
-          res.status(404).send("Update fail. There is something wrong in update process")
-          return
-        } else {
-          res.status(200).send("Update password success")
-        }
+
+      bcrypt.genSalt(10, function (err, salt) {
+        if (err) console.log(err);
+        bcrypt.hash(newPassword, salt, function (err, hash) {
+          if (err) {console.log(err);}
+          newPassword = hash;
+          const query = { username: username }
+          User.findOneAndUpdate(query, { password: newPassword }, function (err) {
+            // console.log("newUserData>>>>",newUserData)
+            if (err) {
+              console.log(err)
+              res.status(404).send("Update fail. There is something wrong in update process")
+              return
+            } else 
+              res.status(200).send("Update password success")
+          })
+        })
       })
     } else {
       res.status(404).send("Wrong old password")

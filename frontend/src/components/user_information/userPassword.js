@@ -3,7 +3,7 @@ import { TabContent, TabPane,  Nav, NavItem, NavLink,Button,Row, Col } from 'rea
 import '../../css/userInfo.css'
 import classnames from 'classnames';
 import Cookies from 'js-cookie';
-import { getUsername, setUsername } from '../../api/user_infomation'
+import { getUsername,setNewPassword } from '../../api/user_infomation'
 
 
 class UserPassword extends React.Component {
@@ -11,13 +11,11 @@ class UserPassword extends React.Component {
     super(props);
     this.state = {
       activeTab: '1',
-      email: '',
       username: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      telephoneNumber: '',
-      address: ''
+      oldPassword: '',
+      newPassword1: '',
+      newPassword2:'',
+
     };
   }
 
@@ -25,12 +23,6 @@ class UserPassword extends React.Component {
     const info = await getUsername(Cookies.get('username'))
     this.setState({
         username: info.username,
-        firstName: info.firstname,
-        lastName: info.lastname,
-        email: info.email,
-        telephoneNumber: info.telephoneNumber,
-        address: info.address,
-        password: info.password
     }, () => console.log(this.state.password))
   }
 
@@ -41,15 +33,14 @@ class UserPassword extends React.Component {
   }
 
 handleSubmit = event => {
-    setUsername(this.state.username, {
-        email: this.state.email,
-        username: this.state.username,
-        // password: this.state.password,
-        firstname: this.state.firstName,
-        lastname: this.state.lastName,
-        telephoneNumber: this.state.telephoneNumber,
-        address: this.state.address  
-    })
+    if(this.state.newPassword1 === this.state.newPassword2){
+        setNewPassword(this.state.username, {
+            email: this.state.email,
+            username: this.state.username,
+            oldPassword: this.state.oldPassword,
+            newPassword: this.state.newPassword1
+        })
+    }
 }
 
   toggle = tab => {
@@ -78,7 +69,7 @@ handleSubmit = event => {
           <TabPane tabId="1">
             <Row>
               <Col sm="12">
-                <div className="info">
+                <div className="info changePass">
                     <br/>
                 <p> 
                 <label>Username</label>
@@ -86,12 +77,16 @@ handleSubmit = event => {
                 </p>
                 <editable>
                 <p>
-                <label>Password</label>
-                <input type="password" name="password" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
+                <label>Old Password</label>
+                <input type="password" name="oldPassword" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
                 </p>
                 <p>
-                <label>Confirm Password</label>
-                <input type="password" name="password" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
+                <label>New Password</label>
+                <input type="password" name="newPassword1" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
+                </p>
+                <p>
+                <label>Confirm New Password</label>
+                <input type="password" name="newPassword2" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
                 </p>
                 
                 </editable>
