@@ -28,3 +28,21 @@ export async function setUsername(username, body){
   
     console.log('Content: ', content);
   }
+
+  export async function setNewPassword(username, body){
+    console.log('Body: ',JSON.stringify(body));
+    
+    const rawResponse = await fetch(`http://localhost:8000/users/password/change`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body),
+    });
+    console.log(rawResponse);
+    
+    const content = await rawResponse.json();
+  
+    console.log('Content: ', content);
+  }
