@@ -4,6 +4,12 @@ import ProductsCat from '../components/products_page/product_cat'
 import { getProducts } from '../api/products_list'
 import styled from 'styled-components'
 import badge from '../images/product-page-badge.jpg'
+
+const Block = styled.div`
+    margin-left: 7%;
+    margin-right: 7%;
+`
+
 const Row = styled.div`
     @media(max-width: 768px) {
         display: block;
@@ -20,7 +26,7 @@ const Left = styled.div`
         width: 100%;
         height: 20%;
     }
-    width: 520px;
+    width: 330px;
 `
 const Img = styled.img`
     @media(max-width: 768px) {
@@ -95,11 +101,26 @@ class ProductsPage extends Component {
         }
     }
 
+    checkProductName = (search, product) => {
+        let wow = []
+        let search_length = search.length
+        if(product.includes(' ')) {
+            product = product.split(' ')
+            wow = product.filter(p => p.substring(0, search_length) === search)
+            
+            return wow.length > 0
+        } else {
+            return product.substring(0, search_length) === search
+        }
+    }
+
     productSearch = () => {
+
         let products = this.state.products.filter(product =>
-          product.name
-            .toUpperCase()
-            .includes(this.state.search.toUpperCase())
+          this.checkProductName(
+            this.state.search.toUpperCase(),
+            product.name.toUpperCase()
+          )
         );
         
         if (products.length <= 0) {
@@ -128,13 +149,15 @@ class ProductsPage extends Component {
     render() {
         return(
             <div>
-                <Img src={badge}></Img>
-                <Row>
-                    <Left><ProductsCat changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
-                    <Right>
-                        {this.renderProductPanel(this.state.renderState)}
-                    </Right>
-                </Row>
+                <Block>
+                    <Img src={badge}></Img>
+                    <Row>
+                        <Left><ProductsCat changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
+                        <Right>
+                            {this.renderProductPanel(this.state.renderState)}
+                        </Right>
+                    </Row>
+                </Block>
             </div>
         )
     }

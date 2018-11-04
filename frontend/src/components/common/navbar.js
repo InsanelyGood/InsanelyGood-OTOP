@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -7,12 +7,11 @@ import {
   Nav,
   NavItem,
   NavLink
-} from 'reactstrap'
-import Cookie from 'js-cookie'
-import '../../css/navbar.css'
+} from "reactstrap";
+import Cookie from "js-cookie";
+import "../../css/navbar.css";
 
 class NavBar extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -26,18 +25,19 @@ class NavBar extends React.Component {
     this.setState({
       isOpen: !this.state.isOpen
     });
-  }
+  };
 
   onLogoutClicked = () => {
-    Cookie.remove('username')
-  }
+    Cookie.remove("username");
+  };
 
   render = () => {
-    return <div>
-        <Navbar className='top-navbar' dark={true} expand="md">
+    return (
+      <div>
+        <Navbar className="top-navbar" dark={true} expand="md">
           <NavbarBrand href="/">OTOPaholic</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar={true} >
+          <Collapse isOpen={this.state.isOpen} navbar={true}>
             <Nav className="ml-auto" navbar={true}>
               <NavItem>
                 <NavLink href="#">north</NavLink>
@@ -54,22 +54,28 @@ class NavBar extends React.Component {
               <NavItem>
                 <NavLink href="/products">all</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="#">cart</NavLink>
-              </NavItem>
-              {Cookie.get('username') 
-                ? <NavItem>
-                  <NavLink onClick={this.onLogoutClicked} href="/">Logout</NavLink>
-                  </NavItem> 
-                : <NavItem>
-                    <NavLink href="/users/login">Login</NavLink>
+              {Cookie.get("username") ? (
+                <Fragment>
+                  <NavItem>
+                    <NavLink href="/cart">cart</NavLink>
                   </NavItem>
-              }
+                  <NavItem>
+                    <NavLink onClick={this.onLogoutClicked} href="/">
+                      Logout
+                    </NavLink>
+                  </NavItem>
+                </Fragment>
+              ) : (
+                <NavItem>
+                  <NavLink href="/users/login">Login</NavLink>
+                </NavItem>
+              )}
             </Nav>
           </Collapse>
         </Navbar>
-      </div>;
-  }
+      </div>
+    );
+  };
 }
 
-export default NavBar
+export default NavBar;
