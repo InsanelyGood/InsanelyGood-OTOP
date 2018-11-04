@@ -6,6 +6,7 @@ import ProductsPage from "../views/products_page";
 import ProductDetail from "../views/product_detail";
 import Login from "../views/login";
 import Register from "../views/register";
+import Checkout from "../views/checkout";
 
 const routes = [
   {
@@ -33,6 +34,11 @@ const routes = [
     path: "/products",
     exact: true,
     component: ProductsPage
+  },
+  {
+    path: "/checkout",
+    exact: true,
+    component: Checkout
   }
 ];
 
