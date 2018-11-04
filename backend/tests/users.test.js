@@ -32,7 +32,6 @@ describe('POST users/:username/information/save', function () {
             })
             .expect(200)
             .expect(function (res) {
-                console.log("res>>>>>",res)
                 expect(res.text).toBe('Update user data success')
             })
             .end((err, res) => {
