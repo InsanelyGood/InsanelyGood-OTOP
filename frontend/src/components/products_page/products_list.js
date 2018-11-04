@@ -11,12 +11,9 @@ const Pane = styled.div`
 `
 
 class ProductsList extends React.Component {
-
-   
-
     render = () => {
         return (
-            <Pane className='container'>{this.props.productsShow.map((product) => (<ProductItem key={product._id} product_name={product.name} product_image={product.image} product_des={product.description} product_price={product.price} />))}</Pane>
+            <Pane>{this.props.productsShow.map((product) => (<ProductItem key={product._id} product={product} />))}</Pane>
         );
     }
 }

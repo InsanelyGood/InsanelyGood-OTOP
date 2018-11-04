@@ -5,7 +5,7 @@ let Product = require("../models/products");
 
 // All products
 router.get("/", (req, res, next) => {
-  console.log(req.cookies)
+  console.log(req.cookies);
   Product.find({}, (err, products) => {
     res.send({ products });
   });
@@ -59,10 +59,10 @@ router.get("/add", (req, res, next) => {
   });
 });
 
-router.get("/:name", (req, res) => {
-  Product.find(req.params, (err, product) => {
-      res.send({product});
-  })
+router.get("/:id", (req, res) => {
+  Product.find({ id: req.params.id }, (err, product) => {
+    res.send({ product });
+  });
 });
 
 // Add product to database
