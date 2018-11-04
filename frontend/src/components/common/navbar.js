@@ -6,8 +6,13 @@ import {
   Collapse,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+  NavDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from "reactstrap";
+import {getUsername} from '../../api/user_infomation'
 import Cookie from "js-cookie";
 import "../../css/navbar.css";
 
@@ -16,14 +21,22 @@ class NavBar extends React.Component {
     super(props);
 
     this.state = {
-      isOpen: false,
-      isLogin: false
+      dropdownOpen: false,
+      firstname: ''
     };
+  }
+
+  async componentDidMount() {
+    const info = await getUsername(Cookie.get('username'))
+    this.setState({
+      username: info.username,
+      firstname: info.firstname
+    })
   }
 
   toggle = () => {
     this.setState({
-      isOpen: !this.state.isOpen
+      dropdownOpen: !this.state.dropdownOpen
     });
   };
 
@@ -40,29 +53,38 @@ class NavBar extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar={true}>
             <Nav className="ml-auto" navbar={true}>
               <NavItem>
-                <NavLink href="#">north</NavLink>
+                <NavLink href="#">NORTHEN</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#">central</NavLink>
+                <NavLink href="#">CENTRAL</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#">south</NavLink>
+                <NavLink href="#">SOUTHEN</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="#">northeast</NavLink>
+                <NavLink href="#">NORTHEASTEN</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/products">all</NavLink>
+                <NavLink href="/products">ALL</NavLink>
               </NavItem>
               {Cookie.get("username") ? (
                 <Fragment>
                   <NavItem>
-                    <NavLink href="/cart">cart</NavLink>
+                    <NavLink href="/cart"><ion-icon name="ios-cart"></ion-icon>CART</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink onClick={this.onLogoutClicked} href="/">
-                      Logout
-                    </NavLink>
+                    <NavDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                    <DropdownToggle nav caret>
+                    <ion-icon name="md-contact"></ion-icon>
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem header>HI, {this.state.firstname}</DropdownItem>
+                      <DropdownItem href="http://localhost:3000/users/information/" >Profile</DropdownItem>
+                      <DropdownItem href="http://localhost:3000/users/information/edit">Edit Profile</DropdownItem>
+                      <DropdownItem divider />
+                      <DropdownItem onClick={this.onLogoutClicked} href="/">Log Out</DropdownItem>
+                    </DropdownMenu>
+                  </NavDropdown>
                   </NavItem>
                 </Fragment>
               ) : (

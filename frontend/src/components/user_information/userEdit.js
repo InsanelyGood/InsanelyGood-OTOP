@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabContent, TabPane, FormFeedback, Nav, NavItem,Input,Label, NavLink,Button,Row, Col } from 'reactstrap';
+import { TabContent, TabPane,  Nav, NavItem, NavLink,Button,Row, Col } from 'reactstrap';
 import '../../css/userInfo.css'
 import classnames from 'classnames';
 import Cookies from 'js-cookie';
@@ -120,7 +120,7 @@ handleSubmit = event => {
               className={classnames({ active: this.state.activeTab === '1' })}
               onClick={() => { this.toggle('1'); }}
             >
-              Profile
+              Edit Profile
             </NavLink>
           </NavItem>
         </Nav>
@@ -139,12 +139,14 @@ handleSubmit = event => {
                 <label>Lastname</label>
                 <input type="text" name="lastName" onChange={this.handleInputChange} placeholder={this.state.lastName} value={this.state.lastName}></input>
                 </p>
+                </editable>
                 <p>
                 <label>Username</label>
                 {/* <input type="text" name="username" onChange={this.handleInputChange} placeholder={this.state.username} value={this.state.username}></input> */}
 
                     <input type="text" name="username" value={this.state.username} readOnly="readonly"></input>
                 </p>
+                <editable>
                 {/* <p>
                 <label>Password</label>
                 <input type="password" name="password" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
