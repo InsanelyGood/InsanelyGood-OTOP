@@ -1,7 +1,16 @@
 const mongoose = require('mongoose')
 
 const ordersSchema = mongoose.Schema({
-    purchasedList: [],
+    purchasedList: [{
+        productID: {
+            type: String,
+            required: true
+        },
+        quantity: {
+            type: Number,
+            required: true
+        }
+    }],
     dateTime: {
         type: Date,
         required: true

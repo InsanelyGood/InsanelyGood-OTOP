@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input, Label, FormFeedback } from 'reactstrap';
 import styled from 'styled-components'
-// import { setUserLogin } from '../../api/userid';
+import '../../css/login&regis.css'
 
 const Div = styled.div`
     margin: auto;
@@ -100,7 +100,7 @@ class LoginComponent extends React.Component {
                     }
                 </FormGroups>
                 <FormGroups>
-                    <Buttons onClick={this.handleSubmit} type="submit" value='Login' href='/' />
+                    <Buttons className="loginBtn" onClick={this.handleSubmit} type="submit" value='Login' href='/' />
                 </FormGroups>
                 </form>
             </Div>

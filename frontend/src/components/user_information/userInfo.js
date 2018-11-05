@@ -62,15 +62,15 @@ class UserInfomation extends React.Component {
                   <br />
                   <p>
                     <label>Firstname</label>
-                    <input type="text" name="firstName" value={this.state.firstName} readOnly="readonly"></input>
+                    <input className="boxInput" type="text" name="firstName" value={this.state.firstName} readOnly="readonly"></input>
                   </p>
                   <p>
                     <label>Lastname</label>
-                    <input type="text" name="lastName" value={this.state.lastName} readOnly="readonly"></input>
+                    <input className="boxInput" type="text" name="lastName" value={this.state.lastName} readOnly="readonly"></input>
                   </p>
                   <p>
                     <label>Username</label>
-                    <input type="text" name="username" value={this.state.username} readOnly="readonly"></input>
+                    <input className="boxInput" type="text" name="username" value={this.state.username} readOnly="readonly"></input>
                   </p>
                   <p>
                     <label>Address(Default)</label>
@@ -78,11 +78,11 @@ class UserInfomation extends React.Component {
                   </p>
                   <p>
                     <label>Email</label>
-                    <input type="email" name="email" value={this.state.email} readOnly="readonly"></input>
+                    <input className="boxInput" type="email" name="email" value={this.state.email} readOnly="readonly"></input>
                   </p>
                   <p>
                     <label>Contact Number</label>
-                    <input type="text" name="telephoneNumber" value={this.state.telephoneNumber} readOnly="readonly"></input>
+                    <input className="boxInput" type="text" name="telephoneNumber" value={this.state.telephoneNumber} readOnly="readonly"></input>
                   </p>
                 </div>
                 <p>

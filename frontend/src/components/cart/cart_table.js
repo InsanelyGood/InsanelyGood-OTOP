@@ -46,8 +46,27 @@ const InputQuantity = styled.input`
   width: 50px;
   text-align: center;
 `;
+const QuantityDiv = styled.div`
+  display: flex;
+  border-color: black;
+  float: left;
+`;
+const QuantityButton = styled.button`
+  background-color: transparent;
+  border: none;
+`;
 
 class CartTable extends React.Component {
+  renderUpdateQuantityComponent = (item, inputType) => {
+    return (
+      <form action="http://localhost:8000/users/cart/add" method="POST">
+        {inputType}
+        <input type="hidden" value={item.product.id} name="productID" />
+        <input type="hidden" value={Cookies.get("username")} name="username" />
+      </form>
+    );
+  };
+
   renderItemInCart = () => {
     return this.props.cartItem.map(item => (
       <tr key={item.product._id}>
@@ -57,19 +76,42 @@ class CartTable extends React.Component {
         </TD>
         <TDCenter>{item.product.price}</TDCenter>
         <TDCenter>
-          <form action="http://localhost:8000/users/cart/add" method="POST">
-            <InputQuantity
-              type="number"
-              defaultValue={item.quantity}
-              name="quantity"
-            />
-            <input type="hidden" value={item.product.id} name="productID" />
-            <input
-              type="hidden"
-              value={Cookies.get("username")}
-              name="username"
-            />
-          </form>
+          <QuantityDiv>
+            {this.renderUpdateQuantityComponent(
+                item,
+                <div>
+                  <QuantityButton type="submit" disabled={item.quantity <= 1}>
+                    <ion-icon name="remove-circle" />
+                  </QuantityButton>
+                  <input
+                    type="hidden"
+                    value={item.quantity - 1}
+                    name="quantity"
+                  />
+                </div>
+              )}
+            {this.renderUpdateQuantityComponent(
+              item,
+              <InputQuantity
+                type="number"
+                defaultValue={item.quantity}
+                name="quantity"
+              />
+            )}
+            {this.renderUpdateQuantityComponent(
+              item,
+              <div>
+                <QuantityButton type="submit">
+                  <ion-icon name="add-circle" />
+                </QuantityButton>
+                <input
+                  type="hidden"
+                  value={item.quantity + 1}
+                  name="quantity"
+                />
+              </div>
+            )}
+          </QuantityDiv>
         </TDCenter>
         <TDCenter>{item.product.price * item.quantity}</TDCenter>
         <TDCenter width="1px">
