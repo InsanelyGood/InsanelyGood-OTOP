@@ -20,8 +20,6 @@ describe("Product item component", () => {
     </Router>
   );
   it("renders without crashing", () => {
-    expect(
-      wrapper.find('div[className="col-md-4 col-sm-6 product-item"]').exists()
-    ).toEqual(true);
+    expect(wrapper.exists()).toEqual(true);
   });
 });

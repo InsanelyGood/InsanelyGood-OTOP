@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import ProductsList from './products_list'
 import Sort from '../sort/sort_component'
 import styled from 'styled-components'
+import emote from '../../images/emote.png'
 
 const Block = styled.div`
     width: 100%;
@@ -21,6 +22,18 @@ const Text = styled.h2`
 const SortBlock = styled.div`
     margin: 15px;
     float: right;
+`
+const AlertBlock = styled.div`
+    margin-top: 50px;
+    text-align: center;
+    display: block;
+`
+
+const Alert = styled.div`
+    margin-left: auto;
+    margin-right: auto;
+    color: grey;
+    font-size: 25px;
 `
 
 class ProductPanel extends Component {
@@ -42,6 +55,18 @@ class ProductPanel extends Component {
     // generate = (a)=> {
     //     return (<Item>{a.map(product => product)}</Item>)
     // }
+
+    generate = ()=> {
+        if(this.props.productsShow.length <= 0) return (
+            <AlertBlock>
+                <img alt='Error' src={emote}/>
+                <br/>
+                <br/>
+                <Alert>Sorry no match product found</Alert>
+            </AlertBlock>
+        ) 
+        else return this.sort()
+    }
 
     sort = ()=> {
         switch(this.state.sortType) {
@@ -68,7 +93,7 @@ class ProductPanel extends Component {
                     <Text>Products</Text>
                     <SortBlock><Sort changeSortType={this.changeSortType}/></SortBlock>
                 </Head>
-                {this.sort()}
+                {this.generate()}
 
             </Block>
         )

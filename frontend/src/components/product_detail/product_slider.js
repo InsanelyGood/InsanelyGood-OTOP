@@ -9,10 +9,6 @@ const Img = styled.img`
 
 export default class PauseSlider extends Component {
 
-    constructor(props) {
-        super(props)
-    }
-
     samples = ()=> {
         return this.props.products.map((product)=> (<Link to={product.id}><Img className='btn' src={product.image}/></Link>))
     }

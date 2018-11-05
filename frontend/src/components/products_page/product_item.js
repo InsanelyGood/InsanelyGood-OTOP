@@ -9,10 +9,11 @@ const Box = styled.div`
 const Img = styled.img`
   width: 65%;
   height: 160px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 `
 const Des = styled.div`
   padding-left: 40px;
+  color: black;
 `
 const Name = styled.div`
   font-weight: 600;
