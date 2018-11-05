@@ -72,10 +72,19 @@ class OrderList extends Component {
 
     async componentDidMount() {
         const checkout = await getOrders(Cookies.get("username"))
-        this.setState({
-            username: await getOrders(Cookies.get("username")),
-            address: checkout.address
-        })
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        this.setState(
+          {
+            username: checkout,
+            address: checkout.address,
+            total: checkout.products
+              .map(
+                item => (item.product.price * item.quantity)
+              )
+              .reduce(reducer)
+          },
+          () => console.log(this.state.total)
+        );
     }
 
     calculateTotal = () => {
@@ -84,7 +93,6 @@ class OrderList extends Component {
             item => (total += item.product.price * item.quantity)
         );
         return total
-        
     } 
 
     renderTotalPrice = () => {
@@ -146,14 +154,13 @@ class OrderList extends Component {
                                 </FormGroup>
                                 <form action={"http://localhost:8000/orders/"+Cookies.get('username')+"/create"} method="POST">
                                 <Button type='submit'>Confirm</Button>
-                                <input type="hidden" value={this.state.products} name="purchasedList"></input>
+                                <input type="hidden" value={(this.state.username.products && this.state.username.products.join(':')) || ''} name="purchasedList"></input>
                                 <input type="hidden" value={this.state.total} name="totalPrice"></input>
                                 <input type="hidden" value={this.state.status} name="status"></input>
                                 <input type="hidden" value={this.state.address === '' ? this.state.username.address : this.state.address} name="shippingAddress"></input>
                                 </form>
                             </Card>
                         </Col>
-
                     </Row>
                 </Form>
             </LoginContent>

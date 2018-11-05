@@ -1,24 +1,15 @@
 .product-item{
-    margin-bottom: 50px;
-    /* margin-right: 5px; */
-    min-width: 20px; 
-    /* border-radius: 20px;
-    border-style: solid;
-    border-color: grey; */
+    display: block;
 }
 
 .product-card-box {
-    margin: 10px;
+    margin: 20px;
 }
 
 .product-card-image {
-    /* width: 253px;
-    height: 191px; */
-    /* height: 55%; */
-    width: 60%;
-    height: auto;
-    display: block;
-
+    width: 65%;
+    height: 160px;
+    justify-items: center;
 }
 
 .product-card-description {

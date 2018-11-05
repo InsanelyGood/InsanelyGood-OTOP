@@ -14,11 +14,16 @@ router.get("/", (req, res, next) => {
 })
 
 router.post('/:username/create', findUserByPath, (req, res) => {
-  const purchasedList = req.body.purchasedList;
-  const dataTime = req.body.dataTime;
+  const purchasedList = req.user.cart_list;
+  // const dataTime = req.body.dataTime;
   const totalPrice = req.body.totalPrice;
   const shippingAddress = req.body.shippingAddress;
-
+  console.log('list',purchasedList);
+  console.log('send list', req.body.purchasedList);
+  
+  console.log('price',totalPrice);
+  
+  
   let newOrder = new Order({
     purchasedList: purchasedList,
     dateTime: new Date,
