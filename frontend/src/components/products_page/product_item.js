@@ -1,6 +1,31 @@
 import React from 'react';
-import '../../css/product_item.css';
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+const Box = styled.div`
+  margin: 20px;
+  display: block;
+`
+const Img = styled.img`
+  width: 65%;
+  height: 160px;
+  margin-bottom: 10px;
+`
+const Des = styled.div`
+  padding-left: 40px;
+`
+const Name = styled.div`
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 1px;
+`
+const Detail = styled.p`
+  overflow-wrap: break-word;
+  margin-bottom: 1px;
+`
+const Price = styled.p`
+  margin-bottom: 2px;
+`
 
 class ProductItem extends React.Component {
 
@@ -13,25 +38,16 @@ class ProductItem extends React.Component {
   }
 
     render = () => {
-        return <div className="col-md-4 col-sm-6 product-item">
-            <div className="product-card-box">
-              <Link to={"/products/" + this.props.product.id}>
-                {/* <CardImg src={this.props.product_image} alt="error" /> */}
-                <img alt="error" src={this.props.product.image} className="product-card-image" />
-              </Link>
-              <Link to={"/products/" + this.props.product.id} className="product-card-description">
-                <p className="product-card-band">
-                  {this.props.product.name}
-                </p>
-                <p className="product-card-description">
-                  {this.props.product.description}
-                </p>
-                <p className="product-card-price">
-                  Price: <span>{this.props.product.price}</span>
-                </p>
-              </Link>
-            </div>
-          </div>;
+        return (<Link to={"/products/" + this.props.product.id}>
+        <Box>
+          {/* <CardImg src={this.props.product_image} alt="error" /> */}
+          <center><Img alt="error" src={this.props.product.image}/></center>
+          <Des>
+            <Name>{this.props.product.name}</Name>
+            <Detail>{this.props.product.description}</Detail>
+            <Price>Price: <span>{this.props.product.price}</span></Price>
+          </Des>
+        </Box></Link>)
     }
 
 }

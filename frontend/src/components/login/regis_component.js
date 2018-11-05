@@ -1,6 +1,7 @@
 import React from 'react'
 import { Input, Label, FormFeedback , Row , Col} from 'reactstrap';
 import styled from 'styled-components'
+import '../../css/login&regis.css'
 
 const Form = styled.div`
     margin: auto;
@@ -232,7 +233,7 @@ class RegisComponent extends React.Component {
                     }
                 </FormGroups>
                 <FormGroups>
-                    <Buttons onClick={this.handleSubmit} type="submit" value='Sign up' />
+                    <Buttons className="regisBtn" onClick={this.handleSubmit} type="submit" value='Sign up' />
                 </FormGroups>
                 </form>
             </Form>

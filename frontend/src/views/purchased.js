@@ -7,13 +7,13 @@ class Purchased extends Component{
     render(){
         return <div>
             <div className='container' align="center">
-            <img src={logo} alt="OTOPAholic_LOGO" height="20px"></img>
+            <img className="logoBlack" src={logo} alt="OTOPAholic_LOGO" ></img>
             <p className="pur">
             Thank you for your purchase.
             </p>
             
             <br/>
-            <Button size="lg" href="/" className="buttonShop">Shop more</Button>{' '}
+            <Button size="lg" href="/products" className="buttonShop">Shop more</Button>{' '}
             <Button size="lg" href="/" className="buttonHome">Home</Button>{' '}
             </div>
           </div>
