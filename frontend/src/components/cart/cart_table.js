@@ -46,8 +46,22 @@ const InputQuantity = styled.input`
   width: 50px;
   text-align: center;
 `;
+const QuantityDiv = styled.div`
+  display: inline;
+  border-color: black;
+`;
 
 class CartTable extends React.Component {
+  renderUpdateQuantityComponent = (item, inputType) => {
+    return (
+      <form action="http://localhost:8000/users/cart/add" method="POST">
+        {inputType}
+        <input type="hidden" value={item.product.id} name="productID" />
+        <input type="hidden" value={Cookies.get("username")} name="username" />
+      </form>
+    );
+  };
+
   renderItemInCart = () => {
     return this.props.cartItem.map(item => (
       <tr key={item.product._id}>
@@ -57,19 +71,39 @@ class CartTable extends React.Component {
         </TD>
         <TDCenter>{item.product.price}</TDCenter>
         <TDCenter>
-          <form action="http://localhost:8000/users/cart/add" method="POST">
-            <InputQuantity
-              type="number"
-              defaultValue={item.quantity}
-              name="quantity"
-            />
-            <input type="hidden" value={item.product.id} name="productID" />
-            <input
-              type="hidden"
-              value={Cookies.get("username")}
-              name="username"
-            />
-          </form>
+          <QuantityDiv>
+            {item.quantity > 1 &&
+              this.renderUpdateQuantityComponent(
+                item,
+                <div>
+                  <button type="submit">-</button>
+                  <input
+                    type="hidden"
+                    value={item.quantity - 1}
+                    name="quantity"
+                  />
+                </div>
+              )}
+            {this.renderUpdateQuantityComponent(
+              item,
+              <InputQuantity
+                type="number"
+                defaultValue={item.quantity}
+                name="quantity"
+              />
+            )}
+            {this.renderUpdateQuantityComponent(
+              item,
+              <div>
+                <button type="submit">+</button>
+                <input
+                  type="hidden"
+                  value={item.quantity + 1}
+                  name="quantity"
+                />
+              </div>
+            )}
+          </QuantityDiv>
         </TDCenter>
         <TDCenter>{item.product.price * item.quantity}</TDCenter>
         <TDCenter width="1px">
