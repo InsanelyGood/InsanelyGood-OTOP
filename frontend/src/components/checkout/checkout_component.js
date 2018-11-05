@@ -7,7 +7,7 @@ import ProductCart from './product_cart'
 import '../../css/checkout.css'
 
 const CheckoutContent = styled.div`
-    padding: 5em;
+    padding: 2em;
     margin: auto;
     a {
         color: black;
