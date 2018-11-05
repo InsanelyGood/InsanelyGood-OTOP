@@ -28,12 +28,12 @@ describe('POST users/:username/information/save', function () {
             .post('/users/testUpdate/information/save')
             .set('Content-Type', 'application/json')
             .send({
-                "username": "testUpdate2",
-                "firstname": "testFirstname",
-                "lastname": "testLastname",
-                "email": "test@insanely.com",
-                "address": "aaa aaa aaa aaaa",
-                "telephoneNumber": "0987654320"
+                "username": "testUpdate",
+                "firstname": "firstname2",
+                "lastname": "lastname2",
+                "email": "test2@insanely.com",
+                "address": "aaa2 aaa2 aaa2 aaaa2",
+                "telephoneNumber": "0987654322"
             })
             .expect(200)
             .expect(function (res) {

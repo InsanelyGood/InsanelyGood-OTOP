@@ -16,7 +16,7 @@ mongoose.connect(config.database, {
   useNewUrlParser: true
 })
 var db = mongoose.connection
-db.once('open', () => console.log('connected to MongoDB.'))
+db.once('open' ,() => console.log('connected to MongoDB.'))
 db.on('error', console.error.bind(console, 'connection error:'))
 
 // view engine setup
