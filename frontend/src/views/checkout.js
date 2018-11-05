@@ -6,14 +6,14 @@ import '../css/purchase.css'
 const Head = styled.div`
     background-color: black;
     width: inherit;
-    height: 70px;
+    height: 50px;
     
 `
 const Text = styled.h1`
     font-weight: bold;
     color: white;
-    padding-left: 20px;
-    padding-top: 10px;
+    padding-left: 10px;
+    padding-top: 1px;
     text-align: center;
 
 `

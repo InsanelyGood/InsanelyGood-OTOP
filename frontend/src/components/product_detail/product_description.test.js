@@ -17,7 +17,7 @@ describe("Product description component", () => {
   it("renders without crashing (include props)", () => {
     expect(wrapper.find("div").exists()).toEqual(true);
   });
-  it("chang quantity of product", () => {
+  it("change quantity of product", () => {
     const instance = wrapper.instance();
     instance.handleValueChange({ target: { value: 5 } });
     expect(wrapper.state("quantity")).toEqual(5);
