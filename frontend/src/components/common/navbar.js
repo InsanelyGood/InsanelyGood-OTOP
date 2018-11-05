@@ -11,7 +11,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
-import { getUsername } from '../../api/user_infomation'
+import { getUsername } from "../../api/user_infomation";
 import Cookie from "js-cookie";
 import "../../css/navbar.css";
 
@@ -22,17 +22,24 @@ class NavBar extends React.Component {
     this.state = {
       dropdownOpen: false,
       dropdownUserOpen: false,
-      firstname: ''
+      firstname: ""
+    };
+
+    this.toggle = this.toggle.bind(this);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.state = {
+      dropdownOpen: false
     };
   }
 
   async componentDidMount() {
-    if (Cookie.get('username')) {
-      const info = await getUsername(Cookie.get('username'))
+    if (Cookie.get("username")) {
+      const info = await getUsername(Cookie.get("username"));
       this.setState({
         username: info.username,
         firstname: info.firstname
-      })
+      });
     }
   }
 
@@ -42,11 +49,33 @@ class NavBar extends React.Component {
     });
   };
 
-  toggleShop = () => {
-    this.setState({
-      dropdownShopOpen: !this.state.dropdownShopOpen
-    });
-  };
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  }
+
+  // toggleShop = () => {
+  //   this.setState({
+  //     dropdownShopOpen: !this.state.dropdownShopOpen
+  //   });
+  // };
+
+  onMouseEnter() {
+    this.setState({ dropdownOpen: true });
+  }
+
+  onMouseLeave() {
+    this.setState({ dropdownOpen: false });
+  }
+
+  onUserMouseEnter = () => {
+    this.setState({ dropdownUserOpen: true });
+  }
+
+  onUserMouseLeave = () => {
+    this.setState({ dropdownUserOpen: false });
+  }
 
   onLogoutClicked = () => {
     Cookie.remove("username");
@@ -59,47 +88,91 @@ class NavBar extends React.Component {
           <NavbarBrand href="/">OTOPaholic</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar={true}>
             <Nav className="ml-auto" navbar={true}>
-
               <NavItem>
-                <NavDropdown isOpen={this.state.dropdownShopOpen} toggle={this.toggleShop}>
-                <DropdownToggle nav caret>
-                PRODUCTS
-                </DropdownToggle>
+                <NavDropdown
+                  onMouseOver={this.onMouseEnter}
+                  onMouseLeave={this.onMouseLeave}
+                  isOpen={this.state.dropdownOpen}
+                  toggle={this.toggle}
+                >
+                  <DropdownToggle nav caret>
+                    PRODUCTS
+                  </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem className="cilckable" href="http://localhost:3000/products" >ALL</DropdownItem>
-                    <DropdownItem className="cilckable" href="#">NORTHEN</DropdownItem>
-                    <DropdownItem className="cilckable" href="#">CENTRAL</DropdownItem>
-                    <DropdownItem className="cilckable" href="#">SOUTHEN</DropdownItem>
-                    <DropdownItem className="cilckable" href="#">NORTHEASTEN</DropdownItem>
+                    <DropdownItem
+                      className="cilckable"
+                      href="http://localhost:3000/products"
+                    >
+                      ALL
+                    </DropdownItem>
+                    <DropdownItem className="cilckable" href="#">
+                      NORTHEN
+                    </DropdownItem>
+                    <DropdownItem className="cilckable" href="#">
+                      CENTRAL
+                    </DropdownItem>
+                    <DropdownItem className="cilckable" href="#">
+                      SOUTHEN
+                    </DropdownItem>
+                    <DropdownItem className="cilckable" href="#">
+                      NORTHEASTEN
+                    </DropdownItem>
                   </DropdownMenu>
                 </NavDropdown>
               </NavItem>
               {Cookie.get("username") ? (
                 <Fragment>
                   <NavItem>
-                    <NavLink href="/cart"><ion-icon name="ios-cart"></ion-icon>CART</NavLink>
+                    <NavLink href="/cart">
+                      <ion-icon name="ios-cart" />
+                      CART
+                    </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavDropdown isOpen={this.state.dropdownUserOpen} toggle={this.toggleUser}>
+                    <NavDropdown
+                      onMouseOver={this.onUserMouseEnter}
+                      onMouseLeave={this.onUserMouseLeave}
+                      isOpen={this.state.dropdownUserOpen}
+                      toggle={this.toggleUser}
+                    >
                       <DropdownToggle nav caret>
-                        <ion-icon name="md-contact"></ion-icon>
+                        <ion-icon name="md-contact" />
                       </DropdownToggle>
                       <DropdownMenu>
-                        <DropdownItem header>HI, {this.state.firstname}</DropdownItem>
-                        <DropdownItem className="cilckable" href="http://localhost:3000/users/information/" >Profile</DropdownItem>
-                        <DropdownItem className="cilckable" href="http://localhost:3000/users/information/edit">Edit Profile</DropdownItem>
-                        <DropdownItem className="cilckable" href="http://localhost:3000/users/information/changePassword">Change Password</DropdownItem>
+                        <DropdownItem header>
+                          HI, {this.state.firstname}
+                        </DropdownItem>
+                        <DropdownItem
+                          className="cilckable"
+                          href="http://localhost:3000/users/information/"
+                        >
+                          Profile
+                        </DropdownItem>
+                        <DropdownItem
+                          className="cilckable"
+                          href="http://localhost:3000/users/information/edit"
+                        >
+                          Edit Profile
+                        </DropdownItem>
+                        <DropdownItem
+                          className="cilckable"
+                          href="http://localhost:3000/users/information/changePassword"
+                        >
+                          Change Password
+                        </DropdownItem>
                         <DropdownItem divider />
-                        <DropdownItem onClick={this.onLogoutClicked} href="/">Log Out</DropdownItem>
+                        <DropdownItem onClick={this.onLogoutClicked} href="/">
+                          Log Out
+                        </DropdownItem>
                       </DropdownMenu>
                     </NavDropdown>
                   </NavItem>
                 </Fragment>
               ) : (
-                  <NavItem>
-                    <NavLink href="/users/login">Login</NavLink>
-                  </NavItem>
-                )}
+                <NavItem>
+                  <NavLink href="/users/login">Login</NavLink>
+                </NavItem>
+              )}
             </Nav>
           </Collapse>
         </Navbar>
