@@ -3,38 +3,26 @@ import styled from 'styled-components'
 import Search from '../search/search_component'
 
 const Block = styled.div`
-    @media(max-width: 768px) {
-       margin-left: 16px;
-       margin-right: 16px;
-    }
-    margin-left: 40px;
     position: sticky;
     position: -webkit-sticky;
     top: 69px; /* required */
+    height: 100%;
 `
 const Content = styled.div`
-    @media(max-width: 768px) {
-        border-radius: 10px;
-    }
-    border-radius: 20px;
     width: inherit;
+    height: inherit;
     min-height: 100px;
-    background-color: #00c6a9;
+    background-color: #f0b733;
     opacity: 20%;
 `
 const Head = styled.div`
     @media(max-width: 768px) {
         height: 50px;
-        border-top-right-radius: 10px;
-        border-top-left-radius: 10px;
     }
-    -webkit-box-shadow:0px 5px 25px -5px black;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
-    height: 90px;
+    height: 70px;
     background-color: black;
 `
-const Text = styled.h1`
+const Text = styled.h2`
     @media(max-width: 768px) {
         font-size: 20px;
         padding-top: 10px;
@@ -42,7 +30,7 @@ const Text = styled.h1`
     text-align: center;
     font-weight: bold;
     color: white;
-    padding-top: 22px;
+    padding-top: 17px;
 `
 const Label = styled.span`
     @media(max-width: 768px) {

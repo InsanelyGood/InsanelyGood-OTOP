@@ -3,21 +3,20 @@ import ProductPanel from '../components/products_page/product_panel'
 import ProductsCat from '../components/products_page/product_cat'
 import { getProducts } from '../api/products_list'
 import styled from 'styled-components'
-import badge from '../images/product-page-badge.jpg'
+import lBadge from '../images/large_badge.jpg'
+import mBadge from '../images/medium_badge.jpg'
 
 const Block = styled.div`
-    margin-left: 7%;
-    margin-right: 7%;
+    height: 100%;
 `
 
-const Row = styled.div`
+const Row = styled.div`h1>Your Cart</h1>
     @media(max-width: 768px) {
         display: block;
-        margin-left: auto;
-        margin-right: auto;
         padding-top: 10px;
+        width: 100%;
     }
-    padding-top: 30px;
+    // padding-top: 1x;
     display: flex;
 `
 
@@ -26,17 +25,21 @@ const Left = styled.div`
         width: 100%;
         height: 20%;
     }
-    width: 330px;
+    width: 470px;
 `
-const Img = styled.img`
-    @media(max-width: 768px) {
-        margin-left: 16px;
-        margin-right: auto;
+const Img1 = styled.img`
+    @media(min-width: 1120px) {
+        width: 100%;
     }
-    width: 96%;
-    margin-top: 100px;
-    margin-left: 35px;
-    margin-right: 35px;
+    width: 0px;
+    margin-top: 56px;
+`
+const Img2 = styled.img`
+    @media(max-width: 1120px) {
+        width: 100%;
+    }
+    width: 0px;;
+    margin-top: 56px;
 `
 
 const Right = styled.div`
@@ -44,7 +47,7 @@ const Right = styled.div`
         padding-top: 10px;
         width: 100%;
     }
-    width: 80%;
+    width: 100%;
 `
 const Noti = styled.p`
   text-align: center;
@@ -88,6 +91,27 @@ class ProductsPage extends Component {
         );
         return (<ProductPanel productsShow={filter} />)
     }
+
+    productSearch = () => {
+        let products = this.state.products.filter(product =>
+          this.checkProductName(
+            this.state.search.toUpperCase(),
+            product.name.toUpperCase()
+          )
+        );
+        
+        if (products.length <= 0) {
+            return <Noti>
+              No Result For <SearchText>
+                '{this.state.search}'
+              </SearchText>
+            </Noti>;
+        } else {
+          return <div className="container">
+              <ProductPanel productsShow={products} />
+            </div>;
+        }
+    }
     
     renderProductPanel = input_case => {
         switch (input_case) {
@@ -114,28 +138,6 @@ class ProductsPage extends Component {
         }
     }
 
-    productSearch = () => {
-
-        let products = this.state.products.filter(product =>
-          this.checkProductName(
-            this.state.search.toUpperCase(),
-            product.name.toUpperCase()
-          )
-        );
-        
-        if (products.length <= 0) {
-            return <Noti>
-              No Result For <SearchText>
-                '{this.state.search}'
-              </SearchText>
-            </Noti>;
-        } else {
-          return <div className="container">
-              <ProductPanel productsShow={products} />
-            </div>;
-        }
-    }
-
     changeTypes = (nTypes) => {
         this.setState({ types: nTypes, renderState: FILTER_CASE })
     }
@@ -150,7 +152,8 @@ class ProductsPage extends Component {
         return(
             <div>
                 <Block>
-                    <Img src={badge}></Img>
+                    <Img1 src={lBadge}></Img1>
+                    <Img2 src={mBadge}></Img2>
                     <Row>
                         <Left><ProductsCat changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
                         <Right>

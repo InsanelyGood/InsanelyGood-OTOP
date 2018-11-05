@@ -32,10 +32,19 @@ class OrderList extends Component {
 
     async componentDidMount() {
         const checkout = await getOrders(Cookies.get("username"))
-        this.setState({
-            username: await getOrders(Cookies.get("username")),
-            address: checkout.address
-        })
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        this.setState(
+          {
+            username: checkout,
+            address: checkout.address,
+            total: checkout.products
+              .map(
+                item => (item.product.price * item.quantity)
+              )
+              .reduce(reducer)
+          },
+          () => console.log(this.state.total)
+        );
     }
 
     calculateTotal = () => {
@@ -44,8 +53,7 @@ class OrderList extends Component {
             item => (total += item.product.price * item.quantity)
         );
         return total
-
-    }
+    } 
 
     renderTotalPrice = () => {
 
