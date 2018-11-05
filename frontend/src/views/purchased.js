@@ -9,7 +9,7 @@ class Purchased extends Component{
             <p className="pur">
             Thank you for your purchase.
             </p>
-            <p className="heart">♡♡♡</p>
+            {/* <p className="heart">♡♡♡</p> */}
             <br/>
             <Button size="lg" href="/" className="buttonBack">Home</Button>{' '}
             </div>
