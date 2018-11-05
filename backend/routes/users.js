@@ -16,9 +16,9 @@ router.get("/", (req, res) => {
 });
 
 // Login Form
-router.get("/login", function (req, res) {
-  res.render("login");
-});
+// router.get("/login", function (req, res) {
+//   res.render("login");
+// });
 
 router.get("/test", (req, res) => {
   // console.log(req.cookies)
@@ -46,8 +46,8 @@ router.post("/login", function (req, res, next) {
     req.logIn(user, function (err) {
       if (err) {
         return next(err);
-      }      
-      
+      }
+
       return res
         .cookie("username", user.username)
         .redirect("http://localhost:3000/");
@@ -56,70 +56,84 @@ router.post("/login", function (req, res, next) {
 })
 
 // Register Form
-router.get("/register", function (req, res) {
-  res.render("register");
-});
+// router.get("/register", function (req, res) {
+//   res.render("register");
+// });
 
 // Register Process
 router.post("/register", function (req, res) {
-  console.log("55555");
-  
-  const firstname = req.body.firstname;
-  const lastname = req.body.lastname;
-  const email = req.body.email;
-  const username = req.body.username;
-  const password = req.body.password;
-  const confirm_password = req.body.confirm_password;
-  const telephone_number = req.body.telephone_number;
+  console.log("Entire Register process")
+  User.findOne({ username: req.body.username }, (err, user) => {
+    if (err) {
+      res.send(401);
+    } else if (!user) {
+      console.log("Register gogo")
+      registerProcess()
+    } else {
+      console.log("Username is already exits")
+      res.status(409).send("Username is already exits")
+    }
+  });
 
-  req.checkBody("firstname", "Firstname is Required").notEmpty();
-  req.checkBody("lastname", "Lastname is Required").notEmpty();
-  req.checkBody("email", "Email is Required").notEmpty();
-  req.checkBody("email", "Email is not valid").isEmail();
-  req.checkBody("username", "Username is Required").notEmpty();
-  req.checkBody("password", "Password is Required").notEmpty();
-  req
-    .checkBody("confirm_password", "Confirm Password do not match")
-    .equals(req.body.password);
-  req.checkBody("telephone_number", "telephone_number is Required").notEmpty();
-  // req.checkBody('telephone_number','telephone_number size must be 10').size() == 10;
+  function registerProcess() {
+    console.log("Register processing")
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+    const confirm_password = req.body.confirm_password;
+    const telephone_number = req.body.telephone_number;
 
-  let errors = req.validationErrors();
-  if (errors) {
-    console.log(errors);
-    // res.render('register', {
-    //   errors: errors
-    // });
-  } else {
-    let newUser = new User({
-      role: "customer",
-      username: username,
-      password: password,
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      address: "",
-      telephone_number: telephone_number,
-      cart_list: []
-    });
+    req.checkBody("firstname", "Firstname is Required").notEmpty();
+    req.checkBody("lastname", "Lastname is Required").notEmpty();
+    req.checkBody("email", "Email is Required").notEmpty();
+    req.checkBody("email", "Email is not valid").isEmail();
+    req.checkBody("username", "Username is Required").notEmpty();
+    req.checkBody("password", "Password is Required").notEmpty();
+    req
+      .checkBody("confirm_password", "Confirm Password do not match")
+      .equals(req.body.password);
+    req.checkBody("telephone_number", "telephone_number is Required").notEmpty();
+    // req.checkBody('telephone_number','telephone_number size must be 10').size() == 10;
 
-    bcrypt.genSalt(10, function (err, salt) {
-      if (err) console.log(err);
-      bcrypt.hash(newUser.password, salt, function (err, hash) {
-        if (err) {
-          console.log(err);
-        }
-        newUser.password = hash;
-        newUser.save(function (err) {
+    let errors = req.validationErrors();
+    if (errors) {
+      console.log(errors);
+      // res.render('register', {
+      //   errors: errors
+      // });
+    } else {
+      let newUser = new User({
+        role: "customer",
+        username: username,
+        password: password,
+        firstname: firstname,
+        lastname: lastname,
+        email: email,
+        address: "",
+        telephone_number: telephone_number,
+        cart_list: []
+      });
+
+      bcrypt.genSalt(10, function (err, salt) {
+        if (err) console.log(err);
+        bcrypt.hash(newUser.password, salt, function (err, hash) {
           if (err) {
             console.log(err);
-            return;
-          } else {
-            res.redirect("http://localhost:3000/users/login");
           }
+          newUser.password = hash;
+          newUser.save(function (err) {
+            if (err) {
+              console.log(err);
+              return;
+            } else {
+              res.redirect("http://localhost:3000/users/login");
+            }
+          });
         });
       });
-    });
+    }
   }
 });
 
@@ -129,16 +143,16 @@ router.post("/password/change", findUser, (req, res, next) => {
   // console.log(">>>>>>>>Body", req.body)
   let { username, oldPassword, newPassword } = req.body
   console.log('user', req.body);
-  
+
   // Match Password
   bcrypt.compare(oldPassword, req.user.password, function (err, isMatch) {
     if (err) throw err;
-    if (isMatch || oldPassword==req.user.password) {
+    if (isMatch || oldPassword == req.user.password) {
 
       bcrypt.genSalt(10, function (err, salt) {
         if (err) console.log(err);
         bcrypt.hash(newPassword, salt, function (err, hash) {
-          if (err) {console.log(err);}
+          if (err) { console.log(err); }
           newPassword = hash;
           const query = { username: username }
           User.findOneAndUpdate(query, { password: newPassword }, function (err) {
@@ -147,7 +161,7 @@ router.post("/password/change", findUser, (req, res, next) => {
               console.log(err)
               res.status(404).send("Update fail. There is something wrong in update process")
               return
-            } else 
+            } else
               res.status(200).send("Update password success")
           })
         })
@@ -182,10 +196,10 @@ router.post("/:username/information/save", findUserByPath, (req, res, next) => {
   // console.log("Req.user>>>>>>>>",req.user)
   if (req.user) {
     // console.log("if")
-    const { username, password, firstname, lastname, email, address, telephoneNumber } = req.body
+    const { username, firstname, lastname, email, address, telephoneNumber } = req.body
     let newUserData = {
       username,
-      password,
+      password: req.user.password,
       firstname,
       lastname,
       email,
