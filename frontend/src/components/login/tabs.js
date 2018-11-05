@@ -4,6 +4,8 @@ import classnames from 'classnames';
 import LoginComponent from '../../components/login/login_component'
 import RegisComponent from '../../components/login/regis_component'
 import styled from 'styled-components'
+import logo from '../../images/logo_black.jpg'
+import '../../css/purchase.css'
 
 const Form = styled.div`
     
@@ -31,8 +33,8 @@ export default class Example extends React.Component {
     }
 
     componentDidMount() {
-        if(this.props.defaultTab === '2') {
-            this.setState({activeTab: '2'})
+        if (this.props.defaultTab === '2') {
+            this.setState({ activeTab: '2' })
         }
     }
 
@@ -47,6 +49,7 @@ export default class Example extends React.Component {
         return (
             <LoginContent className='col-sm-8 col-sm-offset-2 col-md-5 col-md-offset-3'>
                 <Form className='container'>
+                    <img src={logo} alt="OTOPAholic_logo" class="center"/>
                     <Nav tabs>
                         <NavItem>
                             <NavLink xs="6"
@@ -83,7 +86,7 @@ export default class Example extends React.Component {
                             </Row>
                         </TabPane>
                     </TabContent>
-                
+
                 </Form>
             </LoginContent>
         );
