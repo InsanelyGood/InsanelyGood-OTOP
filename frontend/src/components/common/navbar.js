@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import {
   Navbar,
   NavbarBrand,
-  NavbarToggler,
   Collapse,
   Nav,
   NavItem,

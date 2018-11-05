@@ -12,6 +12,7 @@ import UserInfo from "../views/userInfo";
 import UserInfoEdit from "../views/userEdit";
 import UserPassword from "../views/userPassword";
 import Cart from "../views/cart";
+import Checkout from "../views/checkout";
 
 const routes = [
   {
@@ -41,7 +42,8 @@ const routes = [
   {
     path: "/products",
     exact: true,
-    component: ProductsPage
+    component: ProductsPage,
+    canAccess: true
   },
   {
     path: "/purchased",
@@ -72,6 +74,12 @@ const routes = [
     exact: true,
     component: Cart,
     canAccess: Cookies.get("username")
+  },
+  {
+    path: "/checkout",
+    exact: true,
+    component: Checkout,
+    canAccess: true
   }
 ];
 

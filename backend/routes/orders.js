@@ -37,8 +37,8 @@ router.post('/:username/create', findUserByPath, (req, res) => {
         console.log(err);
         return;
       } else {
-        res.status(200).send("Created order success")
-        // res.redirect("http://localhost:3000/purchased");
+        // res.status(200).send("Created order success")
+        res.redirect("http://localhost:3000/purchased");
       }
     })
   }

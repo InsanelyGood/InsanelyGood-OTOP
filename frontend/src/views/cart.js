@@ -115,7 +115,7 @@ class Cart extends React.Component {
         <Link to='/products'>
           <ShopMore>Shopping More!!</ShopMore>
         </Link>
-          <Link to="/">
+          <Link to="/checkout">
             <CheckoutButton>
               <span>Checkout</span>
             </CheckoutButton>
