@@ -29,7 +29,7 @@ p label{
     width: 3em; 
     margin-right: 1em; 
 }
-p input{
+.boxInput {
     padding: 2px 4px ;
     border: 1px solid white ;
     border-radius: 4px;
