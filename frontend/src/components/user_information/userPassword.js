@@ -12,10 +12,12 @@ class UserPassword extends React.Component {
     this.state = {
       activeTab: '1',
       username: '',
+      password: '',
       oldPassword: '',
       newPassword1: '',
       newPassword2:'',
-      invalidConfirmPassword: ''
+      invalidConfirmPassword: '',
+      invalidOldPassword: ''
     };
   }
 
@@ -23,7 +25,8 @@ class UserPassword extends React.Component {
     const info = await getUsername(Cookies.get('username'))
     this.setState({
         username: info.username,
-    }, () => console.log(this.state.password))
+        password: info.password
+    }, () => console.log('pass',this.state.password))
   }
 
   handleInputChange = event => {
@@ -32,17 +35,30 @@ class UserPassword extends React.Component {
       })
   }
 
-handleSubmit = event => {
+handleSubmit = async event => {
     if(this.state.newPassword1 === this.state.newPassword2){
+      this.setState({invalidConfirmPassword: false})
         var a = document.getElementById("mylink")
         a.setAttribute('href', "http://localhost:3000/users/information/");
-        window.location.href = 'http://localhost:3000/users/information/';
-        setNewPassword({
+        
+        console.log({
+          username: this.state.username,
+          oldPassword: this.state.oldPassword,
+          newPassword: this.state.newPassword1,
+      })
+        const content = await setNewPassword({
             username: this.state.username,
             oldPassword: this.state.oldPassword,
             newPassword: this.state.newPassword1,
         })
-        this.setState({invalidConfirmPassword: false})
+        console.log(content.err);
+        if( content.err === "Wrong old password"){
+          this.setState({invalidOldPassword: true})
+        }else{
+          this.setState({invalidOldPassword: false})
+          window.location.href = 'http://localhost:3000/users/information/';
+        }
+        
     }
     else{
         this.setState({invalidConfirmPassword: true})
@@ -82,31 +98,47 @@ handleSubmit = event => {
                     <br/>
                 <p> 
                 <label>Username</label>
-                    <input type="text" name="username" value={this.state.username} readOnly="readonly"></input>
+                    <input type="text" className="boxInput" name="username" value={this.state.username} readOnly="readonly"></input>
                 </p>
                 <editable>
                 <p>
                 <label>Old Password</label>
-                <input type="text" name="oldPassword" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
+                {/* <input type="text"  className="boxInput" name="oldPassword" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input> */}
                 </p>
+                {
+                    this.state.invalidOldPassword &&
+                    <alert >
+                          <Input invalid className="boxInput"  type="password" name="oldPassword" onChange={this.handleInputChange}/>
+                        <FormFeedback>Comfirm password is not same.</FormFeedback>
+                    </alert>
+                }
+                {
+                    !this.state.invalidOldPassword &&
+                    <alert >
+                        <Input type="password" className="boxInput"  name="oldPassword" onChange={this.handleInputChange} />
+                    </alert>
+                }
+                {/* <br/> */}
                 <p>
                 <label>New Password</label>
-                <input type="password" name="newPassword1" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
                 </p>
+                <alert>
+                <Input type="password" className="boxInput" name="newPassword1" onChange={this.handleInputChange}/>
+                </alert>
                 <p>
                 <label>Confirm New Password</label>
                 </p>
                 {
                     this.state.invalidConfirmPassword &&
                     <alert >
-                          <Input invalid type="password" name="newPassword2" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}/>
+                          <Input invalid className="boxInput"  type="password" name="newPassword2" onChange={this.handleInputChange}/>
                         <FormFeedback>Comfirm password is not same.</FormFeedback>
                     </alert>
                 }
                 {
                     !this.state.invalidConfirmPassword &&
                     <alert >
-                        <Input type="password" name="newPassword2" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}/>
+                        <Input type="password" className="boxInput"  name="newPassword2" onChange={this.handleInputChange} />
                     </alert>
                 }
                 

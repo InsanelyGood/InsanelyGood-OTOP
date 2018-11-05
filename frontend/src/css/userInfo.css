@@ -22,7 +22,6 @@
 }
 
 p label{
-    margin-right: 1%;
     margin-left: 1%;
     left: 0px;
     float: left; 
@@ -38,6 +37,9 @@ p label{
     resize: none;
     width: 300px ;
     height: 27px !important;
+}
+.confirm{
+    padding: 2px 1px !important;
 }
 p textarea {
     width: 100%;
