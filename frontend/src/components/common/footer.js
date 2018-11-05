@@ -1,14 +1,13 @@
 import React from 'react';
-import { Col, Container, Row, Footer } from 'mdbreact';
+import { Col, Container, Row } from 'mdbreact';
 import '../../css/footer.css'
 
 class FooterPage extends React.Component {
     render(){
         return(
-            
-                <Footer color="stylish-color-dark" className="font-small pt-4">
-                <Container fluid className="text-center text-md-left">
-                    <Row className="text-center text-md-left mt-3 pb-3">
+        
+                <Container fluid className="text-center text-md-left bg">
+                    <Row className="text-center text-md-left mt-3 pb-3 lower">
                         <Col md="3" lg="3" xl="3" className="mx-auto mt-3">
                             <h6 className="text-uppercase mb-4 font-weight-bold">About Us</h6>
                             <p>
@@ -49,8 +48,7 @@ class FooterPage extends React.Component {
                         </Col>
                     </Row>
                 </Container>
-            </Footer>
-            
+
         );
     }
 }

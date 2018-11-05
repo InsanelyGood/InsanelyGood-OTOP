@@ -72,3 +72,12 @@
 .mt-4 {
   margin-top: 0em !important;
 }
+
+.bg{
+  background-color: #3c3d48;
+  margin-top: -1.1%;
+}
+
+.lower{
+  padding-top: 1%;
+}
