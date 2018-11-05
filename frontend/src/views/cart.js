@@ -4,10 +4,21 @@ import CartTable from "../components/cart/cart_table";
 import { getProductCart } from "../api/user_cart";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
-import logo from "../images/logo.jpg"
 
+const Head = styled.div`
+  background-color: black;
+  width: inherit;
+  height: 50px;
+`;
+const Text = styled.h1`
+  font-weight: bold;
+  color: white;
+  padding-left: 10px;
+  padding-top: 1px;
+  text-align: center;
+`;
 const CartComponent = styled.div`
-  padding-top: 5em;
+  padding-top: 3em;
 `;
 const RightDiv = styled.div`
   padding-top: 2em;
@@ -53,10 +64,6 @@ const CheckoutButton = styled.button`
     right: 0;
   }
 `;
-
-const Img = styled.div`
-  margin-left: 100px;
-`
 
 const ShopMore = styled.button`
   margin-right: 1em;
@@ -114,7 +121,9 @@ class Cart extends React.Component {
   render() {
     return (
       <CartComponent>
-        <Img src={logo}/>
+        <Head>
+          <Text>CART</Text>
+        </Head>
         <CartTable cartItem={this.state.carts} />
         <RightDiv className="container">
         <Link to='/products'>

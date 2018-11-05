@@ -39,7 +39,7 @@ class ProductDescription extends React.Component {
   render = () => {
     return (
       <div>
-        <Name>Product: {this.props.productDetail.name}</Name>
+        <Name>{this.props.productDetail.name}</Name>
         <Description>
           Description: {this.props.productDetail.description}
         </Description>
