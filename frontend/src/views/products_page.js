@@ -43,18 +43,6 @@ const Img2 = styled.img`
 const Right = styled.div`
     width: 100%;
 `
-const Noti = styled.p`
-  text-align: center;
-  color: red;
-  font-size: 20px;
-`;
-
-const SearchText = styled.span`
-  font-weight: bold;
-  color: black;
-  font-size: 23px;
-`;
-
 const FILTER_CASE = 'filter'
 const SEARCH_CASE = 'search'
 

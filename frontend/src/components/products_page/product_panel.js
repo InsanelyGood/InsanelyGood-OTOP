@@ -59,7 +59,7 @@ class ProductPanel extends Component {
     generate = ()=> {
         if(this.props.productsShow.length <= 0) return (
             <AlertBlock>
-                <img src={emote}/>
+                <img alt='Error' src={emote}/>
                 <br/>
                 <br/>
                 <Alert>Sorry no match product found</Alert>
