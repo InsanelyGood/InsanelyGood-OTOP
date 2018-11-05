@@ -1,14 +1,4 @@
 import React from 'react'
-import styled from "styled-components";
-
-const Table = styled.table`
-  width: 50%;
-`;
-const TDCenter = styled.td`
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-`;
 
 class ProductCart extends React.Component {
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Input, Label, FormFeedback , Row , Col} from 'reactstrap';
 import styled from 'styled-components'
-import { setUserRegis } from '../../api/userid';
 
 const Form = styled.div`
     margin: auto;

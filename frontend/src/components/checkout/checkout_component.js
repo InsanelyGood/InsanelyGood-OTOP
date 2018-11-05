@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Card, CardText, CardTitle, Form, Input, FormGroup, Label, Row, Col, Table, Button } from 'reactstrap';
+import { Card, CardText, CardTitle, Form, Input, FormGroup, Row, Col, Table, Button } from 'reactstrap';
 import Cookies from 'js-cookie'
 import { getOrders } from '../../api/order_list';
 import ProductCart from './product_cart'

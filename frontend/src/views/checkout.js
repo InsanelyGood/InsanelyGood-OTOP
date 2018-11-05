@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CheckoutComponent from '../components/checkout/checkout_compinent'
+import CheckoutComponent from '../components/checkout/checkout_component'
 
 
 

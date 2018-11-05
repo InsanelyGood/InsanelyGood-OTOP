@@ -7,14 +7,14 @@ export async function getOrders(username) {
     return body
 }
 
-export async function setOrder(username, body){
-    const rawResponse = await fetch(`http://localhost:8000/orders/${username}/create`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body),
-    });
-    const content = await rawResponse.json();
-  }
+// export async function setOrder(username, body){
+//     const rawResponse = await fetch(`http://localhost:8000/orders/${username}/create`, {
+//       method: 'POST',
+//       headers: {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify(body),
+//     });
+//     const content = await rawResponse.json();
+//   }
