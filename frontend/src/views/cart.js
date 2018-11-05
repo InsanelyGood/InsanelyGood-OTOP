@@ -4,6 +4,7 @@ import CartTable from "../components/cart/cart_table";
 import { getProductCart } from "../api/user_cart";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import logo from "../images/logo.jpg"
 
 const CartComponent = styled.div`
   padding-top: 5em;
@@ -52,6 +53,10 @@ const CheckoutButton = styled.button`
     right: 0;
   }
 `;
+
+const Img = styled.div`
+  margin-left: 100px;
+`
 
 const ShopMore = styled.button`
   margin-right: 1em;
@@ -109,11 +114,11 @@ class Cart extends React.Component {
   render() {
     return (
       <CartComponent>
-        <h1>Your Cart</h1>
+        <Img src={logo}/>
         <CartTable cartItem={this.state.carts} />
         <RightDiv className="container">
         <Link to='/products'>
-          <ShopMore>Shopping More!!</ShopMore>
+          <ShopMore>Continue Shopping</ShopMore>
         </Link>
           <Link to="/checkout">
             <CheckoutButton>
