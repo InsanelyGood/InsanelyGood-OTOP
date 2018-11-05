@@ -11,7 +11,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
-import {getUsername} from '../../api/user_infomation'
+import { getUsername } from '../../api/user_infomation'
 import Cookie from "js-cookie";
 import "../../css/navbar.css";
 
@@ -27,11 +27,13 @@ class NavBar extends React.Component {
   }
 
   async componentDidMount() {
-    const info = await getUsername(Cookie.get('username'))
-    this.setState({
-      username: info.username,
-      firstname: info.firstname
-    })
+    if (Cookie.get('username')) {
+      const info = await getUsername(Cookie.get('username'))
+      this.setState({
+        username: info.username,
+        firstname: info.firstname
+      })
+    }
   }
 
   toggleUser = () => {
@@ -61,16 +63,16 @@ class NavBar extends React.Component {
               <NavItem>
                 <NavDropdown isOpen={this.state.dropdownShopOpen} toggle={this.toggleShop}>
                 <DropdownToggle nav caret>
-                Shopping
+                PRODUCTS
                 </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem className="cilckable" href="http://localhost:3000/products" >ALL</DropdownItem>
-                  <DropdownItem className="cilckable" href="#">NORTHEN</DropdownItem>
-                  <DropdownItem className="cilckable" href="#">CENTRAL</DropdownItem>
-                  <DropdownItem className="cilckable" href="#">SOUTHEN</DropdownItem>
-                  <DropdownItem className="cilckable" href="#">NORTHEASTEN</DropdownItem>
-                </DropdownMenu>
-              </NavDropdown>
+                  <DropdownMenu>
+                    <DropdownItem className="cilckable" href="http://localhost:3000/products" >ALL</DropdownItem>
+                    <DropdownItem className="cilckable" href="#">NORTHEN</DropdownItem>
+                    <DropdownItem className="cilckable" href="#">CENTRAL</DropdownItem>
+                    <DropdownItem className="cilckable" href="#">SOUTHEN</DropdownItem>
+                    <DropdownItem className="cilckable" href="#">NORTHEASTEN</DropdownItem>
+                  </DropdownMenu>
+                </NavDropdown>
               </NavItem>
               {Cookie.get("username") ? (
                 <Fragment>
@@ -79,25 +81,25 @@ class NavBar extends React.Component {
                   </NavItem>
                   <NavItem>
                     <NavDropdown isOpen={this.state.dropdownUserOpen} toggle={this.toggleUser}>
-                    <DropdownToggle nav caret>
-                    <ion-icon name="md-contact"></ion-icon>
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem header>HI, {this.state.firstname}</DropdownItem>
-                      <DropdownItem className="cilckable" href="http://localhost:3000/users/information/" >Profile</DropdownItem>
-                      <DropdownItem className="cilckable" href="http://localhost:3000/users/information/edit">Edit Profile</DropdownItem>
-                      <DropdownItem className="cilckable" href="http://localhost:3000/users/information/changePassword">Change Password</DropdownItem>
-                      <DropdownItem divider />
-                      <DropdownItem onClick={this.onLogoutClicked} href="/">Log Out</DropdownItem>
-                    </DropdownMenu>
-                  </NavDropdown>
+                      <DropdownToggle nav caret>
+                        <ion-icon name="md-contact"></ion-icon>
+                      </DropdownToggle>
+                      <DropdownMenu>
+                        <DropdownItem header>HI, {this.state.firstname}</DropdownItem>
+                        <DropdownItem className="cilckable" href="http://localhost:3000/users/information/" >Profile</DropdownItem>
+                        <DropdownItem className="cilckable" href="http://localhost:3000/users/information/edit">Edit Profile</DropdownItem>
+                        <DropdownItem className="cilckable" href="http://localhost:3000/users/information/changePassword">Change Password</DropdownItem>
+                        <DropdownItem divider />
+                        <DropdownItem onClick={this.onLogoutClicked} href="/">Log Out</DropdownItem>
+                      </DropdownMenu>
+                    </NavDropdown>
                   </NavItem>
                 </Fragment>
               ) : (
-                <NavItem>
-                  <NavLink href="/users/login">Login</NavLink>
-                </NavItem>
-              )}
+                  <NavItem>
+                    <NavLink href="/users/login">Login</NavLink>
+                  </NavItem>
+                )}
             </Nav>
           </Collapse>
         </Navbar>

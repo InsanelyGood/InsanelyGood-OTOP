@@ -87,7 +87,7 @@ handleSubmit = event => {
                 <editable>
                 <p>
                 <label>Old Password</label>
-                <input type="password" name="oldPassword" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
+                <input type="text" name="oldPassword" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input>
                 </p>
                 <p>
                 <label>New Password</label>
@@ -96,7 +96,6 @@ handleSubmit = event => {
                 <p>
                 <label>Confirm New Password</label>
                 </p>
-                {/* <input type="password" name="newPassword2" onChange={this.handleInputChange} placeholder={this.state.password} value={this.state.password}></input> */}
                 {
                     this.state.invalidConfirmPassword &&
                     <alert >
