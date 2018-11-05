@@ -10,11 +10,9 @@ const Block = styled.div`
     height: 100%;
 `
 
-const Row = styled.div`h1>Your Cart</h1>
+const Row = styled.div`
     @media(max-width: 768px) {
         display: block;
-        padding-top: 10px;
-        width: 100%;
     }
     // padding-top: 1x;
     display: flex;
@@ -43,10 +41,6 @@ const Img2 = styled.img`
 `
 
 const Right = styled.div`
-    @media(max-width: 768px) {
-        padding-top: 10px;
-        width: 100%;
-    }
     width: 100%;
 `
 const Noti = styled.p`
@@ -100,17 +94,17 @@ class ProductsPage extends Component {
           )
         );
         
-        if (products.length <= 0) {
-            return <Noti>
-              No Result For <SearchText>
-                '{this.state.search}'
-              </SearchText>
-            </Noti>;
-        } else {
-          return <div className="container">
-              <ProductPanel productsShow={products} />
-            </div>;
-        }
+        // if (products.length <= 0) {
+        //     return <Noti>
+        //       No Result For <SearchText>
+        //         '{this.state.search}'
+        //       </SearchText>
+        //     </Noti>;
+        // } else {
+        //   return  <ProductPanel productsShow={products} />
+        // }
+        
+        return  <ProductPanel productsShow={products} />
     }
     
     renderProductPanel = input_case => {

@@ -3,9 +3,12 @@ import styled from 'styled-components'
 import Search from '../search/search_component'
 
 const Block = styled.div`
-    position: sticky;
-    position: -webkit-sticky;
-    top: 69px; /* required */
+    @media(max-width: 768px) {
+        height: auto;
+    }
+    // position: sticky;
+    // position: -webkit-sticky;
+    // top: 69px; /* required */
     height: 100%;
 `
 const Content = styled.div`
