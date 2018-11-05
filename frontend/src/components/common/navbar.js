@@ -61,7 +61,7 @@ class NavBar extends React.Component {
               <NavItem>
                 <NavDropdown isOpen={this.state.dropdownShopOpen} toggle={this.toggleShop}>
                 <DropdownToggle nav caret>
-                Shopping
+                PRODUCTS
                 </DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem className="cilckable" href="http://localhost:3000/products" >ALL</DropdownItem>

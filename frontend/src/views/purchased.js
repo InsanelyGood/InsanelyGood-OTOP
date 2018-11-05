@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
 import '../css/purchase.css'
+import logo from '../images/logo_black.jpg'
 
 class Purchased extends Component{
     render(){
         return <div>
             <div className='container' align="center">
+            <img src={logo} alt="OTOPAholic_LOGO" height="20px"></img>
             <p className="pur">
             Thank you for your purchase.
             </p>
-            <p className="heart">♡♡♡</p>
+            
             <br/>
-            <Button size="lg" href="/" className="buttonBack">Home</Button>{' '}
+            <Button size="lg" href="/" className="buttonShop">Shop more</Button>{' '}
+            <Button size="lg" href="/" className="buttonHome">Home</Button>{' '}
             </div>
           </div>
     }
