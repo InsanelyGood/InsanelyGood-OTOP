@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import {
   Navbar,
   NavbarBrand,
-  NavbarToggler,
   Collapse,
   Nav,
   NavItem,
@@ -65,7 +64,7 @@ class NavBar extends React.Component {
                 Shopping
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem className="cilckable" href="http://localhost:3000//products" >ALL</DropdownItem>
+                  <DropdownItem className="cilckable" href="http://localhost:3000/products" >ALL</DropdownItem>
                   <DropdownItem className="cilckable" href="#">NORTHEN</DropdownItem>
                   <DropdownItem className="cilckable" href="#">CENTRAL</DropdownItem>
                   <DropdownItem className="cilckable" href="#">SOUTHEN</DropdownItem>
