@@ -28,8 +28,7 @@ describe('POST users/:username/information/save', function () {
             .post('/users/testUpdate/information/save')
             .set('Content-Type', 'application/json')
             .send({
-                "username": "testUpdate",
-                "password": "testUpdate",
+                "username": "testUpdate2",
                 "firstname": "testFirstname",
                 "lastname": "testLastname",
                 "email": "test@insanely.com",
