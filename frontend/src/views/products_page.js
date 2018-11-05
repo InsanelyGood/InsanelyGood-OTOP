@@ -3,18 +3,20 @@ import ProductPanel from '../components/products_page/product_panel'
 import ProductsCat from '../components/products_page/product_cat'
 import { getProducts } from '../api/products_list'
 import styled from 'styled-components'
-import badge from '../images/product-page-badge.jpg'
+import lBadge from '../images/large_badge.jpg'
+import mBadge from '../images/medium_badge.jpg'
 
 const Block = styled.div`
+    height: 100%;
 `
 
-const Row = styled.div`
+const Row = styled.div`h1>Your Cart</h1>
     @media(max-width: 768px) {
         display: block;
         padding-top: 10px;
         width: 100%;
     }
-    padding-top: 10px;
+    // padding-top: 1x;
     display: flex;
 `
 
@@ -25,9 +27,19 @@ const Left = styled.div`
     }
     width: 470px;
 `
-const Img = styled.img`
-    width: 100%;
-    margin-top: 60px;
+const Img1 = styled.img`
+    @media(min-width: 1120px) {
+        width: 100%;
+    }
+    width: 0px;
+    margin-top: 56px;
+`
+const Img2 = styled.img`
+    @media(max-width: 1120px) {
+        width: 100%;
+    }
+    width: 0px;;
+    margin-top: 56px;
 `
 
 const Right = styled.div`
@@ -140,7 +152,8 @@ class ProductsPage extends Component {
         return(
             <div>
                 <Block>
-                    <Img src={badge}></Img>
+                    <Img1 src={lBadge}></Img1>
+                    <Img2 src={mBadge}></Img2>
                     <Row>
                         <Left><ProductsCat changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
                         <Right>

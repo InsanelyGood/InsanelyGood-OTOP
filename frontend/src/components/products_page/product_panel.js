@@ -9,6 +9,7 @@ const Block = styled.div`
 const Head = styled.div`
     background-color: black;
     height: 70px;
+    border-left: solid grey;
 `
 const Text = styled.h2`
     font-weight: bold;
@@ -16,11 +17,6 @@ const Text = styled.h2`
     padding-left: 20px;
     padding-top: 15px;
     float: left;
-`
-
-const Content = styled.div`
-    margin-left: auto;
-    margin-right: auto;
 `
 const SortBlock = styled.div`
     margin: 15px;
@@ -32,6 +28,7 @@ class ProductPanel extends Component {
         super(props)
         this.state = {
             sortType: '',
+            pNum: this.props.productsShow.length
         }
     }
 
@@ -41,6 +38,10 @@ class ProductPanel extends Component {
         })
         
     }
+
+    // generate = (a)=> {
+    //     return (<Item>{a.map(product => product)}</Item>)
+    // }
 
     sort = ()=> {
         switch(this.state.sortType) {
@@ -67,7 +68,8 @@ class ProductPanel extends Component {
                     <Text>Products</Text>
                     <SortBlock><Sort changeSortType={this.changeSortType}/></SortBlock>
                 </Head>
-                <Content>{this.sort()}</Content>
+                {this.sort()}
+
             </Block>
         )
     }

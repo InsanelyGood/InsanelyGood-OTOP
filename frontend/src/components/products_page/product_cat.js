@@ -21,7 +21,6 @@ const Head = styled.div`
     }
     height: 70px;
     background-color: black;
-    border-right: solid white;
 `
 const Text = styled.h2`
     @media(max-width: 768px) {

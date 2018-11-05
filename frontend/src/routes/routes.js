@@ -41,7 +41,8 @@ const routes = [
   {
     path: "/products",
     exact: true,
-    component: ProductsPage
+    component: ProductsPage,
+    canAccess: true
   },
   {
     path: "/purchased",
