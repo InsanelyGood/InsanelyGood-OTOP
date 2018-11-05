@@ -47,8 +47,6 @@ export default class Example extends React.Component {
         return (
             <LoginContent className='col-sm-8 col-sm-offset-2 col-md-5 col-md-offset-3'>
                 <Form className='container'>
-                
-
                     <Nav tabs>
                         <NavItem>
                             <NavLink xs="6"

@@ -14,18 +14,14 @@
   /* background: rgba(144, 12, 63, 1); */
 }
 
-.nav-item {
-
-}
-
 .nav-link .top-navbar{
   color: white !important;
 }
 
 .top-navbar .nav-link:hover{
   font-weight: bolder;
-  background: rgba(144, 12, 63, 0.8);
-  color: white !important;
+  /* background: #F08D33; */
+  color: #F08D33 !important;
 }
 
 .navbar-toggler-icon {
@@ -33,5 +29,5 @@
 }
 
 .cilckable{
-  font-size: 14px;
+  font-size: 15px;
 }

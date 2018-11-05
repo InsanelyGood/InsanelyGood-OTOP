@@ -7,10 +7,21 @@
 .heart{
     font-size: 45px;
 }
-.buttonBack{
-    font-family: 'Coming Soon', cursive !important;
+.buttonHome{
+    /* font-family: 'Coming Soon', cursive !important; */
     font-weight: bold !important;
-    padding-bottom: 10%;
-    border-color: #57a9bb !important;
-    background-color: #57a9bb!important;
+    border-color: white!important;
+    /* border-color: #D75404 !important; */
+    
+    background-color: rgb(200,94,38) !important;
+    margin-bottom: 50px;
+}
+
+.buttonShop{
+    /* font-family: 'Coming Soon', cursive !important; */
+    font-weight: bold !important;
+    border-color: white !important;
+    background-color: rgb(231,184,80) !important;
+    /* border-color: #F08D33!important; */
+    margin-bottom: 50px;
 }

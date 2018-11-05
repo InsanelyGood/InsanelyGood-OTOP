@@ -120,7 +120,7 @@ class Cart extends React.Component {
         <Link to='/products'>
           <ShopMore>Continue Shopping</ShopMore>
         </Link>
-          <Link to="/">
+          <Link to="/checkout">
             <CheckoutButton>
               <span>Checkout</span>
             </CheckoutButton>

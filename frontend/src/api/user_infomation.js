@@ -29,7 +29,7 @@ export async function setUsername(username, body){
     console.log('Content: ', content);
   }
 
-  export async function setNewPassword(username, body){
+  export async function setNewPassword(body){
     console.log('Body: ',JSON.stringify(body));
     
     const rawResponse = await fetch(`http://localhost:8000/users/password/change`, {
