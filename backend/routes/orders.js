@@ -18,10 +18,10 @@ router.post('/:username/create', findUserByPath, (req, res) => {
   // const dataTime = req.body.dataTime;
   const totalPrice = req.body.totalPrice;
   const shippingAddress = req.body.shippingAddress;
-  console.log('list',purchasedList);
-  console.log('send list', req.body.purchasedList);
+  // console.log('list',purchasedList);
+  // console.log('send list', req.body.purchasedList);
   
-  console.log('price',totalPrice);
+  // console.log('price',totalPrice);
   
   
   let newOrder = new Order({
