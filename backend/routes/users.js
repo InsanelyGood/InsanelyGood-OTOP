@@ -182,10 +182,10 @@ router.post("/:username/information/save", findUserByPath, (req, res, next) => {
   // console.log("Req.user>>>>>>>>",req.user)
   if (req.user) {
     // console.log("if")
-    const { username, password, firstname, lastname, email, address, telephoneNumber } = req.body
+    const { username, firstname, lastname, email, address, telephoneNumber } = req.body
     let newUserData = {
       username,
-      password,
+      password: req.user.password,
       firstname,
       lastname,
       email,
