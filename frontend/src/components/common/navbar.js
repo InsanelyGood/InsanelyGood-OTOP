@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import {
   Navbar,
   NavbarBrand,
-  NavbarToggler,
   Collapse,
   Nav,
   NavItem,
@@ -22,6 +21,7 @@ class NavBar extends React.Component {
 
     this.state = {
       dropdownOpen: false,
+      dropdownUserOpen: false,
       firstname: ''
     };
   }
@@ -34,9 +34,15 @@ class NavBar extends React.Component {
     })
   }
 
-  toggle = () => {
+  toggleUser = () => {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      dropdownUserOpen: !this.state.dropdownUserOpen
+    });
+  };
+
+  toggleShop = () => {
+    this.setState({
+      dropdownShopOpen: !this.state.dropdownShopOpen
     });
   };
 
@@ -49,23 +55,22 @@ class NavBar extends React.Component {
       <div>
         <Navbar className="top-navbar" dark={true} expand="md">
           <NavbarBrand href="/">OTOPaholic</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar={true}>
             <Nav className="ml-auto" navbar={true}>
+
               <NavItem>
-                <NavLink href="#">NORTHEN</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#">CENTRAL</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#">SOUTHEN</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="#">NORTHEASTEN</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/products">ALL</NavLink>
+                <NavDropdown isOpen={this.state.dropdownShopOpen} toggle={this.toggleShop}>
+                <DropdownToggle nav caret>
+                Shopping
+                </DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem className="cilckable" href="http://localhost:3000/products" >ALL</DropdownItem>
+                  <DropdownItem className="cilckable" href="#">NORTHEN</DropdownItem>
+                  <DropdownItem className="cilckable" href="#">CENTRAL</DropdownItem>
+                  <DropdownItem className="cilckable" href="#">SOUTHEN</DropdownItem>
+                  <DropdownItem className="cilckable" href="#">NORTHEASTEN</DropdownItem>
+                </DropdownMenu>
+              </NavDropdown>
               </NavItem>
               {Cookie.get("username") ? (
                 <Fragment>
@@ -73,7 +78,7 @@ class NavBar extends React.Component {
                     <NavLink href="/cart"><ion-icon name="ios-cart"></ion-icon>CART</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                    <NavDropdown isOpen={this.state.dropdownUserOpen} toggle={this.toggleUser}>
                     <DropdownToggle nav caret>
                     <ion-icon name="md-contact"></ion-icon>
                     </DropdownToggle>
