@@ -47,8 +47,13 @@ const InputQuantity = styled.input`
   text-align: center;
 `;
 const QuantityDiv = styled.div`
-  display: inline;
+  display: flex;
   border-color: black;
+  float: left;
+`;
+const QuantityButton = styled.button`
+  background-color: transparent;
+  border: none;
 `;
 
 class CartTable extends React.Component {
@@ -72,11 +77,12 @@ class CartTable extends React.Component {
         <TDCenter>{item.product.price}</TDCenter>
         <TDCenter>
           <QuantityDiv>
-            {item.quantity > 1 &&
-              this.renderUpdateQuantityComponent(
+            {this.renderUpdateQuantityComponent(
                 item,
                 <div>
-                  <button type="submit">-</button>
+                  <QuantityButton type="submit" disabled={item.quantity <= 1}>
+                    <ion-icon name="remove-circle" />
+                  </QuantityButton>
                   <input
                     type="hidden"
                     value={item.quantity - 1}
@@ -95,7 +101,9 @@ class CartTable extends React.Component {
             {this.renderUpdateQuantityComponent(
               item,
               <div>
-                <button type="submit">+</button>
+                <QuantityButton type="submit">
+                  <ion-icon name="add-circle" />
+                </QuantityButton>
                 <input
                   type="hidden"
                   value={item.quantity + 1}
