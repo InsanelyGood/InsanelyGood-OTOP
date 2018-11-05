@@ -24,6 +24,13 @@ class NavBar extends React.Component {
       dropdownUserOpen: false,
       firstname: ''
     };
+
+    this.toggle = this.toggle.bind(this);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.state = {
+      dropdownOpen: false
+    };
   }
 
   async componentDidMount() {
@@ -42,11 +49,25 @@ class NavBar extends React.Component {
     });
   };
 
-  toggleShop = () => {
-    this.setState({
-      dropdownShopOpen: !this.state.dropdownShopOpen
-    });
-  };
+  toggle() {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  }
+
+  // toggleShop = () => {
+  //   this.setState({
+  //     dropdownShopOpen: !this.state.dropdownShopOpen
+  //   });
+  // };
+
+  onMouseEnter() {
+    this.setState({dropdownOpen: true});
+  }
+
+  onMouseLeave() {
+    this.setState({dropdownOpen: false});
+  }
 
   onLogoutClicked = () => {
     Cookie.remove("username");
@@ -61,7 +82,7 @@ class NavBar extends React.Component {
             <Nav className="ml-auto" navbar={true}>
 
               <NavItem>
-                <NavDropdown isOpen={this.state.dropdownShopOpen} toggle={this.toggleShop}>
+                <NavDropdown onMouseOver={this.onMouseEnter} onMouseLeave={this.onMouseLeave} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                 <DropdownToggle nav caret>
                 PRODUCTS
                 </DropdownToggle>
