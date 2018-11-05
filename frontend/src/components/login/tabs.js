@@ -5,7 +5,7 @@ import LoginComponent from '../../components/login/login_component'
 import RegisComponent from '../../components/login/regis_component'
 import styled from 'styled-components'
 import logo from '../../images/logo_black.jpg'
-import '../../css/purchase.css'
+import '../../css/login&regis.css'
 
 const Form = styled.div`
     
