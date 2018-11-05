@@ -195,36 +195,31 @@ router.get("/:username/information", findUserByPath, (req, res, next) => {
 router.post("/:username/information/save", findUserByPath, (req, res, next) => {
   // console.log("Req.body>>>>>>>>",req.body)
   // console.log("Req.user>>>>>>>>",req.user)
-  if (req.user) {
-    // console.log("if")
-    const { username, firstname, lastname, email, address, telephoneNumber } = req.body
-    let newUserData = {
-      username,
-      firstname,
-      lastname,
-      email,
-      address,
-      telephoneNumber
+  const { username, firstname, lastname, email, address, telephoneNumber } = req.body
+  let newUserData = {
+    username,
+    password: req.user.password,
+    firstname,
+    lastname,
+    email,
+    address,
+    telephoneNumber
+  }
+  // console.log("newUserData>>>>", newUserData)
+
+  const query = { _id: req.user._id }
+
+  User.updateOne(query, newUserData, function (err) {
+    // console.log("newUserData>>>>",newUserData)
+    if (err) {
+      console.log(err)
+      res.status(404).send("Update fail. There is something wrong in update process")
+      return
+    } else {
+      res.status(200).send("Update user data success")
+      // res.redirect('http://localhost:3000/users/information')
     }
-    console.log("newUserData>>>>", newUserData)
-
-    const query = { _id: req.user._id }
-
-    User.updateOne(query, newUserData, function (err) {
-      // console.log("newUserData>>>>",newUserData)
-      if (err) {
-        console.log(err)
-        res.status(404).send("Update fail. There is something wrong in update process")
-        return
-      } else {
-        res.status(200).send("Update user data success")
-        // res.redirect('http://localhost:3000/users/information')
-      }
-    });
-  }
-  else {
-
-  }
+  })
 });
 
 // Cart list
