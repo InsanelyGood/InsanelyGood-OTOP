@@ -18,8 +18,8 @@ const Button = styled.button`
     width: 40px;
     height: 40px;
     border-radius: 5px;
-    border-color: #57a9bb;
-    background-color: #57a9bb;
+    border-color: #6E757C;
+    background-color: #6E757C;
     font-weight: bold;
 `
 

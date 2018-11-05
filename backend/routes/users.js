@@ -159,15 +159,16 @@ router.post("/password/change", findUser, (req, res, next) => {
             // console.log("newUserData>>>>",newUserData)
             if (err) {
               console.log(err)
-              res.status(404).send("Update fail. There is something wrong in update process")
+              res.status(404).send({err: "Update fail. There is something wrong in update process"})
               return
             } else
-              res.status(200).send("Update password success")
+            
+            res.status(200).send({err: "Update password success"})
           })
         })
       })
     } else {
-      res.status(404).send("Wrong old password")
+      return res.status(404).send({ err: "Wrong old password"})
     }
   });
 });

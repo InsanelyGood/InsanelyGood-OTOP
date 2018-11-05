@@ -22,7 +22,6 @@
 }
 
 p label{
-    margin-right: 1%;
     margin-left: 1%;
     left: 0px;
     float: left; 
@@ -39,6 +38,9 @@ p label{
     width: 300px ;
     height: 27px !important;
 }
+.confirm{
+    padding: 2px 1px !important;
+}
 p textarea {
     width: 100%;
     height: 150px;
@@ -53,7 +55,6 @@ p textarea {
 .form-control{
     height: 27px !important;
 }
-
 
 editable input, editable Input{
     background-color:white !important;
