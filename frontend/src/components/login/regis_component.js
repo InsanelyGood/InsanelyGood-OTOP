@@ -1,6 +1,7 @@
 import React from 'react'
 import { Input, Label, FormFeedback , Row , Col} from 'reactstrap';
 import styled from 'styled-components'
+import { setUserRegis } from '../../api/userid';
 
 const Form = styled.div`
     margin: auto;
@@ -9,13 +10,11 @@ const Form = styled.div`
 
 const FormGroups = styled.div`
     padding: 10px 0;
-    margin: 0 auto;
     width: 100%;
 `
 
 const Buttons = styled.input`
     text-align: center;
-    margin: 0 auto;
     width: 100%;
     color: white;
     height: 40px;
@@ -33,10 +32,10 @@ class RegisComponent extends React.Component {
             email: '',
             username: '',
             password: '',
-            confirmPassword: '',
-            firstName: '',
-            lastName: '',
-            contactNumber: '',
+            confirm_password: '',
+            firstname: '',
+            lastname: '',
+            telephone_number: '',
             notHaveEmail: false,
             notHaveUsername: false,
             notHavePassword: false,
@@ -45,66 +44,15 @@ class RegisComponent extends React.Component {
             notHaveLastName: false,
             notHaveContectNum: false,
         };
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handleUserChange = this.handleUserChange.bind(this);
-        this.handlePassChange = this.handlePassChange.bind(this);
-        this.handleConPassChange = this.handleConPassChange.bind(this);
-        this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-        this.handleLastNameChange = this.handleLastNameChange.bind(this);
-        this.handleContactNumbChange = this.handleContactNumbChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleEmailChange = event => {
+    handleInputChange = event => {
         this.setState({
-            email: event.target.value,
-        });
-    };
-
-    handleUserChange = event => {
-        this.setState({
-            username: event.target.value,
-        });
-    };
-
-    handlePassChange = event => {
-        this.setState({
-            password: event.target.value
-        });
+            [event.target.name]: event.target.value
+        })
     }
-
-    handleConPassChange = event => {
-        this.setState({
-            confirmPassword: event.target.value,
-        });
-    };
-
-    handleFirstNameChange = event => {
-        this.setState({
-            firstName: event.target.value,
-        });
-    };
-
-    handleLastNameChange = event => {
-        this.setState({
-            lastName: event.target.value,
-        });
-    };
-
-    handleContactNumbChange = event => {
-        this.setState({
-            contactNumber: event.target.value,
-        });
-    };
 
     handleSubmit = event => {
-        console.log(this.state.username);
-        console.log(this.state.email);
-        console.log(this.state.password);
-        console.log(this.state.confirmPassword);
-        console.log(this.state.firstName);
-        console.log(this.state.lastName);
-        console.log(this.state.contactNumber);
 
         if (this.state.username === '') {
             this.setState({ notHaveUsername: true });
@@ -126,51 +74,60 @@ class RegisComponent extends React.Component {
             this.setState({ notHavePassword: false })
         }
 
-        if (this.state.confirmPassword === '') {
+        if (this.state.confirm_password === '') {
             this.setState({ notHaveConfirmPass: true });
         } else {
             this.setState({ notHaveConfirmPass: false })
         }
 
-        if (this.state.firstName === '') {
+        if (this.state.firstname === '') {
             this.setState({ notHaveFirstName: true });
         } else {
             this.setState({ notHaveFirstName: false })
         }
 
-        if (this.state.lastName === '') {
+        if (this.state.lastname === '') {
             this.setState({ notHaveLastName: true });
         } else {
             this.setState({ notHaveLastName: false })
         }
 
-        if (this.state.contactNumber === '') {
+        if (this.state.telephone_number === '') {
             this.setState({ notHaveContectNum: true });
         } else {
             this.setState({ notHaveContectNum: false })
         }
+        // setUserRegis({
+        //     email: this.state.email,
+        //     username: this.state.username,
+        //     password: this.state.password,
+        //     confirmPassword: this.state.confirmPassword,
+        //     firstname: this.state.firstName,
+        //     lastname: this.state.lastName,
+        //     telephoneNumber: this.state.telephoneNumber,
+        // })
     }
 
     render() {
         return (
             <Form inline>
-            <form action="http://localhost:8000/users/register" method="POST">
+            <form action="http://localhost:8000/users/register" method='POST'>
              <div>
-                    <Row form>
+                    <Row>
                         <Col md={6}>
                             <FormGroups>
                                 <Label>Firstname</Label>
                                 {
                                     this.state.notHaveFirstName &&
                                     <alert >
-                                        <Input invalid type="text" onChange={this.handleFirstNameChange} name="firstname" placeholder="Firstname" />
+                                        <Input invalid type="text" onChange={this.handleInputChange} name="firstname" placeholder="Firstname" />
                                         <FormFeedback>Please enter first name.</FormFeedback>
                                     </alert>
                                 }
                                 {
                                     !this.state.notHaveFirstName &&
                                     <alert >
-                                        <Input type="text" onChange={this.handleFirstNameChange} name="firstname" placeholder="Firstname" />
+                                        <Input type="text" onChange={this.handleInputChange} name="firstname" placeholder="Firstname" />
                                     </alert>
                                 }
                             </FormGroups>
@@ -181,14 +138,14 @@ class RegisComponent extends React.Component {
                                 {
                                     this.state.notHaveLastName &&
                                     <alert >
-                                        <Input invalid type="text" onChange={this.handleLastNameChange} name="lastname" placeholder="Lastname" />
+                                        <Input invalid type="text" onChange={this.handleInputChange} name="lastname" placeholder="Lastname" />
                                         <FormFeedback>Please enter last name.</FormFeedback>
                                     </alert>
                                 }
                                 {
                                     !this.state.notHaveLastName &&
                                     <alert >
-                                        <Input type="text" onChange={this.handleLastNameChange} name="lastname" placeholder="Lastname" />
+                                        <Input type="text" onChange={this.handleInputChange} name="lastname" placeholder="Lastname" />
                                     </alert>
                                 }
                             </FormGroups>
@@ -200,14 +157,14 @@ class RegisComponent extends React.Component {
                     {
                         this.state.notHaveUsername &&
                         <alert >
-                            <Input invalid type="text" onChange={this.handleUserChange} name="username" placeholder="Username" />
+                            <Input invalid type="text" onChange={this.handleInputChange} name="username" placeholder="Username" />
                             <FormFeedback>Please enter username.</FormFeedback>
                         </alert>
                     }
                     {
                         !this.state.notHaveUsername &&
                         <alert >
-                            <Input type="text" onChange={this.handleUserChange} name="username" placeholder="Username" />
+                            <Input type="text" onChange={this.handleInputChange} name="username" placeholder="Username" />
                         </alert>
                     }                        </FormGroups>
                 <FormGroups>
@@ -215,14 +172,14 @@ class RegisComponent extends React.Component {
                     {
                         this.state.notHavePassword &&
                         <alert >
-                            <Input invalid type="password" onChange={this.handlePassChange} name="password" placeholder="Password" />
+                            <Input invalid type="password" onChange={this.handleInputChange} name="password" placeholder="Password" />
                             <FormFeedback>Please enter password.</FormFeedback>
                         </alert>
                     }
                     {
                         !this.state.notHavePassword &&
                         <alert >
-                            <Input type="password" onChange={this.handlePassChange} name="password" placeholder="Password" />
+                            <Input type="password" onChange={this.handleInputChange} name="password" placeholder="Password" />
                         </alert>
                     }
                 </FormGroups>
@@ -231,14 +188,14 @@ class RegisComponent extends React.Component {
                     {
                         this.state.notHaveConfirmPass &&
                         <alert >
-                            <Input invalid type="password" onChange={this.handleConPassChange} name="confirm_password" placeholder="Confirm Password" />
+                            <Input invalid type="password" onChange={this.handleInputChange} name="confirm_password" placeholder="Confirm Password" />
                             <FormFeedback>Please enter password.</FormFeedback>
                         </alert>
                     }
                     {
                         !this.state.notHaveConfirmPass &&
                         <alert >
-                            <Input type="password" onChange={this.handleConPassChange} name="confirm_password" placeholder="Confirm Password" />
+                            <Input type="password" onChange={this.handleInputChange} name="confirm_password" placeholder="Confirm Password" />
                         </alert>
                     }
                 </FormGroups>
@@ -247,14 +204,14 @@ class RegisComponent extends React.Component {
                     {
                         this.state.notHaveEmail &&
                         <alert >
-                            <Input invalid type="email" onChange={this.handleEmailChange} name="email" placeholder="Email" />
+                            <Input invalid type="email" onChange={this.handleInputChange} name="email" placeholder="Email" />
                             <FormFeedback>Please enter email.</FormFeedback>
                         </alert>
                     }
                     {
                         !this.state.notHaveEmail &&
                         <alert >
-                            <Input type="email" onChange={this.handleEmailChange} name="email" placeholder="Email" />
+                            <Input type="email" onChange={this.handleInputChange} name="email" placeholder="Email" />
                         </alert>
                     }
 
@@ -264,14 +221,14 @@ class RegisComponent extends React.Component {
                     {
                         this.state.notHaveContectNum &&
                         <alert >
-                            <Input invalid type="text" onChange={this.handleContactNumbChange} name="telephone_number" placeholder="Contact Number" />
+                            <Input invalid type="text" onChange={this.handleInputChange} name="telephone_number" placeholder="Contact Number" />
                             <FormFeedback>Please enter contact number.</FormFeedback>
                         </alert>
                     }
                     {
                         !this.state.notHaveContectNum &&
                         <alert >
-                            <Input type="text" onChange={this.handleContactNumbChange} name="telephone_number" placeholder="Contact Number" />
+                            <Input type="text" onChange={this.handleInputChange} name="telephone_number" placeholder="Contact Number" />
                         </alert>
                     }
                 </FormGroups>

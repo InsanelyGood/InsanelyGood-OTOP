@@ -46,7 +46,8 @@ router.post("/login", function (req, res, next) {
     req.logIn(user, function (err) {
       if (err) {
         return next(err);
-      }
+      }      
+      
       return res
         .cookie("username", user.username)
         .redirect("http://localhost:3000/");
@@ -61,6 +62,8 @@ router.get("/register", function (req, res) {
 
 // Register Process
 router.post("/register", function (req, res) {
+  console.log("55555");
+  
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
