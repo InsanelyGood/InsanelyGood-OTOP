@@ -6,8 +6,6 @@ import styled from 'styled-components'
 import badge from '../images/product-page-badge.jpg'
 
 const Block = styled.div`
-    margin-left: auto;
-    margin-right: auto;
 `
 
 const Row = styled.div`
@@ -16,18 +14,7 @@ const Row = styled.div`
         padding-top: 10px;
         width: 100%;
     }
-    @media (min-width: 992px) {
-        width: 970px;
-    }
-    @media (min-width: 1200px) {
-        width: 1170px;
-    }
-    @media (min-width: 1400px) {
-        width: 1400px;
-    }
-    margin-right: auto;
-    margin-left: auto;
-    padding-top: 30px;
+    padding-top: 10px;
     display: flex;
 `
 
@@ -36,7 +23,7 @@ const Left = styled.div`
         width: 100%;
         height: 20%;
     }
-    width: 350px;
+    width: 470px;
 `
 const Img = styled.img`
     width: 100%;
@@ -48,7 +35,7 @@ const Right = styled.div`
         padding-top: 10px;
         width: 100%;
     }
-    width: 80%;
+    width: 100%;
 `
 const Noti = styled.p`
   text-align: center;

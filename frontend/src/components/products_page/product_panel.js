@@ -4,13 +4,10 @@ import Sort from '../sort/sort_component'
 import styled from 'styled-components'
 
 const Block = styled.div`
-    -webkit-box-shadow:0px 5px 25px -5px black;
-    margin-left: 30px;
-    margin-right: 40px;
+    width: 100%;
 `
 const Head = styled.div`
     background-color: black;
-    width: inherit;
     height: 70px;
 `
 const Text = styled.h2`
