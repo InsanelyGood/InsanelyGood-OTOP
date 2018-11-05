@@ -28,6 +28,12 @@
   color: white !important;
 }
 
+.dropdown-item:hover {
+  color: #F08D33 !important;
+  font-weight: bolder;
+}
+
 .cilckable{
   font-size: 15px;
 }
+
