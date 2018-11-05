@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 
 const ordersSchema = mongoose.Schema({
-    purchased_list: [],
-    date_time: {
+    purchasedList: [],
+    dateTime: {
         type: Date,
-        default: Date.now
+        required: true
     },
-    total_price: {
+    totalPrice: {
         type: Number,
         required: true
     },
@@ -14,11 +14,11 @@ const ordersSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    shipping_address: {
+    shippingAddress: {
         type: String,
         required: true
     },
-    userID: {
+    userId: {
         type: String,
         required: true
     }

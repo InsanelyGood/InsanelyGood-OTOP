@@ -3,8 +3,11 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
-let User = require("../models/users");
-let Product = require("../models/products");
+const User = require("../models/users");
+
+const findUser = require("../middlewares/findUser")
+const findUserByPath = require("../middlewares/findUserByPath")
+const findProductsFromCartList = require("../middlewares/findProductsFromCartList")
 
 router.get("/", (req, res) => {
   User.find({}, (err, users) => {
@@ -13,22 +16,21 @@ router.get("/", (req, res) => {
 });
 
 // Login Form
-router.get("/login", function(req, res) {
+router.get("/login", function (req, res) {
   res.render("login");
 });
 
 router.get("/test", (req, res) => {
-  console.log("lsdbackdj-------------------------------------");
   // console.log(req.cookies)
   // res.sendStatus(200)
   res.status(200).send("Hello world");
 });
 
 // Login Process
-router.post("/login", function(req, res, next) {
+router.post("/login", function (req, res, next) {
   console.log("login");
 
-  passport.authenticate("local", function(err, user, info) {
+  passport.authenticate("local", function (err, user, info) {
     console.log("in local authen");
     if (err) {
       console.log("in error");
@@ -41,7 +43,7 @@ router.post("/login", function(req, res, next) {
       return res.redirect("http://localhost:3000/users/login");
     }
 
-    req.logIn(user, function(err) {
+    req.logIn(user, function (err) {
       if (err) {
         return next(err);
       }
@@ -50,15 +52,15 @@ router.post("/login", function(req, res, next) {
         .redirect("http://localhost:3000/");
     });
   })(req, res, next);
-});
+})
 
 // Register Form
-router.get("/register", function(req, res) {
+router.get("/register", function (req, res) {
   res.render("register");
 });
 
 // Register Process
-router.post("/register", function(req, res) {
+router.post("/register", function (req, res) {
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
   const email = req.body.email;
@@ -98,14 +100,14 @@ router.post("/register", function(req, res) {
       cart_list: []
     });
 
-    bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.genSalt(10, function (err, salt) {
       if (err) console.log(err);
-      bcrypt.hash(newUser.password, salt, function(err, hash) {
+      bcrypt.hash(newUser.password, salt, function (err, hash) {
         if (err) {
           console.log(err);
         }
         newUser.password = hash;
-        newUser.save(function(err) {
+        newUser.save(function (err) {
           if (err) {
             console.log(err);
             return;
@@ -118,34 +120,109 @@ router.post("/register", function(req, res) {
   }
 });
 
-// User Information
-router.get("/information", (req, res, next) => {
-  console.log("COOKIEEEEEEEEE", req.cookies);
-  User.find({ username: req.cookies.username }, (err, userinfo) => {
-    if (userinfo.length > 0) res.status(200).send(userinfo[0]);
-    else res.status(404).send("Not found");
-  });
-});
+// User change password
+router.post("/password/change", findUser, (req, res, next) => {
+  // console.log(">>>>>>>>User", req.user)
+  // console.log(">>>>>>>>Body", req.body)
+  let { username, oldPassword, newPassword } = req.body
+  console.log('user', req.body);
+  
+  // Match Password
+  bcrypt.compare(oldPassword, req.user.password, function (err, isMatch) {
+    if (err) throw err;
+    if (isMatch || oldPassword==req.user.password) {
 
-router.get("/:username/cart", (req, res) => {
-  User.find({ username: req.params.username }, async (err, user) => {
-    if (err) {
-      console.log(err);
-    } else {
-      // res.send(user[0].cart_list);
-      let products = await Promise.all(
-        user[0].cart_list.map(async item => {
-          try {
-            const product = await Product.findOne({
-              id: item.productID
-            }).exec();
-            return { product, quantity: item.quantity };
-          } catch (error) {}
+      bcrypt.genSalt(10, function (err, salt) {
+        if (err) console.log(err);
+        bcrypt.hash(newPassword, salt, function (err, hash) {
+          if (err) {console.log(err);}
+          newPassword = hash;
+          const query = { username: username }
+          User.findOneAndUpdate(query, { password: newPassword }, function (err) {
+            // console.log("newUserData>>>>",newUserData)
+            if (err) {
+              console.log(err)
+              res.status(404).send("Update fail. There is something wrong in update process")
+              return
+            } else 
+              res.status(200).send("Update password success")
+          })
         })
-      );
-      res.send(products);
+      })
+    } else {
+      res.status(404).send("Wrong old password")
     }
   });
 });
+
+// User Information
+router.get("/:username/information", findUserByPath, (req, res, next) => {
+  // console.log(">>>>>>>>",req.user)
+  if (req.user) {
+    const { role, username, firstname, lastname, email, address, telephone_number } = req.user
+    res.status(200).send({
+      role,
+      username,
+      firstname,
+      lastname,
+      email,
+      address,
+      telephoneNumber: telephone_number,
+    })
+  }
+  else res.status(404).send("Not found");
+});
+
+// User Information save
+router.post("/:username/information/save", findUserByPath, (req, res, next) => {
+  // console.log("Req.body>>>>>>>>",req.body)
+  // console.log("Req.user>>>>>>>>",req.user)
+  if (req.user) {
+    // console.log("if")
+    const { username, password, firstname, lastname, email, address, telephoneNumber } = req.body
+    let newUserData = {
+      username,
+      password,
+      firstname,
+      lastname,
+      email,
+      address,
+      telephoneNumber
+    }
+    console.log("newUserData>>>>", newUserData)
+
+    const query = { _id: req.user._id }
+
+    User.updateOne(query, newUserData, function (err) {
+      // console.log("newUserData>>>>",newUserData)
+      if (err) {
+        console.log(err)
+        res.status(404).send("Update fail. There is something wrong in update process")
+        return
+      } else {
+        res.status(200).send("Update user data success")
+        // res.redirect('http://localhost:3000/users/information')
+      }
+    });
+  }
+  else {
+
+  }
+});
+
+// Cart list
+router.get("/:username/cart", findUserByPath, findProductsFromCartList, (req, res) => {
+  res.status(200).send(req.products)
+})
+
+// Checkout Information
+router.get("/:username/checkout", findUserByPath, findProductsFromCartList, (req, res) => {
+  // console.log("address",req.user.address)
+  // console.log("products",req.products)
+  res.status(200).send({
+    address: req.user.address,
+    products: req.products
+  })
+})
 
 module.exports = router;

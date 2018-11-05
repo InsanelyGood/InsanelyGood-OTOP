@@ -2,6 +2,7 @@ import React from "react";
 import {Button} from 'reactstrap'
 import styled from "styled-components";
 import Cookies from "js-cookie";
+import PropTypes from "prop-types";
 
 const Name = styled.h2`
   margin-bottom: 50px;
@@ -22,19 +23,18 @@ const BLine = styled.div`
 `
 
 class ProductDescription extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       quantity: 1
-    }
+    };
   }
 
   handleValueChange = e => {
     this.setState({
       quantity: e.target.value
-    })
-  } 
+    });
+  };
 
   render = () => {
     return (
@@ -79,5 +79,18 @@ class ProductDescription extends React.Component {
     );
   };
 }
+
+ProductDescription.propTypes = {
+  productDetail: PropTypes.object
+};
+
+ProductDescription.defaultProps = {
+  productDetail: {
+    name: "",
+    description: "",
+    price: 0,
+    id: ""
+  }
+};
 
 export default ProductDescription;
