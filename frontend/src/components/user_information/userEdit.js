@@ -48,49 +48,6 @@ handleSubmit = event => {
     console.log(this.state.lastName);
     console.log(this.state.telephoneNumber);
 
-    // if (this.state.username === '') {
-    //     this.setState({ notHaveUsername: true });
-    // }
-    // else {
-    //     this.setState({ notHaveUsername: false })
-    // }
-
-    // if (this.state.email === '') {
-    //     this.setState({ notHaveEmail: true });
-    // }
-    // else {
-    //     this.setState({ notHaveEmail: false })
-    // }
-
-    // if (this.state.password === '') {
-    //     this.setState({ notHavePassword: true });
-    // } else {
-    //     this.setState({ notHavePassword: false })
-    // }
-
-    // if (this.state.address === '') {
-    //     this.setState({ notHaveAddress: true });
-    // } else {
-    //     this.setState({ notHaveAddress: false })
-    // }
-
-    // if (this.state.firstName === '') {
-    //     this.setState({ notHaveFirstName: true });
-    // } else {
-    //     this.setState({ notHaveFirstName: false })
-    // }
-
-    // if (this.state.lastName === '') {
-    //     this.setState({ notHaveLastName: true });
-    // } else {
-    //     this.setState({ notHaveLastName: false })
-    // }
-
-    // if (this.state.telephoneNumber === '') {
-    //     this.setState({ notHaveContectNum: true });
-    // } else {
-    //     this.setState({ notHaveContectNum: false })
-    // }
     setUsername(this.state.username, {
         email: this.state.email,
         username: this.state.username,
@@ -133,18 +90,18 @@ handleSubmit = event => {
                 <editable>
                 <p>
                 <label>Firstname</label>
-                <input type="text" name="firstName"  onChange={this.handleInputChange} placeholder={this.state.firstName} value={this.state.firstName}></input>
+                <input className="boxInput" type="text" name="firstName"  onChange={this.handleInputChange} placeholder={this.state.firstName} value={this.state.firstName}></input>
                 </p>
                 <p>
                 <label>Lastname</label>
-                <input type="text" name="lastName" onChange={this.handleInputChange} placeholder={this.state.lastName} value={this.state.lastName}></input>
+                <input className="boxInput" type="text" name="lastName" onChange={this.handleInputChange} placeholder={this.state.lastName} value={this.state.lastName}></input>
                 </p>
                 </editable>
                 <p>
                 <label>Username</label>
                 {/* <input type="text" name="username" onChange={this.handleInputChange} placeholder={this.state.username} value={this.state.username}></input> */}
 
-                    <input type="text" name="username" value={this.state.username} readOnly="readonly"></input>
+                    <input className="boxInput" type="text" name="username" value={this.state.username} readOnly="readonly"></input>
                 </p>
                 <editable>
                 {/* <p>
@@ -157,11 +114,11 @@ handleSubmit = event => {
                 </p>
                 <p>
                 <label>Email</label>
-                <input type="email" name="email" onChange={this.handleInputChange} placeholder={this.state.email} value={this.state.email}></input>
+                <input className="boxInput" type="email" name="email" onChange={this.handleInputChange} placeholder={this.state.email} value={this.state.email}></input>
                 </p>
                 <p>
                 <label>Contact Number</label>
-                <input type="text" name="telephoneNumber" onChange={this.handleInputChange} placeholder={this.state.telephoneNumber} value={this.state.telephoneNumber}></input>
+                <input className="boxInput" type="text" name="telephoneNumber" onChange={this.handleInputChange} placeholder={this.state.telephoneNumber} value={this.state.telephoneNumber}></input>
                 </p>
                 </editable>
                 </div>

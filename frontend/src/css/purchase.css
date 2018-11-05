@@ -1,20 +1,23 @@
 .pur{
-    padding-top: 10%;
+    /* padding-top: 5%; */
     font-style: italic;
-    font-size: 60px;
+    font-size: 80px;
     font-family: 'Rochester', cursive;
 }
-.heart{
-    font-size: 45px;
-}
+
 .buttonHome{
     /* font-family: 'Coming Soon', cursive !important; */
     font-weight: bold !important;
     border-color: white!important;
     /* border-color: #D75404 !important; */
-    
     background-color: rgb(200,94,38) !important;
     margin-bottom: 50px;
+    font-size: 24px !important;
+    /* width: 100px !important; */
+    /* padding: 10px 80px 10px 80px !important; */
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    width: 230px !important;
 }
 
 .buttonShop{
@@ -24,6 +27,14 @@
     background-color: rgb(231,184,80) !important;
     /* border-color: #F08D33!important; */
     margin-bottom: 50px;
+    margin-right: 50px;
+    font-size: 24px !important;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    width: 230px !important;
 }
 
-
+.logoBlack{
+    margin-top: 120px;
+    width: 15% ;
+}
