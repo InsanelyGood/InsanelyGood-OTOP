@@ -29,6 +29,10 @@
   text-decoration: none;
 } */
 
+.mt-4 {
+  margin-top: 0em !important;
+}
+
 .mt-3 p {
   color: #c6c7c7 !important;
 }
@@ -63,4 +67,8 @@
 .col-md-8 a:hover {
   color: white !important;
   text-decoration: none;
+}
+
+.mt-4 {
+  margin-top: 0em !important;
 }

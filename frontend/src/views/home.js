@@ -31,7 +31,9 @@ class Home extends React.Component {
                 <hr/>
                 <br/>
                 <h2>Highlight Products</h2>
+                <p className="productList">
                 <ProductsList productsShow={random} />
+                </p>
         </div>
         </div>)
     }
