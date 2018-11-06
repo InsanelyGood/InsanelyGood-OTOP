@@ -109,7 +109,7 @@ handleSubmit = async event => {
                     this.state.invalidOldPassword &&
                     <alert >
                           <Input invalid className="boxInput"  type="password" name="oldPassword" onChange={this.handleInputChange}/>
-                        <FormFeedback>Comfirm password is not same.</FormFeedback>
+                        <FormFeedback>Wrong password. Try again</FormFeedback>
                     </alert>
                 }
                 {
@@ -132,7 +132,7 @@ handleSubmit = async event => {
                     this.state.invalidConfirmPassword &&
                     <alert >
                           <Input invalid className="boxInput"  type="password" name="newPassword2" onChange={this.handleInputChange}/>
-                        <FormFeedback>Comfirm password is not same.</FormFeedback>
+                        <FormFeedback>Those passwords didn't match. Try again.</FormFeedback>
                     </alert>
                 }
                 {
