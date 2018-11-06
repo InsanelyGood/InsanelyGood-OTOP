@@ -37,46 +37,36 @@ class ProductDescription extends React.Component {
   };
 
   render = () => {
-    return (
-      <div>
+    return <div>
         <Name>{this.props.productDetail.name}</Name>
         <Description>
           Description: {this.props.productDetail.description}
         </Description>
         <Price>Price: {this.props.productDetail.price}$</Price>
         <Form action="http://localhost:8000/users/cart/add" method="POST">
-          <Quantity type="number" onChange={this.handleValueChange} value={this.state.quantity} name="quantity" />
-          <br/>
+          <Quantity type="number" min="1" onChange={this.handleValueChange} value={this.state.quantity} name="quantity" />
+          <br />
           <BLine>
             <Form action="" method="">
-              <input
-                type="hidden"
-                value={this.props.productDetail.id}
-                name="productID"
-              />
-              <input
-                type="hidden"
-                value={Cookies.get("username")}
-                name="username"
-              />
-              <input type="hidden" value={this.state.quantity} name="quantity"></input>
-              <BBlock><Button color='warning' type='submit'>Buy now</Button></BBlock>
+              <input type="hidden" value={this.props.productDetail.id} name="productID" />
+              <input type="hidden" value={Cookies.get("username")} name="username" />
+              <input type="hidden" value={this.state.quantity} name="quantity" />
+              <BBlock>
+                <Button color="warning" type="submit">
+                  Buy now
+                </Button>
+              </BBlock>
             </Form>
-            <BBlock><Button color='success' type="submit">Add to Cart</Button></BBlock>
+            <BBlock>
+              <Button color="success" type="submit">
+                Add to Cart
+              </Button>
+            </BBlock>
           </BLine>
-          <input
-            type="hidden"
-            value={this.props.productDetail.id}
-            name="productID"
-          />
-          <input
-            type="hidden"
-            value={Cookies.get("username")}
-            name="username"
-          />
+          <input type="hidden" value={this.props.productDetail.id} name="productID" />
+          <input type="hidden" value={Cookies.get("username")} name="username" />
         </Form>
-      </div>
-    );
+      </div>;
   };
 }
 
