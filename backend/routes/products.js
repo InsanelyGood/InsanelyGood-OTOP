@@ -73,7 +73,6 @@ router.post("/add", (req, res) => {
   product.image = req.body.image;
   product.price = req.body.price;
   product.description = req.body.description;
-  product.stock = req.body.stock;
   product.category = req.body.category;
   product.region = req.body.region;
 
