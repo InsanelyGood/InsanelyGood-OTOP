@@ -78,18 +78,18 @@ class CartTable extends React.Component {
         <TDCenter>
           <QuantityDiv>
             {this.renderUpdateQuantityComponent(
-                item,
-                <div>
-                  <QuantityButton type="submit" disabled={item.quantity <= 1}>
-                    <ion-icon name="remove-circle" />
-                  </QuantityButton>
-                  <input
-                    type="hidden"
-                    value={item.quantity - 1}
-                    name="quantity"
-                  />
-                </div>
-              )}
+              item,
+              <div>
+                <QuantityButton type="submit" disabled={item.quantity <= 1}>
+                  <ion-icon name="remove-circle" />
+                </QuantityButton>
+                <input
+                  type="hidden"
+                  value={item.quantity - 1}
+                  name="quantity"
+                />
+              </div>
+            )}
             {this.renderUpdateQuantityComponent(
               item,
               <InputQuantity
@@ -150,10 +150,10 @@ class CartTable extends React.Component {
         <Table align="center">
           <thead>
             <tr>
-              <TH>Name</TH>
-              <THCenter width="30px">Price</THCenter>
-              <THCenter width="20px">Quantity</THCenter>
-              <THCenter width="70px">Total</THCenter>
+              <TH width="25%">Name</TH>
+              <THCenter width="25%">Price</THCenter>
+              <THCenter width="25%">Quantity</THCenter>
+              <THCenter width="25%">Total</THCenter>
             </tr>
           </thead>
           <tbody>

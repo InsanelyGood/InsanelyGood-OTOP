@@ -4,6 +4,7 @@ import OrderTable from "../components/admin/order_table";
 
 const Component = styled.div`
   padding-top: 5em;
+  padding-bottom: 5em;
 `;
 
 class Admin extends React.Component {
