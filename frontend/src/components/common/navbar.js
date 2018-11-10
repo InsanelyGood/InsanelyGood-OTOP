@@ -71,14 +71,15 @@ class NavBar extends React.Component {
 
   onUserMouseEnter = () => {
     this.setState({ dropdownUserOpen: true });
-  }
+  };
 
   onUserMouseLeave = () => {
     this.setState({ dropdownUserOpen: false });
-  }
+  };
 
   onLogoutClicked = () => {
-    Cookie.remove("username");
+    Cookie.remove("username");    
+    Cookie.remove("role");
   };
 
   render = () => {
@@ -88,6 +89,11 @@ class NavBar extends React.Component {
           <NavbarBrand href="/">OTOPaholic</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar={true}>
             <Nav className="ml-auto" navbar={true}>
+              {Cookie.get("role") === "admin" && (
+                <NavItem>
+                  <NavLink href="/admin">ADMIN</NavLink>
+                </NavItem>
+              )}
               <NavItem>
                 <NavDropdown
                   onMouseOver={this.onMouseEnter}
