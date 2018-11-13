@@ -26,15 +26,15 @@ class OrderItem extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      status: ""
+      status: props.detail.status
     };
   }
 
-  componentDidMount() {
-    this.setState({
-      status: this.props.detail.status
-    });
-  }
+  // componentDidMount() {
+  //   this.setState({
+  //     status: this.props.detail.status
+  //   });
+  // }
 
   renderOrderDetail = () => {
     this.setState({
@@ -67,8 +67,7 @@ class OrderItem extends React.Component {
 
   render() {
     const { detail } = this.props;
-    console.log(detail);
-
+    
     return (
       <TR onClick={this.renderOrderDetail}>
         <TD>{detail._id}</TD>
