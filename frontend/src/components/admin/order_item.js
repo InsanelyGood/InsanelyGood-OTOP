@@ -16,6 +16,10 @@ const TR = styled.tr`
     cursor: pointer;
   }
 `;
+const DeleteButton = styled.button`
+  position: absolute;
+  left: 3%;
+`;
 
 class OrderItem extends React.Component {
   constructor(props) {
@@ -63,6 +67,8 @@ class OrderItem extends React.Component {
 
   render() {
     const { detail } = this.props;
+    console.log(detail);
+
     return (
       <TR onClick={this.renderOrderDetail}>
         <TD>{detail._id}</TD>
@@ -77,27 +83,30 @@ class OrderItem extends React.Component {
         >
           <ModalHeader toggle={this.renderOrderDetail}>Order</ModalHeader>
           <ModalBody>
+            <p>Name: {detail.userId}</p>
+            <p>Address: {detail.shippingAddress}</p>
+            <p>
+              Products:{" "}
+              {detail.purchasedList.map(
+                item => item.productID + " " + item.quantity
+              )}
+            </p>
+            <p>Total Price: {detail.totalPrice}</p>
             <form id="orderForm" onSubmit={this.handleSubmit}>
-              <select name="status" onChange={this.handleStatusChange}>
-                <option
-                  value="orderCreated"
-                  selected={detail.status === "orderCreated"}
-                >
-                  orderCreated
-                </option>
-                <option
-                  value="adminAccepted"
-                  selected={detail.status === "adminAccepted"}
-                >
-                  adminAccepted
-                </option>
+              <select
+                name="status"
+                defaultValue={detail.status}
+                onChange={this.handleStatusChange}
+              >
+                <option value="orderCreated">orderCreated</option>
+                <option value="adminAccepted">adminAccepted</option>
               </select>
             </form>
           </ModalBody>
           <ModalFooter>
-            <button>Delete Order</button>
+            <DeleteButton>Delete Order</DeleteButton>
             <button form="orderForm">Update Order</button>
-            <button>Cancle</button>
+            <button>Cancel</button>
           </ModalFooter>
         </Modal>
       </TR>

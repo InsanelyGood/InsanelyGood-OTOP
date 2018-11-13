@@ -6,10 +6,11 @@ import {
   Nav,
   NavItem,
   NavLink,
-  NavDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Dropdown,
+  NavbarToggler
 } from "reactstrap";
 import { getUsername } from "../../api/user_infomation";
 import Cookie from "js-cookie";
@@ -22,7 +23,8 @@ class NavBar extends React.Component {
     this.state = {
       dropdownOpen: false,
       dropdownUserOpen: false,
-      firstname: ""
+      firstname: "",
+      isOpen: false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -78,8 +80,11 @@ class NavBar extends React.Component {
   };
 
   onLogoutClicked = () => {
-    Cookie.remove("username");    
+    Cookie.remove("username");
     Cookie.remove("role");
+  };
+  toggleResponsive = () => {
+    this.setState({ isOpen: true });
   };
 
   render = () => {
@@ -87,6 +92,7 @@ class NavBar extends React.Component {
       <div>
         <Navbar className="top-navbar" dark={true} expand="md">
           <NavbarBrand href="/">OTOPaholic</NavbarBrand>
+          <NavbarToggler onClick={this.toggleResponsive} />
           <Collapse isOpen={this.state.isOpen} navbar={true}>
             <Nav className="ml-auto" navbar={true}>
               {Cookie.get("role") === "admin" && (
@@ -95,7 +101,7 @@ class NavBar extends React.Component {
                 </NavItem>
               )}
               <NavItem>
-                <NavDropdown
+                <Dropdown
                   onMouseOver={this.onMouseEnter}
                   onMouseLeave={this.onMouseLeave}
                   isOpen={this.state.dropdownOpen}
@@ -124,7 +130,7 @@ class NavBar extends React.Component {
                       NORTHEASTEN
                     </DropdownItem>
                   </DropdownMenu>
-                </NavDropdown>
+                </Dropdown>
               </NavItem>
               {Cookie.get("username") ? (
                 <Fragment>
@@ -135,7 +141,7 @@ class NavBar extends React.Component {
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavDropdown
+                    <Dropdown
                       onMouseOver={this.onUserMouseEnter}
                       onMouseLeave={this.onUserMouseLeave}
                       isOpen={this.state.dropdownUserOpen}
@@ -171,7 +177,7 @@ class NavBar extends React.Component {
                           Log Out
                         </DropdownItem>
                       </DropdownMenu>
-                    </NavDropdown>
+                    </Dropdown>
                   </NavItem>
                 </Fragment>
               ) : (
