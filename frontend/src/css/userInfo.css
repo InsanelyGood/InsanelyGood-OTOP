@@ -126,3 +126,7 @@ editable textarea{
     opacity: 1;
     right: 0;
   }
+
+  .userComponent{
+      margin-bottom: 5%;
+  }

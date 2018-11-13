@@ -11,13 +11,14 @@
     border-color: white!important;
     /* border-color: #D75404 !important; */
     background-color: rgb(200,94,38) !important;
-    margin-bottom: 50px;
+    margin-bottom: 150px;
     font-size: 24px !important;
     /* width: 100px !important; */
     /* padding: 10px 80px 10px 80px !important; */
     padding-top: 15px !important;
     padding-bottom: 15px !important;
     width: 230px !important;
+
 }
 
 .buttonShop{
@@ -26,7 +27,7 @@
     border-color: white !important;
     background-color: rgb(231,184,80) !important;
     /* border-color: #F08D33!important; */
-    margin-bottom: 50px;
+    margin-bottom: 150px;
     margin-right: 50px;
     font-size: 24px !important;
     padding-top: 15px !important;
@@ -35,6 +36,6 @@
 }
 
 .logoBlack{
-    margin-top: 120px;
+    margin-top: 140px;
     width: 15% ;
 }
