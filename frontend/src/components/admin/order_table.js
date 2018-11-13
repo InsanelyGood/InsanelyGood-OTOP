@@ -11,6 +11,9 @@ const TH = styled.th`
   padding: 8px;
   font-size: 18px;
   text-align: center;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 class OrderTable extends React.Component {
@@ -27,6 +30,20 @@ class OrderTable extends React.Component {
     });
   }
 
+  handleSortByPrice = () => {
+    let sortPrice = this.state.orders.sort(
+      (first, second) => first.totalPrice - second.totalPrice
+    );
+    this.setState({ orders: sortPrice });
+  };
+
+  handleSortByDate = () => {
+    let sortDate = this.state.orders.sort(
+      (first, second) => new Date(first.dateTime) - new Date(second.dateTime)
+    );
+    this.setState({ orders: sortDate });
+  };
+
   render() {
     return (
       <div className="container mt-5">
@@ -34,8 +51,8 @@ class OrderTable extends React.Component {
           <thead>
             <tr>
               <TH>OrderID</TH>
-              <TH>Price</TH>
-              <TH>Date</TH>
+              <TH onClick={this.handleSortByPrice}>Price</TH>
+              <TH onClick={this.handleSortByDate}>Date</TH>
               <TH>Status</TH>
             </tr>
           </thead>

@@ -13,6 +13,7 @@ const TR = styled.tr`
   &:hover {
     color: green;
     font-weight: bold;
+    cursor: pointer;
   }
 `;
 
