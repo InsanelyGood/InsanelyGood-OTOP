@@ -10,6 +10,7 @@ const TH = styled.th`
   border: 1px solid #ddd;
   padding: 8px;
   font-size: 18px;
+  text-align: center;
 `;
 
 class OrderTable extends React.Component {
@@ -21,12 +22,9 @@ class OrderTable extends React.Component {
   }
 
   async componentDidMount() {
-    this.setState(
-      {
-        orders: await getOrders()
-      },
-      () => console.log(this.state.orders)
-    );
+    this.setState({
+      orders: await getOrders()
+    });
   }
 
   render() {
@@ -42,7 +40,10 @@ class OrderTable extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.orders && this.state.orders.map(order => <OrderItem key={order._id} detail={order}/>)}
+            {this.state.orders &&
+              this.state.orders.map(order => (
+                <OrderItem key={order._id} detail={order} />
+              ))}
           </tbody>
         </Table>
       </div>
