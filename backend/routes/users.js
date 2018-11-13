@@ -5,9 +5,9 @@ const passport = require("passport");
 
 const User = require("../models/users");
 
-const findUser = require("../middlewares/findUser")
-const findUserByPath = require("../middlewares/findUserByPath")
-const findProductsFromCartList = require("../middlewares/findProductsFromCartList")
+const findUser = require("../middlewares/findUser");
+const findUserByPath = require("../middlewares/findUserByPath");
+const findProductsFromCartList = require("../middlewares/findProductsFromCartList");
 
 router.get("/", (req, res) => {
   User.find({}, (err, users) => {
@@ -27,10 +27,10 @@ router.get("/test", (req, res) => {
 });
 
 // Login Process
-router.post("/login", function (req, res, next) {
+router.post("/login", function(req, res, next) {
   console.log("login");
 
-  passport.authenticate("local", function (err, user, info) {
+  passport.authenticate("local", function(err, user, info) {
     console.log("in local authen");
     if (err) {
       console.log("in error");
@@ -43,17 +43,19 @@ router.post("/login", function (req, res, next) {
       return res.redirect("http://localhost:3000/users/login");
     }
 
-    req.logIn(user, function (err) {
+    req.logIn(user, function(err) {
       if (err) {
         return next(err);
       }
-
+      if (user.role === "admin") {
+        res.cookie("role", user.role);
+      }
       return res
         .cookie("username", user.username)
         .redirect("http://localhost:3000/");
     });
   })(req, res, next);
-})
+});
 
 // Register Form
 // router.get("/register", function (req, res) {
@@ -61,22 +63,22 @@ router.post("/login", function (req, res, next) {
 // });
 
 // Register Process
-router.post("/register", function (req, res) {
-  console.log("Entire Register process")
+router.post("/register", function(req, res) {
+  console.log("Entire Register process");
   User.findOne({ username: req.body.username }, (err, user) => {
     if (err) {
       res.send(401);
     } else if (!user) {
-      console.log("Register gogo")
-      registerProcess()
+      console.log("Register gogo");
+      registerProcess();
     } else {
-      console.log("Username is already exits")
-      res.status(409).send("Username is already exits")
+      console.log("Username is already exits");
+      res.status(409).send("Username is already exits");
     }
   });
 
   function registerProcess() {
-    console.log("Register processing")
+    console.log("Register processing");
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const email = req.body.email;
@@ -94,7 +96,9 @@ router.post("/register", function (req, res) {
     req
       .checkBody("confirm_password", "Confirm Password do not match")
       .equals(req.body.password);
-    req.checkBody("telephone_number", "telephone_number is Required").notEmpty();
+    req
+      .checkBody("telephone_number", "telephone_number is Required")
+      .notEmpty();
     // req.checkBody('telephone_number','telephone_number size must be 10').size() == 10;
 
     let errors = req.validationErrors();
@@ -116,14 +120,14 @@ router.post("/register", function (req, res) {
         cart_list: []
       });
 
-      bcrypt.genSalt(10, function (err, salt) {
+      bcrypt.genSalt(10, function(err, salt) {
         if (err) console.log(err);
-        bcrypt.hash(newUser.password, salt, function (err, hash) {
+        bcrypt.hash(newUser.password, salt, function(err, hash) {
           if (err) {
             console.log(err);
           }
           newUser.password = hash;
-          newUser.save(function (err) {
+          newUser.save(function(err) {
             if (err) {
               console.log(err);
               return;
@@ -141,34 +145,39 @@ router.post("/register", function (req, res) {
 router.post("/password/change", findUser, (req, res, next) => {
   // console.log(">>>>>>>>User", req.user)
   // console.log(">>>>>>>>Body", req.body)
-  let { username, oldPassword, newPassword } = req.body
-  console.log('user', req.body);
+  let { username, oldPassword, newPassword } = req.body;
+  console.log("user", req.body);
 
   // Match Password
-  bcrypt.compare(oldPassword, req.user.password, function (err, isMatch) {
+  bcrypt.compare(oldPassword, req.user.password, function(err, isMatch) {
     if (err) throw err;
     if (isMatch || oldPassword == req.user.password) {
-
-      bcrypt.genSalt(10, function (err, salt) {
+      bcrypt.genSalt(10, function(err, salt) {
         if (err) console.log(err);
-        bcrypt.hash(newPassword, salt, function (err, hash) {
-          if (err) { console.log(err); }
+        bcrypt.hash(newPassword, salt, function(err, hash) {
+          if (err) {
+            console.log(err);
+          }
           newPassword = hash;
-          const query = { username: username }
-          User.findOneAndUpdate(query, { password: newPassword }, function (err) {
+          const query = { username: username };
+          User.findOneAndUpdate(query, { password: newPassword }, function(
+            err
+          ) {
             // console.log("newUserData>>>>",newUserData)
             if (err) {
-              console.log(err)
-              res.status(404).send({err: "Update fail. There is something wrong in update process"})
-              return
-            } else
-            
-            res.status(200).send({err: "Update password success"})
-          })
-        })
-      })
+              console.log(err);
+              res
+                .status(404)
+                .send({
+                  err: "Update fail. There is something wrong in update process"
+                });
+              return;
+            } else res.status(200).send({ err: "Update password success" });
+          });
+        });
+      });
     } else {
-      return res.status(404).send({ err: "Wrong old password"})
+      return res.status(404).send({ err: "Wrong old password" });
     }
   });
 });
@@ -177,7 +186,15 @@ router.post("/password/change", findUser, (req, res, next) => {
 router.get("/:username/information", findUserByPath, (req, res, next) => {
   // console.log(">>>>>>>>",req.user)
   if (req.user) {
-    const { role, username, firstname, lastname, email, address, telephone_number } = req.user
+    const {
+      role,
+      username,
+      firstname,
+      lastname,
+      email,
+      address,
+      telephone_number
+    } = req.user;
     res.status(200).send({
       role,
       username,
@@ -185,17 +202,23 @@ router.get("/:username/information", findUserByPath, (req, res, next) => {
       lastname,
       email,
       address,
-      telephoneNumber: telephone_number,
-    })
-  }
-  else res.status(404).send("Not found");
+      telephoneNumber: telephone_number
+    });
+  } else res.status(404).send("Not found");
 });
 
 // User Information save
 router.post("/:username/information/save", findUserByPath, (req, res, next) => {
   // console.log("Req.body>>>>>>>>",req.body)
   // console.log("Req.user>>>>>>>>",req.user)
-  const { username, firstname, lastname, email, address, telephoneNumber } = req.body
+  const {
+    username,
+    firstname,
+    lastname,
+    email,
+    address,
+    telephoneNumber
+  } = req.body;
   let newUserData = {
     username,
     password: req.user.password,
@@ -204,37 +227,49 @@ router.post("/:username/information/save", findUserByPath, (req, res, next) => {
     email,
     address,
     telephoneNumber
-  }
+  };
   // console.log("newUserData>>>>", newUserData)
 
-  const query = { _id: req.user._id }
+  const query = { _id: req.user._id };
 
-  User.updateOne(query, newUserData, function (err) {
+  User.updateOne(query, newUserData, function(err) {
     // console.log("newUserData>>>>",newUserData)
     if (err) {
-      console.log(err)
-      res.status(404).send("Update fail. There is something wrong in update process")
-      return
+      console.log(err);
+      res
+        .status(404)
+        .send("Update fail. There is something wrong in update process");
+      return;
     } else {
-      res.status(200).send("Update user data success")
+      res.status(200).send("Update user data success");
       // res.redirect('http://localhost:3000/users/information')
     }
-  })
+  });
 });
 
 // Cart list
-router.get("/:username/cart", findUserByPath, findProductsFromCartList, (req, res) => {
-  res.status(200).send(req.products)
-})
+router.get(
+  "/:username/cart",
+  findUserByPath,
+  findProductsFromCartList,
+  (req, res) => {
+    res.status(200).send(req.products);
+  }
+);
 
 // Checkout Information
-router.get("/:username/checkout", findUserByPath, findProductsFromCartList, (req, res) => {
-  // console.log("address",req.user.address)
-  // console.log("products",req.products)
-  res.status(200).send({
-    address: req.user.address,
-    products: req.products
-  })
-})
+router.get(
+  "/:username/checkout",
+  findUserByPath,
+  findProductsFromCartList,
+  (req, res) => {
+    // console.log("address",req.user.address)
+    // console.log("products",req.products)
+    res.status(200).send({
+      address: req.user.address,
+      products: req.products
+    });
+  }
+);
 
 module.exports = router;
