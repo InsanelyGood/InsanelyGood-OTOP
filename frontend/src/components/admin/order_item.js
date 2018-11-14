@@ -5,13 +5,14 @@ import PropTypes from "prop-types";
 
 const TD = styled.td`
   width: 250px;
-  border: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   padding: 8px;
   text-align: center;
 `;
 const TR = styled.tr`
   &:hover {
-    color: green;
+    box-shadow: 0px 2px 18px 0px rgba(0, 0, 0, 0.5);
     font-weight: bold;
     cursor: pointer;
   }
@@ -19,6 +20,13 @@ const TR = styled.tr`
 const DeleteButton = styled.button`
   position: absolute;
   left: 3%;
+`;
+const Status = styled.div`
+  display: inline-block;
+  color: white;
+  border-radius: 20px;
+  padding-left: 7px;
+  padding-right: 7px;
 `;
 
 class OrderItem extends React.Component {
@@ -67,13 +75,17 @@ class OrderItem extends React.Component {
 
   render() {
     const { detail } = this.props;
-    
+
     return (
       <TR onClick={this.renderOrderDetail}>
         <TD>{detail._id}</TD>
-        <TD>{detail.totalPrice}</TD>
-        <TD>{detail.dateTime}</TD>
-        <TD>{detail.status}</TD>
+        <TD>
+          {detail.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+        </TD>
+        <TD>{new Date(detail.dateTime).toUTCString()}</TD>
+        <TD>
+          <Status style={{ backgroundColor: (detail.status === 'orderCreated' ? '#388ea8' : '#91E31F')}}>{detail.status}</Status>
+        </TD>
         <Modal
           isOpen={this.state.modal}
           size="lg"

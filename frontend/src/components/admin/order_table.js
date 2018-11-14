@@ -7,7 +7,8 @@ const Table = styled.table`
   width: 100%;
 `;
 const TH = styled.th`
-  border: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   padding: 8px;
   font-size: 18px;
   text-align: center;
