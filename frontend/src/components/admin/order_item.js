@@ -34,6 +34,7 @@ class OrderItem extends React.Component {
     super(props);
     this.state = {
       modal: false,
+      nestedModal: false,
       status: props.detail.status
     };
   }
@@ -50,6 +51,12 @@ class OrderItem extends React.Component {
     });
   };
 
+  toggleNested = () => {
+    this.setState({
+      nestedModal: !this.state.nestedModal
+    });
+  };
+
   handleStatusChange = e => {
     this.setState({
       status: e.target.value
@@ -58,8 +65,6 @@ class OrderItem extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    // const data = new FormData(e.target);
-    console.log("data", this.props.detail.status);
     fetch("http://localhost:8000/orders/" + this.props.detail._id, {
       method: "POST",
       headers: {
@@ -67,6 +72,19 @@ class OrderItem extends React.Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ status: this.state.status })
+    }).then(() => {
+      this.setState({ modal: false });
+      window.location.reload();
+    });
+  };
+
+  handleDelete = () => {
+    fetch("http://localhost:8000/orders/" + this.props.detail._id, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
     }).then(() => {
       this.setState({ modal: false });
       window.location.reload();
@@ -84,7 +102,14 @@ class OrderItem extends React.Component {
         </TD>
         <TD>{new Date(detail.dateTime).toUTCString()}</TD>
         <TD>
-          <Status style={{ backgroundColor: (detail.status === 'orderCreated' ? '#388ea8' : '#91E31F')}}>{detail.status}</Status>
+          <Status
+            style={{
+              backgroundColor:
+                detail.status === "orderCreated" ? "#388ea8" : "#91E31F"
+            }}
+          >
+            {detail.status}
+          </Status>
         </TD>
         <Modal
           isOpen={this.state.modal}
@@ -115,9 +140,37 @@ class OrderItem extends React.Component {
             </form>
           </ModalBody>
           <ModalFooter>
-            <DeleteButton>Delete Order</DeleteButton>
-            <button form="orderForm">Update Order</button>
-            <button>Cancel</button>
+            <DeleteButton
+              className="btn btn-danger"
+              onClick={this.toggleNested}
+            >
+              Delete Order
+            </DeleteButton>
+            <Modal
+              isOpen={this.state.nestedModal}
+              toggle={this.toggleNested}
+              centered
+            >
+              <ModalHeader>Confirm delete</ModalHeader>
+              <ModalBody>Delete this order?</ModalBody>
+              <ModalFooter>
+                <button className="btn btn-success" onClick={this.handleDelete}>
+                  Yes
+                </button>
+                <button className="btn btn-danger" onClick={this.toggleNested}>
+                  No
+                </button>
+              </ModalFooter>
+            </Modal>
+            <button className="btn btn-success" form="orderForm">
+              Update Order
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={this.renderOrderDetail}
+            >
+              Cancel
+            </button>
           </ModalFooter>
         </Modal>
       </TR>
