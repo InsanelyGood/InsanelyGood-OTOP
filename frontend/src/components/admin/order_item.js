@@ -129,6 +129,7 @@ class OrderItem extends React.Component {
             </p>
             <p>Total Price: {detail.totalPrice}</p>
             <form id="orderForm" onSubmit={this.handleSubmit}>
+            <label style={{paddingRight: '10px'}}>Status:</label>
               <select
                 name="status"
                 defaultValue={detail.status}
