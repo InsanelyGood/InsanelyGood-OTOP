@@ -3,11 +3,12 @@ import styled from "styled-components";
 import { getOrders } from "../../api/orders_list";
 import OrderItem from "./order_item";
 
-const Table = styled.table`
+export const Table = styled.table`
   width: 100%;
 `;
-const TH = styled.th`
-  border: 1px solid #ddd;
+export const TH = styled.th`
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   padding: 8px;
   font-size: 18px;
   text-align: center;
