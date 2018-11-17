@@ -36,11 +36,9 @@ const CheckoutButton = styled.button`
   padding: 10px;
   width: 150px;
   transition: all 0.5s;
-  cursor: pointer;
   margin: 5px;
 
   span {
-    cursor: pointer;
     display: inline-block;
     position: relative;
     transition: 0.5s;
@@ -126,14 +124,20 @@ class Cart extends React.Component {
         </Head>
         <CartTable cartItem={this.state.carts} />
         <RightDiv className="container">
-        <Link to='/products'>
-          <ShopMore>Continue Shopping</ShopMore>
-        </Link>
-          <Link to="/checkout">
-            <CheckoutButton>
-              <span>Checkout</span>
-            </CheckoutButton>
+          <Link to="/products">
+            <ShopMore>Continue Shopping</ShopMore>
           </Link>
+          {this.state.carts.length === 0 ? (
+            <CheckoutButton tyle={{ cursor: "no-drop" }}>
+              <span style={{ cursor: "no-drop" }}>Checkout</span>
+            </CheckoutButton>
+          ) : (
+            <Link to="/checkout">
+              <CheckoutButton style={{ cursor: "pointer" }}>
+                <span>Checkout</span>
+              </CheckoutButton>
+            </Link>
+          )}
         </RightDiv>
       </CartComponent>
     );
