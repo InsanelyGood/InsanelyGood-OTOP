@@ -80,4 +80,15 @@ router.post("/add", (req, res) => {
   res.redirect("/products");
   // res.send({ product })
 });
+
+router.post('/:id', (req, res) => {  
+  Product.update({_id: req.params.id}, req.body.product, (err) => {
+    if(err) {
+      console.log(err);
+    } else {
+      res.send('Success')
+    }
+  })
+})
+
 module.exports = router;

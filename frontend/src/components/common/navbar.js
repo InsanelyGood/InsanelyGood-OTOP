@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
@@ -23,6 +24,7 @@ class NavBar extends React.Component {
     this.state = {
       dropdownOpen: false,
       dropdownUserOpen: false,
+      dropdownAdminOpen: false,
       firstname: "",
       isOpen: false
     };
@@ -57,6 +59,10 @@ class NavBar extends React.Component {
     }));
   }
 
+  toggleAdmin = () => {
+    this.setState({ dropdownAdminOpen: !this.state.dropdownAdminOpen });
+  };
+
   // toggleShop = () => {
   //   this.setState({
   //     dropdownShopOpen: !this.state.dropdownShopOpen
@@ -79,42 +85,52 @@ class NavBar extends React.Component {
     this.setState({ dropdownUserOpen: false });
   };
 
+  onAdminMouseEnter = () => {
+    this.setState({ dropdownAdminOpen: true });
+  };
+
+  onAdminMouseLeave = () => {
+    this.setState({ dropdownAdminOpen: false });
+  };
+
   onLogoutClicked = () => {
     Cookie.remove("username");
     Cookie.remove("role");
   };
+
   toggleResponsive = () => {
     this.setState({ isOpen: true });
   };
 
   render = () => {
-    return (
-      <div>
+    return <div>
         <Navbar className="top-navbar" dark={true} expand="md">
           <NavbarBrand href="/">OTOPaholic</NavbarBrand>
           <NavbarToggler onClick={this.toggleResponsive} />
           <Collapse isOpen={this.state.isOpen} navbar={true}>
             <Nav className="ml-auto" navbar={true}>
-              {Cookie.get("role") === "admin" && (
-                <NavItem>
-                  <NavLink href="/admin">ADMIN</NavLink>
-                </NavItem>
-              )}
+              {Cookie.get("role") === "admin" && <NavItem>
+                  <Dropdown onMouseOver={this.onAdminMouseEnter} onMouseLeave={this.onAdminMouseLeave} isOpen={this.state.dropdownAdminOpen} toggle={this.toggleAdmin}>
+                    <DropdownToggle nav caret>
+                      ADMIN
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <Link className="cilckable" to="/admin/orders">
+                        <DropdownItem>ORDERS</DropdownItem>
+                      </Link>
+                      <Link className="cilckable" to="/admin/products">
+                        <DropdownItem>PRODUCTS</DropdownItem>
+                      </Link>
+                    </DropdownMenu>
+                  </Dropdown>
+                </NavItem>}
               <NavItem>
-                <Dropdown
-                  onMouseOver={this.onMouseEnter}
-                  onMouseLeave={this.onMouseLeave}
-                  isOpen={this.state.dropdownOpen}
-                  toggle={this.toggle}
-                >
+                <Dropdown onMouseOver={this.onMouseEnter} onMouseLeave={this.onMouseLeave} isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                   <DropdownToggle nav caret>
                     PRODUCTS
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem
-                      className="cilckable"
-                      href="http://localhost:3000/products"
-                    >
+                    <DropdownItem className="cilckable" href="http://localhost:3000/products">
                       ALL
                     </DropdownItem>
                     <DropdownItem className="cilckable" href="#">
@@ -132,8 +148,7 @@ class NavBar extends React.Component {
                   </DropdownMenu>
                 </Dropdown>
               </NavItem>
-              {Cookie.get("username") ? (
-                <Fragment>
+              {Cookie.get("username") ? <Fragment>
                   <NavItem>
                     <NavLink href="/cart">
                       <ion-icon name="ios-cart" />
@@ -141,12 +156,7 @@ class NavBar extends React.Component {
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <Dropdown
-                      onMouseOver={this.onUserMouseEnter}
-                      onMouseLeave={this.onUserMouseLeave}
-                      isOpen={this.state.dropdownUserOpen}
-                      toggle={this.toggleUser}
-                    >
+                    <Dropdown onMouseOver={this.onUserMouseEnter} onMouseLeave={this.onUserMouseLeave} isOpen={this.state.dropdownUserOpen} toggle={this.toggleUser}>
                       <DropdownToggle nav caret>
                         <ion-icon name="md-contact" />
                       </DropdownToggle>
@@ -154,22 +164,13 @@ class NavBar extends React.Component {
                         <DropdownItem header>
                           HI, {this.state.firstname}
                         </DropdownItem>
-                        <DropdownItem
-                          className="cilckable"
-                          href="http://localhost:3000/users/information/"
-                        >
+                        <DropdownItem className="cilckable" href="http://localhost:3000/users/information/">
                           Profile
                         </DropdownItem>
-                        <DropdownItem
-                          className="cilckable"
-                          href="http://localhost:3000/users/information/edit"
-                        >
+                        <DropdownItem className="cilckable" href="http://localhost:3000/users/information/edit">
                           Edit Profile
                         </DropdownItem>
-                        <DropdownItem
-                          className="cilckable"
-                          href="http://localhost:3000/users/information/changePassword"
-                        >
+                        <DropdownItem className="cilckable" href="http://localhost:3000/users/information/changePassword">
                           Change Password
                         </DropdownItem>
                         <DropdownItem divider />
@@ -179,17 +180,13 @@ class NavBar extends React.Component {
                       </DropdownMenu>
                     </Dropdown>
                   </NavItem>
-                </Fragment>
-              ) : (
-                <NavItem>
+                </Fragment> : <NavItem>
                   <NavLink href="/users/login">Login</NavLink>
-                </NavItem>
-              )}
+                </NavItem>}
             </Nav>
           </Collapse>
         </Navbar>
-      </div>
-    );
+      </div>;
   };
 }
 
