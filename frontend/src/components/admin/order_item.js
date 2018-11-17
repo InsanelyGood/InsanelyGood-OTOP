@@ -3,21 +3,8 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { getDetailOfOrder } from "../../api/orders_list";
-import { Table, TH } from "./order_table";
+import { Table, TH, TD, TR } from "./admin_styled";
 
-const TD = styled.td`
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-`;
-const TR = styled.tr`
-  &:hover {
-    box-shadow: 0px 2px 18px 0px rgba(0, 0, 0, 0.5);
-    font-weight: bold;
-    cursor: pointer;
-  }
-`;
 const DeleteButton = styled.button`
   position: absolute;
   left: 3%;
