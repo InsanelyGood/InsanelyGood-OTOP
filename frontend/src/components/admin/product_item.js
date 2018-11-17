@@ -9,6 +9,10 @@ const Img = styled.img`
   width: 150px;
   heigth: 100px;
 `;
+const DeleteButton = styled.button`
+  position: absolute;
+  left: 3%;
+`;
 
 class ProductItem extends React.Component {
   constructor(props) {
@@ -29,6 +33,12 @@ class ProductItem extends React.Component {
   renderProductDetail = () => {
     this.setState({
       modal: !this.state.modal
+    });
+  };
+
+  toggleNested = () => {
+    this.setState({
+      nestedModal: !this.state.nestedModal
     });
   };
 
@@ -74,6 +84,19 @@ class ProductItem extends React.Component {
           region: this.state.region
         }
       })
+    }).then(() => {
+      this.setState({ modal: false });
+      window.location.reload();
+    });
+  };
+
+  handleDelete = () => {
+    fetch("http://localhost:8000/products/" + this.props.detail._id, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
     }).then(() => {
       this.setState({ modal: false });
       window.location.reload();
@@ -165,11 +188,33 @@ class ProductItem extends React.Component {
             </Form>
           </ModalBody>
           <ModalFooter>
+            <DeleteButton
+              className="btn btn-danger"
+              onClick={this.toggleNested}
+            >
+              Delete Product
+            </DeleteButton>
+            <Modal
+              isOpen={this.state.nestedModal}
+              toggle={this.toggleNested}
+              centered
+            >
+              <ModalHeader>Confirm delete</ModalHeader>
+              <ModalBody>Delete this product?</ModalBody>
+              <ModalFooter>
+                <button className="btn btn-success" onClick={this.handleDelete}>
+                  Yes
+                </button>
+                <button className="btn btn-danger" onClick={this.toggleNested}>
+                  No
+                </button>
+              </ModalFooter>
+            </Modal>
             <button className="btn btn-success" form="productForm">
               Update
             </button>
             <button
-              className="btn btn-danger"
+              className="btn btn-secondary"
               onClick={this.renderProductDetail}
             >
               Cancel

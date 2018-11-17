@@ -26,7 +26,7 @@ class ProductTable extends React.Component {
 
   render() {
     return (
-      <div className="container mt-5">
+      <div className="container mt-3">
         <Table align="center">
           <thead>
             <tr>

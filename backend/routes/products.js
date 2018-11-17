@@ -77,8 +77,7 @@ router.post("/add", (req, res) => {
   product.region = req.body.region;
 
   product.save();
-  res.redirect("/products");
-  // res.send({ product })
+  res.send('Success')
 });
 
 router.post('/:id', (req, res) => {  
@@ -90,5 +89,20 @@ router.post('/:id', (req, res) => {
     }
   })
 })
+
+router.delete("/:id", (req, res) => {
+  let query = {
+    _id: req.params.id
+  };
+  Product.findById(req.params.id, (err) => {
+    Product.remove(query, err => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("Delete Success");
+      }
+    });
+  });
+});
 
 module.exports = router;
