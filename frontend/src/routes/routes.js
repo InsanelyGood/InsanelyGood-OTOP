@@ -13,6 +13,7 @@ import UserInfoEdit from "../views/userEdit";
 import UserPassword from "../views/userPassword";
 import Cart from "../views/cart";
 import Checkout from "../views/checkout";
+import Admin from "../views/admin";
 
 const routes = [
   {
@@ -80,13 +81,17 @@ const routes = [
     exact: true,
     component: Checkout,
     canAccess: true
+  },
+  {
+    path: "/admin",
+    exact: true,
+    component: Admin,
+    canAccess: Cookies.get("role") === "admin"
   }
 ];
 
 export default () => (
   <Fragment>
-    {routes.map(
-      (route, i) => route.canAccess && <Route key={i} {...route} />
-    )}
+    {routes.map((route, i) => route.canAccess && <Route key={i} {...route} />)}
   </Fragment>
 );

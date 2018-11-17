@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Order = require("../models/orders");
 const User = require("../models/users");
+const Product = require("../models/products");
 
 const findUserByPath = require("../middlewares/findUserByPath");
 const orderCreated = "orderCreated";
@@ -97,6 +98,46 @@ router.delete("/:id", (req, res) => {
         res.send("Delete Success");
       }
     });
+  });
+});
+
+router.get("/:id/fullDetail", (req, res) => {
+  let data = {
+    firstname: "",
+    lastname: "",
+    shippingAddress: "",
+    status: "",
+    purchasedList: [],
+    totalPrice: 0
+  };
+  Order.findById(req.params.id, (err, order) => {
+    if (err) {
+      console.log(err);
+    } else {
+      User.findById(order.userId, async (err, user) => {
+        if (err) {
+          console.log(err);
+        } else {
+          data.firstname = user.firstname;
+          data.lastname = user.lastname;
+          data.shippingAddress = order.shippingAddress;
+          data.status = order.status;
+          data.totalPrice = order.totalPrice;
+          data.purchasedList = await Promise.all(
+            order.purchasedList.map(async item => {
+              try {
+                const product = await Product.findOne({
+                  id: item.productID
+                }).exec();
+                return { product, quantity: item.quantity };
+              } catch (error) {}
+            })
+          );
+
+          res.send(data);
+        }
+      });
+    }
   });
 });
 
