@@ -162,6 +162,12 @@ class NavBar extends React.Component {
                         </DropdownItem>
                         <DropdownItem
                           className="cilckable"
+                          href="http://localhost:3000/users/information/history"
+                        >
+                          Purchase History
+                        </DropdownItem>
+                        <DropdownItem
+                          className="cilckable"
                           href="http://localhost:3000/users/information/edit"
                         >
                           Edit Profile

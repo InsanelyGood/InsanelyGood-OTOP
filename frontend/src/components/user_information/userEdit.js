@@ -86,23 +86,26 @@ handleSubmit = event => {
             <Row>
               <Col sm="12">
                 <div className="info">
-                    <br/>
                 <editable>
                 <p>
                 <label>Firstname</label>
                 <input className="boxInput" type="text" name="firstName"  onChange={this.handleInputChange} placeholder={this.state.firstName} value={this.state.firstName}></input>
                 </p>
+                <br/>
                 <p>
                 <label>Lastname</label>
                 <input className="boxInput" type="text" name="lastName" onChange={this.handleInputChange} placeholder={this.state.lastName} value={this.state.lastName}></input>
                 </p>
+                <br/>
                 </editable>
                 <p>
+                <br/>
                 <label>Username</label>
                 {/* <input type="text" name="username" onChange={this.handleInputChange} placeholder={this.state.username} value={this.state.username}></input> */}
 
                     <input className="boxInput" type="text" name="username" value={this.state.username} readOnly="readonly"></input>
                 </p>
+                <br/>
                 <editable>
                 {/* <p>
                 <label>Password</label>
@@ -116,10 +119,12 @@ handleSubmit = event => {
                 <label>Email</label>
                 <input className="boxInput" type="email" name="email" onChange={this.handleInputChange} placeholder={this.state.email} value={this.state.email}></input>
                 </p>
+                <br/>
                 <p>
                 <label>Contact Number</label>
                 <input className="boxInput" type="text" name="telephoneNumber" onChange={this.handleInputChange} placeholder={this.state.telephoneNumber} value={this.state.telephoneNumber}></input>
                 </p>
+                <br/>
                 </editable>
                 </div>
                 <p>

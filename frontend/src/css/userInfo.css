@@ -27,16 +27,18 @@ p label{
     float: left; 
     width: 3em; 
     margin-right: 1em; 
+    font-weight: bold;
 }
 .boxInput {
     padding: 2px 4px ;
     border: 1px solid white ;
     border-radius: 4px;
     background-color: #f8f8f8 ;
-    font-size: 14px;
+    font-size: 15px;
     resize: none;
-    width: 300px ;
-    height: 27px !important;
+    width: 73%;
+    height: 30px !important;
+    float: right; 
 }
 .confirm{
     padding: 2px 1px !important;
@@ -129,4 +131,12 @@ editable textarea{
 
   .userComponent{
       margin-bottom: 5%;
+  }
+
+  .historyScroll{
+    margin-top: 5%;
+    margin-top: 5%;
+    overflow-y:scroll;
+    height:400px;
+    
   }

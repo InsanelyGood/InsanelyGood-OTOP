@@ -9,6 +9,7 @@ import Login from "../views/login";
 import Register from "../views/register";
 import Purchased from "../views/purchased";
 import UserInfo from "../views/userInfo";
+import UserHistory from "../views/userHistory";
 import UserInfoEdit from "../views/userEdit";
 import UserPassword from "../views/userPassword";
 import Cart from "../views/cart";
@@ -56,6 +57,12 @@ const routes = [
     path: "/users/information",
     exact: true,
     component: UserInfo,
+    canAccess: true
+  },
+  {
+    path: "/users/information/history",
+    exact: true,
+    component: UserHistory,
     canAccess: true
   },
   {
