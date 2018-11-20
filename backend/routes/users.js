@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 const User = require("../models/users");
+const Product = require("../models/products");
+const Order = require("../models/orders");
 
 const findUser = require("../middlewares/findUser");
 const findUserByPath = require("../middlewares/findUserByPath");
@@ -166,11 +168,9 @@ router.post("/password/change", findUser, (req, res, next) => {
             // console.log("newUserData>>>>",newUserData)
             if (err) {
               console.log(err);
-              res
-                .status(404)
-                .send({
-                  err: "Update fail. There is something wrong in update process"
-                });
+              res.status(404).send({
+                err: "Update fail. There is something wrong in update process"
+              });
               return;
             } else res.status(200).send({ err: "Update password success" });
           });
@@ -271,5 +271,36 @@ router.get(
     });
   }
 );
+
+router.get("/:username/orders", findUserByPath, (req, res) => {
+  Order.find({ userId: req.user._id }, async (err, orders) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const fullOrders = await Promise.all(
+        orders.map(async order => {
+          let newOrder = order
+          const full = await Promise.all(
+            order.purchasedList.map(async item => {
+              try {
+                const product = await Product.findOne({
+                  id: item.productID
+                }).exec();                                
+                return { product, quantity: item.quantity };
+              } catch (error) { }
+            })
+          );
+          newOrder.purchasedList = full;
+          console.log('full',full[0]);
+          return newOrder
+        })
+      ) 
+      // console.log(fullOrders);
+      
+      res.send(fullOrders);
+      // res.send(orders);
+    }
+  });
+});
 
 module.exports = router;
