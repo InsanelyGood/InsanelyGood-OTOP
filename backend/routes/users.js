@@ -279,26 +279,28 @@ router.get("/:username/orders", findUserByPath, (req, res) => {
     } else {
       const fullOrders = await Promise.all(
         orders.map(async order => {
-          let newOrder = order
-          const full = await Promise.all(
+          let newOrder = {
+            _id: order._id,
+            dateTime: order.dateTime,
+            totalPrice: order.totalPrice,
+            status: order.status,
+            shippingAddress: order.shippingAddress,
+            userId: order.userId
+          };
+          newOrder.purchasedList = await Promise.all(
             order.purchasedList.map(async item => {
               try {
                 const product = await Product.findOne({
                   id: item.productID
-                }).exec();                                
+                }).exec();
                 return { product, quantity: item.quantity };
-              } catch (error) { }
+              } catch (error) {}
             })
           );
-          newOrder.purchasedList = full;
-          console.log('full',full[0]);
-          return newOrder
+          return newOrder;
         })
-      ) 
-      // console.log(fullOrders);
-      
+      );
       res.send(fullOrders);
-      // res.send(orders);
     }
   });
 });
