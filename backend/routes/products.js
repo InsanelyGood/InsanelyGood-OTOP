@@ -7,6 +7,7 @@ let Product = require("../models/products");
 router.get("/", (req, res, next) => {
   console.log(req.cookies);
   Product.find({}, (err, products) => {
+    console.log(">>",err)
     res.send({ products });
   });
   // if (req.cookies.username) {
@@ -73,12 +74,36 @@ router.post("/add", (req, res) => {
   product.image = req.body.image;
   product.price = req.body.price;
   product.description = req.body.description;
-  product.stock = req.body.stock;
   product.category = req.body.category;
   product.region = req.body.region;
 
   product.save();
-  res.redirect("/products");
-  // res.send({ product })
+  res.send('Success')
 });
+
+router.post('/:id', (req, res) => {  
+  Product.update({_id: req.params.id}, req.body.product, (err) => {
+    if(err) {
+      console.log(err);
+    } else {
+      res.send('Success')
+    }
+  })
+})
+
+router.delete("/:id", (req, res) => {
+  let query = {
+    _id: req.params.id
+  };
+  Product.findById(req.params.id, (err) => {
+    Product.remove(query, err => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("Delete Success");
+      }
+    });
+  });
+});
+
 module.exports = router;

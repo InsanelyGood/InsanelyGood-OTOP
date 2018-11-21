@@ -28,7 +28,6 @@ describe('POST orders/:username/create', function () {
               "image": "http://static.asiawebdirect.com/m/bangkok/portals/bangkok-com/homepage/shopping-good-buys/thai-products/pagePropertiesImage/otop-shopping.jpg",
               "price": 50,
               "description": "This is shoe",
-              "stock": 5,
               "category": "Shoe",
               "region": "central",
               "__v": 0
