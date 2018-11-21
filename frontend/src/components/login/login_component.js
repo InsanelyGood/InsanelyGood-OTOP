@@ -2,6 +2,8 @@ import React from 'react'
 import { Input, Label, FormFeedback } from 'reactstrap';
 import styled from 'styled-components'
 import '../../css/login&regis.css'
+import Cookies from 'js-cookie';
+import { setUserLogin, getUserLogin } from '../../api/userid';
 
 const Div = styled.div`
     margin: auto;
@@ -20,7 +22,7 @@ const Buttons = styled.input`
     height: 40px;
     border-radius: 5px;
     border-color: #57a9bb;
-    background-color: #57a9bb;
+    background-color: #D78A04;
     font-weight: bold;
 `
 
@@ -32,8 +34,16 @@ class LoginComponent extends React.Component {
             username: '',
             password: '',
             notHaveUsername: false,
-            notHavePassword: false
+            invalidPassword: false
         };
+    }
+
+    async componentDidMount() {
+        const login = await getUserLogin(Cookies.get('username'))
+        this.setState({
+            username: login.username,
+            password: login.password
+        }, () => console.log('pass',this.state.password))
     }
 
     handleInputChange = event => {
@@ -43,19 +53,35 @@ class LoginComponent extends React.Component {
     }
 
     handleSubmit = async event => {
+        if (this.state.username !== '') {
+            this.setState({ notHaveUsername: false })
+            var attribute = document.getElementById("mylink")
+            attribute.setAttribute('herf', "http://localhost:3000/users/login")
 
-        if (this.state.username === '') {
-            this.setState({ notHaveUsername: true });
+            console.log({
+                username: this.state.username,
+                password: this.state.password
+            })
+            const content = await setUserLogin({
+                username: this.state.username,
+                password: this.state.password
+            })
+            // console.log(content.err)
+            if (content.err === "Worng password") { //รอออม set status เพิ่ม "ถ้าเกิดรหัสผิดจะinvalid"
+                this.setState({ invalidPassword: true })
+            } 
+            else {
+                this.setState({ invalidPassword: false })
+                window.location.href = "http://localhost:3000/users/login"
+            }
         }
         else {
-            this.setState({ notHaveUsername: false })
+            this.setState({ notHaveUsername: true })
+            document.getElementById("mylink").onclick = function() {
+            window.location.href = " ";
+            }
         }
 
-        if (this.state.password === '') {
-            this.setState({ notHavePassword: true });
-        } else {
-            this.setState({ notHavePassword: false })
-        }
         // const res = await setUserLogin({
         //     username: this.state.username,
         //     password: this.state.password,
@@ -66,7 +92,6 @@ class LoginComponent extends React.Component {
     render() {
         return (
             <Div inline>
-            <form action="http://localhost:8000/users/login" method="POST">
                 <FormGroups>
                     <Label>Username</Label>
                     {
@@ -86,23 +111,22 @@ class LoginComponent extends React.Component {
                 <FormGroups>
                     <Label>Password</Label>
                     {
-                        this.state.notHavePassword &&
+                        this.state.invalidPassword &&
                         <alert >
                             <Input invalid type="password" name="password" onChange={this.handleInputChange} placeholder="Password" />
                             <FormFeedback>Please enter password.</FormFeedback>
                         </alert>
                     }
                     {
-                        !this.state.notHavePassword &&
+                        !this.state.invalidPassword &&
                         <alert >
                             <Input type="password" name="password" onChange={this.handleInputChange} placeholder="Password" />
                         </alert>
                     }
                 </FormGroups>
                 <FormGroups>
-                    <Buttons className="loginBtn" onClick={this.handleSubmit} type="submit" value='Login' href='/' />
+                    <Buttons onClick={this.handleSubmit} type="submit" value='Login' href='/' />
                 </FormGroups>
-                </form>
             </Div>
         );
     }
