@@ -22,11 +22,11 @@ router.get("/", (req, res) => {
 //   res.render("login");
 // });
 
-router.get("/test", (req, res) => {
-  // console.log(req.cookies)
-  // res.sendStatus(200)
-  res.status(200).send("Hello world");
-});
+// router.get("/test", (req, res) => {
+//   // console.log(req.cookies)
+//   // res.sendStatus(200)
+//   res.status(200).send("Hello world");
+// });
 
 // Login Process
 router.post("/login", function(req, res, next) {
@@ -42,7 +42,8 @@ router.post("/login", function(req, res, next) {
 
     console.log("user", user);
     if (!user) {
-      return res.redirect("http://localhost:3000/users/login");
+      // return res.redirect("http://localhost:3000/users/login");
+      res.status(401).send("wrong username or password")
     }
 
     req.logIn(user, function(err) {
@@ -54,7 +55,9 @@ router.post("/login", function(req, res, next) {
       }
       return res
         .cookie("username", user.username)
-        .redirect("http://localhost:3000/");
+        // .redirect("http://localhost:3000/");
+        .status(200)
+        .send(user.username + " login success")
     });
   })(req, res, next);
 });
@@ -134,7 +137,8 @@ router.post("/register", function(req, res) {
               console.log(err);
               return;
             } else {
-              res.redirect("http://localhost:3000/users/login");
+              // res.redirect("http://localhost:3000/users/login");
+              res.status(200).send(newUser.username + ' registeration is success')
             }
           });
         });
