@@ -7,6 +7,7 @@ let Product = require("../models/products");
 router.get("/", (req, res, next) => {
   console.log(req.cookies);
   Product.find({}, (err, products) => {
+    console.log(">>",err)
     res.send({ products });
   });
   // if (req.cookies.username) {

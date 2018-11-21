@@ -7,12 +7,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const passport = require('passport')
 const expressValidator = require('express-validator');
-const config = require('./config/database');
+const configdb = require('./config/database');
 
 var app = express();
 
 // Connect to database
-mongoose.connect(config.database, {
+console.log("db",configdb.database)
+mongoose.connect(configdb.database, {
   useNewUrlParser: true
 })
 var db = mongoose.connection
