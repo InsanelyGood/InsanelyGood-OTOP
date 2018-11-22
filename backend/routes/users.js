@@ -43,7 +43,8 @@ router.post("/login", function(req, res, next) {
     console.log("user", user);
     if (!user) {
       // return res.redirect("http://localhost:3000/users/login");
-      res.status(401).send("wrong username or password")
+      // res.status(401)
+      res.send('Wrong username and password')
     }
 
     req.logIn(user, function(err) {

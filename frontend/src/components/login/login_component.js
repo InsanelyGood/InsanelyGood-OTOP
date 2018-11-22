@@ -33,17 +33,19 @@ class LoginComponent extends React.Component {
         this.state = {
             username: '',
             password: '',
-            notHaveUsername: false,
+            invalidUsername: false,
             invalidPassword: false
         };
     }
 
     async componentDidMount() {
         const login = await getUserLogin(Cookies.get('username'))
+        // if (Cookies.get('username'))
+        // redirect HOME
         this.setState({
             username: login.username,
             password: login.password
-        }, () => console.log('pass',this.state.password))
+        }, () => console.log('pass', this.state.password))
     }
 
     handleInputChange = event => {
@@ -53,8 +55,9 @@ class LoginComponent extends React.Component {
     }
 
     handleSubmit = async event => {
-        if (this.state.username !== '') {
-            this.setState({ notHaveUsername: false })
+        if (this.state.username !== '' && this.state.password !== '') {
+            this.setState({ invalidUsername: false })
+            this.setState({ invalidPassword: false })
             var attribute = document.getElementById("mylink")
             attribute.setAttribute('herf', "http://localhost:3000/users/login")
 
@@ -66,27 +69,28 @@ class LoginComponent extends React.Component {
                 username: this.state.username,
                 password: this.state.password
             })
-            // console.log(content.err)
-            if (content.err === "Worng password") { //รอออม set status เพิ่ม "ถ้าเกิดรหัสผิดจะinvalid"
+            console.log(content.err)
+            if (content.err === "wrong username or password") {
+                this.setState({ invalidUsername: true })
                 this.setState({ invalidPassword: true })
-            } 
+            }
             else {
+                this.setState({ invalidUsername: false })
                 this.setState({ invalidPassword: false })
                 window.location.href = "http://localhost:3000/users/login"
             }
         }
+        else if (this.state.username === '' || this.state.password === '') {
+            this.setState({ invalidPassword: true })
+            this.setState({ invalidUsername: true })
+        }
         else {
-            this.setState({ notHaveUsername: true })
-            document.getElementById("mylink").onclick = function() {
-            window.location.href = " ";
+            this.setState({ invalidPassword: true })
+            this.setState({ invalidUsername: true })
+            document.getElementById("mylink").onclick = function () {
+                window.location.href = " ";
             }
         }
-
-        // const res = await setUserLogin({
-        //     username: this.state.username,
-        //     password: this.state.password,
-        // })
-        // console.log(res.status);
     }
 
     render() {
@@ -95,14 +99,14 @@ class LoginComponent extends React.Component {
                 <FormGroups>
                     <Label>Username</Label>
                     {
-                        this.state.notHaveUsername &&
+                        this.state.invalidUsername &&
                         <alert >
-                            <Input invalid type="text" name="username" onChange={this.handleInputChange} placeholder="Username" />
-                            <FormFeedback>Please enter username.</FormFeedback>
+                            <Input invalid type="text" name="username" value={this.state.username} onChange={this.handleInputChange} placeholder="Username" />
+                            <FormFeedback>Wrong username. Try again</FormFeedback>
                         </alert>
                     }
                     {
-                        !this.state.notHaveUsername &&
+                        !this.state.invalidUsername &&
                         <alert >
                             <Input type="text" name="username" onChange={this.handleInputChange} placeholder="Username" />
                         </alert>
@@ -114,7 +118,7 @@ class LoginComponent extends React.Component {
                         this.state.invalidPassword &&
                         <alert >
                             <Input invalid type="password" name="password" onChange={this.handleInputChange} placeholder="Password" />
-                            <FormFeedback>Please enter password.</FormFeedback>
+                            <FormFeedback>Wrong password. Try again</FormFeedback>
                         </alert>
                     }
                     {
