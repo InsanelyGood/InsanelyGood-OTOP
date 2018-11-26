@@ -69,7 +69,7 @@ handleSubmit = event => {
 
   render() {
     return (
-      <div className="container locate col-sm-8 col-sm-offset-2 col-md-5 col-md-offset-3 ">
+      <div className="container locate col-sm-4 col-sm-offset-2 col-md-7 col-md-offset-3 ">
 
         <Nav tabs>
           <NavItem>

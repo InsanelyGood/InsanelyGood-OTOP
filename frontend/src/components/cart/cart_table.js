@@ -48,8 +48,8 @@ const InputQuantity = styled.input`
 `;
 const QuantityDiv = styled.div`
   display: flex;
+  justify-content: center;
   border-color: black;
-  float: left;
 `;
 const QuantityButton = styled.button`
   background-color: transparent;

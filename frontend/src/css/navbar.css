@@ -6,7 +6,6 @@
   position: fixed !important;
   width: 100%;
   z-index: 99;
-
 }
 .navbar-brand {
   font-weight: bolder;
@@ -14,14 +13,14 @@
   /* background: rgba(144, 12, 63, 1); */
 }
 
-.nav-link .top-navbar{
+.nav-link .top-navbar {
   color: white !important;
 }
 
-.top-navbar .nav-link:hover{
+.top-navbar .nav-link:hover {
   font-weight: bolder;
   /* background: #F08D33; */
-  color: #F08D33 !important;
+  color: #f08d33 !important;
 }
 
 .navbar-toggler-icon {
@@ -29,11 +28,11 @@
 }
 
 .dropdown-item:hover {
-  color: #F08D33 !important;
+  color: #f08d33 !important;
   font-weight: bolder;
 }
 
-.cilckable{
+.cilckable {
   font-size: 15px;
+  text-decoration: none !important;
 }
-

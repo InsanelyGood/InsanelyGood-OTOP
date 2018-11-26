@@ -15,6 +15,7 @@ import UserPassword from "../views/userPassword";
 import Cart from "../views/cart";
 import Checkout from "../views/checkout";
 import Admin from "../views/admin";
+import AdminProduct from '../views/admin_product'
 
 const routes = [
   {
@@ -90,9 +91,15 @@ const routes = [
     canAccess: true
   },
   {
-    path: "/admin",
+    path: "/admin/orders",
     exact: true,
     component: Admin,
+    canAccess: Cookies.get("role") === "admin"
+  },
+  {
+    path: "/admin/products",
+    exact: true,
+    component: AdminProduct,
     canAccess: Cookies.get("role") === "admin"
   }
 ];

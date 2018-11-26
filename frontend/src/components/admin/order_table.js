@@ -1,21 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import {Table, TH} from './admin_styled'
 import { getOrders } from "../../api/orders_list";
 import OrderItem from "./order_item";
-
-export const Table = styled.table`
-  width: 100%;
-`;
-export const TH = styled.th`
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  padding: 8px;
-  font-size: 18px;
-  text-align: center;
-  :hover {
-    cursor: pointer;
-  }
-`;
 
 class OrderTable extends React.Component {
   constructor(props) {

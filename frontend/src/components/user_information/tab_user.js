@@ -46,7 +46,7 @@ export default class Example extends React.Component {
     }
     render() {
         return (
-            <AllContent className='col-sm-8 col-sm-offset-2 col-md-5 col-md-offset-3'>   
+            <AllContent className='col-sm-4 col-sm-offset-2 col-md-7 col-md-offset-3'>   
                     <Nav tabs>
                         <NavItem>
                             <NavLink xs="6"
