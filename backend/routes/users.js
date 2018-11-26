@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 const User = require("../models/users");
+const Product = require("../models/products");
+const Order = require("../models/orders");
 
 const findUser = require("../middlewares/findUser");
 const findUserByPath = require("../middlewares/findUserByPath");
@@ -20,11 +22,11 @@ router.get("/", (req, res) => {
 //   res.render("login");
 // });
 
-router.get("/test", (req, res) => {
-  // console.log(req.cookies)
-  // res.sendStatus(200)
-  res.status(200).send("Hello world");
-});
+// router.get("/test", (req, res) => {
+//   // console.log(req.cookies)
+//   // res.sendStatus(200)
+//   res.status(200).send("Hello world");
+// });
 
 // Login Process
 router.post("/login", function(req, res, next) {
@@ -40,7 +42,8 @@ router.post("/login", function(req, res, next) {
 
     console.log("user", user);
     if (!user) {
-      return res.redirect("http://localhost:3000/users/login");
+      // return res.redirect("http://localhost:3000/users/login");
+      res.status(401).send("wrong username or password")
     }
 
     req.logIn(user, function(err) {
@@ -52,7 +55,9 @@ router.post("/login", function(req, res, next) {
       }
       return res
         .cookie("username", user.username)
-        .redirect("http://localhost:3000/");
+        // .redirect("http://localhost:3000/");
+        .status(200)
+        .send(user.username + " login success")
     });
   })(req, res, next);
 });
@@ -132,7 +137,8 @@ router.post("/register", function(req, res) {
               console.log(err);
               return;
             } else {
-              res.redirect("http://localhost:3000/users/login");
+              // res.redirect("http://localhost:3000/users/login");
+              res.status(200).send(newUser.username + ' registeration is success')
             }
           });
         });
@@ -166,11 +172,9 @@ router.post("/password/change", findUser, (req, res, next) => {
             // console.log("newUserData>>>>",newUserData)
             if (err) {
               console.log(err);
-              res
-                .status(404)
-                .send({
-                  err: "Update fail. There is something wrong in update process"
-                });
+              res.status(404).send({
+                err: "Update fail. There is something wrong in update process"
+              });
               return;
             } else res.status(200).send({ err: "Update password success" });
           });
@@ -271,5 +275,38 @@ router.get(
     });
   }
 );
+
+router.get("/:username/orders", findUserByPath, (req, res) => {
+  Order.find({ userId: req.user._id }, async (err, orders) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const fullOrders = await Promise.all(
+        orders.map(async order => {
+          let newOrder = {
+            _id: order._id,
+            dateTime: order.dateTime,
+            totalPrice: order.totalPrice,
+            status: order.status,
+            shippingAddress: order.shippingAddress,
+            userId: order.userId
+          };
+          newOrder.purchasedList = await Promise.all(
+            order.purchasedList.map(async item => {
+              try {
+                const product = await Product.findOne({
+                  id: item.productID
+                }).exec();
+                return { product, quantity: item.quantity };
+              } catch (error) {}
+            })
+          );
+          return newOrder;
+        })
+      );
+      res.send(fullOrders);
+    }
+  });
+});
 
 module.exports = router;
