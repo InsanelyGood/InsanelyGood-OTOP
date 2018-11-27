@@ -3,9 +3,8 @@
 import React from 'react';
 import { TabContent, TabPane,  Nav, NavItem, NavLink,Button,Row, Col, Table } from 'reactstrap';
 import '../../css/userInfo.css'
-import classnames from 'classnames';
 import Cookies from 'js-cookie';
-import { getUsername, setUsername } from '../../api/user_infomation'
+import { getPurchaseProduct} from '../../api/user_infomation'
 
 
 class UserHistory extends React.Component {
@@ -13,26 +12,22 @@ class UserHistory extends React.Component {
     super(props);
     this.state = {
       activeTab: '2',
-      email: '',
-      username: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      telephoneNumber: '',
-      address: ''
+      dateTime: '',
+      name: '',
+      image: '',
+      price: '',
+      description: ''
     };
   }
   async componentDidMount() {
-    const info = await getUsername(Cookies.get('username'))
+    const prod = await getPurchaseProduct(Cookies.get('username'))
     this.setState({
-        username: info.username,
-        firstName: info.firstname,
-        lastName: info.lastname,
-        email: info.email,
-        telephoneNumber: info.telephoneNumber,
-        address: info.address,
-        password: info.password
-    }, () => console.log(this.state.password))
+        name: prod.name,
+        image: prod.image,
+        price: prod.price,
+        description: prod.description,
+        dateTime: prod.dateTime
+    }, () => console.log(this.state.name+" "+this.state.price+" "+this.state.description+" "+this.state.dateTime))
   }
 
   handleInputChange = event => {
@@ -41,25 +36,25 @@ class UserHistory extends React.Component {
       })
   }
 
-handleSubmit = event => {
-    console.log(this.state.username);
-    console.log(this.state.email);
-    console.log(this.state.password);
-    console.log(this.state.address);
-    console.log(this.state.firstName);
-    console.log(this.state.lastName);
-    console.log(this.state.telephoneNumber);
+// handleSubmit = event => {
+//     console.log(this.state.username);
+//     console.log(this.state.email);
+//     console.log(this.state.password);
+//     console.log(this.state.address);
+//     console.log(this.state.firstName);
+//     console.log(this.state.lastName);
+//     console.log(this.state.telephoneNumber);
 
-    setUsername(this.state.username, {
-        email: this.state.email,
-        username: this.state.username,
-        // password: this.state.password,
-        firstname: this.state.firstName,
-        lastname: this.state.lastName,
-        telephoneNumber: this.state.telephoneNumber,
-        address: this.state.address  
-    })
-}
+//     setUsername(this.state.username, {
+//         email: this.state.email,
+//         username: this.state.username,
+//         // password: this.state.password,
+//         firstname: this.state.firstName,
+//         lastname: this.state.lastName,
+//         telephoneNumber: this.state.telephoneNumber,
+//         address: this.state.address  
+//     })
+// }
 
   toggle = tab => {
     if (this.state.activeTab !== tab) {
@@ -74,14 +69,6 @@ handleSubmit = event => {
       <div>
         <div  className="historyScroll">
         <Table responsive hover>
-          {/* <thead>
-            <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
-            </tr>
-          </thead> */}
           <tbody>
             <tr>
               <th scope="row">1</th>

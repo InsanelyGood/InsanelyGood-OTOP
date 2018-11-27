@@ -6,8 +6,6 @@ export const getUsername = async (username) => {
   console.log('res', res);
 
   return body
-
-
 }
 
 export const setUsername = async (username, body) => {
@@ -48,4 +46,14 @@ export const setNewPassword = async (body) => {
   const content = await rawResponse.json();
   console.log('Content: ', content.err);
   return content
+}
+
+export const getPurchaseProduct = async (username) => {
+  const res = await fetch(`http://localhost:8000/users/${username}/orders/`, {
+    credentials: 'include'
+  })
+  const body = await res.json()
+  console.log('res', res);
+
+  return body
 }
