@@ -9,6 +9,6 @@ export async function getDetailOfOrder(id) {
   const res = await fetch(`http://localhost:8000/orders/` + id + `/fullDetail`, {
     credentials: "include"
   });
-  const body = await res.json(); 
+  const body = await res.json();
   return body; 
 }
