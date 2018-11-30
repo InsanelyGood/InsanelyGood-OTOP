@@ -36,4 +36,4 @@ Dump database for see products by command `mongorestore --collection products --
 - name the test files as `____.test.js` in the same folder of component that want to test
 
 ### Run testcafe
-- `cd front` command `yarn testcafe` for run testcafe
+- `cd frontend` command `yarn testcafe` for run testcafe
