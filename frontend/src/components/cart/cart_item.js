@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Cookies from "js-cookie";
-import { addOrder } from "../../api/orders_list";
+import { addCartItem, removeCartItem } from "../../api/user_cart";
 
 const TD = styled.td`
   border: 1px solid #ddd;
@@ -70,15 +70,27 @@ class CartItem extends React.Component {
       username: Cookies.get("username"),
       quantity: this.state.quantity
     };
-    const res = await addOrder(data);
-    console.log(res);
+    const res = await addCartItem(data);
     if (res === 200) {
       window.location.reload();
     }
   };
 
-  renderUpdateQuantityComponent = (inputType) => {
+  renderUpdateQuantityComponent = inputType => {
     return <form onSubmit={this.handleCartAdd}>{inputType}</form>;
+  };
+
+  handleCartRemove = async e => {
+    e.preventDefault();
+    const { item } = this.props;
+    const data = {
+      productID: item.product.id,
+      username: Cookies.get("username")
+    };
+    const res = await removeCartItem(data);
+    if (res === 200) {
+      window.location.reload();
+    }
   };
 
   render() {
@@ -122,14 +134,8 @@ class CartItem extends React.Component {
         </TDCenter>
         <TDCenter>{item.product.price * item.quantity}</TDCenter>
         <TDCenter width="1px">
-          <form action="http://localhost:8000/users/cart/remove" method="POST">
+          <form onSubmit={this.handleCartRemove}>
             <RemoveItem type="submit">&times;</RemoveItem>
-            <input type="hidden" value={item.product.id} name="productID" />
-            <input
-              type="hidden"
-              value={Cookies.get("username")}
-              name="username"
-            />
           </form>
         </TDCenter>
       </tr>

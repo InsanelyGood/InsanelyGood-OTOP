@@ -43,7 +43,7 @@ router.post("/remove", findUser, (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.redirect("http://localhost:3000/cart");
+      res.status(200).send('success');
     }
   });
 });
