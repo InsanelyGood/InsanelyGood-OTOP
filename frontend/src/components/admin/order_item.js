@@ -87,8 +87,6 @@ class OrderItem extends React.Component {
   };
 
   renderProductsTable = () => {
-    console.log(this.state.details);
-
     return (
       <Table>
         <thead>

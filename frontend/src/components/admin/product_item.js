@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Col, Form, FormGroup, Label, Input } from "reactstrap";
 import { TD, TDLeft, TR } from "./admin_styled";
+import { updateProduct, deleteProduct } from "../../api/products_list";
 
 const Img = styled.img`
   margin-bottom: 1em;
@@ -66,41 +67,31 @@ class ProductItem extends React.Component {
     this.setState({ region: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
-    fetch("http://localhost:8000/products/" + this.props.detail._id, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        product: {
-          name: this.state.name,
-          image: this.state.image,
-          price: this.state.price,
-          description: this.state.description,
-          category: this.state.category,
-          region: this.state.region
-        }
-      })
-    }).then(() => {
+    const data = {
+      product: {
+        name: this.state.name,
+        image: this.state.image,
+        price: this.state.price,
+        description: this.state.description,
+        category: this.state.category,
+        region: this.state.region
+      }
+    };
+    const res = await updateProduct(this.props.detail._id, data);
+    if (res === 200) {
       this.setState({ modal: false });
       window.location.reload();
-    });
+    }
   };
 
-  handleDelete = () => {
-    fetch("http://localhost:8000/products/" + this.props.detail._id, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    }).then(() => {
+  handleDelete = async () => {
+    const res = await deleteProduct(this.props.detail._id)
+    if (res === 200) {
       this.setState({ modal: false });
       window.location.reload();
-    });
+    }
   };
 
   render() {

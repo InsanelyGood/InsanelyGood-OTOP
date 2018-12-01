@@ -30,7 +30,7 @@ router.post("/add", findUser, (req, res) => {
       console.log(err);
       return;
     } else {
-      res.redirect("http://localhost:3000/cart");
+      res.status(200).send('Success');
     }
   });
 });
