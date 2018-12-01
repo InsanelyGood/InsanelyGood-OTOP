@@ -3,7 +3,7 @@ import {BACKEND} from '../config'
 console.log('api: ', BACKEND);
 
 export async function getProducts() {
-  const res = await fetch("http://localhost:8000/products", {
+  const res = await fetch(BACKEND + "/products", {
     credentials: "include"
   });
   const body = await res.json();
@@ -11,7 +11,7 @@ export async function getProducts() {
 }
 
 export async function getProduct(param) {
-  const res = await fetch("http://localhost:8000" + param, {
+  const res = await fetch(BACKEND + param, {
     credentials: "include"
   });
   const body = await res.json();
@@ -19,7 +19,7 @@ export async function getProduct(param) {
 }
 
 export const addNewProduct = async data => {
-  const res = await fetch("http://localhost:8000/products/add", {
+  const res = await fetch(BACKEND + "/products/add", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -31,7 +31,7 @@ export const addNewProduct = async data => {
 };
 
 export const updateProduct = async (id, data) => {
-  const res = await fetch("http://localhost:8000/products/" + id, {
+  const res = await fetch(BACKEND + "/products/" + id, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -43,7 +43,7 @@ export const updateProduct = async (id, data) => {
 };
 
 export const deleteProduct = async id => {
-  const res = await fetch("http://localhost:8000/products/" + id, {
+  const res = await fetch(BACKEND + "/products/" + id, {
     method: "DELETE",
     headers: {
       Accept: "application/json",

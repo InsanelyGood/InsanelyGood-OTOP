@@ -1,5 +1,7 @@
+import { BACKEND } from '../config'
+
 export async function getProductCart(user) {
-  const res = await fetch("http://localhost:8000/users/" + user + "/cart", {
+  const res = await fetch(BACKEND + "/users/" + user + "/cart", {
     credentials: "include"
   });
   const body = await res.json();
@@ -7,7 +9,7 @@ export async function getProductCart(user) {
 }
 
 export const addCartItem = async data => {
-  const res = await fetch("http://localhost:8000/users/cart/add", {
+  const res = await fetch(BACKEND + "/users/cart/add", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -19,7 +21,7 @@ export const addCartItem = async data => {
 };
 
 export const removeCartItem = async data => {
-  const res = await fetch("http://localhost:8000/users/cart/remove", {
+  const res = await fetch(BACKEND + "/users/cart/remove", {
     method: "POST",
     headers: {
       Accept: "application/json",

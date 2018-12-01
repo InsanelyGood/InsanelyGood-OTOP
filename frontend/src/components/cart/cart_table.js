@@ -26,7 +26,7 @@ const THCenter = styled.th`
 class CartTable extends React.Component {
   renderItemInCart = () => {
     return this.props.cartItem.map(item => (
-      <CartItem item={item} />
+      <CartItem item={item} key={item.product._id} />
     ));
   };
 
