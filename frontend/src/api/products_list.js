@@ -1,3 +1,7 @@
+import {BACKEND} from '../config'
+
+console.log('api: ', BACKEND);
+
 export async function getProducts() {
   const res = await fetch("http://localhost:8000/products", {
     credentials: "include"
