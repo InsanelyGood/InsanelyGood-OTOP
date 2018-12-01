@@ -16,7 +16,7 @@ var app = express();
 // Connect to database
 console.log("db", config.database ? config.database : configdb.database);
 mongoose.connect(
-  configdb.database,
+  config.database,
   {
     useNewUrlParser: true
   }
