@@ -2,7 +2,11 @@ import React from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { getDetailOfOrder } from "../../api/orders_list";
+import {
+  getDetailOfOrder,
+  setNewStatus,
+  deleteOrder
+} from "../../api/orders_list";
 import { Table, TH, TD, TR } from "./admin_styled";
 
 const DeleteButton = styled.button`
@@ -58,32 +62,24 @@ class OrderItem extends React.Component {
     });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
-    fetch("http://localhost:8000/orders/" + this.props.detail._id, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ status: this.state.status })
-    }).then(() => {
+    const data = {
+      status: this.state.status
+    };
+    const res = await setNewStatus(this.props.detail._id, data);
+    if (res === 200) {
       this.setState({ modal: false });
       window.location.reload();
-    });
+    }
   };
 
-  handleDelete = () => {
-    fetch("http://localhost:8000/orders/" + this.props.detail._id, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    }).then(() => {
+  handleDelete = async () => {
+    const res = await deleteOrder(this.props.detail._id);
+    if(res === 200) {
       this.setState({ modal: false });
       window.location.reload();
-    });
+    }
   };
 
   renderProductsTable = () => {
@@ -116,27 +112,40 @@ class OrderItem extends React.Component {
     const { detail } = this.props;
     const { details } = this.state;
 
-    return <TR onClick={this.renderOrderDetail}>
+    return (
+      <TR onClick={this.renderOrderDetail}>
         <TD>{detail._id.substring(detail._id.length - 5)}</TD>
         <TD>
-          {detail.totalPrice
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          {detail.totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
         </TD>
         <TD>{new Date(detail.dateTime).toUTCString()}</TD>
         <TD>
-          <Status style={{ backgroundColor: detail.status === "orderCreated" ? "#388ea8" : "#91E31F" }}>
+          <Status
+            style={{
+              backgroundColor:
+                detail.status === "orderCreated" ? "#388ea8" : "#91E31F"
+            }}
+          >
             {detail.status}
           </Status>
         </TD>
-        <Modal isOpen={this.state.modal} size="lg" toggle={this.renderOrderDetail} centered>
+        <Modal
+          isOpen={this.state.modal}
+          size="lg"
+          toggle={this.renderOrderDetail}
+          centered
+        >
           <ModalHeader toggle={this.renderOrderDetail}>Order</ModalHeader>
           <ModalBody>
             <p>Name: {details.firstname + "  " + details.lastname}</p>
             <p>Address: {details.shippingAddress}</p>
             <form id="orderForm" onSubmit={this.handleSubmit}>
               <label style={{ paddingRight: "10px" }}>Status:</label>
-              <select name="status" defaultValue={detail.status} onChange={this.handleStatusChange}>
+              <select
+                name="status"
+                defaultValue={detail.status}
+                onChange={this.handleStatusChange}
+              >
                 <option value="orderCreated">orderCreated</option>
                 <option value="adminAccepted">adminAccepted</option>
               </select>
@@ -148,10 +157,17 @@ class OrderItem extends React.Component {
             </TotalPrice>
           </ModalBody>
           <ModalFooter>
-            <DeleteButton className="btn btn-danger" onClick={this.toggleNested}>
+            <DeleteButton
+              className="btn btn-danger"
+              onClick={this.toggleNested}
+            >
               Delete Order
             </DeleteButton>
-            <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} centered>
+            <Modal
+              isOpen={this.state.nestedModal}
+              toggle={this.toggleNested}
+              centered
+            >
               <ModalHeader>Confirm delete</ModalHeader>
               <ModalBody>Delete this order?</ModalBody>
               <ModalFooter>
@@ -166,12 +182,16 @@ class OrderItem extends React.Component {
             <button className="btn btn-success" form="orderForm">
               Update Order
             </button>
-            <button className="btn btn-secondary" onClick={this.renderOrderDetail}>
+            <button
+              className="btn btn-secondary"
+              onClick={this.renderOrderDetail}
+            >
               Cancel
             </button>
           </ModalFooter>
         </Modal>
-      </TR>;
+      </TR>
+    );
   }
 }
 

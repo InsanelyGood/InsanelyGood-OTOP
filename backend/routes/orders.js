@@ -81,7 +81,7 @@ router.post("/:id", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.send("Update Success");
+      res.status(200).send("Success");
     }
   });
 });
@@ -95,7 +95,7 @@ router.delete("/:id", (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        res.send("Delete Success");
+        res.status(200).send("Success");
       }
     });
   });
