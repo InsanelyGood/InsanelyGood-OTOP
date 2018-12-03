@@ -55,6 +55,9 @@ class RegisComponent extends React.Component {
     }
 
     handleSubmit = async event => {
+        if (this.state.password !== this.state.confirm_password){
+            this.setState({ notHaveConfirmPass: true });
+        }
         const setInfo = {
             username: this.state.username,
             password: this.state.password,
@@ -67,8 +70,6 @@ class RegisComponent extends React.Component {
         const regis = await getUserRegis(setInfo)
         console.log('submit');
         console.log('regis', regis.status);
-
-
         if (regis.status === 409) {
             this.setState({ notHaveUsername: true });
             console.log('regisssssssss ');
