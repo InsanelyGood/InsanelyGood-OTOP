@@ -3,7 +3,7 @@ import { Input, Label, FormFeedback } from 'reactstrap';
 import styled from 'styled-components'
 import '../../css/login&regis.css'
 import Cookies from 'js-cookie';
-import { setUserLogin, getUserLogin } from '../../api/userid';
+import { getUserLogin } from '../../api/userid';
 
 const Div = styled.div`
     margin: auto;
@@ -34,18 +34,8 @@ class LoginComponent extends React.Component {
             username: '',
             password: '',
             invalidUsername: false,
-            invalidPassword: false
+            invalidPassword: false,
         };
-    }
-
-    async componentDidMount() {
-        const login = await getUserLogin(Cookies.get('username'))
-        // if (Cookies.get('username'))
-        // redirect HOME
-        this.setState({
-            username: login.username,
-            password: login.password
-        }, () => console.log('pass', this.state.password))
     }
 
     handleInputChange = event => {
@@ -55,41 +45,24 @@ class LoginComponent extends React.Component {
     }
 
     handleSubmit = async event => {
-        if (this.state.username !== '' && this.state.password !== '') {
+        const data = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        const login = await getUserLogin(data)
+        if(login.status === 500) {
+            this.setState({ invalidUsername: true })
+            this.setState({ invalidPassword: true })
+            console.log('login ',login);
+        } else if (login.status === 200){
             this.setState({ invalidUsername: false })
             this.setState({ invalidPassword: false })
-            var attribute = document.getElementById("mylink")
-            attribute.setAttribute('herf', "http://localhost:3000/users/login")
-
-            console.log({
-                username: this.state.username,
-                password: this.state.password
-            })
-            const content = await setUserLogin({
-                username: this.state.username,
-                password: this.state.password
-            })
-            console.log(content.err)
-            if (content.err === "wrong username or password") {
-                this.setState({ invalidUsername: true })
-                this.setState({ invalidPassword: true })
-            }
-            else {
-                this.setState({ invalidUsername: false })
-                this.setState({ invalidPassword: false })
-                window.location.href = "http://localhost:3000/users/login"
-            }
-        }
-        else if (this.state.username === '' || this.state.password === '') {
-            this.setState({ invalidPassword: true })
-            this.setState({ invalidUsername: true })
-        }
-        else {
-            this.setState({ invalidPassword: true })
-            this.setState({ invalidUsername: true })
-            document.getElementById("mylink").onclick = function () {
-                window.location.href = " ";
-            }
+            // let role = await login.json()
+            // if(role.role === 'admin') {
+            //     Cookies.set('role', 'admin');
+            // }
+            Cookies.set('username', this.state.username);
+            window.location.href = '/'
         }
     }
 
@@ -102,7 +75,7 @@ class LoginComponent extends React.Component {
                         this.state.invalidUsername &&
                         <alert >
                             <Input invalid type="text" name="username" value={this.state.username} onChange={this.handleInputChange} placeholder="Username" />
-                            <FormFeedback>Wrong username. Try again</FormFeedback>
+                            <FormFeedback>Invalid username. Try again</FormFeedback>
                         </alert>
                     }
                     {
@@ -118,7 +91,7 @@ class LoginComponent extends React.Component {
                         this.state.invalidPassword &&
                         <alert >
                             <Input invalid type="password" name="password" onChange={this.handleInputChange} placeholder="Password" />
-                            <FormFeedback>Wrong password. Try again</FormFeedback>
+                            <FormFeedback>Invalid password. Try again</FormFeedback>
                         </alert>
                     }
                     {
@@ -129,7 +102,7 @@ class LoginComponent extends React.Component {
                     }
                 </FormGroups>
                 <FormGroups>
-                    <Buttons onClick={this.handleSubmit} type="submit" value='Login' href='/' />
+                    <Buttons onClick={this.handleSubmit} id="myuser" type="submit" value='Login' href='/' />
                 </FormGroups>
             </Div>
         );

@@ -1,7 +1,9 @@
 import React from 'react'
-import { Input, Label, FormFeedback , Row , Col} from 'reactstrap';
+import { Input, Label, FormFeedback, Row, Col } from 'reactstrap';
 import styled from 'styled-components'
 import '../../css/login&regis.css'
+import Cookies from 'js-cookie';
+import { getUserRegis } from '../../api/userid';
 
 const Form = styled.div`
     margin: auto;
@@ -52,67 +54,56 @@ class RegisComponent extends React.Component {
         })
     }
 
-    handleSubmit = event => {
+    handleSubmit = async event => {
+        const setInfo = {
+            username: this.state.username,
+            password: this.state.password,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            email: this.state.email,
+            telephone_number: this.state.telephone_number,
+            confirm_password: this.state.confirm_password
+        }
+        const regis = await getUserRegis(setInfo)
+        console.log('submit');
+        console.log('regis', regis.status);
 
-        if (this.state.username === '') {
+
+        if (regis.status === 409) {
             this.setState({ notHaveUsername: true });
+            console.log('regisssssssss ');
         }
-        else {
-            this.setState({ notHaveUsername: false })
-        }
-
-        if (this.state.email === '') {
-            this.setState({ notHaveEmail: true });
-        }
-        else {
-            this.setState({ notHaveEmail: false })
-        }
-
-        if (this.state.password === '') {
+        if (regis.status === 401) {
+            this.setState({ notHaveUsername: true });
             this.setState({ notHavePassword: true });
-        } else {
-            this.setState({ notHavePassword: false })
-        }
-
-        if (this.state.confirm_password === '') {
+            this.setState({ notHaveEmail: true });
             this.setState({ notHaveConfirmPass: true });
-        } else {
-            this.setState({ notHaveConfirmPass: false })
-        }
-
-        if (this.state.firstname === '') {
             this.setState({ notHaveFirstName: true });
-        } else {
-            this.setState({ notHaveFirstName: false })
-        }
-
-        if (this.state.lastname === '') {
             this.setState({ notHaveLastName: true });
-        } else {
-            this.setState({ notHaveLastName: false })
-        }
-
-        if (this.state.telephone_number === '') {
             this.setState({ notHaveContectNum: true });
-        } else {
-            this.setState({ notHaveContectNum: false })
+            console.log('cannot regisssssss');
+        } else if (regis.status === 200) {
+            
+            this.setState({ notHaveUsername: false });
+            this.setState({ notHavePassword: false });
+            this.setState({ notHaveEmail: false });
+            this.setState({ notHaveConfirmPass: false });
+            this.setState({ notHaveFirstName: false });
+            this.setState({ notHaveLastName: false });
+            this.setState({ notHaveContectNum: false });
+            // let role = await login.json()
+            // if(role.role === 'admin') {
+            //     Cookies.set('role', 'admin');
+            // }
+            window.location.href = 'http://localhost:3000/users/login'
+            console.log('can regissssss')
         }
-        // setUserRegis({
-        //     email: this.state.email,
-        //     username: this.state.username,
-        //     password: this.state.password,
-        //     confirmPassword: this.state.confirmPassword,
-        //     firstname: this.state.firstName,
-        //     lastname: this.state.lastName,
-        //     telephoneNumber: this.state.telephoneNumber,
-        // })
     }
 
     render() {
         return (
             <Form inline>
-            <form action="http://localhost:8000/users/register" method='POST'>
-             <div>
+                <div>
                     <Row>
                         <Col md={6}>
                             <FormGroups>
@@ -121,7 +112,7 @@ class RegisComponent extends React.Component {
                                     this.state.notHaveFirstName &&
                                     <alert >
                                         <Input invalid type="text" onChange={this.handleInputChange} name="firstname" placeholder="Firstname" />
-                                        <FormFeedback>Please enter first name.</FormFeedback>
+                                        <FormFeedback>Invalid first name.</FormFeedback>
                                     </alert>
                                 }
                                 {
@@ -139,7 +130,7 @@ class RegisComponent extends React.Component {
                                     this.state.notHaveLastName &&
                                     <alert >
                                         <Input invalid type="text" onChange={this.handleInputChange} name="lastname" placeholder="Lastname" />
-                                        <FormFeedback>Please enter last name.</FormFeedback>
+                                        <FormFeedback>Invalid last name.</FormFeedback>
                                     </alert>
                                 }
                                 {
@@ -158,7 +149,7 @@ class RegisComponent extends React.Component {
                         this.state.notHaveUsername &&
                         <alert >
                             <Input invalid type="text" onChange={this.handleInputChange} name="username" placeholder="Username" />
-                            <FormFeedback>Please enter username.</FormFeedback>
+                            <FormFeedback>Invalid username.</FormFeedback>
                         </alert>
                     }
                     {
@@ -173,7 +164,7 @@ class RegisComponent extends React.Component {
                         this.state.notHavePassword &&
                         <alert >
                             <Input invalid type="password" onChange={this.handleInputChange} name="password" placeholder="Password" />
-                            <FormFeedback>Please enter password.</FormFeedback>
+                            <FormFeedback>Invalid password.</FormFeedback>
                         </alert>
                     }
                     {
@@ -189,7 +180,7 @@ class RegisComponent extends React.Component {
                         this.state.notHaveConfirmPass &&
                         <alert >
                             <Input invalid type="password" onChange={this.handleInputChange} name="confirm_password" placeholder="Confirm Password" />
-                            <FormFeedback>Please enter password.</FormFeedback>
+                            <FormFeedback>Invalid confirm password.</FormFeedback>
                         </alert>
                     }
                     {
@@ -205,7 +196,7 @@ class RegisComponent extends React.Component {
                         this.state.notHaveEmail &&
                         <alert >
                             <Input invalid type="email" onChange={this.handleInputChange} name="email" placeholder="Email" />
-                            <FormFeedback>Please enter email.</FormFeedback>
+                            <FormFeedback>Invalid email.</FormFeedback>
                         </alert>
                     }
                     {
@@ -222,7 +213,7 @@ class RegisComponent extends React.Component {
                         this.state.notHaveContectNum &&
                         <alert >
                             <Input invalid type="text" onChange={this.handleInputChange} name="telephone_number" placeholder="Contact Number" />
-                            <FormFeedback>Please enter contact number.</FormFeedback>
+                            <FormFeedback>Invalid contact number.</FormFeedback>
                         </alert>
                     }
                     {
@@ -235,10 +226,7 @@ class RegisComponent extends React.Component {
                 <FormGroups>
                     <Buttons className="regisBtn" onClick={this.handleSubmit} type="submit" value='Sign up' />
                 </FormGroups>
-                </form>
             </Form>
-
-
         );
     }
 }
