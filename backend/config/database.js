@@ -1,3 +1,3 @@
 module.exports = {
-  database: 'mongodb://root:insanelygood@68.183.236.161:27017/otopaholicDB?authSource=admin'
+  database: 'mongodb://root:insanelygood@178.128.111.203:27017/otopaholicDB?authSource=admin'
 }

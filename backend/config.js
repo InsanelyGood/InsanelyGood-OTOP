@@ -1,6 +1,6 @@
 const config = {
   FRONTEND_URL: {
-    global: "http://68.183.236.161:3000",
+    global: "http://178.128.111.203:3000",
     local: "http://localhost:3000"
   },
   local: {
@@ -8,7 +8,7 @@ const config = {
   },
   global: {
     database:
-      "mongodb://root:insanelygood@68.183.236.161:27017/otopaholicDB?authSource=admin"
+      "mongodb://root:insanelygood@178.128.111.203:27017/otopaholicDB?authSource=admin"
   }
 };
 

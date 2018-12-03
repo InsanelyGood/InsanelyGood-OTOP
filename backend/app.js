@@ -29,7 +29,7 @@ db.on("error", console.error.bind(console, "connection error:"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-app.use(cors({ credentials: true, origin: ["http://68.183.236.161:3000", "http://localhost:3000"] }));
+app.use(cors({ credentials: true, origin: ["http://178.128.111.203:80", "http://localhost:3000"] }));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
