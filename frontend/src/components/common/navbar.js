@@ -16,6 +16,11 @@ import {
 import { getUsername } from "../../api/user_infomation";
 import Cookie from "js-cookie";
 import "../../css/navbar.css";
+import styled from 'styled-components'
+
+const Tab = styled.div`
+  margin-left: 11px;
+`
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -115,10 +120,10 @@ class NavBar extends React.Component {
                       ADMIN
                     </DropdownToggle>
                     <DropdownMenu>
-                      <Link className="cilckable" to="/admin/orders">
+                      <Link className="clickable" to="/admin/orders">
                         <DropdownItem>ORDERS</DropdownItem>
                       </Link>
-                      <Link className="cilckable" to="/admin/products">
+                      <Link className="clickable" to="/admin/products">
                         <DropdownItem>PRODUCTS</DropdownItem>
                       </Link>
                     </DropdownMenu>
@@ -130,6 +135,7 @@ class NavBar extends React.Component {
                     PRODUCTS
                   </DropdownToggle>
                   <DropdownMenu>
+                    {/* <DropdownItem className="cilckable" href="http://localhost:3000/products">
                     <DropdownItem className="cilckable" href="/products">
                       ALL
                     </DropdownItem>
@@ -144,7 +150,12 @@ class NavBar extends React.Component {
                     </DropdownItem>
                     <DropdownItem className="cilckable" href="#">
                       NORTHEASTEN
-                    </DropdownItem>
+                    </DropdownItem> */}
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: '',types: []}}}>ALL</Link></Tab><hr/>
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['north']}}}>NORTHEN</Link></Tab><hr/>
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['central']}}}>CENTRAL</Link></Tab><hr/>
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['south']}}}>SOUTHEN</Link></Tab><hr/>
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['west']}}}>WESTEN</Link></Tab>
                   </DropdownMenu>
                 </Dropdown>
               </NavItem>

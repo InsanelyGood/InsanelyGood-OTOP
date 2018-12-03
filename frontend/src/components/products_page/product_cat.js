@@ -150,6 +150,7 @@ class Categories extends React.Component {
                 type="Bag"
                 checkedType={this.checkedType}
                 unCheckedType={this.unCheckedType}
+                initialType={this.props.initialType}
               />
               <Label>Bag</Label>
             </Tab>
@@ -158,6 +159,7 @@ class Categories extends React.Component {
                 type="Bloom"
                 checkedType={this.checkedType}
                 unCheckedType={this.unCheckedType}
+                initialType={this.props.initialType}
               />
               <Label>Bloom</Label>
             </Tab>
@@ -166,6 +168,7 @@ class Categories extends React.Component {
                 type="Cloth"
                 checkedType={this.checkedType}
                 unCheckedType={this.unCheckedType}
+                initialType={this.props.initialType}
               />
               <Label>Cloth</Label>
             </Tab>
@@ -174,6 +177,7 @@ class Categories extends React.Component {
                 type="Food"
                 checkedType={this.checkedType}
                 unCheckedType={this.unCheckedType}
+                initialType={this.props.initialType}
               />
               <Label>Food</Label>
             </Tab>
@@ -182,8 +186,46 @@ class Categories extends React.Component {
                 type="Shoe"
                 checkedType={this.checkedType}
                 unCheckedType={this.unCheckedType}
+                initialType={this.props.initialType}
               />
               <Label>Shoe</Label>
+            </Tab>
+            <hr/>
+            <Tab>
+              <Check
+                type="north"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+                initialType={this.props.initialType}
+              />
+              <Label>Northen</Label>
+            </Tab>
+            <Tab>
+              <Check
+                type="central"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+                initialType={this.props.initialType}
+              />
+              <Label>Central</Label>
+            </Tab>
+            <Tab>
+              <Check
+                type="south"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+                initialType={this.props.initialType}
+              />
+              <Label>Southen</Label>
+            </Tab>
+            <Tab>
+              <Check
+                type="west"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+                initialType={this.props.initialType}
+              />
+              <Label>Westen</Label>
             </Tab>
           </BGroup>
           <br />
@@ -199,10 +241,36 @@ class Check extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state = { 
-            checked: false,
-            color: '#eee',
-            opacity: 0
+        
+        if(this.props.initialType === this.props.type) {
+            this.state = { 
+                checked: true,
+                color: '#eee',
+                opacity: 100
+            }
+        } else {
+            this.state = { 
+                checked: false,
+                color: '#eee',
+                opacity: 0
+            }
+        }
+        
+    }
+
+    componentDidUpdate = (prevProps)=> {
+        if(prevProps.initialType != this.props.initialType) {
+            if(this.props.initialType == this.props.type) {
+                this.setState({
+                    checked: true,
+                    opacity: 100
+                })
+            } else {
+                this.setState({
+                    checked: false,
+                    opacity: 0
+                })
+            }
         }
     }
 
