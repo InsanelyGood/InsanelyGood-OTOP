@@ -55,7 +55,7 @@ testfrontend:
   only:
     - master
   script:
-    - cd frontend && yarn testcafe
+    - cd frontend && yarn test
   dependencies:
     - installfrontend
 
