@@ -42,6 +42,9 @@ stages:
 #       - node_modules
 
 deploy:
+  image: docker:latest
+  services:
+    - docker:dind
   stage: deploy
   only:
     - master
