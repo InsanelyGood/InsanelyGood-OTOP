@@ -26,7 +26,7 @@ installbackend:
   only:
     - master
   script:
-    - cd backend && yarn && NODE_ENV=global node ./bin/www
+    - cd backend && yarn
   artifacts:
     paths:
       - node_modules
@@ -45,7 +45,7 @@ installfrontend:
   only:
     - master
   script:
-    - cd frontend && yarn && yarn start
+    - cd frontend && yarn
   artifacts:
     paths:
       - node_modules
@@ -64,7 +64,7 @@ deploy:
   only:
     - master
   script:
-    - ssh root@$DEPLOYMENT_SERVER_IP "git clone https://github.com/InsanelyGood/InsanelyGood-OTOP.git InsanelyGood-OTOP;cd InsanelyGood-OTOP;cd backend;docker build -t backend-insanelygood .;docker run --rm -p 8000:8000 -d backend-insanelygood;cd ..;cd frontend;docker build -t frontend-insanelygood .;docker run --rm -p 80:3000 -d frontend-insanelygood"
+    - ssh root@$DEPLOYMENT_SERVER_IP "git clone https://github.com/InsanelyGood/InsanelyGood-OTOP.git InsanelyGood-OTOP;cd InsanelyGood-OTOP;cd backend;docker build -t backend-insanelygood .;docker run --rm -p 8000:8000 -d backend-insanelygood;cd ../frontend/;docker build -t frontend-insanelygood .;docker run --rm -p 80:3000 -d frontend-insanelygood"
   dependencies:
     - installbackend
     - installfrontend
