@@ -44,7 +44,7 @@ const Item = styled.div`
     }
     justify-content: center;
     width: 23%;
-    height: 370px;
+    height: 410px;
     margin-left: 2%;
     margin-top: 2%;
 `
