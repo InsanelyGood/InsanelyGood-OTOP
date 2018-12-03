@@ -53,7 +53,7 @@ export const getPurchaseProduct = async (username) => {
     credentials: 'include'
   })
   const body = await res.json()
-  console.log('res', res);
+  console.log('res', body);
 
   return body
 }
