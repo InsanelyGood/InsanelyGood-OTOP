@@ -15,49 +15,31 @@ before_script:
   - ssh-keyscan -H $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
 
 stages:
-  - installbackend
-  - installfrontend
-  - testfrontend
-  - testbackend
+  - test_backend
+  - test_frontend
   - deploy
 
-installbackend:
-  stage: installbackend
+test_backend:
+  stage: test_backend
   only:
     - master
   script:
     - cd backend && yarn
+    - yarn test
   artifacts:
     paths:
       - node_modules
 
-testbackend:
-  stage: testbackend
-  only:
-    - master
-  script:
-    - cd backend && yarn test
-  dependencies:
-    - installbackend
-
-installfrontend:
-  stage: installfrontend
+test_frontend:
+  stage: test_frontend
   only:
     - master
   script:
     - cd frontend && yarn
+    - yarn test
   artifacts:
     paths:
       - node_modules
- 
-testfrontend:
-  stage: testfrontend
-  only:
-    - master
-  script:
-    - cd frontend && yarn test
-  dependencies:
-    - installfrontend
 
 deploy:
   stage: deploy
@@ -66,7 +48,5 @@ deploy:
   script:
     - ssh root@$DEPLOYMENT_SERVER_IP "git clone https://github.com/InsanelyGood/InsanelyGood-OTOP.git InsanelyGood-OTOP;cd InsanelyGood-OTOP;cd backend;docker build -t backend-insanelygood .;docker run --rm -p 8000:8000 -d backend-insanelygood;cd ../frontend/;docker build -t frontend-insanelygood .;docker run --rm -p 80:3000 -d frontend-insanelygood"
   dependencies:
-    - installbackend
-    - installfrontend
-    - testfrontend
-    - testbackend
+    - test_backend
+    - test_frontend
