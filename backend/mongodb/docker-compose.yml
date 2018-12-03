@@ -2,6 +2,9 @@ version: '2'
 services:
   insanelygood-mongodb:
     image: mongo:3
+    environment:
+      - MONGODB_USER=root
+      - MONGODB_PASS=password
     ports:
       - "127.0.0.1:27017:27017"
     volumes:
