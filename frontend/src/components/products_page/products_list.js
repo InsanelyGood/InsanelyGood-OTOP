@@ -52,7 +52,7 @@ const Item = styled.div`
 class ProductsList extends React.Component {
     render = () => {
         return (
-            <List>{this.props.productsShow.map((product) => (<Item><ProductItem key={product._id} product={product}/></Item>))}</List>
+            <List>{this.props.productsShow.map((product) => (<Item><ProductItem key={product.id} product={product}/></Item>))}</List>
         );
     }
 }

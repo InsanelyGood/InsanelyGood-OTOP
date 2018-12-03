@@ -195,13 +195,17 @@ class OrderItem extends React.Component {
   }
 }
 
-// change prop to send only id
-OrderItem.propTypes = {
-  detail: PropTypes.object
-};
-
 OrderItem.defaultProps = {
-  detail: {}
-};
+  detail:{
+    name: '',
+    price: 0,
+    image: '',
+    description: '',
+    category: '',
+    status: '',
+    _id:'11111111111',
+    totalPrice: 100
+  }
+}
 
 export default OrderItem;

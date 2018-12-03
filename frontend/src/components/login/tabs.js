@@ -22,7 +22,7 @@ const LoginContent = styled.div`
     }
 `
 
-export default class Example extends React.Component {
+export default class TabsComponent extends React.Component {
     constructor(props) {
         super(props);
 
@@ -49,7 +49,7 @@ export default class Example extends React.Component {
         return (
             <LoginContent className='col-sm-8 col-sm-offset-2 col-md-5 col-md-offset-3'>
                 <Form className='container'>
-                    <img src={logo} alt="OTOPAholic_logo" class="center"/>
+                    <img src={logo} alt="OTOPAholic_logo" className="center"/>
                     <Nav tabs>
                         <NavItem>
                             <NavLink xs="6"
