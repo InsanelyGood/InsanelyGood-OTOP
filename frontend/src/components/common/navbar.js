@@ -115,10 +115,10 @@ class NavBar extends React.Component {
                       ADMIN
                     </DropdownToggle>
                     <DropdownMenu>
-                      <Link className="cilckable" to="/admin/orders">
+                      <Link className="clickable" to="/admin/orders">
                         <DropdownItem>ORDERS</DropdownItem>
                       </Link>
-                      <Link className="cilckable" to="/admin/products">
+                      <Link className="clickable" to="/admin/products">
                         <DropdownItem>PRODUCTS</DropdownItem>
                       </Link>
                     </DropdownMenu>
@@ -130,7 +130,7 @@ class NavBar extends React.Component {
                     PRODUCTS
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem className="cilckable" href="http://localhost:3000/products">
+                    {/* <DropdownItem className="cilckable" href="http://localhost:3000/products">
                       ALL
                     </DropdownItem>
                     <DropdownItem className="cilckable" href="#">
@@ -144,7 +144,12 @@ class NavBar extends React.Component {
                     </DropdownItem>
                     <DropdownItem className="cilckable" href="#">
                       NORTHEASTEN
-                    </DropdownItem>
+                    </DropdownItem> */}
+                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: '',types: []}}}>ALL</Link><br/>
+                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['north']}}}>NORTHEN</Link><br/>
+                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['central']}}}>CENTRAL</Link><br/>
+                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['south']}}}>SOUTHEN</Link><br/>
+                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['west']}}}>WESTEN</Link><br/>
                   </DropdownMenu>
                 </Dropdown>
               </NavItem>
