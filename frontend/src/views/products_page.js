@@ -44,6 +44,7 @@ const Img2 = styled.img`
 
 const Right = styled.div`
     width: 100%;
+    margin-bottom: 35px;
 `
 const FILTER_CASE = 'filter'
 const SEARCH_CASE = 'search'
@@ -54,9 +55,9 @@ class ProductsPage extends Component {
         super(props)
         this.state = {
             products: [],
-            types: [],
+            types: this.props.location.state.types ? this.props.location.state.types: [],
             search: '',
-            renderState: ''
+            renderState: this.props.location.state.renderState ? this.props.location.state.renderState: ''
         }
     }
 
@@ -66,13 +67,29 @@ class ProductsPage extends Component {
         })
     }
 
+    componentDidUpdate = (prevProps)=> {
+        if(prevProps.location.state.types != this.props.location.state.types) {
+            this.setState({
+                types: this.props.location.state.types,
+                renderState: this.props.location.state.renderState
+            })
+        }
+    }
+
     productFilter = () => {
+        let filter = []
         if(this.state.types.length < 1) {
             return (<ProductPanel productsShow={this.state.products} />)
         }
-        let filter = this.state.products.filter(product =>
-          this.state.types.includes(product.category)
-        );
+        if(this.state.types == 'north' || this.state.types == 'central' || this.state.types == 'south' || this.state.types == 'west') {
+            filter = this.state.products.filter(product =>
+                this.state.types.includes(product.region)
+              );
+        } else {
+            filter = this.state.products.filter(product =>
+                this.state.types.includes(product.category)
+              );
+        }
         return (<ProductPanel productsShow={filter} />)
     }
 
@@ -140,7 +157,7 @@ class ProductsPage extends Component {
                     {/* <CarouselProduct /> */}
                     <Img2 src={mBadge}></Img2>
                     <Row>
-                        <Left><ProductsCat changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
+                        <Left><ProductsCat initialType={this.props.location.state.types} changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
                         <Right>
                             {this.renderProductPanel(this.state.renderState)}
                         </Right>
