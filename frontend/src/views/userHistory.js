@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import TabComponent from '../components/user_information/tab_user'
 import '../css/userInfo.css'
 
-class UserInfo extends Component{
+class UserHistory extends Component{
     render(){
         return <div>
             <div className='container userComponent' align="center" >
-            <TabComponent defaultTab={'1'} />
+            <TabComponent defaultTab={'2'} />
             </div>
           </div>
     }
 }
-export default UserInfo
+export default UserHistory

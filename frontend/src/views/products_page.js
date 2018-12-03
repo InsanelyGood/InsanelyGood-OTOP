@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import lBadge from '../images/large_badge.jpg'
 import mBadge from '../images/medium_badge.jpg'
 
+import CarouselProduct from '../components/carousel_home/carousal_product'
+
 const Block = styled.div`
     height: 100%;
 `
@@ -135,6 +137,7 @@ class ProductsPage extends Component {
             <div>
                 <Block>
                     <Img1 src={lBadge}></Img1>
+                    {/* <CarouselProduct /> */}
                     <Img2 src={mBadge}></Img2>
                     <Row>
                         <Left><ProductsCat changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
