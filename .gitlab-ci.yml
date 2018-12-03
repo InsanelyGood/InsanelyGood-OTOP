@@ -1,0 +1,72 @@
+image: node:latest
+
+cache:
+  key: node_modules
+  paths:
+    - node_modules
+
+before_script:  
+  - apt-get update -qq && apt-get install
+  - mkdir -p ~/.ssh
+  - echo "$DEPLOY_SERVER_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - eval "$(ssh-agent -s)"
+  - ssh-add ~/.ssh/id_rsa
+  - ssh-keyscan -H $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
+
+stages:
+  - installbackend
+  - installfrontend
+  - testfrontend
+  - testbackend
+  - deploy
+
+installbackend:
+  stage: installbackend
+  only:
+    - master
+  script:
+    - cd backend && yarn && NODE_ENV=global node ./bin/www
+  artifacts:
+    paths:
+      - node_modules
+
+testbackend:
+  stage: testbackend
+  only:
+    - master
+  script:
+    - cd backend && yarn test
+  dependencies:
+    - installbackend
+
+installfrontend:
+  stage: installfrontend
+  only:
+    - master
+  script:
+    - cd frontend && yarn && yarn start
+  artifacts:
+    paths:
+      - node_modules
+ 
+testfrontend:
+  stage: testfrontend
+  only:
+    - master
+  script:
+    - cd frontend && yarn testcafe
+  dependencies:
+    - installfrontend
+
+deploy:
+  stage: deploy
+  only:
+    - master
+  script:
+    - ssh root@$DEPLOYMENT_SERVER_IP "git clone https://github.com/InsanelyGood/InsanelyGood-OTOP.git InsanelyGood-OTOP;cd InsanelyGood-OTOP;cd backend;docker build -t backend-insanelygood .;docker run --rm -p 8000:8000 -d backend-insanelygood;cd ..;cd frontend;docker build -t frontend-insanelygood .;docker run --rm -p 80:3000 -d frontend-insanelygood"
+  dependencies:
+    - installbackend
+    - installfrontend
+    - testfrontend
+    - testbackend
