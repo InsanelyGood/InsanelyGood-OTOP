@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Col, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { addNewProduct } from "../../api/products_list";
 
 const Img = styled.img`
   margin-bottom: 1em;
@@ -58,37 +59,34 @@ class ProductAdd extends React.Component {
     this.setState({ region: e.target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
-    fetch("http://localhost:8000/products/add", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        id: this.state.id,
-        name: this.state.name,
-        image: this.state.image,
-        price: this.state.price,
-        description: this.state.description,
-        category: this.state.category,
-        region: this.state.region
-      })
-    }).then(() => {
+    const data = {
+      id: this.state.id,
+      name: this.state.name,
+      image: this.state.image,
+      price: this.state.price,
+      description: this.state.description,
+      category: this.state.category,
+      region: this.state.region
+    };
+    const res = await addNewProduct(data);
+    if (res === 200) {
       this.setState({ modal: false });
       window.location.reload();
-    });
+    }
   };
 
   render() {
     return (
       <div>
-        <Button color="info" onClick={this.renderModal}>New Product</Button>
+        <Button color="info" onClick={this.renderModal}>
+          New Product
+        </Button>
         <Modal isOpen={this.state.modal} toggle={this.renderModal} centered>
           <ModalHeader>New Product</ModalHeader>
           <ModalBody>
-            <Img src={this.state.image} alt='Wait for image...' />
+            <Img src={this.state.image} alt="Wait for image..." />
             <Form id="productForm" onSubmit={this.handleSubmit}>
               <FormGroup row>
                 <Label sm={3}>ID: </Label>
