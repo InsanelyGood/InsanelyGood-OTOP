@@ -1,5 +1,7 @@
+import { BACKEND } from "../config";
+
 export const getUsername = async (username) => {
-  const res = await fetch(`http://localhost:8000/users/${username}/information/`, {
+  const res = await fetch(BACKEND +`/users/${username}/information/`, {
     credentials: 'include'
   })
   const body = await res.json()
@@ -9,10 +11,10 @@ export const getUsername = async (username) => {
 }
 
 export const setUsername = async (username, body) => {
-  console.log(`http://localhost:8000/users/${username}/information/save`);
+  console.log(BACKEND +`/users/${username}/information/save`);
   console.log('Body: ', JSON.stringify(body));
 
-  const rawResponse = await fetch(`http://localhost:8000/users/${username}/information/save`, {
+  const rawResponse = await fetch(BACKEND +`/users/${username}/information/save`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -31,7 +33,7 @@ export const setNewPassword = async (body) => {
   console.log('Body: ', JSON.stringify(body));
   let rawResponse
   try {
-    rawResponse = await fetch(`http://localhost:8000/users/password/change`, {
+    rawResponse = await fetch(BACKEND +`/users/password/change`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -49,7 +51,7 @@ export const setNewPassword = async (body) => {
 }
 
 export const getPurchaseProduct = async (username) => {
-  const res = await fetch(`http://localhost:8000/users/${username}/orders/`, {
+  const res = await fetch(BACKEND +`/users/${username}/orders/`, {
     credentials: 'include'
   })
   const body = await res.json()

@@ -57,10 +57,10 @@ class LoginComponent extends React.Component {
         } else if (login.status === 200){
             this.setState({ invalidUsername: false })
             this.setState({ invalidPassword: false })
-            // let role = await login.json()
-            // if(role.role === 'admin') {
-            //     Cookies.set('role', 'admin');
-            // }
+            let role = await login.json()
+            if(role.role === 'admin') {
+                Cookies.set('role', 'admin');
+            }
             Cookies.set('username', this.state.username);
             window.location.href = '/'
         }
