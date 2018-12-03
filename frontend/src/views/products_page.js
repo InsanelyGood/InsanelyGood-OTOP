@@ -135,7 +135,7 @@ class ProductsPage extends Component {
 
     render() {
         return(
-            <div style={{paddingTop: '4em'}}>
+            <div style={{paddingTop: '3.5em'}}>
                 <Block>
                     <CarouselProduct />
                     <Row>
