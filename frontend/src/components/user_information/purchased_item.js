@@ -15,7 +15,7 @@ class PurchasedItems extends React.Component {
     return (
         <tr>
             <td>{res[4]}<br/>{res[1]+" "+res[2]+" "+res[3]}</td>
-            <td><Image src={item.product.image}/></td>
+            <td width="130px"><Image src={item.product.image}/></td>
             <td>{item.product.name}</td>
             <td>{item.product.price}<br/>x {item.quantity}</td>
             <td>=</td>

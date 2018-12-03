@@ -1,7 +1,6 @@
 import React from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import {
   getDetailOfOrder,
   setNewStatus,

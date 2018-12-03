@@ -56,7 +56,7 @@ class ProductPanel extends Component {
     }
 
     componentDidUpdate = (prevProps)=> {
-        if(prevProps.productsShow != this.props.productsShow) {
+        if(prevProps.productsShow !== this.props.productsShow) {
             this.setState({
                 pNum: this.props.productsShow.length
             })

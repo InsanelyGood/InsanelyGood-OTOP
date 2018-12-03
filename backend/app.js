@@ -32,7 +32,7 @@ app.set("view engine", "jade");
 app.use(
   cors({
     credentials: true,
-    origin: ["http://178.128.111.203:80", "http://localhost:3000"]
+    origin: ["http://178.128.111.203:3000", "http://localhost:3000"]
   })
 );
 app.use(logger("dev"));

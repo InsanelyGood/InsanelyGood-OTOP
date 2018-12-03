@@ -1,4 +1,8 @@
 image: node:latest
+# image: docker:latest
+
+# services:
+#   - docker:dind
 
 cache:
   key: node_modules
@@ -46,7 +50,7 @@ deploy:
   only:
     - master
   script:
-    - ssh root@$DEPLOYMENT_SERVER_IP "cd InsanelyGood-OTOP;git pull;cd backend;docker build -t backend-insanelygood .;docker run --rm -p 8000:8000 -d backend-insanelygood;cd ../frontend/;docker build -t frontend-insanelygood .;docker run --rm -p 80:3000 -d frontend-insanelygood"
+    - ssh root@$DEPLOYMENT_SERVER_IP "cd InsanelyGood-OTOP;git pull;cd /usr/;bin/lsof -t -i;kill -9 $(lsof -t -i :8000);kill -9 $(lsof -t -i :3000);cd backend;yarn;yarn start &;cd ../frontend;yarn;yarn start &;echo Done"
 #   dependencies:
 #     - test_backend
 #     - test_frontend

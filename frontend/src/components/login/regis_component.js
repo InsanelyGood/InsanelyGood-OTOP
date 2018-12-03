@@ -2,7 +2,6 @@ import React from 'react'
 import { Input, Label, FormFeedback, Row, Col } from 'reactstrap';
 import styled from 'styled-components'
 import '../../css/login&regis.css'
-import Cookies from 'js-cookie';
 import { getUserRegis } from '../../api/userid';
 
 const Form = styled.div`

@@ -6,11 +6,11 @@ import ImgCarousel from '../components/product_detail/product_img_carousel';
 import PauseSlider from '../components/product_detail/product_slider'
 
 const Detail = styled.div`
-  padding-top: 5em;
+  padding-top: 7em;
 `
 
 const DesDetail = styled.div`
-  
+  width: 500px;
 `
 const ImgBlock = styled.div`
   margin-right: 50px;
@@ -81,7 +81,7 @@ class ProductDetail extends React.Component {
       <div>
         <Detail>
           <Content>
-            <Row>
+            <Row  className="container">
               <ImgBlock><ImgCarousel img={this.state.product.image} /></ImgBlock>
               <DesDetail>
                  <ProductDescription productDetail={this.state.product} />
