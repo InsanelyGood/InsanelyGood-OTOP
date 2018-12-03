@@ -55,7 +55,7 @@ class ProductDescription extends React.Component {
       <div>
         <Name>{this.props.productDetail.name}</Name>
         <Description>
-          Description:<br/> {this.props.productDetail.description}
+          Description:<br/>{this.props.productDetail.description}
         </Description>
         <Price>Price: <strong>{this.props.productDetail.price}$</strong></Price>
         <Form onSubmit={this.handleCartAdd}>

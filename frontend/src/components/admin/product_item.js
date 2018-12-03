@@ -217,4 +217,14 @@ class ProductItem extends React.Component {
   }
 }
 
+ProductItem.defaultProps = {
+  detail:{
+    name: '',
+    price: 0,
+    image: '',
+    description: '',
+    category: ''
+  }
+}
+
 export default ProductItem;

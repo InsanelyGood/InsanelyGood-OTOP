@@ -2,6 +2,8 @@ import React from 'react'
 import { Input, Label, FormFeedback } from 'reactstrap';
 import styled from 'styled-components'
 import '../../css/login&regis.css'
+import Cookies from 'js-cookie';
+import { getUserLogin } from '../../api/userid';
 
 const Div = styled.div`
     margin: auto;
@@ -20,7 +22,7 @@ const Buttons = styled.input`
     height: 40px;
     border-radius: 5px;
     border-color: #57a9bb;
-    background-color: #57a9bb;
+    background-color: #D78A04;
     font-weight: bold;
 `
 
@@ -31,8 +33,8 @@ class LoginComponent extends React.Component {
         this.state = {
             username: '',
             password: '',
-            notHaveUsername: false,
-            notHavePassword: false
+            invalidUsername: false,
+            invalidPassword: false,
         };
     }
 
@@ -43,41 +45,41 @@ class LoginComponent extends React.Component {
     }
 
     handleSubmit = async event => {
-
-        if (this.state.username === '') {
-            this.setState({ notHaveUsername: true });
+        const data = {
+            username: this.state.username,
+            password: this.state.password
         }
-        else {
-            this.setState({ notHaveUsername: false })
+        const login = await getUserLogin(data)
+        if(login.status === 500) {
+            this.setState({ invalidUsername: true })
+            this.setState({ invalidPassword: true })
+            console.log('login ',login);
+        } else if (login.status === 200){
+            this.setState({ invalidUsername: false })
+            this.setState({ invalidPassword: false })
+            let role = await login.json()
+            if(role.role === 'admin') {
+                Cookies.set('role', 'admin');
+            }
+            Cookies.set('username', this.state.username);
+            window.location.href = '/'
         }
-
-        if (this.state.password === '') {
-            this.setState({ notHavePassword: true });
-        } else {
-            this.setState({ notHavePassword: false })
-        }
-        // const res = await setUserLogin({
-        //     username: this.state.username,
-        //     password: this.state.password,
-        // })
-        // console.log(res.status);
     }
 
-    render() {
+    render = () => {
         return (
             <Div inline>
-            <form action="http://localhost:8000/users/login" method="POST">
                 <FormGroups>
                     <Label>Username</Label>
                     {
-                        this.state.notHaveUsername &&
+                        this.state.invalidUsername &&
                         <alert >
-                            <Input invalid type="text" name="username" onChange={this.handleInputChange} placeholder="Username" />
-                            <FormFeedback>Please enter username.</FormFeedback>
+                            <Input invalid type="text" name="username" value={this.state.username} onChange={this.handleInputChange} placeholder="Username" />
+                            <FormFeedback>Invalid username. Try again</FormFeedback>
                         </alert>
                     }
                     {
-                        !this.state.notHaveUsername &&
+                        !this.state.invalidUsername &&
                         <alert >
                             <Input type="text" name="username" onChange={this.handleInputChange} placeholder="Username" />
                         </alert>
@@ -86,23 +88,22 @@ class LoginComponent extends React.Component {
                 <FormGroups>
                     <Label>Password</Label>
                     {
-                        this.state.notHavePassword &&
+                        this.state.invalidPassword &&
                         <alert >
                             <Input invalid type="password" name="password" onChange={this.handleInputChange} placeholder="Password" />
-                            <FormFeedback>Please enter password.</FormFeedback>
+                            <FormFeedback>Invalid password. Try again</FormFeedback>
                         </alert>
                     }
                     {
-                        !this.state.notHavePassword &&
+                        !this.state.invalidPassword &&
                         <alert >
                             <Input type="password" name="password" onChange={this.handleInputChange} placeholder="Password" />
                         </alert>
                     }
                 </FormGroups>
                 <FormGroups>
-                    <Buttons className="loginBtn" onClick={this.handleSubmit} type="submit" value='Login' href='/' />
+                    <Buttons onClick={this.handleSubmit} id="myuser" type="submit" value='Login' href='/' />
                 </FormGroups>
-                </form>
             </Div>
         );
     }

@@ -30,26 +30,26 @@ const Price = styled.p`
 
 class ProductItem extends React.Component {
 
-  onMouseOver = ()=> {
-    
-  }
-
-  onMouseOut = ()=> {
+  onMouseOver = () => {
 
   }
 
-    render = () => {
-        return (<Link to={"/products/" + this.props.product.id}>
-        <Box>
-          {/* <CardImg src={this.props.product_image} alt="error" /> */}
-          <center><Img alt="error" src={this.props.product.image}/></center>
-          <Des>
-            <Name>{this.props.product.name}</Name>
-            <Detail>{this.props.product.description}</Detail>
-            <Price>Price: <span>{this.props.product.price}</span></Price>
-          </Des>
-        </Box></Link>)
-    }
+  onMouseOut = () => {
+
+  }
+
+  render = () => {
+    return (<Link to={"/products/" + this.props.product.id}>
+      <Box>
+        {/* <CardImg src={this.props.product_image} alt="error" /> */}
+        <center><Img alt="error" src={this.props.product.image} /></center>
+        <Des>
+          <Name>{this.props.product.name}</Name>
+          <Detail>{this.props.product.description}</Detail>
+          <Price>Price: <span>{this.props.product.price}</span></Price>
+        </Des>
+      </Box></Link>)
+  }
 
 }
 

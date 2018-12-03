@@ -43,7 +43,8 @@ router.post("/login", function(req, res, next) {
     console.log("user", user);
     if (!user) {
       // return res.redirect("http://localhost:3000/users/login");
-      res.status(401).send("wrong username or password")
+      // res.status(401)
+      res.status(500).send('Wrong username and password')
     }
 
     req.logIn(user, function(err) {
@@ -51,11 +52,12 @@ router.post("/login", function(req, res, next) {
         return next(err);
       }
       if (user.role === "admin") {
-        res.cookie("role", user.role);
+        return res.cookie("role", user.role).status(200).send({role: 'admin'});
+      } else {
+        return res
+          .cookie("username", user.username)
+          .status(200).send({ role: 'customer' });
       }
-      return res
-        .cookie("username", user.username)
-        .redirect("http://localhost:3000/");
         // .status(200)
         // .send(user.username + " login success")
     });
@@ -84,6 +86,8 @@ router.post("/register", function(req, res) {
 
   function registerProcess() {
     console.log("Register processing");
+    console.log('user: ', req.body.firstname);
+    
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const email = req.body.email;
@@ -108,7 +112,7 @@ router.post("/register", function(req, res) {
 
     let errors = req.validationErrors();
     if (errors) {
-      console.log(errors);
+      console.log('error: ',errors);
       // res.render('register', {
       //   errors: errors
       // });
@@ -137,8 +141,8 @@ router.post("/register", function(req, res) {
               console.log(err);
               return;
             } else {
-              res.redirect("http://localhost:3000/users/login");
-              // res.status(200).send(newUser.username + ' registeration is success')
+              // res.redirect("http://localhost:3000/users/login");
+              res.status(200).send(newUser.username + ' registeration is success')
             }
           });
         });

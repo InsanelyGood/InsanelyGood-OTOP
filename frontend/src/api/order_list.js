@@ -1,10 +1,12 @@
+import { BACKEND } from "../config";
+
 export async function getOrders(username) {
-    const res = await fetch(`http://localhost:8000/users/${username}/checkout`, {
-        credentials: 'include'
-    })
-    const body = await res.json()
-    console.log(body);
-    return body
+  const res = await fetch(BACKEND + `/users/${username}/checkout`, {
+    credentials: "include"
+  });
+  const body = await res.json();
+  console.log(body);
+  return body;
 }
 
 // export async function setOrder(username, body){
