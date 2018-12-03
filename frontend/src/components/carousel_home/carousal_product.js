@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
   Carousel,
-  CarouselItem,
-  CarouselControl
+  CarouselItem
 } from 'reactstrap';
 import badgeC from '../../images/badge_c.jpg'
 import badgeM from '../../images/large_badge.jpg'
@@ -85,10 +84,7 @@ class CarouselProduct extends Component {
         next={this.next}
         previous={this.previous}
       >
-        {/* <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} /> */}
         {slides}
-        {/* <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} /> */}
-        {/* <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} /> */}
       </Carousel>
     );
   }

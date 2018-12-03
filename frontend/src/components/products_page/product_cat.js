@@ -259,8 +259,8 @@ class Check extends React.Component {
     }
 
     componentDidUpdate = (prevProps)=> {
-        if(prevProps.initialType != this.props.initialType) {
-            if(this.props.initialType == this.props.type) {
+        if(prevProps.initialType !== this.props.initialType) {
+            if(this.props.initialType === this.props.type) {
                 this.setState({
                     checked: true,
                     opacity: 100

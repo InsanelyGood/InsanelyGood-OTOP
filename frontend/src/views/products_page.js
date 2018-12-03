@@ -3,8 +3,6 @@ import ProductPanel from '../components/products_page/product_panel'
 import ProductsCat from '../components/products_page/product_cat'
 import { getProducts } from '../api/products_list'
 import styled from 'styled-components'
-import lBadge from '../images/large_badge.jpg'
-import mBadge from '../images/medium_badge.jpg'
 
 import CarouselProduct from '../components/carousel_home/carousal_product'
 
@@ -26,20 +24,6 @@ const Left = styled.div`
         height: 20%;
     }
     width: 470px;
-`
-const Img1 = styled.img`
-    @media(min-width: 1120px) {
-        width: 100%;
-    }
-    width: 0px;
-    margin-top: 56px;
-`
-const Img2 = styled.img`
-    @media(max-width: 1120px) {
-        width: 100%;
-    }
-    width: 0px;;
-    margin-top: 56px;
 `
 
 const Right = styled.div`
@@ -68,7 +52,7 @@ class ProductsPage extends Component {
     }
 
     componentDidUpdate = (prevProps)=> {
-        if(prevProps.location.state.types != this.props.location.state.types) {
+        if(prevProps.location.state.types !== this.props.location.state.types) {
             this.setState({
                 types: this.props.location.state.types,
                 renderState: this.props.location.state.renderState
@@ -81,7 +65,7 @@ class ProductsPage extends Component {
         if(this.state.types.length < 1) {
             return (<ProductPanel productsShow={this.state.products} />)
         }
-        if(this.state.types == 'north' || this.state.types == 'central' || this.state.types == 'south' || this.state.types == 'west') {
+        if(this.state.types === 'north' || this.state.types === 'central' || this.state.types === 'south' || this.state.types === 'west') {
             filter = this.state.products.filter(product =>
                 this.state.types.includes(product.region)
               );
@@ -151,11 +135,9 @@ class ProductsPage extends Component {
 
     render() {
         return(
-            <div>
+            <div style={{paddingTop: '4em'}}>
                 <Block>
-                    <Img1 src={lBadge}></Img1>
-                    {/* <CarouselProduct /> */}
-                    <Img2 src={mBadge}></Img2>
+                    <CarouselProduct />
                     <Row>
                         <Left><ProductsCat initialType={this.props.location.state.types} changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
                         <Right>
