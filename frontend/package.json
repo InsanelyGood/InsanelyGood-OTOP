@@ -21,8 +21,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:local": "REACT_APP_BACKEND=local react-scripts start",
     "build": "react-scripts build",
     "test": "CI=true react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "testcafe": "testcafe chrome src/testcafe/otopaholic.testcafe.js"
   }
 }
