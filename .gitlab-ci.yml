@@ -15,49 +15,31 @@ before_script:
   - ssh-keyscan -H $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
 
 stages:
-  - installbackend
-  - installfrontend
-  - testfrontend
-  - testbackend
+  - test_backend
+  - test_frontend
   - deploy
 
-installbackend:
-  stage: installbackend
+test_backend:
+  stage: test_backend
   only:
     - master
   script:
     - cd backend && yarn
+    - yarn start
   artifacts:
     paths:
       - node_modules
 
-testbackend:
-  stage: testbackend
-  only:
-    - master
-  script:
-    - cd backend && yarn test
-  dependencies:
-    - installbackend
-
-installfrontend:
-  stage: installfrontend
+test_frontend:
+  stage: test_frontend
   only:
     - master
   script:
     - cd frontend && yarn
+    - yarn start
   artifacts:
     paths:
       - node_modules
- 
-testfrontend:
-  stage: testfrontend
-  only:
-    - master
-  script:
-    - cd frontend && yarn test
-  dependencies:
-    - installfrontend
 
 deploy:
   stage: deploy
