@@ -50,7 +50,7 @@ deploy:
   only:
     - master
   script:
-    - ssh root@$DEPLOYMENT_SERVER_IP "cd InsanelyGood-OTOP;git pull;kill -9 $(lsof -t -i :8000);kill -9 $(lsof -t -i :3000);cd backend;yarn;yarn start &;cd ../frontend;yarn;yarn start &;echo Done"
+    - ssh root@$DEPLOYMENT_SERVER_IP "cd InsanelyGood-OTOP;git pull;sudo apt-get install lsof;kill -9 $(lsof -t -i :8000);kill -9 $(lsof -t -i :3000);cd backend;yarn;yarn start &;cd ../frontend;yarn;yarn start &;echo Done"
 #   dependencies:
 #     - test_backend
 #     - test_frontend
