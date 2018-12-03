@@ -44,6 +44,7 @@ const Img2 = styled.img`
 
 const Right = styled.div`
     width: 100%;
+    margin-bottom: 35px;
 `
 const FILTER_CASE = 'filter'
 const SEARCH_CASE = 'search'
