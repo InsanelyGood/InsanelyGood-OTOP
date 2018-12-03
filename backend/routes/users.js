@@ -56,7 +56,7 @@ router.post("/login", function(req, res, next) {
       } else {
         return res
           .cookie("username", user.username)
-          .status(200).send('login success');
+          .status(200).send({ role: 'customer' });
       }
         // .status(200)
         // .send(user.username + " login success")
