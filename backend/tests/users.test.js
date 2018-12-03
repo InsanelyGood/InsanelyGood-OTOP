@@ -5,11 +5,11 @@ const server = require('../app')
 describe('GET users/:username/information', function () {
     it('Should return object of user.', function (done) {
         const res = request(server)
-            .get('/users/newUserAom/information')
+            .get('/users/test/information')
             .expect('Content-Type', 'application/json; charset=utf-8')
             .expect(200)
             .expect(function (res) {
-                expect(res.body.username).toBe('newUserAom')
+                expect(res.body.username).toBe('test')
             })
             .end((err, res) => {
                 if (err) {
@@ -25,10 +25,10 @@ describe('GET users/:username/information', function () {
 describe('POST users/:username/information/save', function () {
     it('Should return update data success', function (done) {
         const res = request(server)
-            .post('/users/testUpdate/information/save')
+            .post('/users/test/information/save')
             .set('Content-Type', 'application/json')
             .send({
-                "username": "testUpdate",
+                "username": "test",
                 "firstname": "firstname2",
                 "lastname": "lastname2",
                 "email": "test2@insanely.com",
@@ -49,11 +49,12 @@ describe('POST users/:username/information/save', function () {
     })
 })
 
+
 // GET User checkout Info
 describe('GET users/:username/checkout', function () {
     it('Should return user address and list of product.', function (done) {
         const res = request(server)
-            .get('/users/newUserAom/checkout')
+            .get('/users/test/checkout')
             .expect('Content-Type', 'application/json; charset=utf-8')
             .expect(200)
             .expect(function (res) {

@@ -142,5 +142,16 @@ class CartItem extends React.Component {
     );
   }
 }
+CartItem.defaultProps = {
+  item: {
+    product: {
+      _id: '',
+      image: '',
+      name: '',
+      price: 0
+    },
+    quantity: 0
+  }
+};
 
 export default CartItem;

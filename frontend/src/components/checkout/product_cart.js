@@ -22,5 +22,14 @@ class ProductCart extends React.Component {
             </tbody>
         )}
 }
+ProductCart.defaultProps = {
+    cartItem: {
+      product: {
+        name: '',
+        price: 0
+      },
+      quantity: 0
+    }
+  };
 
 export default ProductCart

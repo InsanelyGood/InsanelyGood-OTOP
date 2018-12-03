@@ -13,8 +13,8 @@ class Purchased extends Component{
             </p>
             
             <br/>
-            <Button size="lg" href="/products" className="buttonShop">Shop more</Button>{' '}
-            <Button size="lg" href="/" className="buttonHome">Home</Button>{' '}
+            <Button size="lg" href="/cart" className="buttonShop">Your Cart</Button>{' '}
+            <Button size="lg" href="/products" className="buttonHome">Shop more</Button>{' '}
             </div>
           </div>
     }
