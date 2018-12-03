@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Card, Form, Input, FormGroup, Table, Button } from 'reactstrap';
+import { Card, Form, Input, FormGroup, Table, Button, FormFeedback } from 'reactstrap';
 import Cookies from 'js-cookie'
-import { getOrders } from '../../api/order_list';
+import { setNewOrder, getOrders } from '../../api/checkout';
 import ProductCart from './product_cart'
 import '../../css/checkout.css'
 
@@ -26,7 +26,8 @@ class OrderList extends Component {
             username: {},
             total: 0,
             status: 'OrderCreated',
-            readOnly: true
+            readOnly: true,
+            addressInvalid: false
         }
     }
 
@@ -53,7 +54,7 @@ class OrderList extends Component {
             item => (total += item.product.price * item.quantity)
         );
         return total
-    } 
+    }
 
     renderTotalPrice = () => {
 
@@ -74,6 +75,27 @@ class OrderList extends Component {
         })
     }
 
+    handleCheckout = async e => {
+        e.preventDefault();
+        if (this.state.address !== '' || this.state.username.address !== '') {
+            this.setState({ addressInvalid: false })
+            const data = {
+                purchasedList: this.state.username.products,
+                totalPrice: this.state.total,
+                status: this.state.status,
+                shippingAddress: this.state.address === '' ? this.state.username.address : this.state.address
+            };
+
+            const res = await setNewOrder(Cookies.get('username'), data);
+            if (res === 200) {
+                window.location.href = '/purchased'
+            }
+        }
+        else{
+            this.setState({ addressInvalid: true })
+        }
+    }
+
     handleEdit = async event => {
         this.setState({
             readOnly: false
@@ -81,12 +103,12 @@ class OrderList extends Component {
     }
 
 
-    render() {
+    render = () => {
         return (
             <CheckoutContent className='col-sm-4 col-sm-offset-2 col-md-7 col-md-offset-3'>
                 <Form className='container'>
                     <h4>Product List</h4>
-                    <Card  className="card" body>
+                    <Card className="card" body>
                         <Table borderless>
                             <thead>
                                 <tr>
@@ -105,19 +127,28 @@ class OrderList extends Component {
                     <h4>Payment Detail</h4>
                     <Card body>
                         <h5>Address</h5>
-                        <Input className="textaddress" type="textarea" name="address" onChange={this.handleInputChange} readOnly={this.state.readOnly} value={this.state.address}></Input>
+                        {
+                            this.state.addressInvalid &&
+                            <alert >
+                                <Input invalid className="textaddress" type="textarea" name="address" onChange={this.handleInputChange} readOnly={this.state.readOnly} value={this.state.address} />
+                                <FormFeedback>Invalid address. Try again</FormFeedback>
+                            </alert>
+                        }
+                        {
+                            !this.state.addressInvalid &&
+                            <alert >
+                                <Input className="textaddress" type="textarea" name="address" onChange={this.handleInputChange} readOnly={this.state.readOnly} value={this.state.address} />
+                            </alert>
+                        }
+
                         <FormGroup>
                             <Button className="float-right" size="sm" onClick={this.handleEdit}><ion-icon ios="ios-create" md="md-create"></ion-icon></Button>
                         </FormGroup>
                     </Card>
                     <br></br>
                     <br></br>
-                    <form action={"http://localhost:8000/orders/" + Cookies.get('username') + "/create"} method="POST">
+                    <form onSubmit={this.handleCheckout}>
                         <Button className="confirmBtn" type='submit' size="lg" block>Confirm</Button>
-                        <input type="hidden" value={this.state.products} name="purchasedList"></input>
-                        <input type="hidden" value={this.state.total} name="totalPrice"></input>
-                        <input type="hidden" value={this.state.status} name="status"></input>
-                        <input type="hidden" value={this.state.address === '' ? this.state.username.address : this.state.address} name="shippingAddress"></input>
                     </form>
                 </Form>
             </CheckoutContent>
