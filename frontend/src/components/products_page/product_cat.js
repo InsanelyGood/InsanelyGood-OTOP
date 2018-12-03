@@ -211,7 +211,7 @@ class Categories extends React.Component {
             <hr />
             <Tab>
               <Check
-                type="north"
+                type="North"
                 checkedType={this.checkedType}
                 unCheckedType={this.unCheckedType}
                 initialType={this.props.initialType}
@@ -238,12 +238,12 @@ class Categories extends React.Component {
             </Tab>
             <Tab>
               <Check
-                type="west"
+                type="east"
                 checkedType={this.checkedType}
                 unCheckedType={this.unCheckedType}
                 initialType={this.props.initialType}
               />
-              <Label>Westen</Label>
+              <Label>Northeneast</Label>
             </Tab>
           </BGroup>
           <br />

@@ -11,7 +11,7 @@ const Box = styled.div`
 `
 const Img = styled.img`
   width: 65%;
-  height: 160px;
+  height: 65%;
   margin-bottom: 18px;
 `
 const Des = styled.div`
@@ -23,11 +23,8 @@ const Name = styled.div`
   text-transform: uppercase;
   margin-bottom: 1px;
 `
-const Line = styled.div`
-  display: flex;
-`
 const Btn = styled.div`
-  margin-left: 21%;
+
 `
 
 const Price = styled.p`
@@ -52,17 +49,14 @@ class ProductItem extends React.Component {
     render = () => {
         return (<Link to={"/products/" + this.props.product.id}>
         <Box>
-          {/* <CardImg src={this.props.product_image} alt="error" /> */}
           <center><Img alt="error" src={this.props.product.image}/></center>
           <Des>
             <Name>{this.props.product.name}</Name>
-            <Line>
             <Price>Price: <span>{this.props.product.price}</span></Price>
             <br/>
             <Btn>
             <Button color="success" size="sm" onClick={this.handleCartAdd}>Buy Now</Button>
             </Btn>
-            </Line>
           </Des>
         </Box></Link>)
     }

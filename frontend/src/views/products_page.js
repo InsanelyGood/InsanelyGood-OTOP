@@ -65,7 +65,7 @@ class ProductsPage extends Component {
         if(this.state.types.length < 1) {
             return (<ProductPanel productsShow={this.state.products} />)
         }
-        if(this.state.types === 'north' || this.state.types === 'central' || this.state.types === 'south' || this.state.types === 'west') {
+        if(this.state.types == 'North' || this.state.types == 'central' || this.state.types == 'south' || this.state.types == 'east') {
             filter = this.state.products.filter(product =>
                 this.state.types.includes(product.region)
               );
