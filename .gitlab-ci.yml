@@ -48,7 +48,5 @@ deploy:
   script:
     - ssh root@$DEPLOYMENT_SERVER_IP "git clone https://github.com/InsanelyGood/InsanelyGood-OTOP.git InsanelyGood-OTOP;cd InsanelyGood-OTOP;cd backend;docker build -t backend-insanelygood .;docker run --rm -p 8000:8000 -d backend-insanelygood;cd ../frontend/;docker build -t frontend-insanelygood .;docker run --rm -p 80:3000 -d frontend-insanelygood"
   dependencies:
-    - installbackend
-    - installfrontend
-    - testfrontend
-    - testbackend
+    - test_backend
+    - test_frontend
