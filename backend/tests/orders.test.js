@@ -16,7 +16,7 @@ describe("GET orders", () => {
 describe('POST orders/:username/create', function () {
   it('Should return text "Created order success"', function (done) {
     const res = request(server)
-      .post('/orders/newUserAom/create')
+      .post('/orders/admin/create')
       .set('Content-Type', 'application/json')
       .send({
         "purchasedList": [

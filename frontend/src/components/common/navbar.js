@@ -130,7 +130,7 @@ class NavBar extends React.Component {
                     PRODUCTS
                   </DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem className="cilckable" href="http://localhost:3000/products">
+                    <DropdownItem className="cilckable" href="/products">
                       ALL
                     </DropdownItem>
                     <DropdownItem className="cilckable" href="#">
