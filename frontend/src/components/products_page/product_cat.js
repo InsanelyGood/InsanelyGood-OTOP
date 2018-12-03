@@ -258,7 +258,6 @@ export default Categories;
 class Check extends React.Component {
   constructor(props) {
     super(props);
-
     if (this.props.initialType === this.props.type) {
       this.state = {
         checked: true,

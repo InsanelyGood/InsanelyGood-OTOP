@@ -6,10 +6,6 @@ import UserHistory from '../../components/user_information/user_history'
 import styled from 'styled-components'
 import '../../css/login&regis.css'
 
-const Form = styled.div`
-    
-    // padding: 5% 37% 20% 30%;
-`
 const AllContent = styled.div`
     padding: 5em;
     margin: auto;

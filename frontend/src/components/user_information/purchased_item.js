@@ -6,11 +6,6 @@ const Image = styled.img`
   padding-right: 5px;
 `;
 
-const centre = styled.div`
-  display: flex;
-  align-items: center;
-  `;
-
 class PurchasedItems extends React.Component {
 
   render() {
