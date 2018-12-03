@@ -1,4 +1,8 @@
 image: node:latest
+image: docker:latest
+
+services:
+  - docker:dind
 
 cache:
   key: node_modules
@@ -42,9 +46,6 @@ stages:
 #       - node_modules
 
 deploy:
-#   image: docker:latest
-#   services:
-#     - docker:dind
   stage: deploy
   only:
     - master
