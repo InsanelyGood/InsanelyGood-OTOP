@@ -28,7 +28,6 @@ const AlertBlock = styled.div`
     text-align: center;
     display: block;
 `
-
 const Alert = styled.div`
     margin-left: auto;
     margin-right: auto;
@@ -41,7 +40,8 @@ class ProductPanel extends Component {
         super(props)
         this.state = {
             sortType: '',
-            pNum: this.props.productsShow.length
+            pNum: this.props.productsShow.length,
+            pages: 1
         }
     }
 

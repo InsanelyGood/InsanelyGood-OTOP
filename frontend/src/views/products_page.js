@@ -65,12 +65,19 @@ class ProductsPage extends Component {
     }
 
     productFilter = () => {
+        let filter = []
         if(this.state.types.length < 1) {
             return (<ProductPanel productsShow={this.state.products} />)
         }
-        let filter = this.state.products.filter(product =>
-          this.state.types.includes(product.category)
-        );
+        if(this.state.types == 'Northen' || this.state.types == 'Central' || this.state.types == 'Southen' || this.state.types == 'Northeasten') {
+            filter = this.state.products.filter(product =>
+                this.state.types.includes(product.category)
+              );
+        } else {
+            filter = this.state.products.filter(product =>
+                this.state.types.includes(product.region)
+              );
+        }
         return (<ProductPanel productsShow={filter} />)
     }
 

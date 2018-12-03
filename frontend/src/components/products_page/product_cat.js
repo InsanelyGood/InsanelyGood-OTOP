@@ -185,6 +185,39 @@ class Categories extends React.Component {
               />
               <Label>Shoe</Label>
             </Tab>
+            <hr/>
+            <Tab>
+              <Check
+                type="north"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+              />
+              <Label>Northen</Label>
+            </Tab>
+            <Tab>
+              <Check
+                type="central"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+              />
+              <Label>Central</Label>
+            </Tab>
+            <Tab>
+              <Check
+                type="south"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+              />
+              <Label>Southen</Label>
+            </Tab>
+            <Tab>
+              <Check
+                type="west"
+                checkedType={this.checkedType}
+                unCheckedType={this.unCheckedType}
+              />
+              <Label>Westen</Label>
+            </Tab>
           </BGroup>
           <br />
         </Content>
