@@ -1,15 +1,13 @@
 export const getUserLogin = async () => {
-    const res = await fetch(`http://localhost:8000/users/login/`, {
+   const res = await fetch(`http://localhost:8000/users/login/`, {
         method: 'POST',
         credentials: 'include',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
     })
-    console.log(rs)
-    const body = await res.json()
-    console.log(body)
+    console.log(res)
+    if(!res.ok){
+         console.log(await res.text())
+    }
+
     // if (!res.ok) {
     //     console.log('err', res)
     //     const body = await res.json()
