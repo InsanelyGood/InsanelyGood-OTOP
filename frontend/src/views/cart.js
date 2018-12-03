@@ -128,7 +128,7 @@ class Cart extends React.Component {
             <ShopMore>Continue Shopping</ShopMore>
           </Link>
           {this.state.carts.length === 0 ? (
-            <CheckoutButton tyle={{ cursor: "no-drop" }}>
+            <CheckoutButton style={{ cursor: "no-drop" }}>
               <span style={{ cursor: "no-drop" }}>Checkout</span>
             </CheckoutButton>
           ) : (
