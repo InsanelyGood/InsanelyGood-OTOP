@@ -95,18 +95,16 @@ class ProductPanel extends Component {
 
     sort = ()=> {
         let sorted = []
-        switch(this.state.sortType) {
-            case 'price':
-                sorted = this.props.productsShow.sort((a,b)=> {
-                    return a.price - b.price
-                })
-            case 'name':
-                sorted = this.props.productsShow.sort((a,b)=> {
-                    return (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : 0;
-                })
-            default:
-                sorted = this.props.productsShow
-                
+        if(this.state.sortType == 'price') {
+            sorted = this.props.productsShow.sort((a,b)=> {
+                return a.price - b.price
+            })
+        } else if (this.state.sortType == 'name') {
+            sorted = this.props.productsShow.sort((a,b)=> {
+                return (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : 0;
+            })
+        } else {
+            sorted = this.props.productsShow
         }
 
         return this.cutPages(sorted)

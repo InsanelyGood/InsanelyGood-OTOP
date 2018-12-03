@@ -11,7 +11,7 @@ const Box = styled.div`
 `
 const Img = styled.img`
   width: 65%;
-  height: 160px;
+  height: 65%;
   margin-bottom: 18px;
 `
 const Des = styled.div`
