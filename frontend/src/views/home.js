@@ -22,7 +22,7 @@ class Home extends React.Component {
 
     render = () => {
 
-        let random = this.state.products.slice(0, 3)
+        let random = this.state.products.slice(0, 4)
         return (
         <div>
             <CarousalHighlight />
