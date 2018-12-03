@@ -4,6 +4,7 @@ import Sort from '../sort/sort_component'
 import styled from 'styled-components'
 import emote from '../../images/emote.png'
 import { Pagination } from 'antd';
+import 'antd/lib/pagination/style/css';
 
 const Block = styled.div`
     width: 100%;
@@ -130,7 +131,6 @@ class ProductPanel extends Component {
                     <SortBlock><Sort changeSortType={this.changeSortType}/></SortBlock>
                 </Head>
                 {this.generate()}
-
             </Block>
         )
     }
