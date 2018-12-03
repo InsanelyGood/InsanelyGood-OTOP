@@ -16,6 +16,11 @@ import {
 import { getUsername } from "../../api/user_infomation";
 import Cookie from "js-cookie";
 import "../../css/navbar.css";
+import styled from 'styled-components'
+
+const Tab = styled.div`
+  margin-left: 11px;
+`
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -145,11 +150,11 @@ class NavBar extends React.Component {
                     <DropdownItem className="cilckable" href="#">
                       NORTHEASTEN
                     </DropdownItem> */}
-                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: '',types: []}}}>ALL</Link><br/>
-                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['north']}}}>NORTHEN</Link><br/>
-                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['central']}}}>CENTRAL</Link><br/>
-                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['south']}}}>SOUTHEN</Link><br/>
-                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['west']}}}>WESTEN</Link><br/>
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: '',types: []}}}>ALL</Link></Tab><hr/>
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['north']}}}>NORTHEN</Link></Tab><hr/>
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['central']}}}>CENTRAL</Link></Tab><hr/>
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['south']}}}>SOUTHEN</Link></Tab><hr/>
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['west']}}}>WESTEN</Link></Tab>
                   </DropdownMenu>
                 </Dropdown>
               </NavItem>

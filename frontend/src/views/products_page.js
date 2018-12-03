@@ -112,8 +112,6 @@ class ProductsPage extends Component {
     }
     
     renderProductPanel = input_case => {
-        console.log(this.state.products);
-        
         switch (input_case) {
             case FILTER_CASE:
                 return this.productFilter()
