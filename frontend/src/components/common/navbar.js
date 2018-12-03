@@ -152,10 +152,10 @@ class NavBar extends React.Component {
                       NORTHEASTEN
                     </DropdownItem> */}
                     <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: '',types: []}}}>ALL</Link></Tab><hr/>
-                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['north']}}}>NORTHEN</Link></Tab><hr/>
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['North']}}}>NORTHEN</Link></Tab><hr/>
                     <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['central']}}}>CENTRAL</Link></Tab><hr/>
                     <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['south']}}}>SOUTHEN</Link></Tab><hr/>
-                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['west']}}}>WESTEN</Link></Tab>
+                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['east']}}}>NORTHENEAST</Link></Tab>
                   </DropdownMenu>
                 </Dropdown>
               </NavItem>
