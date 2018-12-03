@@ -22,7 +22,7 @@ const LoginContent = styled.div`
     }
 `
 
-export default class Example extends React.Component {
+export default class TabsComponent extends React.Component {
     constructor(props) {
         super(props);
 

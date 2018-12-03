@@ -66,7 +66,7 @@ class LoginComponent extends React.Component {
         }
     }
 
-    render() {
+    render = () => {
         return (
             <Div inline>
                 <FormGroups>

@@ -46,12 +46,21 @@ class OrderTable extends React.Component {
           <tbody>
             {this.state.orders &&
               this.state.orders.map(order => (
-                <OrderItem key={order._id} detail={order} />
+                <OrderItem key={order.id} detail={order} />
               ))}
           </tbody>
         </Table>
       </div>
     );
+  }
+}
+
+OrderTable.defaultProps = {
+  second:{
+    totalPrice: 0
+  },
+  first:{
+    totalPrice: 0
   }
 }
 
