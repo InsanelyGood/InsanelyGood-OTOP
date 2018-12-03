@@ -25,7 +25,7 @@ test_backend:
     - master
   script:
     - cd backend && yarn
-    - yarn start
+    - yarn test
   artifacts:
     paths:
       - node_modules
@@ -36,7 +36,7 @@ test_frontend:
     - master
   script:
     - cd frontend && yarn
-    - yarn start
+    - yarn test
   artifacts:
     paths:
       - node_modules
