@@ -100,6 +100,7 @@ handleSubmit = async event => {
                 <label>Username</label>
                     <input type="text" className="boxInput" name="username" value={this.state.username} readOnly="readonly"></input>
                 </p>
+                <br />
                 <editable>
                 <p>
                 <label>Old Password</label>
@@ -118,13 +119,14 @@ handleSubmit = async event => {
                         <Input type="password" className="boxInput"  name="oldPassword" onChange={this.handleInputChange} />
                     </alert>
                 }
-                {/* <br/> */}
+                <br/>
                 <p>
                 <label>New Password</label>
                 </p>
                 <alert>
                 <Input type="password" className="boxInput" name="newPassword1" onChange={this.handleInputChange}/>
                 </alert>
+                <br />
                 <p>
                 <label>Confirm New Password</label>
                 </p>

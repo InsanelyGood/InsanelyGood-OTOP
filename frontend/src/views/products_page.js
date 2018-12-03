@@ -3,8 +3,8 @@ import ProductPanel from '../components/products_page/product_panel'
 import ProductsCat from '../components/products_page/product_cat'
 import { getProducts } from '../api/products_list'
 import styled from 'styled-components'
-import lBadge from '../images/large_badge.jpg'
-import mBadge from '../images/medium_badge.jpg'
+
+import CarouselProduct from '../components/carousel_home/carousal_product'
 
 const Block = styled.div`
     height: 100%;
@@ -25,23 +25,10 @@ const Left = styled.div`
     }
     width: 470px;
 `
-const Img1 = styled.img`
-    @media(min-width: 1120px) {
-        width: 100%;
-    }
-    width: 0px;
-    margin-top: 56px;
-`
-const Img2 = styled.img`
-    @media(max-width: 1120px) {
-        width: 100%;
-    }
-    width: 0px;;
-    margin-top: 56px;
-`
 
 const Right = styled.div`
     width: 100%;
+    margin-bottom: 35px;
 `
 const FILTER_CASE = 'filter'
 const SEARCH_CASE = 'search'
@@ -52,9 +39,9 @@ class ProductsPage extends Component {
         super(props)
         this.state = {
             products: [],
-            types: [],
+            types: this.props.location.state.types ? this.props.location.state.types: [],
             search: '',
-            renderState: ''
+            renderState: this.props.location.state.renderState ? this.props.location.state.renderState: ''
         }
     }
 
@@ -64,13 +51,29 @@ class ProductsPage extends Component {
         })
     }
 
+    componentDidUpdate = (prevProps)=> {
+        if(prevProps.location.state.types !== this.props.location.state.types) {
+            this.setState({
+                types: this.props.location.state.types,
+                renderState: this.props.location.state.renderState
+            })
+        }
+    }
+
     productFilter = () => {
+        let filter = []
         if(this.state.types.length < 1) {
             return (<ProductPanel productsShow={this.state.products} />)
         }
-        let filter = this.state.products.filter(product =>
-          this.state.types.includes(product.category)
-        );
+        if(this.state.types === 'north' || this.state.types === 'central' || this.state.types === 'south' || this.state.types === 'west') {
+            filter = this.state.products.filter(product =>
+                this.state.types.includes(product.region)
+              );
+        } else {
+            filter = this.state.products.filter(product =>
+                this.state.types.includes(product.category)
+              );
+        }
         return (<ProductPanel productsShow={filter} />)
     }
 
@@ -132,12 +135,11 @@ class ProductsPage extends Component {
 
     render() {
         return(
-            <div>
+            <div style={{paddingTop: '4em'}}>
                 <Block>
-                    <Img1 src={lBadge}></Img1>
-                    <Img2 src={mBadge}></Img2>
+                    <CarouselProduct />
                     <Row>
-                        <Left><ProductsCat changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
+                        <Left><ProductsCat initialType={this.props.location.state.types} changeTypes={this.changeTypes} searchValue={this.changeSearchValue} /></Left>
                         <Right>
                             {this.renderProductPanel(this.state.renderState)}
                         </Right>
