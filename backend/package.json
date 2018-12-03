@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "NODE_ENV=global nodemon ./bin/www",
+        "start": "NODE_ENV=global node ./bin/www",
         "start:local": "NODE_ENV=local nodemon ./bin/www",
         "test": "jest --forceExit --updateSnapshot --detectOpenHandles"
     },
