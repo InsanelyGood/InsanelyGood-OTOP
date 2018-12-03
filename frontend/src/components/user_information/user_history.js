@@ -5,6 +5,7 @@ import { Table } from 'reactstrap';
 import '../../css/userInfo.css'
 import Cookies from 'js-cookie';
 import { getPurchaseProduct} from '../../api/user_infomation'
+import PurchasedItems from './purchased_item'
 
 
 class UserHistory extends React.Component {
@@ -23,13 +24,7 @@ class UserHistory extends React.Component {
     const prod = await getPurchaseProduct(Cookies.get('username'))
     this.setState({
         product: prod
-    }, () => console.log("history "+this.state.product[0].purchasedList))
-  }
-
-  handleInputChange = event => {
-      this.setState({
-          [event.target.name]: event.target.value
-      })
+    }, () => console.log("history "+this.state.product))
   }
 
   toggle = tab => {
@@ -46,21 +41,13 @@ class UserHistory extends React.Component {
         <div  className="historyScroll">
         <Table responsive hover>
           <tbody>
-          <thead>
-            <tr>
-              
-            </tr>
-          </thead>
-            <tr>
-              <th scope="row">1</th>
-              <td>2hhhh</td>
-              <td>nnnn</td>
-              <td>4nnnnn</td>
-            </tr>
-            
+            { this.state.product && this.state.product.map( order =>
+              order.purchasedList.map(item => 
+                <PurchasedItems date={order.dateTime} item={item} />
+                )
+              ) }
           </tbody>
         </Table>
-
       </div>
     </div>
     );

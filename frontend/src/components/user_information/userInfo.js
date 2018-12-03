@@ -31,7 +31,7 @@ class UserInfomation extends React.Component {
   }
   render() {
     return (
-        <div>
+        <div className=" col-sm-4 col-sm-offset-2 col-md-10 col-md-offset-3 ">
                 <div className="info">
                   <br />
                   <p>
