@@ -14,7 +14,8 @@ class OrderTable extends React.Component {
   async componentDidMount() {
     this.setState({
       orders: await getOrders()
-    });
+    }, ()=> console.log(this.state.orders)
+    );
   }
 
   handleSortByPrice = () => {
@@ -46,7 +47,7 @@ class OrderTable extends React.Component {
           <tbody>
             {this.state.orders &&
               this.state.orders.map(order => (
-                <OrderItem key={order.id} detail={order} />
+                <OrderItem key={order._id} detail={order} />
               ))}
           </tbody>
         </Table>
