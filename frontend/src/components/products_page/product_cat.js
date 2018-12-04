@@ -12,19 +12,19 @@ const Block = styled.div`
   height: 100%;
 `;
 const Content = styled.div`
-  width: inherit;
-  height: inherit;
-  min-height: 100px;
-  background-color: #f0b733;
-  opacity: 20%;
-`;
+    width: inherit;
+    height: inherit;
+    min-height: 100px;
+    background-color: #dfdccc ; //kakee #e1d2af gray #dfdccc
+    opacity: 20%;
+`
 const Head = styled.div`
-  @media (max-width: 768px) {
-    height: 50px;
-  }
-  height: 70px;
-  background-color: black;
-`;
+    @media(max-width: 768px) {
+        height: 50px;
+    }
+    height: 70px;
+    background-color: #ddc992;
+`
 const Text = styled.h2`
   @media (max-width: 768px) {
     font-size: 20px;
