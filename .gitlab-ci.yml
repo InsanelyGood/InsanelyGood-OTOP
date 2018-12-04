@@ -1,8 +1,4 @@
 image: node:latest
-# image: docker:latest
-
-# services:
-#   - docker:dind
 
 cache:
   key: node_modules
@@ -19,20 +15,20 @@ before_script:
   - ssh-keyscan -H $DEPLOYMENT_SERVER_IP >> ~/.ssh/known_hosts
 
 stages:
-#   - test_backend
+  - test_backend
 #   - test_frontend
   - deploy
 
-# test_backend:
-#   stage: test_backend
-#   only:
-#     - master
-#   script:
-#     - cd backend && yarn
-#     - yarn test
-#   artifacts:
-#     paths:
-#       - node_modules
+test_backend:
+  stage: test_backend
+  only:
+    - master
+  script:
+    - cd backend && yarn
+    - yarn test
+  artifacts:
+    paths:
+      - node_modules
 
 # test_frontend:
 #   stage: test_frontend
@@ -50,7 +46,7 @@ deploy:
   only:
     - master
   script:
-    - ssh root@$DEPLOYMENT_SERVER_IP "docker;docker images;docker ps;docker rmi -f backend-insanelygood; docker rmi -f frontend-insanelygood;cd InsanelyGood-OTOP;git pull;cd backend;docker build -t backend-insanelygood .;docker run --rm -p 8000:8000 -d backend-insanelygood;cd ../frontend/;docker build -t frontend-insanelygood .;docker run --rm -p 80:3000 -d frontend-insanelygood"
-#   dependencies:
-#     - test_backend
+    - ssh root@$DEPLOYMENT_SERVER_IP "cd InsanelyGood-OTOP;git pull;kill-port 3000;kill-port 8000;cd backend;yarn install;forever start -c 'yarn start' .; cd ../frontend/;yarn install;forever start -c 'yarn start' .; sleep 5;exit"
+  dependencies:
+    - test_backend
 #     - test_frontend

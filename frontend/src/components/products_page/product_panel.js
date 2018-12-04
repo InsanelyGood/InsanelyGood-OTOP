@@ -4,6 +4,7 @@ import Sort from '../sort/sort_component'
 import styled from 'styled-components'
 import emote from '../../images/emote.png'
 import { Pagination } from 'antd';
+import 'antd/lib/pagination/style/css';
 
 const Block = styled.div`
     width: 100%;
@@ -94,18 +95,16 @@ class ProductPanel extends Component {
 
     sort = ()=> {
         let sorted = []
-        switch(this.state.sortType) {
-            case 'price':
-                sorted = this.props.productsShow.sort((a,b)=> {
-                    return a.price - b.price
-                })
-            case 'name':
-                sorted = this.props.productsShow.sort((a,b)=> {
-                    return (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : 0;
-                })
-            default:
-                sorted = this.props.productsShow
-                
+        if(this.state.sortType == 'price') {
+            sorted = this.props.productsShow.sort((a,b)=> {
+                return a.price - b.price
+            })
+        } else if (this.state.sortType == 'name') {
+            sorted = this.props.productsShow.sort((a,b)=> {
+                return (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : 0;
+            })
+        } else {
+            sorted = this.props.productsShow
         }
 
         return this.cutPages(sorted)
@@ -130,7 +129,6 @@ class ProductPanel extends Component {
                     <SortBlock><Sort changeSortType={this.changeSortType}/></SortBlock>
                 </Head>
                 {this.generate()}
-
             </Block>
         )
     }
