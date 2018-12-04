@@ -170,22 +170,22 @@ class NavBar extends React.Component {
                         <DropdownItem header>
                           HI, {this.state.firstname}
                         </DropdownItem>
-                        <DropdownItem className="cilckable" href="http://localhost:3000/users/information/">
+                        <DropdownItem className="cilckable" href="/users/information/">
                           Profile
                         </DropdownItem>
                         <DropdownItem
                           className="cilckable"
-                          href="http://localhost:3000/users/information/history"
+                          href="/users/information/history"
                         >
                           Purchase History
                         </DropdownItem>
                         <DropdownItem
                           className="cilckable"
-                          href="http://localhost:3000/users/information/edit"
+                          href="/users/information/edit"
                         >
                           Edit Profile
                         </DropdownItem>
-                        <DropdownItem className="cilckable" href="http://localhost:3000/users/information/changePassword">
+                        <DropdownItem className="cilckable" href="/users/information/changePassword">
                           Change Password
                         </DropdownItem>
                         <DropdownItem divider />
