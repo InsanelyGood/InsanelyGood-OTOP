@@ -41,7 +41,7 @@ describe('POST orders/:username/create', function () {
         "shippingAddress": "aaa aaa aaa aaaa",
         "userId": "5bbc509c564e190ab8b688c6"
       })
-      .expect(302)
+      .expect(200)
       .end((err, res) => {
         if (err) {
           done.fail(err)

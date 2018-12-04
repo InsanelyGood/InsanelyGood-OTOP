@@ -50,6 +50,19 @@ class ProductDescription extends React.Component {
     }
   };
 
+  bnOnClick = async (e)=> {
+    e.preventDefault();
+    const data = {
+      quantity: 1,
+      productID: this.props.productDetail.id,
+      username: Cookies.get("username")
+    };
+    const res = await addCartItem(data);
+    if (res === 200) {
+      window.location.href = "/checkout";
+    }
+  }
+
   render = () => {
     return (
       <div>
@@ -68,28 +81,11 @@ class ProductDescription extends React.Component {
           />
           <br />
           <BLine>
-            <Form action="" method="">
-              <input
-                type="hidden"
-                value={this.props.productDetail.id}
-                name="productID"
-              />
-              <input
-                type="hidden"
-                value={Cookies.get("username")}
-                name="username"
-              />
-              <input
-                type="hidden"
-                value={this.state.quantity}
-                name="quantity"
-              />
-              <BBlock>
-                <Button color="warning" type="submit">
+            <BBlock>
+              <Button color="warning" onClick={this.bnOnClick}>
                   Buy now
-                </Button>
-              </BBlock>
-            </Form>
+              </Button>
+            </BBlock>
             <BBlock>
               <Button color="success" type="submit">
                 Add to Cart
