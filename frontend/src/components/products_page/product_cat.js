@@ -258,7 +258,7 @@ export default Categories;
 class Check extends React.Component {
   constructor(props) {
     super(props);
-    if (this.props.initialType == this.props.type) {
+    if (this.props.initialType === this.props.type) {
       this.state = {
         checked: true,
 
@@ -275,8 +275,8 @@ class Check extends React.Component {
   }
 
   componentDidUpdate = prevProps => {
-    if (prevProps.initialType != this.props.initialType) {
-      if (this.props.initialType == this.props.type) {
+    if (prevProps.initialType !== this.props.initialType) {
+      if (this.props.initialType === this.props.type) {
         this.setState({
           checked: true,
           opacity: 100

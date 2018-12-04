@@ -16,11 +16,6 @@ import {
 import { getUsername } from "../../api/user_infomation";
 import Cookie from "js-cookie";
 import "../../css/navbar.css";
-import styled from 'styled-components'
-
-const Tab = styled.div`
-  margin-left: 11px;
-`
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -151,11 +146,11 @@ class NavBar extends React.Component {
                     <DropdownItem className="cilckable" href="#">
                       NORTHEASTEN
                     </DropdownItem> */}
-                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: '',types: []}}}>ALL</Link></Tab><hr/>
-                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['North']}}}>NORTHEN</Link></Tab><hr/>
-                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['central']}}}>CENTRAL</Link></Tab><hr/>
-                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['south']}}}>SOUTHEN</Link></Tab><hr/>
-                    <Tab><Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['east']}}}>NORTHENEAST</Link></Tab>
+                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: '',types: []}}}><DropdownItem>ALL</DropdownItem></Link>
+                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['North']}}}><DropdownItem>NORTHEN</DropdownItem></Link>
+                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['central']}}}><DropdownItem>CENTRAL</DropdownItem></Link>
+                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['south']}}}><DropdownItem>SOUTHEN</DropdownItem></Link>
+                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['east']}}}><DropdownItem>NORTHENEAST</DropdownItem></Link>
                   </DropdownMenu>
                 </Dropdown>
               </NavItem>
