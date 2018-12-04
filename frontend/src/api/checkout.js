@@ -13,7 +13,7 @@ export const setNewOrder = async (username, data) => {
   };
 
   export async function getOrders(username) {
-    const res = await fetch(`http://localhost:8000/users/${username}/checkout`, {
+    const res = await fetch(BACKEND + `/users/${username}/checkout`, {
         credentials: 'include'
     })
     const body = await res.json()
