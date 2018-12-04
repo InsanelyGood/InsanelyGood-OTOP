@@ -1,5 +1,5 @@
 import React from "react";
-import {Table, TH} from './admin_styled'
+import { Table, TH } from "./admin_styled";
 import { getOrders } from "../../api/orders_list";
 import OrderItem from "./order_item";
 
@@ -46,7 +46,7 @@ class OrderTable extends React.Component {
           <tbody>
             {this.state.orders &&
               this.state.orders.map(order => (
-                <OrderItem key={order.id} detail={order} />
+                <OrderItem key={order._id} detail={order} />
               ))}
           </tbody>
         </Table>
@@ -56,12 +56,12 @@ class OrderTable extends React.Component {
 }
 
 OrderTable.defaultProps = {
-  second:{
+  second: {
     totalPrice: 0
   },
-  first:{
+  first: {
     totalPrice: 0
   }
-}
+};
 
 export default OrderTable;

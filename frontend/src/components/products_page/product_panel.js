@@ -95,11 +95,11 @@ class ProductPanel extends Component {
 
     sort = ()=> {
         let sorted = []
-        if(this.state.sortType == 'price') {
+        if(this.state.sortType === 'price') {
             sorted = this.props.productsShow.sort((a,b)=> {
                 return a.price - b.price
             })
-        } else if (this.state.sortType == 'name') {
+        } else if (this.state.sortType === 'name') {
             sorted = this.props.productsShow.sort((a,b)=> {
                 return (a.name.toUpperCase() < b.name.toUpperCase()) ? -1 : (a.name.toUpperCase() > b.name.toUpperCase()) ? 1 : 0;
             })
