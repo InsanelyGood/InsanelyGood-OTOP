@@ -14,14 +14,14 @@ const FormGroups = styled.div`
     width: 100%;
 `
 
-const Buttons = styled.input`
+const Buttons = styled.button`
     text-align: center;
     width: 100%;
     color: white;
     height: 40px;
     border-radius: 5px;
-    border-color: #57a9bb;
-    background-color: #57a9bb;
+    border-color: #D78A04;
+    background-color: #D78A04;
     font-weight: bold;
 `
 
@@ -224,7 +224,7 @@ class RegisComponent extends React.Component {
                     }
                 </FormGroups>
                 <FormGroups>
-                    <Buttons className="regisBtn" onClick={this.handleSubmit} type="submit" value='Sign up' />
+                    <Buttons onClick={this.handleSubmit} type="submit">Sign up</Buttons>
                 </FormGroups>
             </Form>
         );

@@ -15,13 +15,13 @@ const FormGroups = styled.div`
     width: 100%;
 `
 
-const Buttons = styled.input`
+const Buttons = styled.button`
     text-align: center;
     width: 100%;
     color: white;
     height: 40px;
     border-radius: 5px;
-    border-color: #57a9bb;
+    border-color: #D78A04;
     background-color: #D78A04;
     font-weight: bold;
 `
@@ -102,7 +102,7 @@ class LoginComponent extends React.Component {
                     }
                 </FormGroups>
                 <FormGroups>
-                    <Buttons onClick={this.handleSubmit} id="myuser" type="submit" value='Login' href='/' />
+                    <Buttons onClick={this.handleSubmit} type="submit">Login</Buttons>
                 </FormGroups>
             </Div>
         );
