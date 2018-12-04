@@ -124,7 +124,12 @@ class Cart extends React.Component {
         </Head>
         <CartTable cartItem={this.state.carts} />
         <RightDiv className="container">
-          <Link to={{ pathname: '/products', state: { renderState: '', types: [] } }}>
+          <Link
+            to={{
+              pathname: "/products",
+              state: { renderState: "", types: [] }
+            }}
+          >
             <ShopMore>Continue Shopping</ShopMore>
           </Link>
           {this.state.carts.length === 0 ? (
