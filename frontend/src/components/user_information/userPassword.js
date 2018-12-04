@@ -39,7 +39,7 @@ handleSubmit = async event => {
     if(this.state.newPassword1 === this.state.newPassword2){
       this.setState({invalidConfirmPassword: false})
         var a = document.getElementById("mylink")
-        a.setAttribute('href', "http://localhost:3000/users/information/");
+        a.setAttribute('href', "/users/information/");
         
         console.log({
           username: this.state.username,
@@ -56,7 +56,7 @@ handleSubmit = async event => {
           this.setState({invalidOldPassword: true})
         }else{
           this.setState({invalidOldPassword: false})
-          window.location.href = 'http://localhost:3000/users/information/';
+          window.location.href = '/users/information/';
         }
         
     }

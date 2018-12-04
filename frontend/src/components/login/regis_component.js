@@ -95,7 +95,7 @@ class RegisComponent extends React.Component {
             // if(role.role === 'admin') {
             //     Cookies.set('role', 'admin');
             // }
-            window.location.href = 'http://localhost:3000/users/login'
+            window.location.href = '/users/login'
             console.log('can regissssss')
         }
     }

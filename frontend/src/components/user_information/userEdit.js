@@ -182,7 +182,7 @@ class UserEdit extends React.Component {
                 <p>
                   <Button
                     className="buttonEdit"
-                    href="http://localhost:3000/users/information/"
+                    href="/users/information/"
                     onClick={this.handleSubmit}
                   >
                     <span>Save</span>

@@ -102,7 +102,7 @@ class UserInfomation extends React.Component {
         <p>
           <Button
             className="buttonEdit"
-            href="http://localhost:3000/users/information/edit"
+            href="/users/information/edit"
           >
             <span>Edit Profile</span>
           </Button>
