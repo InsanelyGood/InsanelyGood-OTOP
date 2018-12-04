@@ -39,18 +39,22 @@ class ProductDescription extends React.Component {
   handleCartAdd = async e => {
     e.preventDefault();
     const { productDetail } = this.props;
-    const data = {
-      quantity: this.state.quantity,
-      productID: productDetail.id,
-      username: Cookies.get("username")
-    };
-    const res = await addCartItem(data);
-    if (res === 200) {
-      window.location.href = "/cart";
+    if (Cookies.get("username")) {
+      const data = {
+        quantity: this.state.quantity,
+        productID: productDetail.id,
+        username: Cookies.get("username")
+      };
+      const res = await addCartItem(data);
+      if (res === 200) {
+        window.location.href = "/cart";
+      }
+    } else {
+      window.location.href = "/users/login";
     }
   };
 
-  bnOnClick = async (e)=> {
+  bnOnClick = async e => {
     e.preventDefault();
     const data = {
       quantity: 1,
@@ -61,16 +65,20 @@ class ProductDescription extends React.Component {
     if (res === 200) {
       window.location.href = "/checkout";
     }
-  }
+  };
 
   render = () => {
     return (
       <div>
         <Name>{this.props.productDetail.name}</Name>
         <Description>
-          Description:<br/>{this.props.productDetail.description}
+          Description:
+          <br />
+          {this.props.productDetail.description}
         </Description>
-        <Price>Price: <strong>{this.props.productDetail.price}$</strong></Price>
+        <Price>
+          Price: <strong>{this.props.productDetail.price}$</strong>
+        </Price>
         <Form onSubmit={this.handleCartAdd}>
           <Quantity
             type="number"
@@ -83,7 +91,7 @@ class ProductDescription extends React.Component {
           <BLine>
             <BBlock>
               <Button color="warning" onClick={this.bnOnClick}>
-                  Buy now
+                Buy now
               </Button>
             </BBlock>
             <BBlock>
