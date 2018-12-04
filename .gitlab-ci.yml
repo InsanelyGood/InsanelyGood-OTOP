@@ -16,7 +16,7 @@ before_script:
 
 stages:
   - test_backend
-  - test_frontend
+#   - test_frontend
   - deploy
 
 test_backend:
@@ -30,16 +30,16 @@ test_backend:
     paths:
       - node_modules
 
-test_frontend:
-  stage: test_frontend
-  only:
-    - master
-  script:
-    - cd frontend && yarn
-    - yarn test
-  artifacts:
-    paths:
-      - node_modules
+# test_frontend:
+#   stage: test_frontend
+#   only:
+#     - master
+#   script:
+#     - cd frontend && yarn
+#     - yarn test
+#   artifacts:
+#     paths:
+#       - node_modules
 
 deploy:
   stage: deploy
@@ -49,4 +49,4 @@ deploy:
     - ssh root@$DEPLOYMENT_SERVER_IP "cd InsanelyGood-OTOP;git pull;kill-port 3000;kill-port 8000;cd backend;yarn install;forever start -c 'yarn start' .; cd ../frontend/;yarn install;forever start -c 'yarn start' .; sleep 5;exit"
   dependencies:
     - test_backend
-    - test_frontend
+#     - test_frontend
