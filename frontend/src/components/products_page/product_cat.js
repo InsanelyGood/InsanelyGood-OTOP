@@ -15,7 +15,7 @@ const Content = styled.div`
     width: inherit;
     height: inherit;
     min-height: 100px;
-    background-color: #f0b733;
+    background-color: #dfdccc ; //kakee #e1d2af gray #dfdccc
     opacity: 20%;
 `
 const Head = styled.div`
@@ -23,7 +23,7 @@ const Head = styled.div`
         height: 50px;
     }
     height: 70px;
-    background-color: black;
+    background-color: #ddc992;
 `
 const Text = styled.h2`
     @media(max-width: 768px) {

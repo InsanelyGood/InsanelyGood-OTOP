@@ -9,9 +9,9 @@ const Block = styled.div`
     width: 100%;
 `
 const Head = styled.div`
-    background-color: black;
+    background-color: #ddc992;
     height: 70px;
-    border-left: solid grey;
+    border-left: solid #e1d2af;
     display: flex;
 `
 const Text = styled.h2`
