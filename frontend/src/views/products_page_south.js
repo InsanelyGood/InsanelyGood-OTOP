@@ -38,9 +38,9 @@ class ProductsPage extends Component {
     super(props);
     this.state = {
       products: [],
-      types: [],
+      types: ['south'],
       search: "",
-      renderState: ''
+      renderState: 'filter'
     };
   }
 
@@ -50,14 +50,14 @@ class ProductsPage extends Component {
     });
   }
 
-//   componentDidUpdate = prevProps => {
-//     if (prevProps.location.state.types !== this.props.location.state.types) {
-//       this.setState({
-//         types: this.props.location.state.types,
-//         renderState: this.props.location.state.renderState
-//       });
-//     }
-//   };
+  // componentDidUpdate = prevProps => {
+  //   if (prevProps.location.state.types !== this.props.location.state.types) {
+  //     this.setState({
+  //       types: this.props.location.state.types,
+  //       renderState: this.props.location.state.renderState
+  //     });
+  //   }
+  // };
 
   productFilter = () => {
     let filter = [];
@@ -146,7 +146,7 @@ class ProductsPage extends Component {
           <Row>
             <Left>
               <ProductsCat
-                initialType={''}
+                initialType='south'
                 changeTypes={this.changeTypes}
                 searchValue={this.changeSearchValue}
               />
@@ -157,15 +157,6 @@ class ProductsPage extends Component {
       </div>
     );
   }
-}
-
-ProductsPage.defaultProps = {
-    location: {
-        state: {
-            types:[],
-            renderState: ''
-        }
-    }
 }
 
 export default ProductsPage;

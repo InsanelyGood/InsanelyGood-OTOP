@@ -24,7 +24,7 @@ const items = [
     button: (
       <Link
         className="link-color"
-        to={{ pathname: "/products", state: { renderState: "", types: [] } }}
+        to="/products"
       >
         <a className="btn btn-outline-white">Shop Now</a>
       </Link>
@@ -38,10 +38,7 @@ const items = [
     button: (
       <Link
         className="link-color"
-        to={{
-          pathname: "/products",
-          state: { renderState: "filter", types: ["central"] }
-        }}
+        to="/central"
       >
         <a className="btn btn-outline-white">Shop Collection</a>
       </Link>
@@ -55,10 +52,7 @@ const items = [
     button: (
       <Link
         className="link-color"
-        to={{
-          pathname: "/products",
-          state: { renderState: "filter", types: ["east"] }
-        }}
+        to="/northeneast"
       >
         <a className="btn btn-outline-white">Shop Collection</a>
       </Link>
@@ -72,10 +66,7 @@ const items = [
     button: (
       <Link
         className="link-color"
-        to={{
-          pathname: "/products",
-          state: { renderState: "filter", types: ["North"] }
-        }}
+        to="/north"
       >
         <a className="btn-outline-white btn">Shop Collection</a>
       </Link>
@@ -89,10 +80,7 @@ const items = [
     button: (
       <Link
         className="link-color"
-        to={{
-          pathname: "/products",
-          state: { renderState: "filter", types: ["south"] }
-        }}
+        to="/south"
       >
         <a className="btn btn-outline-white">
           Shop Collection

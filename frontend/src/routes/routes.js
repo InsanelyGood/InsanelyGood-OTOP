@@ -4,6 +4,10 @@ import Cookies from "js-cookie";
 
 import Home from "../views/home";
 import ProductsPage from "../views/products_page";
+import ProductsPageCentral from "../views/products_page_central"
+import ProductsPageNorth from "../views/products_page_north"
+import ProductsPageSouth from "../views/products_page_south"
+import ProductsPageNorthenEast from "../views/products_page_northeneast"
 import ProductDetail from "../views/product_detail";
 import Login from "../views/login";
 import Register from "../views/register";
@@ -46,6 +50,30 @@ const routes = [
     path: "/products",
     exact: true,
     component: ProductsPage,
+    canAccess: true
+  },
+  {
+    path: "/central",
+    exact: true,
+    component: ProductsPageCentral,
+    canAccess: true
+  },
+  {
+    path: "/north",
+    exact: true,
+    component: ProductsPageNorth,
+    canAccess: true
+  },
+  {
+    path: "/south",
+    exact: true,
+    component: ProductsPageSouth,
+    canAccess: true
+  },
+  {
+    path: "/northeneast",
+    exact: true,
+    component: ProductsPageNorthenEast,
     canAccess: true
   },
   {

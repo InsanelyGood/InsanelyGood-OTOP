@@ -146,11 +146,11 @@ class NavBar extends React.Component {
                     <DropdownItem className="cilckable" href="#">
                       NORTHEASTEN
                     </DropdownItem> */}
-                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: '',types: []}}}><DropdownItem>ALL</DropdownItem></Link>
-                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['North']}}}><DropdownItem>NORTHEN</DropdownItem></Link>
-                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['central']}}}><DropdownItem>CENTRAL</DropdownItem></Link>
-                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['south']}}}><DropdownItem>SOUTHEN</DropdownItem></Link>
-                    <Link className="clickable" to = {{pathname: '/products', state: {renderState: 'filter',types: ['east']}}}><DropdownItem>NORTHENEAST</DropdownItem></Link>
+                    <Link className="clickable" to = "/products"><DropdownItem>ALL</DropdownItem></Link>
+                    <Link className="clickable" to = "/north"><DropdownItem>NORTHEN</DropdownItem></Link>
+                    <Link className="clickable" to = "/central"><DropdownItem>CENTRAL</DropdownItem></Link>
+                    <Link className="clickable" to = "/south"><DropdownItem>SOUTHEN</DropdownItem></Link>
+                    <Link className="clickable" to = "/northeneast"><DropdownItem>NORTHENEAST</DropdownItem></Link>
                   </DropdownMenu>
                 </Dropdown>
               </NavItem>
